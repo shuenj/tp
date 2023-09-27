@@ -52,10 +52,10 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/AFFILIATION]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [af/AFFILIATION]` can be used as `n/John Doe af/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/AFFILIATION]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[af/AFFILIATION]…​` can be used as ` ` (i.e. 0 times), `af/friend`, `af/friend af/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -79,7 +79,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/AFFILIATION]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [af/AFFILIATION]…​`
 
 <box type="tip" seamless>
 
@@ -88,7 +88,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/AFFILIATION]…​`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe af/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 af/criminal`
 
 ### Listing all persons : `list`
 
@@ -100,18 +100,18 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/AFFILIATION]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [af/AFFILIATION]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing affiliations, the existing affiliations of the person will be removed i.e adding of affiliations is not cumulative.
-* You can remove all the person’s affiliations by typing `t/` without
+* You can remove all the person’s affiliations by typing `af/` without
     specifying any affiliations after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing affiliations.
+*  `edit 2 n/Betsy Crower af/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing affiliations.
 
 ### Locating persons by name: `find`
 
@@ -130,6 +130,19 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Returning affiliations of a doctor/patient: `affn`
+
+Finds doctors/patients who are affiliated with the patient/doctor indicated
+by the given index.
+
+* Finds affiliations for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `affn 2` lists the people affiliated to the 2nd person in the address book.
+* Subsequently, `affn 1` will list the people affiliated with the 1st person displayed after the previous `affn` command.
 
 ### Deleting a person : `delete`
 
@@ -194,10 +207,11 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/AFFILIATION]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [af/AFFILIATION]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 af/friend af/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/AFFILIATION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [af/AFFILIATION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Affiliation** | `affn INDEX`
 **List**   | `list`
 **Help**   | `help`

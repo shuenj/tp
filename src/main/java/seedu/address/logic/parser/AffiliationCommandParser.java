@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AffiliationCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -17,9 +20,10 @@ public class AffiliationCommandParser implements Parser<AffiliationCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AffiliationCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         try {
-            Name name = ParserUtil.parseName(args);
-            return new AffiliationCommand(name);
+            Index index = ParserUtil.parseIndex(args);
+            return new AffiliationCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AffiliationCommand.MESSAGE_USAGE), pe);

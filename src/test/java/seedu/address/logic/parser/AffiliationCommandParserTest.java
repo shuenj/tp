@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AffiliationCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.Name;
@@ -27,8 +28,8 @@ public class AffiliationCommandParserTest {
     public void parse_validArgs_returnsAffiliationCommand() {
         // no leading and trailing whitespaces
         AffiliationCommand expectedAffiliationCommand =
-                new AffiliationCommand(new Name("Alice Sim"));
-        assertParseSuccess(parser, "Alice Sim", expectedAffiliationCommand);
+                new AffiliationCommand(Index.fromOneBased(1));
+        assertParseSuccess(parser, "1", expectedAffiliationCommand);
 
     }
 

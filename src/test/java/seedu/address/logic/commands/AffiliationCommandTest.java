@@ -1,41 +1,52 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
+import java.util.Set;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NameMatchesAffiliationPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for AffiliationCommand.
  */
 public class AffiliationCommandTest {
 
-
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute() {
-        final Name name = new Name("Jill Strongman");
-
-        assertCommandFailure(new AffiliationCommand(name), model, name.fullName);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        NameMatchesAffiliationPredicate predicate = new NameMatchesAffiliationPredicate(
+                Set.of(new Affiliation("Benson Meier")));
+        AffiliationCommand command = new AffiliationCommand(Index.fromOneBased(1));
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void equals() {
-        final AffiliationCommand standardCommand = new AffiliationCommand(new Name(VALID_NAME_AMY));
+        final AffiliationCommand standardCommand = new AffiliationCommand(Index.fromOneBased(1));
 
         // same values -> returns true
-        final AffiliationCommand commandWithSameValues = new AffiliationCommand(new Name(VALID_NAME_AMY));
+        final AffiliationCommand commandWithSameValues = new AffiliationCommand(Index.fromOneBased(1));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -48,6 +59,7 @@ public class AffiliationCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different name -> returns false
-        assertFalse(standardCommand.equals(new AffiliationCommand(new Name(VALID_NAME_BOB))));
+        assertFalse(standardCommand.equals(new AffiliationCommand(Index.fromOneBased(2))));
     }
+
 }

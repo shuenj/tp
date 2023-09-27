@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AffiliationCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -94,7 +95,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_affiliation() throws Exception {
         assertEquals(parser.parseCommand(AffiliationCommand.COMMAND_WORD + " "
-                + VALID_NAME_AMY), new AffiliationCommand(new Name(VALID_NAME_AMY)));
+                + "1"), new AffiliationCommand(Index.fromOneBased(1)));
     }
 
     @Test
