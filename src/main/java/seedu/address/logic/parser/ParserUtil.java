@@ -13,7 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.affiliation.Affiliation;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -96,29 +96,29 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String affiliation} into a {@code Affiliation}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code affiliation} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Affiliation parseAffiliation(String affiliation) throws ParseException {
+        requireNonNull(affiliation);
+        String trimmedAffiliation = affiliation.trim();
+        if (!Affiliation.isValidAffiliationName(trimmedAffiliation)) {
+            throw new ParseException(Affiliation.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Affiliation(trimmedAffiliation);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> affiliations} into a {@code Set<Affiliation>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Affiliation> parseAffiliations(Collection<String> affiliations) throws ParseException {
+        requireNonNull(affiliations);
+        final Set<Affiliation> affiliationSet = new HashSet<>();
+        for (String AffiliationName : affiliations) {
+            affiliationSet.add(parseAffiliation(AffiliationName));
         }
-        return tagSet;
+        return affiliationSet;
     }
 }
