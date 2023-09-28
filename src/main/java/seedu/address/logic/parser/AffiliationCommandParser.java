@@ -10,13 +10,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new AffiliationCommand object
  */
 public class AffiliationCommandParser implements Parser<AffiliationCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AffiliationCommand
+     * and returns a AffiliationCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AffiliationCommand parse(String args) throws ParseException {
