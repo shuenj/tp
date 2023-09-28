@@ -28,7 +28,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/EricXiong420)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
+* Role: Piano Man
 * Responsibilities: UI
 
 ### Johnny Doe
