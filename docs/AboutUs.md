@@ -31,14 +31,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Ng Shuen Jin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shuenj.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/shuenj)] [[portfolio](team/shuenj.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Drummer
+* Responsibilities: Drums
 
 ### Jean Doe
 
