@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "Zhan Peng's Project Portfolio Page"
+  title: "Ng Shuen Jin's Project Portfolio Page"
 ---
 
 ### Project: MediSync
