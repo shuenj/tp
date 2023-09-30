@@ -44,6 +44,30 @@ public class ToStringBuilder {
     }
 
     /**
+     * Retrieves the fields of the superclass and adds to the output string of a subclass.
+     *
+     * @param superToString The output string of super class.
+     * @return A reference to this {@code ToStringBuilder} object that has been added
+     * the attributes of its superclass.
+     */
+    public ToStringBuilder appendSuper(String superToString) {
+        if (superToString != null) {
+            int startPos = superToString.indexOf(OBJECT_PREFIX) + OBJECT_PREFIX.length();
+            int endPos = superToString.lastIndexOf(OBJECT_SUFFIX);
+            String combinedAttributes = superToString.substring(startPos, endPos);
+
+            if (startPos < endPos) {
+                String[] attributes = combinedAttributes.split(", ");
+                for (String attribute : attributes) {
+                    String[] nameValuePair = attribute.split("=");
+                    this.add(nameValuePair[0], nameValuePair[1]);
+                }
+            }
+        }
+        return this;
+    }
+
+    /**
      * Returns the built formatted string representation.
      */
     @Override
