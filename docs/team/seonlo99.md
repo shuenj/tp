@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "Ng Shuen Jin's Project Portfolio Page"
+  title: "Zheng Chenglong's Project Portfolio Page"
 ---
 
 ### Project: MediSync
@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **New Feature**:
   * To be added
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=shuenj&breakdown=false)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=seonlo99&breakdown=false)
 
 * **Project management**:
   * To be added
@@ -22,9 +22,9 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * To be added
+      * To be added
   * Developer Guide:
-    * To be added
+      * To be added
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
@@ -33,4 +33,3 @@ Given below are my contributions to the project.
 
 * **Tools**:
   * Set up the team's project repo
-
