@@ -27,7 +27,7 @@ Given below are my contributions to the project.
     * To be added
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): 
+  * PRs reviewed (with non-trivial review comments):
   * Contributed to forum discussions (examples: )
   * Reported bugs and suggestions for other teams in the class (examples: To be added)
 
