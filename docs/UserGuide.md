@@ -77,13 +77,12 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a contact to the contact book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/AFFN`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN]`
 
 <box type="tip" seamless>
 
-**Note:** a/AFFN is optional
 </box>
 
 Examples:
@@ -98,7 +97,7 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing contact in the contact book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/AFFN]`
 
@@ -106,11 +105,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/AFFN]`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * You can remove the person’s affiliation by typing `a/` without
-    specifying any name after it.
+    specifying any affiliation after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/John Doe a/` Edits the name of the 2nd person to be `John Doe` and clears all existing affiliation.
+*  `edit 3 p/81234567 a/` Edits the phone number of the 3rd person to 81234567 and removes the person’s affiliation
+*  `edit 1 n/Sally Wing e/sallyw@kmail.com` Edits the name and the email of the 1st person to Sally Wing and sallyw@kmail.com respectively.
+
 
 ### Locating persons by name: `find`
 
@@ -193,10 +193,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN]` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com r/patient a/Dr Mike`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/AFFN]`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
