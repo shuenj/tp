@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=ericxiong420&breakdown=true)
 
 * **Project management**:
-    * Managing release `v1.1` on Github
+    * Managing release `v1.1` on GitHub
 
 * **Enhancements to existing features**:
     * None yet
