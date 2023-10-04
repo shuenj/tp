@@ -79,7 +79,7 @@ Format: `help`
 
 Adds a contact to the contact book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [af/AFFILIATION]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN]…​`
 
 <box type="tip" seamless>
 
@@ -87,8 +87,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [af/AFFILIATION]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe af/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 af/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com r/patient`
+* `add n/John Doe p/98765432 e/johnd@example.com r/patient a/Dr Mike`
 
 ### Listing all persons : `list`
 
@@ -100,18 +100,18 @@ Format: `list`
 
 Edits an existing contact in the contact book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [af/AFFILIATION]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/AFFN]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing affiliations, the existing affiliations of the person will be removed i.e adding of affiliations is not cumulative.
-* You can remove all the person’s affiliations by typing `af/` without
+* You can remove all the person’s affiliations by typing `a/` without
     specifying any affiliations after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower af/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing affiliations.
+*  `edit 3 p/81234567 a/` Edits the phone number of the 3rd person to `81234567` and removes the person’s affiliation
+*  `edit 1 n/Sally Wing e/sallyw@kmail.com` Edits the name and the email of the 1st person to `Sally Wing` and `sallyw@kmail.com` respectively.
 
 ### Locating persons by name: `find`
 
@@ -206,13 +206,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [af/AFFILIATION]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 af/friend af/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [af/AFFILIATION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Affiliation** | `affn INDEX`
-**List**   | `list`
-**Help**   | `help`
+| Action          | Format, Examples                                                                                                                     |
+|-----------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com r/patient a/Dr Mike` |
+| **Clear**       | `clear`                                                                                                                              |
+| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                  |
+| **Edit**        | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/AFFN]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                     |
+| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                           |
+| **Affiliation** | `affn INDEX`                                                                                                                         |
+| **List**        | `list`                                                                                                                               |
+| **Help**        | `help`                                                                                                                               |
