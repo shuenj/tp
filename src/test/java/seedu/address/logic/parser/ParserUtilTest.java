@@ -14,11 +14,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.affiliation.Affiliation;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -44,7 +44,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -178,7 +178,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseAffiliations_collectionWithInvalidAffiliations_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAffiliations(Arrays.asList(VALID_AFFILIATION_1, INVALID_AFFILIATION)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAffiliations(
+                Arrays.asList(VALID_AFFILIATION_1, INVALID_AFFILIATION)));
     }
 
     @Test
@@ -188,8 +189,10 @@ public class ParserUtilTest {
 
     @Test
     public void parseAffiliations_collectionWithValidAffiliations_returnsAffiliationSet() throws Exception {
-        Set<Affiliation> actualAffiliationSet = ParserUtil.parseAffiliations(Arrays.asList(VALID_AFFILIATION_1, VALID_AFFILIATION_2));
-        Set<Affiliation> expectedAffiliationSet = new HashSet<Affiliation>(Arrays.asList(new Affiliation(VALID_AFFILIATION_1), new Affiliation(VALID_AFFILIATION_2)));
+        Set<Affiliation> actualAffiliationSet = ParserUtil
+                .parseAffiliations(Arrays.asList(VALID_AFFILIATION_1, VALID_AFFILIATION_2));
+        Set<Affiliation> expectedAffiliationSet = new HashSet<Affiliation>(
+                Arrays.asList(new Affiliation(VALID_AFFILIATION_1), new Affiliation(VALID_AFFILIATION_2)));
 
         assertEquals(expectedAffiliationSet, actualAffiliationSet);
     }

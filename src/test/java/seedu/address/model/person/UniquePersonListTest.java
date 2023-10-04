@@ -42,7 +42,8 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withAffiliations(VALID_AFFILIATION_AMY)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withAffiliations(VALID_AFFILIATION_AMY)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -85,7 +86,8 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withAffiliations(VALID_AFFILIATION_AMY)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withAffiliations(VALID_AFFILIATION_AMY)
                 .build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
@@ -165,7 +167,7 @@ public class UniquePersonListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-            -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+                -> uniquePersonList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test

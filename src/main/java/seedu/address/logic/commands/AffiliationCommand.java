@@ -10,7 +10,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.affiliation.Affiliation;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.NameMatchesAffiliationPredicate;
 import seedu.address.model.person.Person;
 
@@ -29,6 +28,9 @@ public class AffiliationCommand extends Command {
 
     private final Index index;
 
+    /**
+     * Creates an AffiliationCommand to return the affiliation for the specified {@code Index}
+     */
     public AffiliationCommand(Index index) {
         requireNonNull(index);
 
