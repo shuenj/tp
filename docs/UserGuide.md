@@ -218,3 +218,4 @@ _Details coming soon ..._
 | **Affiliation** | `affn INDEX`                                                                                                                         |
 | **List**        | `list`                                                                                                                               |
 | **Help**        | `help`                                                                                                                               |
+| **Exit**        | `exit`                                                                                                                               |
