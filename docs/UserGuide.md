@@ -52,10 +52,10 @@ MediSync is a **desktop app for managing contacts, optimized for use via a  Line
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [a/AFFILIATION]` can be used as `n/John Doe a/friend` or as `n/John Doe`.
+  e.g `n/NAME [a/AFFN]` can be used as `n/John Doe a/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[a/AFFILIATION]…​` can be used as ` ` (i.e. 0 times), `a/friend`, `a/friend a/family` etc.
+  e.g. `[a/AFFN]…​` can be used as ` ` (i.e. 0 times), `a/friend`, `a/friend a/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -196,7 +196,8 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-More FAQ to come.
+### More FAQ to come
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
