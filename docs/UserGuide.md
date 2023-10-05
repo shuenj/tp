@@ -19,7 +19,7 @@ MediSync is a **desktop app specifically used for head nurses to manage staff an
 
 1. Download the latest `medisync.jar` from [here](https://github.com/AY2324S1-CS2103-T16-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your MediSync.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar medisync.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -77,7 +77,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a contact to the contact book.
+Adds a contact to the contact list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN]…​`
 
@@ -92,13 +92,13 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the contact list.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing contact in the contact book.
+Edits an existing contact in the contact list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/AFFN]…​`
 
@@ -141,12 +141,12 @@ by the given index.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `affn 2` lists the people affiliated to the 2nd person in the address book.
+* `list` followed by `affn 2` lists the people affiliated to the 2nd person in the contact list.
 * Subsequently, `affn 1` will list the people affiliated with the 1st person displayed after the previous `affn` command.
 
 ### Deleting a person : `delete`
 
-Deletes the contact in the contact book.
+Deletes the contact in the contact list.
 If the other contacts have affiliations with this contact, the affiliations will be deleted automatically.
 
 Format: `delete INDEX`
@@ -156,12 +156,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 3` deletes the 3rd person in the address book.
+* `list` followed by `delete 3` deletes the 3rd person in the contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the contact list.
 
 Format: `clear`
 
@@ -173,16 +173,16 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+MediSync data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+MediSync data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless></box>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, MediSync will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -194,7 +194,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediSync home folder.
 
 ### More FAQ to come
 
