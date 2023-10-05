@@ -70,7 +70,7 @@ MediSync is a **desktop app specifically used for head nurses to manage staff an
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/helpMessageT16.png)
 
 Format: `help`
 
