@@ -335,16 +335,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `MediSync`, the **Actor** is the `user`, and the `precondition` is that user is in the main interface unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01- Add a person**
+
+**MSS**
+
+1. User requests to add new person and provide details
+2. MediSync adds person to system and confirms addition to user
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Provided details are incomplete or incorrect format
+
+  * 1a1. MediSync shows an error message.
+
+    Use case ends.
+
+* 2a. Person of the same name already exists
+
+    * 2a1. MediSync shows an error message.
+
+      Use case ends.
+
+**Use case: UC02- Edit a person**
+
+**MSS**
+
+1. User requests to edit a particular person's contact and provide details
+2. MediSync edits person on system and confirms changes to user
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Provided details are incomplete or incorrect format
+
+    * 1a1. MediSync shows an error message.
+
+      Use case ends.
+
+* 1a. The given index is invalid.
+
+    * 1a1. MediSync shows an error message.
+
+      Use case ends.
+
+**Use case: UC03- Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  MediSync shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  MediSync deletes the person
 
     Use case ends.
 
@@ -356,11 +402,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. MediSync shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: UC04- Find a person**
+
+**MSS**
+
+1.  User requests to find person by name
+2.  MediSync shows details of the all relevant persons 
+3.  User issues command to access help 
+4.  MediSync displays help instructions
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No relevant names found.
+
+  Use case resumes at step 3.
+
+* 2a. List is empty.
+
+  Use case resumes at step 3.
+
+**Use case: UC05- Find affiliation of a person**
+
+**MSS**
+
+1.  User requests to find affiliations of a person
+2.  MediSync shows all persons affiliated with the specified person
+3.  User requests to exit MediSync
+4.  MediSync closes the application
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. MediSync shows an error message.
+
+      Use case resumes at step 3.
+
+* 2a. Person has no affiliations.
+
+  Use case resumes at step 3.
 
 ### Non-Functional Requirements
 
