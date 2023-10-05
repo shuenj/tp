@@ -44,7 +44,7 @@ MediSync is a **desktop app specifically used for head nurses to manage staff an
 
 ## Features
 
-<box type="info" seamless></box>
+<box type="info" seamless>
 
 **Notes about the command format:**<br>
 
@@ -64,6 +64,7 @@ MediSync is a **desktop app specifically used for head nurses to manage staff an
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </box>
 
 ### Viewing help : `help`
@@ -81,9 +82,10 @@ Adds a contact to the contact list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN]…​`
 
-<box type="tip" seamless></box>
+<box type="tip" seamless>
 
 **Tip:** A person can have any number of affiliations (including 0)
+
 </box>
 
 Examples:

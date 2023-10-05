@@ -49,13 +49,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Bassist
 * Responsibilities: Double Bass
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
