@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -16,12 +14,10 @@ import seedu.address.testutil.PersonBuilder;
 
 public class NameMatchesAffiliationPredicateTest {
 
-    private final Affiliation VALID_AFFILIATION_JOHN = new Affiliation("John Doe");
-
     @Test
     public void equals() {
-        Set<Affiliation> firstAffiliationSet = Set.of(VALID_AFFILIATION_JOHN);
-        Set<Affiliation> secondAffiliationSet = Set.of(VALID_AFFILIATION_JOHN,
+        Set<Affiliation> firstAffiliationSet = Set.of(new Affiliation("John Doe"));
+        Set<Affiliation> secondAffiliationSet = Set.of(new Affiliation("John Doe"),
                 new Affiliation("Jill Wagon"));
 
         NameMatchesAffiliationPredicate firstPredicate = new NameMatchesAffiliationPredicate(firstAffiliationSet);

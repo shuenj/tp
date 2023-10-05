@@ -3,12 +3,12 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -58,9 +58,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code affiliations} into a {@code Set<Affiliation>} and set it to the {@code Person} that we are building.
+     * Parses the {@code affiliations} into a {@code Set<Affiliation>} and
+     * set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withAffiliations(String ... tags) {
+    public PersonBuilder withAffiliations(String... tags) {
         this.affiliations = SampleDataUtil.getAffiliationSet(tags);
         return this;
     }
