@@ -14,10 +14,10 @@ Given below are my contributions to the project.
     * Justification: This feature adds on the specific functionality for a head nurse, by allowing a nurse to find out the doctors of a patient, or the patients of a doctor.
     * Highlights: This implementation was challenging as the "tag" functionality had to be changed to "affiliation", which required project-wide renaming and refactoring, across both code and comments. The implementation required certain additions to Logic classes, and the addition of a new predicate.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=ericxiong420&breakdown=true)
 
 * **Project management**:
-    * Managing release `v1.1` on Github
+    * Managing release `v1.1` on GitHub
 
 * **Enhancements to existing features**:
     * None yet

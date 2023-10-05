@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# MediSync Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -269,27 +269,64 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* A head nurse of a hospital
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Provide categories for different healthcare roles, healthcare-specific information within each contact, capacity to track duty days and shifts for staff members, an emergency contacts section that updates based on who is on duty, robust search and filter capabilities to quickly find staff members based on criteria such as department, specialisation
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Type  | Priority | As a …​                                    | I want to …​                                                                                                         | So that I can…​                                                                                                      |
+|-------|----------|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| Story | `* * *`  | new user                                   | see usage instructions                                                                                               | refer to instructions when I forget how to use the App                                                               |
+| Epic  | `* * *`  | new user                                   | set up the application                                                                                               |                                                                                                                      |
+| Story | `* * *`  | new user                                   | see the features of the app                                                                                          |                                                                                                                      |
+| Story | `* * *`  | past user                                  | import existing contact data from my previously saved contacts                                                       | kickstart my contact list                                                                                            |
+| Epic  | `* * *`  | user                                       | add a new person                                                                                                     |                                                                                                                      |
+| Story | `* * *`  | user                                       | specify contact details, including phone numbers and email addresses,                                                | maintain accurate and up-to-date contact information for each staff member                                           |
+| Story | `* * *`  | user                                       | add emergency contact information for each staff member                                                              | quickly reach out to the appropriate contacts in critical situations                                                 |
+| Story | `* * *`  | user                                       | include pager numbers for doctors and on-call schedules                                                              | have a method of contact during off-hours                                                                            |
+| Epic  | `* * *`  | head nurse                                 | edit my contacts                                                                                                     |                                                                                                                      |
+| Story | `* * *`  | head nurse                                 | update contact information (e.g., phone numbers, email addresses) as needed                                          | ensure that the contact details remain current and reliable                                                          |
+| Story | `* * *`  | head nurse                                 | track and manage staff availability for upcoming shifts in the contact book including leave requests and shift swaps | manage the availability and shift schedule easily                                                                    |
+| Story | `* * *`  | head nurse                                 | add comments to the contact book entries, such as private notes                                                      | make more informed decisions when assigning tasks or seeking assistance                                              |
+| Story | `* * *`  | head nurse                                 | mark certain contacts as "critical contacts" in the contact book                                                     | they can be searched for and identified more easily in emergencies                                                   |
+| Story | `* * *`  | head nurse                                 | adjust the shifts of staff members                                                                                   | staff members can have flexibility in changing shift timings                                                         |
+| Story | `* * *`  | head nurse                                 | transfer a patient to a new doctor in charge                                                                         | patients can be flexibly transferred when different expertise is required, or when manpower needs reallocation       |
+| Epic  | `* * *`  | head nurse                                 | view my contacts                                                                                                     |                                                                                                                      |
+| Story | `* * *`  | head nurse                                 | view who is the doctor in charge of a patient currently                                                              |                                                                                                                      |
+| Story | `* * *`  | head nurse                                 | view who are the patients who are currently under a doctor                                                           |                                                                                                                      |
+| Story | `* * *`  | head nurse                                 | view the past doctors who have treated the patient                                                                   | obtain some medical history                                                                                          |
+| Story | `* * *`  | head nurse                                 | view who are the past patients who have been treated by a doctor                                                     | obtain the patient history of the doctor                                                                             |
+| Story | `* * *`  | head nurse                                 | view view the patients whom the nurses are in charge of                                                              | balance the workload of my nurses                                                                                    |
+| Story | `* * *`  | head nurse                                 | view next-of-kin information of patients                                                                             | contact them when necessary                                                                                          |
+| Story | `* * *`  | head nurse                                 | view the patients’ discharge dates                                                                                   | manage the discharge procedure                                                                                       |
+| Story | `* * *`  | head nurse                                 | view the duty and shift dates of my staff                                                                            | manage and oversee when they are working                                                                             |
+| Epic  | `* * *`  | head nurse                                 | delete a person                                                                                                      | remove entries that I no longer need                                                                                 |
+| Story | `* * *`  | head nurse                                 | remove only the unwanted information about a staff or a patient if it is inaccurate                                  | ensure that the directory remains accurate                                                                           |
+| Story | `* * *`  | head nurse                                 | delete contacts of staff who are not working in the hospital anymore                                                 |                                                                                                                      |
+| Story | `* * *`  | head nurse                                 | delete contacts of patients who have been discharged                                                                 |                                                                                                                      |
+| Story | `* * *`  | head nurse                                 | delete all contacts when I quit                                                                                      |                                                                                                                      |
+| Story | `* * *`  | head nurse                                 | maintain a contact book of all medical staff within the hospital                                                     | quickly find and contact the right healthcare professionals in case of emergencies or when coordinating patient care |
+| Epic  | `* * *`  | head nurse                                 | manage my contact book                                                                                               |                                                                                                                      |
+| Story | `* * *`  | head nurse                                 | back up the contact book                                                                                             | prevent data loss and maintain the integrity of the contact information                                              |
+| Story | `* * *`  | head nurse                                 | load the previous backup                                                                                             | restore my contacts when I make wrong edits                                                                          |
+| Story | `* * *`  | user                                       | export contact information in a printable format for reference                                                       | have physical copies of essential contact details when needed                                                        |
+| Epic  | `* * *`  | head nurse                                 | search for specific contacts                                                                                         | locate details of persons without having to go through the entire list                                               |
+| Story | `* *`    | head nurse                                 | filter out "critical contacts" in the contact book                                                                   | reach them quickly during urgent situations                                                                          |
+| Story | `* *`    | head nurse                                 | select language preferences and interpreter contact information                                                      | effectively communicate with patients who have limited English proficiency                                           |
+| Story | `* *`    | head nurse                                 | track and display the availability status of staff members (e.g., on-duty, off-duty, on-call)                        | facilitate decision-making for patient care assignments                                                              |
+| Story | `* *`    | head nurse                                 | filter staff members by their specialisation (e.g., cardiologist, pediatrician)                                      | identify and contact the right healthcare professionals based on their expertise                                     |
+| Story | `* *`    | head nurse                                 | search for staff members by name, role, or department quickly                                                        | easily find and access their contact information when necessary                                                      |
+| Story | `* *`    | user                                       | hide private contact details                                                                                         | minimize chance of someone else seeing them by accident                                                              |
+| Story | `*`      | user with many persons in the address book | sort persons by name                                                                                                 | locate a person easily                                                                                               |
+| Story | `*`      | include photos of staff members            | quickly identify the individual and better personalise our communication                                             | locate a person easily                                                                                               |
 
 *{More to be added}*
 
