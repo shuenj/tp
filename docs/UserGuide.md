@@ -68,7 +68,7 @@ MediSync is a **desktop app specifically used for head nurses to manage staff an
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessageT16.png)
 

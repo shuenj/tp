@@ -269,13 +269,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* A head nurse of a hospital
-* prefer desktop apps over other types
-* can type fast
+* a head nurse of a hospital
+* has a need to track significant number of contacts
+* has a need to quickly identify relevant individuals from the vast pool of contacts
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* can type fast
 
-**Value proposition**: Provide categories for different healthcare roles, healthcare-specific information within each contact, capacity to track duty days and shifts for staff members, an emergency contacts section that updates based on who is on duty, robust search and filter capabilities to quickly find staff members based on criteria such as department, specialisation
+**Value proposition**: 
+
+Provide categories for different healthcare roles, healthcare-specific information within each contact, capacity to track duty days and shifts for staff members, an emergency contacts section that updates based on who is on duty, robust search and filter capabilities to quickly find staff members based on criteria such as department, specialisation
 
 
 ### User stories
@@ -364,6 +367,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should respond to all commands within 3 seconds.
+5.  Commands should be easy to remember and succinct.
+6.  Product is not required to handle the printing of reports.
 
 *{More to be added}*
 
