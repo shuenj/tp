@@ -21,11 +21,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Lead Singer
 * Responsibilities: Singing
 
-### Jane Doe
+### Eric Xiong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ericxiong420.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/EricXiong420)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
@@ -40,15 +40,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Drummer
 * Responsibilities: Drums
 
-### Jean Doe
+### Zheng Chenglong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/seonlo99.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/seonlo99)]
+[[portfolio](team/seonlo99.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Bassist
+* Responsibilities: Double Bass
 
 ### James Doe
 
