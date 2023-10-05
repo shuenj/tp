@@ -6,7 +6,7 @@
 
 # MediSync User Guide
 
-MediSync is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+MediSync is a **desktop app specifically used for head nurses to manage staff and patients, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Instead of tracking data of staff and patients using existing applications such as Microsoft Excel, using a CLI-centric application like MediSync will help head nurses track and handle contact management more quickly.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -30,7 +30,7 @@ MediSync is a **desktop app for managing contacts, optimized for use via a  Line
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com r/patient a/Dr Mike` : Adds a contact named `John Doe` to MediSync.
+   * `add n/John Doe p/98765432 e/johnd@example.com r/patient af/Dr Mike` : Adds a contact named `John Doe` to MediSync.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -44,7 +44,7 @@ MediSync is a **desktop app for managing contacts, optimized for use via a  Line
 
 ## Features
 
-<box type="info" seamless>
+<box type="info" seamless></box>
 
 **Notes about the command format:**<br>
 
@@ -81,7 +81,7 @@ Adds a contact to the contact book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN]…​`
 
-<box type="tip" seamless>
+<box type="tip" seamless></box>
 
 **Tip:** A person can have any number of affiliations (including 0)
 </box>
@@ -179,7 +179,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning" seamless></box>
 
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
