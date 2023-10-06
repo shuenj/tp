@@ -9,11 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -25,6 +25,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -96,29 +97,29 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String affiliation} into a {@code Affiliation}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code affiliation} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Affiliation parseAffiliation(String affiliation) throws ParseException {
+        requireNonNull(affiliation);
+        String trimmedAffiliation = affiliation.trim();
+        if (!Affiliation.isValidAffiliationName(trimmedAffiliation)) {
+            throw new ParseException(Affiliation.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Affiliation(trimmedAffiliation);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> affiliations} into a {@code Set<Affiliation>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Affiliation> parseAffiliations(Collection<String> affiliations) throws ParseException {
+        requireNonNull(affiliations);
+        final Set<Affiliation> affiliationSet = new HashSet<>();
+        for (String affiliationName : affiliations) {
+            affiliationSet.add(parseAffiliation(affiliationName));
         }
-        return tagSet;
+        return affiliationSet;
     }
 }
