@@ -55,7 +55,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Set<Affiliation> affiliationList = ParserUtil.parseAffiliations(argMultimap.getAllValues(PREFIX_AFFILIATION));
 
-        Person person = new Person(name, phone, email, role, affiliationList);
+        Person person = role.generatePerson(name, phone, email, affiliationList);
 
         return new AddCommand(person);
     }

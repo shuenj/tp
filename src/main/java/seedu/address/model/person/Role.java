@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import seedu.address.model.affiliation.Affiliation;
 
 /**
  * Represents a Person's role in the address book.
@@ -14,18 +16,18 @@ import java.util.stream.Collectors;
 public class Role {
 
     /**
-     * Represents different types of roles in MediSync.
+     * Represents different types of role in MediSync.
      */
     public enum Type {
         DOCTOR,
         PATIENT
     }
 
-    /*
+    /**
      * Role must be exactly one of the types. It is case-insensitive.
      */
-    public static final String VALIDATION_REGEX = "(?i)" + new HashSet<>(Arrays.asList(Type.PATIENT, Type.DOCTOR))
-            .stream().map(Enum::toString).collect(Collectors.joining("|"));
+    public static final String VALIDATION_REGEX = "(?i)" + Arrays.stream(Type.values()).map(Enum::name)
+            .collect(Collectors.joining("|"));
 
     public static final String MESSAGE_CONSTRAINTS = "Role can only be Doctor or Patient, and it should not be blank";
 
@@ -47,6 +49,24 @@ public class Role {
      */
     public static boolean isValidRole(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns person with its particular type based on the role.
+     *
+     * @param name Name of person.
+     * @param phone Phone of person.
+     * @param email Email of person.
+     * @param affiliationList Affiliations of person.
+     */
+    public Person generatePerson(Name name, Phone phone, Email email, Set<Affiliation> affiliationList) {
+        if (value.toUpperCase().equals(Type.DOCTOR.name())) {
+            return new Doctor(name, phone, email, affiliationList);
+        } else if (value.toUpperCase().equals(Type.PATIENT.name())) {
+            return new Patient(name, phone, email, affiliationList);
+        } else {
+            return null;
+        }
     }
 
     @Override

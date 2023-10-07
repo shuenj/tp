@@ -25,6 +25,8 @@ public class Person {
     private final Role role;
     private final Set<Affiliation> affiliations = new HashSet<>();
 
+    private final ToStringBuilder stringRepresentation;
+
     /**
      * Every field must be present and not null.
      */
@@ -35,6 +37,12 @@ public class Person {
         this.email = email;
         this.role = role;
         this.affiliations.addAll(affiliations);
+        this.stringRepresentation = new ToStringBuilder(this)
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("role", role)
+                .add("affiliations", affiliations);
     }
 
     public Name getName() {
@@ -59,6 +67,10 @@ public class Person {
      */
     public Set<Affiliation> getAffiliations() {
         return Collections.unmodifiableSet(affiliations);
+    }
+
+    public ToStringBuilder getStringRepresentation() {
+        return stringRepresentation;
     }
 
     /**
@@ -105,13 +117,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("role", role)
-                .add("affiliations", affiliations)
-                .toString();
+        return stringRepresentation.toString();
     }
 
 }

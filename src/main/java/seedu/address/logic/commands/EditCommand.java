@@ -56,7 +56,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -81,7 +81,7 @@ public class EditCommand extends Command {
         Set<Affiliation> updatedAffiliations = editPersonDescriptor
                 .getAffiliations().orElse(personToEdit.getAffiliations());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedRole, updatedAffiliations);
+        return updatedRole.generatePerson(updatedName, updatedPhone, updatedEmail, updatedAffiliations);
     }
 
     @Override

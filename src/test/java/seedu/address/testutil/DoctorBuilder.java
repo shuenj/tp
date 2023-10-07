@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.affiliation.Affiliation;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -19,12 +18,10 @@ public class DoctorBuilder {
     public static final String DEFAULT_NAME = "Jennifer Chue";
     public static final String DEFAULT_PHONE = "85552222";
     public static final String DEFAULT_EMAIL = "jenchue@facemail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
     private Set<Affiliation> affiliations;
 
     /**
@@ -34,7 +31,6 @@ public class DoctorBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         affiliations = new HashSet<>();
     }
 
@@ -45,7 +41,6 @@ public class DoctorBuilder {
         name = doctorToCopy.getName();
         phone = doctorToCopy.getPhone();
         email = doctorToCopy.getEmail();
-        address = doctorToCopy.getAddress();
         affiliations = new HashSet<>(doctorToCopy.getAffiliations());
     }
 
@@ -67,14 +62,6 @@ public class DoctorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Doctor} that we are building.
-     */
-    public DoctorBuilder withAddress(String address) {
-        this.address = new Address(address);
-        return this;
-    }
-
-    /**
      * Sets the {@code Phone} of the {@code Doctor} that we are building.
      */
     public DoctorBuilder withPhone(String phone) {
@@ -91,7 +78,7 @@ public class DoctorBuilder {
     }
 
     public Doctor build() {
-        return new Doctor(name, phone, email, address, affiliations);
+        return new Doctor(name, phone, email, affiliations);
     }
 
 }

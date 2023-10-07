@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AFFILIATION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -34,7 +33,7 @@ public class DoctorTest {
 
         // same name, all other attributes different -> returns true
         Doctor editedAlice = new DoctorBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withAffiliations(VALID_AFFILIATION_AMY).build();
+                .withAffiliations(VALID_AFFILIATION_AMY).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -81,10 +80,6 @@ public class DoctorTest {
         editedAlice = new DoctorBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
-        editedAlice = new DoctorBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different affiliations -> returns false
         editedAlice = new DoctorBuilder(ALICE).withAffiliations(VALID_AFFILIATION_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -93,7 +88,7 @@ public class DoctorTest {
     @Test
     public void toStringMethod() {
         String expected = Doctor.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", affiliations="
+                + ", email=" + ALICE.getEmail() + ", role=" + ALICE.getRole() + ", affiliations="
                 + ALICE.getAffiliations() + "}";
         assertEquals(expected, ALICE.toString());
     }
