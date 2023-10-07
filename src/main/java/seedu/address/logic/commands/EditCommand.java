@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AFFILIATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -22,11 +22,11 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.affiliation.Affiliation;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -42,7 +42,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_AFFILIATION + "AFFILIATION]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -77,11 +77,11 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         Set<Affiliation> updatedAffiliations = editPersonDescriptor
                 .getAffiliations().orElse(personToEdit.getAffiliations());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedAffiliations);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedRole, updatedAffiliations);
     }
 
     @Override
@@ -137,7 +137,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private Role role;
         private Set<Affiliation> affiliations;
 
         public EditPersonDescriptor() {
@@ -151,7 +151,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setRole(toCopy.role);
             setAffiliations(toCopy.affiliations);
         }
 
@@ -159,7 +159,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, affiliations);
+            return CollectionUtil.isAnyNonNull(name, phone, email, role, affiliations);
         }
 
         public Optional<Name> getName() {
@@ -186,12 +186,12 @@ public class EditCommand extends Command {
             this.email = email;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Role> getRole() {
+            return Optional.ofNullable(role);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setRole(Role role) {
+            this.role = role;
         }
 
         /**
@@ -226,7 +226,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(role, otherEditPersonDescriptor.role)
                     && Objects.equals(affiliations, otherEditPersonDescriptor.affiliations);
         }
 
@@ -236,7 +236,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", address)
+                    .add("role", role)
                     .add("affiliations", affiliations)
                     .toString();
         }
