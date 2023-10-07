@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -22,7 +20,11 @@ public class Patient extends Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .appendSuper(super.toString())
+                .add("name", getName())
+                .add("phone", getPhone())
+                .add("email", getEmail())
+                .add("address", getAddress())
+                .add("affiliations", getAffiliations())
                 .toString();
     }
 
