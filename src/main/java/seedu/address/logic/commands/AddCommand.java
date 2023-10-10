@@ -36,7 +36,8 @@ public class AddCommand extends Command {
             + PREFIX_AFFILIATION + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the contact list";
+    public static final String MESSAGE_DUPLICATE_PERSON =
+        "This person already exists in the contact list. Please use a different name.";
 
     private final Person toAdd;
 
