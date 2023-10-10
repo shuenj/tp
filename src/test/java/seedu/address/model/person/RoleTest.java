@@ -1,10 +1,26 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
+import static seedu.address.logic.parser.ParserUtil.parseAffiliations;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.DoctorBuilder;
+import seedu.address.testutil.PatientBuilder;
 
 public class RoleTest {
 
@@ -52,5 +68,35 @@ public class RoleTest {
 
         // different values -> returns false
         assertFalse(role.equals(new Role("Patient")));
+    }
+
+    @Test
+    public void generate_doctorRole_correctTypeReturned() {
+        Doctor doctor = new DoctorBuilder().build();
+        Role role = new Role(VALID_ROLE_AMY);
+        try {
+            assertEquals(doctor.getClass(),
+                    role.generatePerson(new Name(VALID_NAME_AMY),
+                            new Phone(VALID_PHONE_AMY),
+                            new Email(VALID_EMAIL_AMY),
+                            parseAffiliations(new ArrayList<>())).getClass());
+        } catch (Exception e) {
+            fail(); // the test should not reach this line
+        }
+    }
+
+    @Test
+    public void generate_patientRole_correctTypeReturned() {
+        Patient patient = new PatientBuilder().build();
+        Role role = new Role(VALID_ROLE_BOB);
+        try {
+            assertEquals(patient.getClass(),
+                    role.generatePerson(new Name(VALID_NAME_BOB),
+                            new Phone(VALID_PHONE_BOB),
+                            new Email(VALID_EMAIL_BOB),
+                            parseAffiliations(new ArrayList<>())).getClass());
+        } catch (Exception e) {
+            fail(); // the test should not reach this line
+        }
     }
 }
