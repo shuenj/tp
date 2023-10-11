@@ -43,8 +43,9 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Role: ")
                 .append(person.getRole())
-                .append("; Affiliations: ");
+                .append("; Affiliations: {");
         person.getAffiliations().forEach(builder::append);
+        builder.append("}");
         return builder.toString();
     }
 

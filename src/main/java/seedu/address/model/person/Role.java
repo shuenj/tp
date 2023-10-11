@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.affiliation.Affiliation;
 
 /**
- * Represents a Person's role in the address book.
+ * Represents a Person's role in the contact list.
  * Guarantees: immutable; is valid as declared in {@link #isValidRole(String)}
  */
 public class Role {
