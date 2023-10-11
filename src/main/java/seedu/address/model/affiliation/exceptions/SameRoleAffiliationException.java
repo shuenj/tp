@@ -3,6 +3,11 @@ package seedu.address.model.affiliation.exceptions;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
+
+/**
+ * Throws a SameRoleAffiliationException exception which is a CommmandException
+ * when the affiliation person's role is the same as the role of the person adding affiliation.
+ */
 public class SameRoleAffiliationException extends CommandException {
 
     /**

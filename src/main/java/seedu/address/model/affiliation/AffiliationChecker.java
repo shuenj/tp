@@ -1,5 +1,9 @@
 package seedu.address.model.affiliation;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.Set;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -7,9 +11,6 @@ import seedu.address.model.affiliation.exceptions.AffiliationPersonNotFoundExcep
 import seedu.address.model.affiliation.exceptions.SamePersonAffiliationException;
 import seedu.address.model.affiliation.exceptions.SameRoleAffiliationException;
 import seedu.address.model.person.Person;
-
-import java.util.Set;
-import static java.util.Objects.requireNonNull;
 
 /**
  * Check if the affiliation can be successfully added to a Person.
