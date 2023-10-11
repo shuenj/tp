@@ -101,8 +101,10 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        AffiliationChecker affiliationFilter = new AffiliationChecker(editedPerson);
-        affiliationFilter.check(model);
+        if (this.editPersonDescriptor.isAffiliationEdited()) {
+            AffiliationChecker affiliationFilter = new AffiliationChecker(editedPerson);
+            affiliationFilter.check(model);
+        }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -164,6 +166,13 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, role, affiliations);
+        }
+
+        /**
+         * Returns true if affiliations is edited.
+         */
+        public boolean isAffiliationEdited() {
+            return CollectionUtil.isAnyNonNull(affiliations);
         }
 
         public Optional<Name> getName() {
