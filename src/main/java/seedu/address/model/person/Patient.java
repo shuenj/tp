@@ -5,7 +5,7 @@ import java.util.Set;
 import seedu.address.model.affiliation.Affiliation;
 
 /**
- * Represents a Patient in the address book.
+ * Represents a Patient in the contact list.
  */
 public class Patient extends Person {
 
