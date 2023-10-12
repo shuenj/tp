@@ -1,6 +1,6 @@
 package seedu.address.model.affiliation;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Set;
 
@@ -23,9 +23,7 @@ public class AffiliationModifier {
      * @param model The current model that is running.
      */
     public static void addAffiliations(Set<Affiliation> affiliationSet, Person affiliatedPerson, Model model) {
-        requireNonNull(affiliationSet);
-        requireNonNull(affiliatedPerson);
-        requireNonNull(model);
+        requireAllNonNull(affiliationSet, affiliatedPerson, model);
         ReadOnlyAddressBook addressBook = model.getAddressBook();
 
         for (Affiliation affiliation: affiliationSet) {
@@ -44,9 +42,7 @@ public class AffiliationModifier {
      * @param model The current model that is running.
      */
     public static void removeAffiliations(Set<Affiliation> affiliationSet, Person affiliatedPerson, Model model) {
-        requireNonNull(affiliationSet);
-        requireNonNull(affiliatedPerson);
-        requireNonNull(model);
+        requireAllNonNull(affiliationSet, affiliatedPerson, model);
 
         ReadOnlyAddressBook addressBook = model.getAddressBook();
 
@@ -69,10 +65,7 @@ public class AffiliationModifier {
      */
     public static void nameChangeAffiliations(Set<Affiliation> affiliationSet,
                                               Name oldName, Name newName, Model model) {
-        requireNonNull(affiliationSet);
-        requireNonNull(oldName);
-        requireNonNull(newName);
-        requireNonNull(model);
+        requireAllNonNull(affiliationSet, oldName, newName, model);
 
         ReadOnlyAddressBook addressBook = model.getAddressBook();
 

@@ -8,20 +8,21 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.affiliation.Affiliation;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
 
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
+    public void asObservableList_modifyList_success() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getAffiliations().remove(0));
+        person.getAffiliations().add(new Affiliation(VALID_AFFILIATION_AMY));
+        assertTrue(person.getAffiliations().contains(new Affiliation(VALID_AFFILIATION_AMY)));
     }
 
     @Test

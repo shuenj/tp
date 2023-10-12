@@ -55,6 +55,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON =
         "This person already exists in the contact list. Please use a different name.";
+    public static final String MESSAGE_EDIT_ROLE_CONTAIN_AFFILIATION =
+            "This person contains affiliations. Changing of Role is not allowed.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -104,12 +106,18 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        if (this.editPersonDescriptor.isRoleEdited()) {
+            if (!isNull(personToEdit.getAffiliations()) && personToEdit.getAffiliations().isEmpty()) {
+                throw new CommandException(MESSAGE_EDIT_ROLE_CONTAIN_AFFILIATION);
+            }
+        }
+
         if (this.editPersonDescriptor.isNameEdited()) {
             AffiliationModifier.nameChangeAffiliations(personToEdit.getAffiliations(), personToEdit.getName(),
                     editedPerson.getName(), model);
         }
 
-        if (this.editPersonDescriptor.isAffiliationEdited()) {
+        if (this.editPersonDescriptor.isAffiliationEdited() && !editedPerson.getAffiliations().isEmpty()) {
             AffiliationChecker.check(editedPerson, model);
             AffiliationModifier.removeAffiliations(personToEdit.getAffiliations(), editedPerson, model);
             AffiliationModifier.addAffiliations(editedPerson.getAffiliations(), editedPerson, model);
@@ -178,10 +186,17 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns true if affiliations is edited.
+         * Returns true if name is edited.
          */
         public boolean isNameEdited() {
             return !isNull(name);
+        }
+
+        /**
+         * Returns true if role is edited.
+         */
+        public boolean isRoleEdited() {
+            return !isNull(role);
         }
 
         /**

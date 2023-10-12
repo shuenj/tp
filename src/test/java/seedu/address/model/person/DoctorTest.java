@@ -7,20 +7,21 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_AFFILIATION_AMY
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDoctors.ALICE;
 import static seedu.address.testutil.TypicalDoctors.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.affiliation.Affiliation;
 import seedu.address.testutil.DoctorBuilder;
 
 public class DoctorTest {
 
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
+    public void asObservableList_modifyList_success() {
         Doctor doctor = new DoctorBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> doctor.getAffiliations().remove(0));
+        doctor.getAffiliations().add(new Affiliation(VALID_AFFILIATION_AMY));
+        assertTrue(doctor.getAffiliations().contains(new Affiliation(VALID_AFFILIATION_AMY)));
     }
 
     @Test

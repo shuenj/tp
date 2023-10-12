@@ -1,6 +1,7 @@
 package seedu.address.model.affiliation;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.DoctorBuilder;
+import seedu.address.testutil.PatientBuilder;
 
 public class AffiliationModifierTest {
 
@@ -17,31 +20,36 @@ public class AffiliationModifierTest {
 
     @Test
     public void addAffiliation_validParam_success() {
-        Person PatientB = model.getFilteredPersonList().get(1); // B Affn to A and C
-        Person DoctorC = model.getFilteredPersonList().get(2); // C Affn to None
+        Person doctorA = new DoctorBuilder().withName("Alice").build();
+        Person patientB = new PatientBuilder().withName("Bob").withAffiliations("Alice").build();
+        model.addPerson(doctorA);
+        model.addPerson(patientB);
 
-        AffiliationModifier.addAffiliations(PatientB.getAffiliations(), PatientB, model);
-        assertTrue(DoctorC.getAffiliations().contains(new Affiliation(PatientB.getName().fullName)));
+        AffiliationModifier.addAffiliations(patientB.getAffiliations(), patientB, model);
+        assertTrue(doctorA.getAffiliations().contains(new Affiliation(patientB.getName().fullName)));
     }
 
     @Test
     public void removeAffiliation_validParam_success() {
-        Person DoctorA = model.getFilteredPersonList().get(0); // A Affn to B
-        Person PatientB = model.getFilteredPersonList().get(1); // B Affn to A and C
+        Person doctorA = new DoctorBuilder().withName("Alice").withAffiliations("Bob").build();
+        Person patientB = new PatientBuilder().withName("Bob").withAffiliations("Alice").build();
+        model.addPerson(doctorA);
+        model.addPerson(patientB);
 
-        AffiliationModifier.removeAffiliations(PatientB.getAffiliations(), PatientB, model);
-        assertFalse(DoctorA.getAffiliations().contains(new Affiliation(PatientB.getName().fullName)));
+        AffiliationModifier.removeAffiliations(patientB.getAffiliations(), patientB, model);
+        assertFalse(doctorA.getAffiliations().contains(new Affiliation(patientB.getName().fullName)));
     }
 
     @Test
     public void nameChangeAffiliation_validParam_success() {
-        Person DoctorA = model.getFilteredPersonList().get(0); // A Affn to B
-        Person PatientB = model.getFilteredPersonList().get(1); // B Affn to A and C
+        Person doctorA = new DoctorBuilder().withName("Alice").withAffiliations("Bob").build();
+        Person patientB = new PatientBuilder().withName("Bob").withAffiliations("Alice").build();
+        model.addPerson(doctorA);
+        model.addPerson(patientB);
         Name newName = new Name("Ben");
 
-        AffiliationModifier.nameChangeAffiliations(PatientB.getAffiliations(),
-                PatientB.getName(), newName, model);
-        System.out.println(PatientB);
-        assertTrue(DoctorA.getAffiliations().contains(new Affiliation(newName.fullName)));
+        AffiliationModifier.nameChangeAffiliations(patientB.getAffiliations(),
+                patientB.getName(), newName, model);
+        assertTrue(doctorA.getAffiliations().contains(new Affiliation(newName.fullName)));
     }
 }

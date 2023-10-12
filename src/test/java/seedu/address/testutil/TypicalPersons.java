@@ -73,6 +73,24 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        Person alice = new PersonBuilder().withName("Alice Pauline")
+                .withRole("Doctor").withEmail("alice@example.com")
+                .withPhone("94351253")
+                .withAffiliations("Benson Meier").build();
+        Person benson = new PersonBuilder().withName("Benson Meier")
+                .withRole("Patient")
+                .withEmail("johnd@example.com").withPhone("98765432")
+                .withAffiliations("Alice Pauline", "Carl Kurz").build();
+        Person carl = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
+                .withEmail("heinz@example.com").withRole("Doctor").build();
+        Person daniel = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+                .withEmail("cornelia@example.com").withRole("Patient").build();
+        Person elle = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+                .withEmail("werner@example.com").withRole("Doctor").build();
+        Person fiona = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+                .withEmail("lydia@example.com").withRole("Patient").build();
+        Person george = new PersonBuilder().withName("George Best").withPhone("9482442")
+                .withEmail("anna@example.com").withRole("Doctor").build();
+        return new ArrayList<>(Arrays.asList(alice, benson, carl, daniel, elle, fiona, george));
     }
 }
