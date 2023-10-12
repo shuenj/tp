@@ -20,11 +20,12 @@ public class AffiliationCommand extends Command {
 
     public static final String COMMAND_WORD = "affn";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds and returns the list "
-            + "of people who are affiliated with the person identified by their full name. "
-            + "(i.e. returns the doctors of a patient, or the patients of a doctor)\n"
-            + "Parameters: [FULL NAME]\n"
-            + "Example: " + COMMAND_WORD + "John Doe";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds and returns the list of people who are "
+        + "affiliated with the person identified by the index number shown in the displayed person list. "
+        + "(i.e. returns the doctors of a patient, or the patients of a doctor)\n"
+        + "The index must be a positive integer 1, 2, 3, …\n"
+        + "Parameters: INDEX (must be a positive integer)\n"
+        + "Example: " + COMMAND_WORD + " 2";
 
     private final Index index;
 
