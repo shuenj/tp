@@ -1,13 +1,13 @@
 package seedu.address.model.affiliation;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.Set;
+
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * AffiliationModifier modifies affiliation.
