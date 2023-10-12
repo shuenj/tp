@@ -28,7 +28,7 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withAffiliations("Benson Meier").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withRole("Doctor")
+            .withRole("Patient")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withAffiliations("Alice Pauline", "Carl Kurz").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")

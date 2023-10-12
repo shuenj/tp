@@ -13,26 +13,9 @@ import seedu.address.model.affiliation.exceptions.SameRoleAffiliationException;
 import seedu.address.model.person.Person;
 
 /**
- * Check if the affiliation can be successfully added to a Person.
+ * AffiliationChecker checks if affiliation is valid.
  */
 public class AffiliationChecker {
-
-    /**
-     * The affiliation list to be checked
-     */
-    private final Set<Affiliation> affiliationList;
-
-    private final Person personAddingAffiliation;
-
-    /**
-     * Constructs an Affiliation Checker.
-     * @param personAddingAffiliation The person adding affiliation.
-     */
-    public AffiliationChecker(Person personAddingAffiliation) {
-        requireNonNull(personAddingAffiliation);
-        this.personAddingAffiliation = personAddingAffiliation;
-        this.affiliationList = personAddingAffiliation.getAffiliations();
-    }
 
     /**
      * Returns true if affiliation list pass the check, throws an exception otherwise.
@@ -40,7 +23,12 @@ public class AffiliationChecker {
      * @param model The current model that is running.
      * @throws CommandException If affiliation list fails the check.
      */
-    public Boolean check(Model model) throws CommandException {
+    public static Boolean check(Person personAddingAffiliation, Model model) throws CommandException {
+        requireNonNull(personAddingAffiliation);
+        requireNonNull(model);
+
+        Set<Affiliation> affiliationList = personAddingAffiliation.getAffiliations();
+
         if (affiliationList.isEmpty()) {
             return true;
         }
@@ -69,7 +57,9 @@ public class AffiliationChecker {
      * @param affiliation The affiliation contains the affiliation person.
      * @param addressBook The address book to check for the affiliation person.
      */
-    private Person findAffiliatedPerson(Affiliation affiliation, ReadOnlyAddressBook addressBook) {
+    public static Person findAffiliatedPerson(Affiliation affiliation, ReadOnlyAddressBook addressBook) {
+        requireNonNull(affiliation);
+        requireNonNull(addressBook);
         for (Person p: addressBook.getPersonList()) {
             if (p.getName().fullName.equals(affiliation.affiliationName)) {
                 return p;

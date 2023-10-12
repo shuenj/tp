@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AFFILIATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.affiliation.AffiliationChecker;
+import seedu.address.model.affiliation.AffiliationModifier;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -101,9 +103,15 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        if (this.editPersonDescriptor.isNameEdited()) {
+            AffiliationModifier.nameChangeAffiliations(personToEdit.getAffiliations(), personToEdit.getName(),
+                    editedPerson.getName(), model);
+        }
+
         if (this.editPersonDescriptor.isAffiliationEdited()) {
-            AffiliationChecker affiliationFilter = new AffiliationChecker(editedPerson);
-            affiliationFilter.check(model);
+            AffiliationChecker.check(editedPerson, model);
+            AffiliationModifier.removeAffiliations(personToEdit.getAffiliations(), editedPerson, model);
+            AffiliationModifier.addAffiliations(editedPerson.getAffiliations(), editedPerson, model);
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -171,8 +179,15 @@ public class EditCommand extends Command {
         /**
          * Returns true if affiliations is edited.
          */
+        public boolean isNameEdited() {
+            return !isNull(name);
+        }
+
+        /**
+         * Returns true if affiliations is edited.
+         */
         public boolean isAffiliationEdited() {
-            return CollectionUtil.isAnyNonNull(affiliations);
+            return !isNull(affiliations);
         }
 
         public Optional<Name> getName() {

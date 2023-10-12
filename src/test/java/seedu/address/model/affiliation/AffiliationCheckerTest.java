@@ -28,19 +28,13 @@ public class AffiliationCheckerTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AffiliationChecker(null));
-    }
-
-    @Test
     public void check_withAffiliationPersonNotExist_affiliationPersonNotFoundException() {
         Person person = new PersonBuilder()
                 .withName(VALID_NAME_AMY)
                 .withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_AFFILIATION_BOB)
                 .build();
-        AffiliationChecker affiliationChecker = new AffiliationChecker(person);
-        assertThrows(AffiliationPersonNotFoundException.class, () -> affiliationChecker.check(model));
+        assertThrows(AffiliationPersonNotFoundException.class, () -> AffiliationChecker.check(person, model));
     }
 
     @Test
@@ -50,8 +44,7 @@ public class AffiliationCheckerTest {
                 .withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_NAME_ALICE)
                 .build();
-        AffiliationChecker affiliationChecker = new AffiliationChecker(person);
-        assertThrows(SamePersonAffiliationException.class, () -> affiliationChecker.check(model));
+        assertThrows(SamePersonAffiliationException.class, () -> AffiliationChecker.check(person, model));
     }
 
     @Test
@@ -61,8 +54,7 @@ public class AffiliationCheckerTest {
                 .withRole(VALID_ROLE_AMY)
                 .withAffiliations(VALID_NAME_ALICE)
                 .build();
-        AffiliationChecker affiliationChecker = new AffiliationChecker(person);
-        assertThrows(SameRoleAffiliationException.class, () -> affiliationChecker.check(model));
+        assertThrows(SameRoleAffiliationException.class, () -> AffiliationChecker.check(person, model));
     }
 
     @Test
@@ -72,9 +64,8 @@ public class AffiliationCheckerTest {
                 .withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_NAME_ALICE)
                 .build();
-        AffiliationChecker affiliationChecker = new AffiliationChecker(person);
         try {
-            assertTrue(affiliationChecker.check(model));
+            assertTrue(AffiliationChecker.check(person, model));
         } catch (CommandException ce) {
             fail();
         }
