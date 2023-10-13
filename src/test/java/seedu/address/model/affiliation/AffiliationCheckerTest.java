@@ -34,7 +34,7 @@ public class AffiliationCheckerTest {
                 .withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_AFFILIATION_BOB)
                 .build();
-        assertThrows(AffiliationPersonNotFoundException.class, () -> AffiliationChecker.check(person, model));
+        assertThrows(AffiliationPersonNotFoundException.class, () -> AuthenticateAffiliation.check(person, model));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class AffiliationCheckerTest {
                 .withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_NAME_ALICE)
                 .build();
-        assertThrows(SamePersonAffiliationException.class, () -> AffiliationChecker.check(person, model));
+        assertThrows(SamePersonAffiliationException.class, () -> AuthenticateAffiliation.check(person, model));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class AffiliationCheckerTest {
                 .withRole(VALID_ROLE_AMY)
                 .withAffiliations(VALID_NAME_ALICE)
                 .build();
-        assertThrows(SameRoleAffiliationException.class, () -> AffiliationChecker.check(person, model));
+        assertThrows(SameRoleAffiliationException.class, () -> AuthenticateAffiliation.check(person, model));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class AffiliationCheckerTest {
                 .withAffiliations(VALID_NAME_ALICE)
                 .build();
         try {
-            assertTrue(AffiliationChecker.check(person, model));
+            assertTrue(AuthenticateAffiliation.check(person, model));
         } catch (CommandException ce) {
             fail();
         }

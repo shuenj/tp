@@ -15,7 +15,7 @@ public class SameRoleAffiliationException extends CommandException {
      * @param personNotAdded The person that fails to add in affiliation.
      */
     public SameRoleAffiliationException(Person personNotAdded) {
-        super(personNotAdded.getName().toString() + " cannot be added as it has the same role "
-                + personNotAdded.getRole() + ".");
+        super(personNotAdded.getName().toString() + " cannot be added as an affiliation as "
+                + "it has the same role of " + personNotAdded.getRole() + ".");
     }
 }

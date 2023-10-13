@@ -23,8 +23,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.affiliation.Affiliation;
-import seedu.address.model.affiliation.AffiliationChecker;
 import seedu.address.model.affiliation.AffiliationModifier;
+import seedu.address.model.affiliation.AuthenticateAffiliation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -117,8 +117,8 @@ public class EditCommand extends Command {
                     editedPerson.getName(), model);
         }
 
-        if (this.editPersonDescriptor.isAffiliationEdited() && !editedPerson.getAffiliations().isEmpty()) {
-            AffiliationChecker.check(editedPerson, model);
+        if (this.editPersonDescriptor.isAffiliationEdited()) {
+            AuthenticateAffiliation.check(editedPerson, model);
             AffiliationModifier.removeAffiliations(personToEdit.getAffiliations(), editedPerson, model);
             AffiliationModifier.addAffiliations(editedPerson.getAffiliations(), editedPerson, model);
         }

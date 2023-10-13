@@ -14,6 +14,7 @@ public class SamePersonAffiliationException extends CommandException {
      * @param personNotAdded The person that fails to add in affiliation.
      */
     public SamePersonAffiliationException(Person personNotAdded) {
-        super(personNotAdded.getName().toString() + " cannot be added as it is the same person.");
+        super(personNotAdded.getName().toString() + " cannot be added as an affiliation as it "
+                + "is the same person.");
     }
 }

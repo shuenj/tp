@@ -13,6 +13,7 @@ public class AffiliationPersonNotFoundException extends CommandException {
      * @param nameOfPersonNotFound The name of person that is not found in address book.
      */
     public AffiliationPersonNotFoundException(String nameOfPersonNotFound) {
-        super(nameOfPersonNotFound + " cannot be added as it does not exist in contact");
+        super(nameOfPersonNotFound + " cannot be added as an affiliation as it does not exist "
+                + "in the contact list.");
     }
 }

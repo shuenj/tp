@@ -27,7 +27,7 @@ public class AffiliationModifier {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
 
         for (Affiliation affiliation: affiliationSet) {
-            Person otherAffiliatedPerson = AffiliationChecker.findAffiliatedPerson(affiliation, addressBook);
+            Person otherAffiliatedPerson = AuthenticateAffiliation.findAffiliatedPerson(affiliation, addressBook);
             assert otherAffiliatedPerson != null;
             otherAffiliatedPerson.getAffiliations().add(new Affiliation(affiliatedPerson.getName().fullName));
         }
@@ -47,7 +47,7 @@ public class AffiliationModifier {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
 
         for (Affiliation affiliation: affiliationSet) {
-            Person otherAffiliatedPerson = AffiliationChecker.findAffiliatedPerson(affiliation, addressBook);
+            Person otherAffiliatedPerson = AuthenticateAffiliation.findAffiliatedPerson(affiliation, addressBook);
             assert otherAffiliatedPerson != null;
             otherAffiliatedPerson.getAffiliations().remove(new Affiliation(affiliatedPerson.getName().fullName));
         }
@@ -70,7 +70,7 @@ public class AffiliationModifier {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
 
         for (Affiliation affiliation: affiliationSet) {
-            Person otherAffiliatedPerson = AffiliationChecker.findAffiliatedPerson(affiliation, addressBook);
+            Person otherAffiliatedPerson = AuthenticateAffiliation.findAffiliatedPerson(affiliation, addressBook);
             assert otherAffiliatedPerson != null;
             Set<Affiliation> otherAffiliatedSet = otherAffiliatedPerson.getAffiliations();
             for (Affiliation affiliation1: otherAffiliatedSet) {

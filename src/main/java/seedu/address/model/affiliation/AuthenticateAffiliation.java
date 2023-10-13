@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 /**
  * AffiliationChecker checks if affiliation is valid.
  */
-public class AffiliationChecker {
+public class AuthenticateAffiliation {
 
     /**
      * Returns true if affiliation list pass the check, throws an exception otherwise.
