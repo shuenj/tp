@@ -10,7 +10,7 @@
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "role" : "Doctor",
+    "role" : "Patient",
     "affiliations" : [ "Alice Pauline", "Carl Kurz" ]
   }, {
     "name" : "Carl Kurz",

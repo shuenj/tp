@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AFFILIATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -22,6 +23,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.affiliation.Affiliation;
+import seedu.address.model.affiliation.AffiliationModifier;
+import seedu.address.model.affiliation.AuthenticateAffiliation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -52,6 +55,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON =
         "This person already exists in the contact list. Please use a different name.";
+    public static final String MESSAGE_EDIT_ROLE_CONTAIN_AFFILIATION =
+            "This person contains affiliations. Changing of Role is not allowed.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -99,6 +104,23 @@ public class EditCommand extends Command {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (this.editPersonDescriptor.isRoleEdited()) {
+            if (!isNull(personToEdit.getAffiliations()) && personToEdit.getAffiliations().isEmpty()) {
+                throw new CommandException(MESSAGE_EDIT_ROLE_CONTAIN_AFFILIATION);
+            }
+        }
+
+        if (this.editPersonDescriptor.isNameEdited()) {
+            AffiliationModifier.nameChangeAffiliations(personToEdit.getAffiliations(), personToEdit.getName(),
+                    editedPerson.getName(), model);
+        }
+
+        if (this.editPersonDescriptor.isAffiliationEdited()) {
+            AuthenticateAffiliation.check(editedPerson, model);
+            AffiliationModifier.removeAffiliations(personToEdit.getAffiliations(), editedPerson, model);
+            AffiliationModifier.addAffiliations(editedPerson.getAffiliations(), editedPerson, model);
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -161,6 +183,27 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, role, affiliations);
+        }
+
+        /**
+         * Returns true if name is edited.
+         */
+        public boolean isNameEdited() {
+            return !isNull(name);
+        }
+
+        /**
+         * Returns true if role is edited.
+         */
+        public boolean isRoleEdited() {
+            return !isNull(role);
+        }
+
+        /**
+         * Returns true if affiliations is edited.
+         */
+        public boolean isAffiliationEdited() {
+            return !isNull(affiliations);
         }
 
         public Optional<Name> getName() {

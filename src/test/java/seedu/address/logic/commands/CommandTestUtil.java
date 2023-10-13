@@ -26,6 +26,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_NAME_ALICE = "Alice Pauline";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -35,6 +36,7 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_AMY = "Doctor";
     public static final String VALID_ROLE_BOB = "Patient";
     public static final String VALID_AFFILIATION_AMY = "Amy Bee";
+    public static final String VALID_AFFILIATION_DANIEL = "Daniel Meier";
     public static final String VALID_AFFILIATION_BOB = "Bob Choo";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;

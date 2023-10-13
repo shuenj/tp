@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -25,8 +24,6 @@ public class Person {
     private final Role role;
     private final Set<Affiliation> affiliations = new HashSet<>();
 
-    private final ToStringBuilder stringRepresentation;
-
     /**
      * Every field must be present and not null.
      */
@@ -37,12 +34,6 @@ public class Person {
         this.email = email;
         this.role = role;
         this.affiliations.addAll(affiliations);
-        this.stringRepresentation = new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("role", role)
-                .add("affiliations", affiliations);
     }
 
     public Name getName() {
@@ -62,15 +53,10 @@ public class Person {
     }
 
     /**
-     * Returns an immutable affiliation set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns an affiliation set.
      */
     public Set<Affiliation> getAffiliations() {
-        return Collections.unmodifiableSet(affiliations);
-    }
-
-    public ToStringBuilder getStringRepresentation() {
-        return stringRepresentation;
+        return affiliations;
     }
 
     /**
@@ -115,9 +101,18 @@ public class Person {
         return Objects.hash(name, phone, email, role, affiliations);
     }
 
+    public ToStringBuilder getStringBuilderRepresentation() {
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("role", role)
+                .add("affiliations", affiliations);
+    }
+
     @Override
     public String toString() {
-        return stringRepresentation.toString();
+        return getStringBuilderRepresentation().toString();
     }
 
 }

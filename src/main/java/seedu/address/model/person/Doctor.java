@@ -18,7 +18,7 @@ public class Doctor extends Person {
 
     @Override
     public String toString() {
-        return getStringRepresentation().toString();
+        return getStringBuilderRepresentation().toString();
     }
 
 }
