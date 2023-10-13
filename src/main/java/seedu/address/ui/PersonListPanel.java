@@ -8,7 +8,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,9 +36,6 @@ public class PersonListPanel extends UiPart<Region> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
-            for (Affiliation affiliation: person.getAffiliations()) {
-
-            }
 
             if (empty || person == null) {
                 setGraphic(null);
