@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -40,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane affiliations;
+    @FXML
+    private FlowPane affiliationHistoryPane;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -52,8 +55,21 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         role.setText(person.getRole().value);
         email.setText(person.getEmail().value);
-        person.getAffiliations().stream()
-                .sorted(Comparator.comparing(affiliation -> affiliation.affiliationName))
-                .forEach(affiliation -> affiliations.getChildren().add(new Label(affiliation.affiliationName)));
+        String affiliationsText = person.getAffiliations().stream()
+            .sorted(Comparator.comparing(affiliation -> affiliation.affiliationName))
+            .map(affiliation -> affiliation.affiliationName)
+            .collect(Collectors.joining(", "));
+        affiliations.getChildren().add(new Label(affiliationsText));
+        String affiliationHistoryText = person.getAffiliationHistory().stream()
+            .sorted(Comparator.comparing(affiliation -> affiliation.affiliationName))
+            .map(affiliation -> affiliation.affiliationName)
+            .collect(Collectors.joining(", "));
+        affiliationHistoryPane.getChildren().add(new Label(affiliationHistoryText));
+        // person.getAffiliations().stream()
+        //         .sorted(Comparator.comparing(affiliation -> affiliation.affiliationName))
+        //         .forEach(affiliation -> affiliations.getChildren().add(new Label(affiliation.affiliationName)));
+        // person.getAffiliationHistory().stream()
+        //         .sorted(Comparator.comparing(affiliation -> affiliation.affiliationName))
+        //         .forEach(affiliation -> affiliationHistoryPane.getChildren().add(new Label(affiliation.affiliationName)));
     }
 }
