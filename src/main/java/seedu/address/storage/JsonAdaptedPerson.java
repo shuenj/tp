@@ -103,7 +103,7 @@ class JsonAdaptedPerson {
         final Role modelRole = new Role(role);
 
         final Set<Affiliation> modelAffiliations = new HashSet<>(personAffiliations);
-        return new Person(modelName, modelPhone, modelEmail, modelRole, modelAffiliations);
+        return modelRole.generatePerson(modelName, modelPhone, modelEmail, modelAffiliations);
     }
 
 }

@@ -65,11 +65,5 @@ public class PersonCard extends UiPart<Region> {
             .map(affiliation -> affiliation.affiliationName)
             .collect(Collectors.joining(", "));
         affiliationHistoryPane.getChildren().add(new Label(affiliationHistoryText));
-        // person.getAffiliations().stream()
-        //         .sorted(Comparator.comparing(affiliation -> affiliation.affiliationName))
-        //         .forEach(affiliation -> affiliations.getChildren().add(new Label(affiliation.affiliationName)));
-        // person.getAffiliationHistory().stream()
-        //         .sorted(Comparator.comparing(affiliation -> affiliation.affiliationName))
-        //         .forEach(affiliation -> affiliationHistoryPane.getChildren().add(new Label(affiliation.affiliationName)));
     }
 }
