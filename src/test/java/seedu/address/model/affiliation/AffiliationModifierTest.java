@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -22,7 +26,7 @@ public class AffiliationModifierTest {
     public void addAffiliation_validParam_success() {
         Person doctorA = new DoctorBuilder().withName("Alice").build();
         Person patientB = new PatientBuilder().withName("Bob").withAffiliations("Alice")
-        .withAffiliationHistory("Alice").build();
+            .withAffiliationHistory("Alice").build();
         model.addPerson(doctorA);
         model.addPerson(patientB);
 
@@ -31,11 +35,28 @@ public class AffiliationModifierTest {
     }
 
     @Test
+    public void addAffiliationHistory_validParam_success() {
+        Person doctorAlice = new DoctorBuilder().withName("Alice").build();
+        Person doctorCharlie = new DoctorBuilder().withName("Charlie").build();
+        Person patientBob = new PatientBuilder().withName("Bob")
+            .withAffiliations("Alice", "Charlie")
+            .withAffiliationHistory("Alice", "Charlie").build();
+        model.addPerson(doctorAlice);
+        model.addPerson(doctorCharlie);
+        model.addPerson(patientBob);
+        Set<Affiliation> affiliationSet = new HashSet<>(Arrays.asList(new Affiliation("Alice"),
+            new Affiliation("Charlie")));
+        AffiliationModifier.addAffiliationHistory(affiliationSet, patientBob, model);
+        assertTrue(doctorAlice.getAffiliationHistory().contains(new Affiliation(patientBob.getName().fullName)));
+        assertTrue(doctorCharlie.getAffiliationHistory().contains(new Affiliation(patientBob.getName().fullName)));
+    }
+
+    @Test
     public void removeAffiliation_validParam_success() {
         Person doctorA = new DoctorBuilder().withName("Alice").withAffiliations("Bob")
-        .withAffiliationHistory("Bob").build();
+            .withAffiliationHistory("Bob").build();
         Person patientB = new PatientBuilder().withName("Bob").withAffiliations("Alice")
-        .withAffiliationHistory("Alice").build();
+            .withAffiliationHistory("Alice").build();
         model.addPerson(doctorA);
         model.addPerson(patientB);
 
@@ -46,9 +67,9 @@ public class AffiliationModifierTest {
     @Test
     public void nameChangeAffiliation_validParam_success() {
         Person doctorA = new DoctorBuilder().withName("Alice").withAffiliations("Bob")
-        .withAffiliationHistory("Bob").build();
+            .withAffiliationHistory("Bob").build();
         Person patientB = new PatientBuilder().withName("Bob").withAffiliations("Alice")
-        .withAffiliationHistory("Alice").build();
+            .withAffiliationHistory("Alice").build();
         model.addPerson(doctorA);
         model.addPerson(patientB);
         Name newName = new Name("Ben");

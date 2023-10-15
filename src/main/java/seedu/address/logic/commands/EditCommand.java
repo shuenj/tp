@@ -87,8 +87,9 @@ public class EditCommand extends Command {
         Set<Affiliation> updatedAffiliations = editPersonDescriptor
                 .getAffiliations().orElse(personToEdit.getAffiliations());
         Set<Affiliation> mergedAffiliationHistory = new HashSet<>(personToEdit.getAffiliationHistory());
-        mergedAffiliationHistory.addAll(updatedAffiliations); 
-        return updatedRole.generatePerson(updatedName, updatedPhone, updatedEmail, updatedAffiliations, mergedAffiliationHistory);
+        mergedAffiliationHistory.addAll(updatedAffiliations);
+        return updatedRole.generatePerson(updatedName, updatedPhone, updatedEmail,
+            updatedAffiliations, mergedAffiliationHistory);
     }
 
     @Override
@@ -254,7 +255,8 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code affiliations} is null.
          */
         public Optional<Set<Affiliation>> getAffiliationHistory() {
-            return (affiliationHistory != null) ? Optional.of(Collections.unmodifiableSet(affiliationHistory)) : Optional.empty();
+            return (affiliationHistory != null) ? Optional.of(Collections.unmodifiableSet(affiliationHistory))
+                : Optional.empty();
         }
         /**
          * Sets {@code affiliations} to this object's {@code affiliations}.
@@ -265,7 +267,8 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code affiliationHistory} to this object's {@code affiliationHistory}.
+         * Sets {@code affiliationHistory} and {@code affiliations} to
+         * this object's {@code affiliationHistory}.
          * A defensive copy of {@code affiliationHistory} is used internally.
          */
         public void setAffiliationHistory(Set<Affiliation> affiliationHistory, Set<Affiliation> affiliations) {
@@ -284,7 +287,8 @@ public class EditCommand extends Command {
          * A defensive copy of {@code affiliationHistory} is used internally.
          */
         public void setAffiliationHistory(Set<Affiliation> affiliationHistory) {
-            this.affiliationHistory = (affiliationHistory != null) ? new HashSet<>(affiliationHistory) : null;
+            this.affiliationHistory = (affiliationHistory != null)
+                ? new HashSet<>(affiliationHistory) : null;
         }
         /**
          * Adds {@code affiliations} to this object's {@code affiliations}.
@@ -296,7 +300,6 @@ public class EditCommand extends Command {
             }
             this.affiliationHistory.addAll(affiliations);
         }
-        
         @Override
         public boolean equals(Object other) {
             if (other == this) {

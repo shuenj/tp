@@ -83,8 +83,9 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code affiliationHistory} into a {@code Set<Affiliation>} and set it to the {@code EditPersonDescriptor}
-     * @return
+     * Parses the {@code affiliationHistory} into a {@code Set<Affiliation>} and
+     * set it to the {@code EditPersonDescriptor}
+     * @return EditPersonDescriptorBuilder
      */
     public EditPersonDescriptorBuilder withAffiliationHistory(String... tags) {
         Set<Affiliation> affiliationSet = Stream.of(tags).map(Affiliation::new).collect(Collectors.toSet());
