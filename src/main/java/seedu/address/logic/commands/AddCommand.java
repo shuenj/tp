@@ -61,7 +61,7 @@ public class AddCommand extends Command {
 
         AuthenticateAffiliation.check(toAdd, model);
         AffiliationModifier.addAffiliations(toAdd.getAffiliations(), toAdd, model);
-        AffiliationModifier.addAffiliations(toAdd.getAffiliationHistory(), toAdd, model);
+        AffiliationModifier.addAffiliationHistory(toAdd.getAffiliations(), toAdd, model);
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
