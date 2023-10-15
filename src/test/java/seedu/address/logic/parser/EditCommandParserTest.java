@@ -116,7 +116,8 @@ public class EditCommandParserTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withRole(VALID_ROLE_AMY)
-                .withAffiliations(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB).build();
+                .withAffiliations(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB)
+                .withAffiliationHistory(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -163,7 +164,8 @@ public class EditCommandParserTest {
 
         // affiliations
         userInput = targetIndex.getOneBased() + AFFILIATION_DESC_BOB;
-        descriptor = new EditPersonDescriptorBuilder().withAffiliations(VALID_AFFILIATION_BOB).build();
+        descriptor = new EditPersonDescriptorBuilder().withAffiliations(VALID_AFFILIATION_BOB)
+        .withAffiliationHistory(VALID_AFFILIATION_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

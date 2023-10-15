@@ -34,7 +34,8 @@ public class PatientTest {
 
         // same name, all other attributes different -> returns true
         Patient editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAffiliations(VALID_AFFILIATION_AMY).build();
+                .withAffiliations(VALID_AFFILIATION_AMY)
+                .withAffiliationHistory(VALID_AFFILIATION_AMY).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -82,7 +83,8 @@ public class PatientTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different affiliations -> returns false
-        editedAlice = new PatientBuilder(ALICE).withAffiliations(VALID_AFFILIATION_AMY).build();
+        editedAlice = new PatientBuilder(ALICE).withAffiliations(VALID_AFFILIATION_AMY)
+        .withAffiliationHistory(VALID_AFFILIATION_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -90,7 +92,7 @@ public class PatientTest {
     public void toStringMethod() {
         String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", role=" + ALICE.getRole() + ", affiliations="
-                + ALICE.getAffiliations() + "}";
+                + ALICE.getAffiliations() + ", affiliationHistory=" + ALICE.getAffiliationHistory() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

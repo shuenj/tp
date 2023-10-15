@@ -37,6 +37,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setRole(person.getRole());
         descriptor.setAffiliations(person.getAffiliations());
+        descriptor.setAffiliationHistory(person.getAffiliationHistory());
     }
 
     /**
@@ -78,6 +79,16 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withAffiliations(String... tags) {
         Set<Affiliation> affiliationSet = Stream.of(tags).map(Affiliation::new).collect(Collectors.toSet());
         descriptor.setAffiliations(affiliationSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code affiliationHistory} into a {@code Set<Affiliation>} and set it to the {@code EditPersonDescriptor}
+     * @return
+     */
+    public EditPersonDescriptorBuilder withAffiliationHistory(String... tags) {
+        Set<Affiliation> affiliationSet = Stream.of(tags).map(Affiliation::new).collect(Collectors.toSet());
+        descriptor.setAffiliationHistory(affiliationSet);
         return this;
     }
 

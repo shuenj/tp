@@ -25,10 +25,12 @@ public class TypicalDoctors {
     public static final Doctor ALICE = new DoctorBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withAffiliations("Benson Meier").build();
+            .withAffiliations("Benson Meier")
+            .withAffiliationHistory("Benson Meier").build();
     public static final Doctor BENSON = new DoctorBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withAffiliations("Alice Pauline", "Carl Kurz").build();
+            .withAffiliations("Alice Pauline", "Carl Kurz")
+            .withAffiliationHistory("Alice Pauline", "Carl Kurz").build();
     public static final Doctor CARL = new DoctorBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").build();
     public static final Doctor DANIEL = new DoctorBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -48,10 +50,12 @@ public class TypicalDoctors {
 
     // Manually added - Doctor's details found in {@code CommandTestUtil}
     public static final Doctor AMY = new DoctorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAffiliations(VALID_AFFILIATION_BOB).build();
+            .withEmail(VALID_EMAIL_AMY).withAffiliations(VALID_AFFILIATION_BOB)
+            .withAffiliationHistory(VALID_AFFILIATION_BOB).build();
     public static final Doctor BOB = new DoctorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)
             .withAffiliations(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB)
+            .withAffiliationHistory(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

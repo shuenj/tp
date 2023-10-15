@@ -26,7 +26,7 @@ public class Person {
     private final Set<Affiliation> affiliationHistory = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null, except affiliationHistory.
      */
     public Person(Name name, Phone phone, Email email, Role role, Set<Affiliation> affiliations) {
         requireAllNonNull(name, phone, email, role, affiliations);
@@ -36,6 +36,19 @@ public class Person {
         this.role = role;
         this.affiliations.addAll(affiliations);
         this.affiliationHistory.addAll(affiliations);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Role role, Set<Affiliation> affiliations, Set<Affiliation> affiliationHistory) {
+        requireAllNonNull(name, phone, email, role, affiliations);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.role = role;
+        this.affiliations.addAll(affiliations);
+        this.affiliationHistory.addAll(affiliationHistory);
     }
 
     public Name getName() {

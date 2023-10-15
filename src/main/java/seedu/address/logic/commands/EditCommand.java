@@ -86,8 +86,9 @@ public class EditCommand extends Command {
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         Set<Affiliation> updatedAffiliations = editPersonDescriptor
                 .getAffiliations().orElse(personToEdit.getAffiliations());
-
-        return updatedRole.generatePerson(updatedName, updatedPhone, updatedEmail, updatedAffiliations);
+        Set<Affiliation> mergedAffiliationHistory = new HashSet<>(personToEdit.getAffiliationHistory());
+        mergedAffiliationHistory.addAll(updatedAffiliations); 
+        return updatedRole.generatePerson(updatedName, updatedPhone, updatedEmail, updatedAffiliations, mergedAffiliationHistory);
     }
 
     @Override
@@ -116,13 +117,12 @@ public class EditCommand extends Command {
             AffiliationModifier.nameChangeAffiliations(personToEdit.getAffiliations(), personToEdit.getName(),
                     editedPerson.getName(), model);
         }
-
         if (this.editPersonDescriptor.isAffiliationEdited()) {
             AuthenticateAffiliation.check(editedPerson, model);
+            AffiliationModifier.addAffiliationHistory(editedPerson.getAffiliationHistory(), editedPerson, model);
             AffiliationModifier.removeAffiliations(personToEdit.getAffiliations(), editedPerson, model);
             AffiliationModifier.addAffiliations(editedPerson.getAffiliations(), editedPerson, model);
         }
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -162,6 +162,7 @@ public class EditCommand extends Command {
         private Email email;
         private Role role;
         private Set<Affiliation> affiliations;
+        private Set<Affiliation> affiliationHistory;
 
         public EditPersonDescriptor() {
         }
@@ -176,13 +177,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setRole(toCopy.role);
             setAffiliations(toCopy.affiliations);
+            setAffiliationHistory(toCopy.affiliationHistory, toCopy.affiliations);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, role, affiliations);
+            return CollectionUtil.isAnyNonNull(name, phone, email, role, affiliations, affiliationHistory);
         }
 
         /**
@@ -246,7 +248,14 @@ public class EditCommand extends Command {
         public Optional<Set<Affiliation>> getAffiliations() {
             return (affiliations != null) ? Optional.of(Collections.unmodifiableSet(affiliations)) : Optional.empty();
         }
-
+        /**
+         * Returns an unmodifiable affiliation set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code affiliations} is null.
+         */
+        public Optional<Set<Affiliation>> getAffiliationHistory() {
+            return (affiliationHistory != null) ? Optional.of(Collections.unmodifiableSet(affiliationHistory)) : Optional.empty();
+        }
         /**
          * Sets {@code affiliations} to this object's {@code affiliations}.
          * A defensive copy of {@code affiliations} is used internally.
@@ -255,6 +264,39 @@ public class EditCommand extends Command {
             this.affiliations = (affiliations != null) ? new HashSet<>(affiliations) : null;
         }
 
+        /**
+         * Sets {@code affiliationHistory} to this object's {@code affiliationHistory}.
+         * A defensive copy of {@code affiliationHistory} is used internally.
+         */
+        public void setAffiliationHistory(Set<Affiliation> affiliationHistory, Set<Affiliation> affiliations) {
+            if (affiliationHistory != null) {
+                this.affiliationHistory = new HashSet<>(affiliationHistory);
+            } else {
+                this.affiliationHistory = null;
+            }
+            if (affiliations != null) {
+                addAffiliationsToHistory(affiliations);
+            }
+        }
+
+        /**
+         * Sets {@code affiliationHistory} to this object's {@code affiliationHistory}.
+         * A defensive copy of {@code affiliationHistory} is used internally.
+         */
+        public void setAffiliationHistory(Set<Affiliation> affiliationHistory) {
+            this.affiliationHistory = (affiliationHistory != null) ? new HashSet<>(affiliationHistory) : null;
+        }
+        /**
+         * Adds {@code affiliations} to this object's {@code affiliations}.
+         * @param affiliations
+         */
+        public void addAffiliationsToHistory(Set<Affiliation> affiliations) {
+            if (this.affiliationHistory == null) {
+                this.affiliationHistory = new HashSet<>();
+            }
+            this.affiliationHistory.addAll(affiliations);
+        }
+        
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -271,7 +313,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(role, otherEditPersonDescriptor.role)
-                    && Objects.equals(affiliations, otherEditPersonDescriptor.affiliations);
+                    && Objects.equals(affiliations, otherEditPersonDescriptor.affiliations)
+                    && Objects.equals(affiliationHistory, otherEditPersonDescriptor.affiliationHistory);
         }
 
         @Override
@@ -282,6 +325,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("role", role)
                     .add("affiliations", affiliations)
+                    .add("affiliationHistory", affiliationHistory)
                     .toString();
         }
     }

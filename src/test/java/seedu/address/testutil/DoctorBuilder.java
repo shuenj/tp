@@ -23,6 +23,7 @@ public class DoctorBuilder {
     private Phone phone;
     private Email email;
     private Set<Affiliation> affiliations;
+    private Set<Affiliation> affiliationHistory;
 
     /**
      * Creates a {@code DoctorBuilder} with the default details.
@@ -32,6 +33,7 @@ public class DoctorBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         affiliations = new HashSet<>();
+        affiliationHistory = new HashSet<>();
     }
 
     /**
@@ -42,6 +44,7 @@ public class DoctorBuilder {
         phone = doctorToCopy.getPhone();
         email = doctorToCopy.getEmail();
         affiliations = new HashSet<>(doctorToCopy.getAffiliations());
+        affiliationHistory = new HashSet<>(doctorToCopy.getAffiliationHistory());
     }
 
     /**
@@ -62,6 +65,15 @@ public class DoctorBuilder {
     }
 
     /**
+     * Parses the {@code affiliationHistory} into a {@code Set<Affiliation>} and set it to the {@code Doctor} that
+     * we are building.
+     */
+    public DoctorBuilder withAffiliationHistory(String ... affiliationHistory) {
+        this.affiliationHistory = SampleDataUtil.getAffiliationSet(affiliationHistory);
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Doctor} that we are building.
      */
     public DoctorBuilder withPhone(String phone) {
@@ -78,7 +90,7 @@ public class DoctorBuilder {
     }
 
     public Doctor build() {
-        return new Doctor(name, phone, email, affiliations);
+        return new Doctor(name, phone, email, affiliations, affiliationHistory);
     }
 
 }

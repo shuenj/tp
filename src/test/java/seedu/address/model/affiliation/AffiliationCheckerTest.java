@@ -33,6 +33,7 @@ public class AffiliationCheckerTest {
                 .withName(VALID_NAME_AMY)
                 .withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_AFFILIATION_BOB)
+                .withAffiliationHistory(VALID_AFFILIATION_BOB)
                 .build();
         assertThrows(AffiliationPersonNotFoundException.class, () -> AuthenticateAffiliation.check(person, model));
     }
@@ -43,6 +44,7 @@ public class AffiliationCheckerTest {
                 .withName(VALID_NAME_ALICE)
                 .withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_NAME_ALICE)
+                .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
         assertThrows(SamePersonAffiliationException.class, () -> AuthenticateAffiliation.check(person, model));
     }
@@ -53,6 +55,7 @@ public class AffiliationCheckerTest {
                 .withName(VALID_NAME_BOB)
                 .withRole(VALID_ROLE_AMY)
                 .withAffiliations(VALID_NAME_ALICE)
+                .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
         assertThrows(SameRoleAffiliationException.class, () -> AuthenticateAffiliation.check(person, model));
     }
@@ -63,6 +66,7 @@ public class AffiliationCheckerTest {
                 .withName(VALID_NAME_BOB)
                 .withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_NAME_ALICE)
+                .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
         try {
             assertTrue(AuthenticateAffiliation.check(person, model));

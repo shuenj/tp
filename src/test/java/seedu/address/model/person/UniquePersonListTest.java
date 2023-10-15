@@ -44,6 +44,7 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_AFFILIATION_AMY)
+                .withAffiliationHistory(VALID_AFFILIATION_AMY)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -88,6 +89,7 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_AFFILIATION_AMY)
+                .withAffiliationHistory(VALID_AFFILIATION_AMY)
                 .build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();

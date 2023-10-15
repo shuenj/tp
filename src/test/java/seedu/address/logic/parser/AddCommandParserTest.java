@@ -50,7 +50,8 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withAffiliations(VALID_AFFILIATION_BOB).build();
+        Person expectedPerson = new PersonBuilder(BOB).withAffiliations(VALID_AFFILIATION_BOB)
+        .withAffiliationHistory(VALID_AFFILIATION_BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -60,6 +61,7 @@ public class AddCommandParserTest {
         // multiple affiliations - all accepted
         Person expectedPersonMultipleAffiliations = new PersonBuilder(BOB)
                 .withAffiliations(VALID_AFFILIATION_BOB, VALID_AFFILIATION_AMY)
+                .withAffiliationHistory(VALID_AFFILIATION_BOB, VALID_AFFILIATION_AMY)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

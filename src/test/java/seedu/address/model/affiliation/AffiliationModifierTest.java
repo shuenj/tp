@@ -21,7 +21,8 @@ public class AffiliationModifierTest {
     @Test
     public void addAffiliation_validParam_success() {
         Person doctorA = new DoctorBuilder().withName("Alice").build();
-        Person patientB = new PatientBuilder().withName("Bob").withAffiliations("Alice").build();
+        Person patientB = new PatientBuilder().withName("Bob").withAffiliations("Alice")
+        .withAffiliationHistory("Alice").build();
         model.addPerson(doctorA);
         model.addPerson(patientB);
 
@@ -31,8 +32,10 @@ public class AffiliationModifierTest {
 
     @Test
     public void removeAffiliation_validParam_success() {
-        Person doctorA = new DoctorBuilder().withName("Alice").withAffiliations("Bob").build();
-        Person patientB = new PatientBuilder().withName("Bob").withAffiliations("Alice").build();
+        Person doctorA = new DoctorBuilder().withName("Alice").withAffiliations("Bob")
+        .withAffiliationHistory("Bob").build();
+        Person patientB = new PatientBuilder().withName("Bob").withAffiliations("Alice")
+        .withAffiliationHistory("Alice").build();
         model.addPerson(doctorA);
         model.addPerson(patientB);
 
@@ -42,8 +45,10 @@ public class AffiliationModifierTest {
 
     @Test
     public void nameChangeAffiliation_validParam_success() {
-        Person doctorA = new DoctorBuilder().withName("Alice").withAffiliations("Bob").build();
-        Person patientB = new PatientBuilder().withName("Bob").withAffiliations("Alice").build();
+        Person doctorA = new DoctorBuilder().withName("Alice").withAffiliations("Bob")
+        .withAffiliationHistory("Bob").build();
+        Person patientB = new PatientBuilder().withName("Bob").withAffiliations("Alice")
+        .withAffiliationHistory("Alice").build();
         model.addPerson(doctorA);
         model.addPerson(patientB);
         Name newName = new Name("Ben");

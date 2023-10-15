@@ -53,7 +53,8 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different affiliations -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAffiliations(VALID_AFFILIATION_AMY).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAffiliations(VALID_AFFILIATION_AMY)
+        .withAffiliationHistory(VALID_AFFILIATION_AMY).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -65,7 +66,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", role="
                 + editPersonDescriptor.getRole().orElse(null) + ", affiliations="
-                + editPersonDescriptor.getAffiliations().orElse(null) + "}";
+                + editPersonDescriptor.getAffiliations().orElse(null) + ", affiliationHistory="
+                + editPersonDescriptor.getAffiliationHistory().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

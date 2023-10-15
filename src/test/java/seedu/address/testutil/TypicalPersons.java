@@ -26,11 +26,13 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withRole("Doctor").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withAffiliations("Benson Meier").build();
+            .withAffiliations("Benson Meier")
+            .withAffiliationHistory("Benson Meier").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withRole("Patient")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withAffiliations("Alice Pauline", "Carl Kurz").build();
+            .withAffiliations("Alice Pauline", "Carl Kurz")
+            .withAffiliationHistory("Alice Pauline", "Carl Kurz").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withRole("Doctor").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -76,11 +78,13 @@ public class TypicalPersons {
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withRole("Doctor").withEmail("alice@example.com")
                 .withPhone("94351253")
-                .withAffiliations("Benson Meier").build();
+                .withAffiliations("Benson Meier")
+                .withAffiliationHistory("Benson Meier").build();
         Person benson = new PersonBuilder().withName("Benson Meier")
                 .withRole("Patient")
                 .withEmail("johnd@example.com").withPhone("98765432")
-                .withAffiliations("Alice Pauline", "Carl Kurz").build();
+                .withAffiliations("Alice Pauline", "Carl Kurz")
+                .withAffiliationHistory("Alice Pauline", "Carl Kurz").build();
         Person carl = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
                 .withEmail("heinz@example.com").withRole("Doctor").build();
         Person daniel = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")

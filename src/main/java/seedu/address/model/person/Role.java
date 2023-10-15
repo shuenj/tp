@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -52,6 +53,24 @@ public class Role {
     }
 
     /**
+     * Returns person with its particular type based on the role.
+     *
+     * @param name Name of person.
+     * @param phone Phone of person.
+     * @param email Email of person.
+     * @param affiliationList Affiliations of person.
+     */
+    public Person generatePerson(Name name, Phone phone, Email email, Set<Affiliation> affiliationList, Set<Affiliation> affiliationHistory) {
+        if (value.toUpperCase().equals(Type.DOCTOR.name())) {
+            return new Doctor(name, phone, email, affiliationList, affiliationHistory);
+        } else if (value.toUpperCase().equals(Type.PATIENT.name())) {
+            return new Patient(name, phone, email, affiliationList, affiliationHistory);
+        } else {
+            return null;
+        }
+    }
+
+        /**
      * Returns person with its particular type based on the role.
      *
      * @param name Name of person.
