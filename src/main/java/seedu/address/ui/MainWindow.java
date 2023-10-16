@@ -44,7 +44,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private ImageView cliImage;
 
-
     @FXML
     private MenuItem helpMenuItem;
 
@@ -136,8 +135,6 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
-
-
 
     /**
      * Sets the default size based on {@code guiSettings}.
