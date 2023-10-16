@@ -203,6 +203,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            // Every command successfully executed will reset the information window.
+            informationWindow.resetWindow();
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);

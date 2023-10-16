@@ -7,20 +7,21 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_AFFILIATION_AMY
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDoctors.ALICE;
 import static seedu.address.testutil.TypicalDoctors.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.affiliation.Affiliation;
 import seedu.address.testutil.DoctorBuilder;
 
 public class DoctorTest {
 
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
+    public void asObservableList_modifyList_success() {
         Doctor doctor = new DoctorBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> doctor.getAffiliations().remove(0));
+        doctor.getAffiliations().add(new Affiliation(VALID_AFFILIATION_AMY));
+        assertTrue(doctor.getAffiliations().contains(new Affiliation(VALID_AFFILIATION_AMY)));
     }
 
     @Test
@@ -33,7 +34,8 @@ public class DoctorTest {
 
         // same name, all other attributes different -> returns true
         Doctor editedAlice = new DoctorBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAffiliations(VALID_AFFILIATION_AMY).build();
+                .withAffiliations(VALID_AFFILIATION_AMY)
+                .withAffiliationHistory(VALID_AFFILIATION_AMY).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -81,7 +83,8 @@ public class DoctorTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different affiliations -> returns false
-        editedAlice = new DoctorBuilder(ALICE).withAffiliations(VALID_AFFILIATION_AMY).build();
+        editedAlice = new DoctorBuilder(ALICE).withAffiliations(VALID_AFFILIATION_AMY)
+        .withAffiliationHistory(VALID_AFFILIATION_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -89,7 +92,7 @@ public class DoctorTest {
     public void toStringMethod() {
         String expected = Doctor.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", role=" + ALICE.getRole() + ", affiliations="
-                + ALICE.getAffiliations() + "}";
+                + ALICE.getAffiliations() + ", affiliationHistory=" + ALICE.getAffiliationHistory() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

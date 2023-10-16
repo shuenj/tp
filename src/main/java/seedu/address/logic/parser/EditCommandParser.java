@@ -62,6 +62,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseAffiliationsForEdit(argMultimap.getAllValues(PREFIX_AFFILIATION))
                 .ifPresent(editPersonDescriptor::setAffiliations);
+        parseAffiliationsForEdit(argMultimap.getAllValues(PREFIX_AFFILIATION))
+                .ifPresent(editPersonDescriptor::addAffiliationsToHistory);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

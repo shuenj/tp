@@ -26,6 +26,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_NAME_ALICE = "Alice Pauline";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -35,6 +36,7 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_AMY = "Doctor";
     public static final String VALID_ROLE_BOB = "Patient";
     public static final String VALID_AFFILIATION_AMY = "Amy Bee";
+    public static final String VALID_AFFILIATION_DANIEL = "Daniel Meier";
     public static final String VALID_AFFILIATION_BOB = "Bob Choo";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -64,10 +66,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withRole(VALID_ROLE_AMY)
-                .withAffiliations(VALID_AFFILIATION_BOB).build();
+                .withAffiliations(VALID_AFFILIATION_BOB)
+                .withAffiliationHistory(VALID_AFFILIATION_BOB).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withRole(VALID_ROLE_BOB)
-                .withAffiliations(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB).build();
+                .withAffiliations(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB)
+                .withAffiliationHistory(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB).build();
     }
 
     /**

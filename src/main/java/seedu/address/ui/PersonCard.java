@@ -43,7 +43,6 @@ public class PersonCard extends UiPart<Region> {
     private Image doctorImage = new Image(MainApp.class.getResourceAsStream("/images/doctor.png"));
     private Image patientImage = new Image(MainApp.class.getResourceAsStream("/images/patient.png"));
 
-
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */

@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -24,11 +23,10 @@ public class Person {
     // Data fields
     private final Role role;
     private final Set<Affiliation> affiliations = new HashSet<>();
-
-    private final ToStringBuilder stringRepresentation;
+    private final Set<Affiliation> affiliationHistory = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null, except affiliationHistory.
      */
     public Person(Name name, Phone phone, Email email, Role role, Set<Affiliation> affiliations) {
         requireAllNonNull(name, phone, email, role, affiliations);
@@ -37,12 +35,21 @@ public class Person {
         this.email = email;
         this.role = role;
         this.affiliations.addAll(affiliations);
-        this.stringRepresentation = new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("role", role)
-                .add("affiliations", affiliations);
+        this.affiliationHistory.addAll(affiliations);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Role role,
+        Set<Affiliation> affiliations, Set<Affiliation> affiliationHistory) {
+        requireAllNonNull(name, phone, email, role, affiliations);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.role = role;
+        this.affiliations.addAll(affiliations);
+        this.affiliationHistory.addAll(affiliationHistory);
     }
 
     public Name getName() {
@@ -62,15 +69,18 @@ public class Person {
     }
 
     /**
-     * Returns an immutable affiliation set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns an affiliation set.
      */
     public Set<Affiliation> getAffiliations() {
-        return Collections.unmodifiableSet(affiliations);
+        return affiliations;
     }
 
-    public ToStringBuilder getStringRepresentation() {
-        return stringRepresentation;
+    /**
+     * Returns an affiliation history set.
+     * @return affiliationHistory
+     */
+    public Set<Affiliation> getAffiliationHistory() {
+        return affiliationHistory;
     }
 
     /**
@@ -106,18 +116,29 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && role.equals(otherPerson.role)
-                && affiliations.equals(otherPerson.affiliations);
+                && affiliations.equals(otherPerson.affiliations)
+                && affiliationHistory.equals(otherPerson.affiliationHistory);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, role, affiliations);
+        return Objects.hash(name, phone, email, role, affiliations, affiliationHistory);
+    }
+
+    public ToStringBuilder getStringBuilderRepresentation() {
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("role", role)
+                .add("affiliations", affiliations)
+                .add("affiliationHistory", affiliationHistory);
     }
 
     @Override
     public String toString() {
-        return stringRepresentation.toString();
+        return getStringBuilderRepresentation().toString();
     }
 
 }

@@ -29,6 +29,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String role;
     private final List<JsonAdaptedAffiliation> affiliations = new ArrayList<>();
+    private final List<JsonAdaptedAffiliation> affiliationHistory = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,13 +37,17 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("role") String role,
-                             @JsonProperty("affiliations") List<JsonAdaptedAffiliation> affiliations) {
+                             @JsonProperty("affiliations") List<JsonAdaptedAffiliation> affiliations,
+                             @JsonProperty("affiliationHistory") List<JsonAdaptedAffiliation> affiliationHistory) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.role = role;
         if (affiliations != null) {
             this.affiliations.addAll(affiliations);
+        }
+        if (affiliationHistory != null) {
+            this.affiliationHistory.addAll(affiliationHistory);
         }
     }
 
@@ -57,6 +62,9 @@ class JsonAdaptedPerson {
         affiliations.addAll(source.getAffiliations().stream()
                 .map(JsonAdaptedAffiliation::new)
                 .collect(Collectors.toList()));
+        affiliationHistory.addAll(source.getAffiliationHistory().stream()
+                .map(JsonAdaptedAffiliation::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -69,7 +77,10 @@ class JsonAdaptedPerson {
         for (JsonAdaptedAffiliation affiliation : affiliations) {
             personAffiliations.add(affiliation.toModelType());
         }
-
+        final List<Affiliation> personAffiliationHistory = new ArrayList<>();
+        for (JsonAdaptedAffiliation affiliation : affiliationHistory) {
+            personAffiliationHistory.add(affiliation.toModelType());
+        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -103,7 +114,8 @@ class JsonAdaptedPerson {
         final Role modelRole = new Role(role);
 
         final Set<Affiliation> modelAffiliations = new HashSet<>(personAffiliations);
-        return new Person(modelName, modelPhone, modelEmail, modelRole, modelAffiliations);
+        final Set<Affiliation> modelAffiliationHistory = new HashSet<>(personAffiliationHistory);
+        return new Person(modelName, modelPhone, modelEmail, modelRole, modelAffiliations, modelAffiliationHistory);
     }
 
 }

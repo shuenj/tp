@@ -7,26 +7,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <HBox prefHeight="30.0" spacing="20.0">
-      <children>
-         <Label styleClass="list-header" text="NAME">
-            <HBox.margin>
-               <Insets left="120.0" />
-            </HBox.margin>
-            <font>
-               <Font size="10.0" />
-            </font>
-         </Label>
-         <Label styleClass="list-header" text="PHONE NO.">
-            <HBox.margin>
-               <Insets left="122.0" />
-            </HBox.margin>
-            <font>
-               <Font size="10.0" />
-            </font>
-         </Label>
-      </children>
-   </HBox>
-  <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox prefHeight="30.0" spacing="20.0">
+        <children>
+            <Label styleClass="list-header" text="NAME">
+                <HBox.margin>
+                    <Insets left="120.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="10.0"/>
+                </font>
+            </Label>
+            <Label styleClass="list-header" text="PHONE NO.">
+                <HBox.margin>
+                    <Insets left="122.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="10.0"/>
+                </font>
+            </Label>
+        </children>
+    </HBox>
+    <ListView fx:id="personListView" VBox.vgrow="ALWAYS"/>
 </VBox>

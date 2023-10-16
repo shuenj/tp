@@ -6,92 +6,94 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);" styleClass="scroll-pane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <content>
-      <VBox>
-         <children>
-            <Label fx:id="name" minWidth="350.0" prefWidth="350.0" styleClass="information-name">
-               <VBox.margin>
-                  <Insets left="20.0" top="15.0" />
-               </VBox.margin>
-            </Label>
-            <Label fx:id="role" styleClass="information-role">
-               <VBox.margin>
-                  <Insets left="20.0" top="5.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets left="10.0" right="10.0" />
-               </padding>
-            </Label>
-            <VBox fx:id="shiftBlock">
-               <children>
-                  <Label fx:id="shiftHeader" styleClass="information-shift">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </Label>
-                  <HBox spacing="5.0" VBox.vgrow="NEVER">
-                     <children>
-                        <Label fx:id="shiftMon" styleClass="information-shift">
-                           <padding>
-                              <Insets left="5.0" right="5.0" />
-                           </padding>
+<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER"
+            style="-fx-background-color: transparent; -fx-border-width: 0; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);"
+            styleClass="scroll-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <VBox fx:id="fullWindow">
+            <children>
+                <Label fx:id="name" minWidth="350.0" prefWidth="350.0" styleClass="information-name">
+                    <VBox.margin>
+                        <Insets left="20.0" top="15.0"/>
+                    </VBox.margin>
+                </Label>
+                <Label fx:id="role" styleClass="information-role">
+                    <VBox.margin>
+                        <Insets left="20.0" top="5.0"/>
+                    </VBox.margin>
+                    <padding>
+                        <Insets left="10.0" right="10.0"/>
+                    </padding>
+                </Label>
+                <VBox fx:id="shiftBlock">
+                    <children>
+                        <Label fx:id="shiftHeader" styleClass="information-shift">
+                            <VBox.margin>
+                                <Insets/>
+                            </VBox.margin>
                         </Label>
-                        <Label fx:id="shiftTue" styleClass="information-shift">
-                           <padding>
-                              <Insets left="5.0" right="5.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="shiftWed" styleClass="information-shift">
-                           <padding>
-                              <Insets left="5.0" right="5.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="shiftThu" styleClass="information-shift">
-                           <padding>
-                              <Insets left="5.0" right="5.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="shiftFri" styleClass="information-shift">
-                           <padding>
-                              <Insets left="5.0" right="5.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="shiftSat" styleClass="information-shift">
-                           <padding>
-                              <Insets left="5.0" right="5.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="shiftSun" styleClass="information-shift">
-                           <padding>
-                              <Insets left="5.0" right="5.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </HBox>
-               </children>
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="15.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </VBox>
-            <HBox fx:id="affnBlock">
-               <children>
-                  <Label fx:id="affnCount" styleClass="information-affn" />
-               </children>
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="15.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </HBox>
-         </children>
-      </VBox>
-   </content>
+                        <HBox spacing="5.0" VBox.vgrow="NEVER">
+                            <children>
+                                <Label fx:id="shiftMon" styleClass="information-shift" text="Mon">
+                                    <padding>
+                                        <Insets left="5.0" right="5.0"/>
+                                    </padding>
+                                </Label>
+                                <Label fx:id="shiftTue" styleClass="information-shift" text="Tue">
+                                    <padding>
+                                        <Insets left="5.0" right="5.0"/>
+                                    </padding>
+                                </Label>
+                                <Label fx:id="shiftWed" styleClass="information-shift" text="Wed">
+                                    <padding>
+                                        <Insets left="5.0" right="5.0"/>
+                                    </padding>
+                                </Label>
+                                <Label fx:id="shiftThu" styleClass="information-shift" text="Thu">
+                                    <padding>
+                                        <Insets left="5.0" right="5.0"/>
+                                    </padding>
+                                </Label>
+                                <Label fx:id="shiftFri" styleClass="information-shift" text="Fri">
+                                    <padding>
+                                        <Insets left="5.0" right="5.0"/>
+                                    </padding>
+                                </Label>
+                                <Label fx:id="shiftSat" styleClass="information-shift" text="Sat">
+                                    <padding>
+                                        <Insets left="5.0" right="5.0"/>
+                                    </padding>
+                                </Label>
+                                <Label fx:id="shiftSun" styleClass="information-shift" text="Sun">
+                                    <padding>
+                                        <Insets left="5.0" right="5.0"/>
+                                    </padding>
+                                </Label>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="10.0"/>
+                            </VBox.margin>
+                        </HBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="15.0"/>
+                    </VBox.margin>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                </VBox>
+                <HBox fx:id="affnBlock">
+                    <children>
+                        <Label fx:id="affnCount" styleClass="information-affn"/>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="15.0"/>
+                    </VBox.margin>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+    </content>
 </ScrollPane>
