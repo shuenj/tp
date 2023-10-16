@@ -89,8 +89,8 @@ public class EditPersonDescriptorBuilder {
      * @param affiliations The affiliation history to set.
      * @return EditPersonDescriptorBuilder
      */
-    public EditPersonDescriptorBuilder withAffiliationHistory(String... affiliations) {
-        Set<Affiliation> affiliationSet = Stream.of(affiliations).map(Affiliation::new).collect(Collectors.toSet());
+    public EditPersonDescriptorBuilder withAffiliationHistory(String... affiliationHistory) {
+        Set<Affiliation> affiliationSet = Stream.of(affiliationHistory).map(Affiliation::new).collect(Collectors.toSet());
         descriptor.setAffiliationHistory(affiliationSet);
         return this;
     }
