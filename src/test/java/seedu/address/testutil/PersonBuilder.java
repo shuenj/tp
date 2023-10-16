@@ -26,6 +26,7 @@ public class PersonBuilder {
     private Email email;
     private Role role;
     private Set<Affiliation> affiliations;
+    private Set<Affiliation> affiliationHistory;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +37,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         role = new Role(DEFAULT_ROLE);
         affiliations = new HashSet<>();
+        affiliationHistory = new HashSet<>();
     }
 
     /**
@@ -47,6 +49,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         role = personToCopy.getRole();
         affiliations = new HashSet<>(personToCopy.getAffiliations());
+        affiliationHistory = new HashSet<>(personToCopy.getAffiliationHistory());
     }
 
     /**
@@ -63,6 +66,15 @@ public class PersonBuilder {
      */
     public PersonBuilder withAffiliations(String... tags) {
         this.affiliations = SampleDataUtil.getAffiliationSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code affiliationHistory} into a {@code Set<Affiliation>} and
+     * set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withAffiliationHistory(String... tags) {
+        this.affiliationHistory = SampleDataUtil.getAffiliationSet(tags);
         return this;
     }
 
@@ -91,7 +103,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, role, affiliations);
+        return new Person(name, phone, email, role, affiliations, affiliationHistory);
     }
 
 }

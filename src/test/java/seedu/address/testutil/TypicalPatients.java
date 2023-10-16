@@ -24,10 +24,12 @@ public class TypicalPatients {
     public static final Patient ALICE = new PatientBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withAffiliations("Benson Meier").build();
+            .withAffiliations("Benson Meier")
+            .withAffiliationHistory("Benson Meier").build();
     public static final Patient BENSON = new PatientBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withAffiliations("Alice Pauline", "Carl Kurz").build();
+            .withAffiliations("Alice Pauline", "Carl Kurz")
+            .withAffiliationHistory("Alice Pauline", "Carl Kurz").build();
     public static final Patient CARL = new PatientBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").build();
     public static final Patient DANIEL = new PatientBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -47,10 +49,12 @@ public class TypicalPatients {
 
     // Manually added - Patient's details found in {@code CommandTestUtil}
     public static final Patient AMY = new PatientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAffiliations(VALID_AFFILIATION_BOB).build();
+            .withEmail(VALID_EMAIL_AMY).withAffiliations(VALID_AFFILIATION_BOB)
+            .withAffiliationHistory(VALID_AFFILIATION_BOB).build();
     public static final Patient BOB = new PatientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)
             .withAffiliations(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB)
+            .withAffiliationHistory(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

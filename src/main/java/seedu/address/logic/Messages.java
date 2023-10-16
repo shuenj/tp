@@ -46,6 +46,9 @@ public class Messages {
                 .append("; Affiliations: {");
         person.getAffiliations().forEach(builder::append);
         builder.append("}");
+        builder.append("; Affiliation History: {");
+        person.getAffiliationHistory().forEach(builder::append);
+        builder.append("}");
         return builder.toString();
     }
 
