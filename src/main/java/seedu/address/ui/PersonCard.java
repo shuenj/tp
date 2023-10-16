@@ -1,13 +1,14 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.MainApp;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -37,9 +38,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label role;
     @FXML
-    private Label email;
-    @FXML
-    private FlowPane affiliations;
+    private ImageView displayPicture;
+
+    private Image doctorImage = new Image(MainApp.class.getResourceAsStream("/images/doctor.png"));
+    private Image patientImage = new Image(MainApp.class.getResourceAsStream("/images/patient.png"));
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -51,9 +54,13 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         role.setText(person.getRole().value);
-        email.setText(person.getEmail().value);
-        person.getAffiliations().stream()
-                .sorted(Comparator.comparing(affiliation -> affiliation.affiliationName))
-                .forEach(affiliation -> affiliations.getChildren().add(new Label(affiliation.affiliationName)));
+
+        if (person.getRole().toString().toUpperCase().equals(Role.Type.DOCTOR.name())) {
+            displayPicture.setImage(doctorImage);
+            role.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
+        } else if (person.getRole().toString().toUpperCase().equals(Role.Type.PATIENT.name())) {
+            displayPicture.setImage(patientImage);
+            role.setStyle("-fx-background-color: #E97451; -fx-font-weight: bold; -fx-text-fill: #8B4000");
+        }
     }
 }
