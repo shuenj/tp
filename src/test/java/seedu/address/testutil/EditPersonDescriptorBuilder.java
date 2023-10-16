@@ -86,7 +86,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Parses the {@code affiliationHistory} into a {@code Set<Affiliation>} and
      * set it to the {@code EditPersonDescriptor}
-     * @param affiliations The affiliation history to set.
+     * @param affiliationHistory The affiliation history to set.
      * @return EditPersonDescriptorBuilder
      */
     public EditPersonDescriptorBuilder withAffiliationHistory(String... affiliationHistory) {
