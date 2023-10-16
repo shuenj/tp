@@ -1,7 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +17,8 @@ public class MessagesTest {
 
     @Test
     public void generate_userDisplay_printCorrectDisplay() {
-        assertEquals("Alice Pauline; Phone: 94351253; Email: alice@example.com; "
-                + "Role: Doctor; Affiliations: {Benson Meier}; "
-                + "Affiliation History: {Benson Meier}", Messages.format(ALICE));
+        assertEquals("Benson Meier; Phone: 98765432; Email: johnd@example.com; Role: Patient; "
+                + "Affiliations: {Alice Pauline, Carl Kurz}; Affiliation History: {Alice Pauline, Carl Kurz}",
+                Messages.format(BENSON));
     }
 }
