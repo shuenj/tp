@@ -203,6 +203,9 @@ public class MainWindow extends UiPart<Stage> {
             // Every command successfully executed will reset the information window.
             informationWindow.resetWindow();
 
+            // Clear selection of any PersonCard.
+            personListPanel.unselectPersonCard();
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);

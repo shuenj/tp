@@ -154,7 +154,11 @@
 }
 
 .information-affn {
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
+}
+
+.information-affn-list {
+    -fx-font-size: 16px;
 }
 
 .scroll-pane > .viewport {

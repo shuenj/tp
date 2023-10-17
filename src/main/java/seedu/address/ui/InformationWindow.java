@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Role;
 
@@ -43,10 +43,11 @@ public class InformationWindow extends UiPart<Region> {
     private Label shiftSun;
 
     @FXML
-    private HBox affnBlock;
+    private VBox affnBlock;
     @FXML
     private Label affnCount;
-
+    @FXML
+    private VBox affnListBlock;
 
     /**
      * Initialises the {@code InformationWindow}.
@@ -85,7 +86,8 @@ public class InformationWindow extends UiPart<Region> {
     private void displayDoctorInformation(Person person) {
         role.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
         setShiftDays(person);
-        affnCount.setText("No. of patients in charge: " + person.getAffiliations().size());
+        setAffiliations(person);
+        affnCount.setText("Tending to:");
         affnBlock.setStyle("-fx-border-color: #BBBBBB; -fx-border-width: 2 0 0 0;");
     }
 
@@ -96,7 +98,8 @@ public class InformationWindow extends UiPart<Region> {
     private void displayPatientInformation(Person person) {
         role.setStyle("-fx-background-color: #E97451; -fx-font-weight: bold; -fx-text-fill: #8B4000");
         clearShiftDays();
-        affnCount.setText("Staff overhead: " + person.getAffiliations().size());
+        setAffiliations(person);
+        affnCount.setText("Attended by:");
         affnBlock.setStyle("-fx-border-color: #BBBBBB; -fx-border-width: 2 0 0 0;");
     }
 
@@ -109,7 +112,7 @@ public class InformationWindow extends UiPart<Region> {
         shiftBlock.setVisible(true);
         shiftBlock.setManaged(true);
         shiftBlock.setStyle("-fx-border-color: #BBBBBB; -fx-border-width: 2 0 0 0;");
-        shiftHeader.setText("Shift days: (TO BE ADDED)");
+        shiftHeader.setText("Shift days:");
 
         // Function to be modified in the future. Currently picks only Mon, Thu and Sat.
         shiftMon.setStyle("-fx-background-color: #AFE1AF; -fx-font-weight: bold; -fx-text-fill: #008000");
@@ -119,6 +122,32 @@ public class InformationWindow extends UiPart<Region> {
         // shiftFri.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
         shiftSat.setStyle("-fx-background-color: #AFE1AF; -fx-font-weight: bold; -fx-text-fill: #008000");
         // shiftSun.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
+    }
+
+    /**
+     * Sets the list of affiliation names into the information window.
+     */
+    private void setAffiliations(Person person) {
+        clearAffiliations();
+        for (Affiliation affiliation : person.getAffiliations()) {
+            String name = affiliation.toString();
+            Label label = new Label("- " + name);
+            label.getStyleClass().add("information-affn-list");
+            affnListBlock.getChildren().add(label);
+        }
+
+        if (affnListBlock.getChildren().size() == 0) {
+            Label label = new Label("[EMPTY]");
+            label.getStyleClass().add("information-affn-list");
+            affnListBlock.getChildren().add(label);
+        }
+    }
+
+    /**
+     * Removes all affiliation names from the information window.
+     */
+    private void clearAffiliations() {
+        affnListBlock.getChildren().clear();
     }
 
     /**
@@ -135,6 +164,7 @@ public class InformationWindow extends UiPart<Region> {
     public void showWindow() {
         fullWindow.setVisible(true);
         fullWindow.setManaged(true);
+        fullWindow.setMinSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
     }
 
     /**
@@ -143,6 +173,7 @@ public class InformationWindow extends UiPart<Region> {
     public void resetWindow() {
         fullWindow.setVisible(false);
         fullWindow.setManaged(false);
+        fullWindow.setMinSize(0, 0);
     }
 
 }

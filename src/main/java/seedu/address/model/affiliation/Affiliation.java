@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Affiliation in the contact list.
+ * Represents an Affiliation in the contact list.
  * Guarantees: immutable; name is valid as declared in {@link #isValidAffiliationName(String)}
  */
 public class Affiliation {

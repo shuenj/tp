@@ -10,7 +10,7 @@
             style="-fx-background-color: transparent; -fx-border-width: 0; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);"
             styleClass="scroll-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <content>
-        <VBox fx:id="fullWindow">
+        <VBox fx:id="fullWindow" minHeight="0.0">
             <children>
                 <Label fx:id="name" minWidth="350.0" prefWidth="350.0" styleClass="information-name">
                     <VBox.margin>
@@ -82,17 +82,18 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                     </padding>
                 </VBox>
-                <HBox fx:id="affnBlock">
-                    <children>
-                        <Label fx:id="affnCount" styleClass="information-affn"/>
-                    </children>
+                <VBox fx:id="affnBlock">
                     <VBox.margin>
                         <Insets left="20.0" right="20.0" top="15.0"/>
                     </VBox.margin>
                     <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                     </padding>
-                </HBox>
+                    <children>
+                        <Label fx:id="affnCount" styleClass="information-affn"/>
+                        <VBox fx:id="affnListBlock"/>
+                    </children>
+                </VBox>
             </children>
         </VBox>
     </content>

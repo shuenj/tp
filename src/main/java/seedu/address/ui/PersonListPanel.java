@@ -29,8 +29,14 @@ public class PersonListPanel extends UiPart<Region> {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
-
         this.informationWindow = informationWindow;
+    }
+
+    /**
+     * Clears any selection of {@code PersonCard}.
+     */
+    public void unselectPersonCard() {
+        personListView.getSelectionModel().clearSelection();
     }
 
     /**
@@ -42,7 +48,9 @@ public class PersonListPanel extends UiPart<Region> {
             setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1) {
                     Person selectedPerson = getItem();
-                    informationWindow.displayInformation(selectedPerson);
+                    if (selectedPerson != null) {
+                        informationWindow.displayInformation(selectedPerson);
+                    }
                 }
             });
         }
