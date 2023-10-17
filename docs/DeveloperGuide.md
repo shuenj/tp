@@ -276,7 +276,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps
 * can type fast
 
-**Value proposition**: 
+**Value proposition**:
 
 Provide categories for different healthcare roles, healthcare-specific information within each contact, capacity to track duty days and shifts for staff members, an emergency contacts section that updates based on who is on duty, robust search and filter capabilities to quickly find staff members based on criteria such as department, specialisation
 
@@ -411,8 +411,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to find person by name
-2.  MediSync shows details of the all relevant persons 
-3.  User issues command to access help 
+2.  MediSync shows details of the all relevant persons
+3.  User issues command to access help
 4.  MediSync displays help instructions
 
     Use case ends.

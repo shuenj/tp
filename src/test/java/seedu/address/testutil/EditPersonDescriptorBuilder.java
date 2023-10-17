@@ -73,7 +73,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Affiliation>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code affiliations} into a {@code Set<Affiliation>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      * @param affiliations The affiliations to set.
      */

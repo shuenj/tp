@@ -109,7 +109,7 @@ public class EditCommand extends Command {
         }
 
         if (this.editPersonDescriptor.isRoleEdited()) {
-            if (!isNull(personToEdit.getAffiliations()) && personToEdit.getAffiliations().isEmpty()) {
+            if (!isNull(personToEdit.getAffiliations()) && !personToEdit.getAffiliations().isEmpty()) {
                 throw new CommandException(MESSAGE_EDIT_ROLE_CONTAIN_AFFILIATION);
             }
         }
