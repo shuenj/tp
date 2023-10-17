@@ -23,7 +23,7 @@ import seedu.address.model.affiliation.exceptions.SameRoleAffiliationException;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class AffiliationCheckerTest {
+public class AuthenticateAffiliationTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -35,8 +35,8 @@ public class AffiliationCheckerTest {
                 .withAffiliations(VALID_AFFILIATION_BOB)
                 .withAffiliationHistory(VALID_AFFILIATION_BOB)
                 .build();
-        assertThrows(AffiliationPersonNotFoundException.class,
-                () -> AuthenticateAffiliation.check(person.getAffiliations(), person, model));
+        assertThrows(AffiliationPersonNotFoundException.class, () ->
+                AuthenticateAffiliation.check(person.getAffiliations(), person, model));
     }
 
     @Test
@@ -47,8 +47,8 @@ public class AffiliationCheckerTest {
                 .withAffiliations(VALID_NAME_ALICE)
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
-        assertThrows(SamePersonAffiliationException.class,
-                () -> AuthenticateAffiliation.check(person.getAffiliations(), person, model));
+        assertThrows(SamePersonAffiliationException.class, () ->
+                AuthenticateAffiliation.check(person.getAffiliations(), person, model));
     }
 
     @Test
@@ -59,8 +59,8 @@ public class AffiliationCheckerTest {
                 .withAffiliations(VALID_NAME_ALICE)
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
-        assertThrows(SameRoleAffiliationException.class,
-                () -> AuthenticateAffiliation.check(person.getAffiliations(), person, model));
+        assertThrows(SameRoleAffiliationException.class, () ->
+                AuthenticateAffiliation.check(person.getAffiliations(), person, model));
     }
 
     @Test

@@ -119,7 +119,7 @@ public class EditCommand extends Command {
                     editedPerson.getName(), model);
         }
         if (this.editPersonDescriptor.isAffiliationEdited()) {
-            AuthenticateAffiliation.check(editedPerson, model);
+            AuthenticateAffiliation.check(editedPerson.getAffiliations(), editedPerson, model);
             AffiliationModifier.addAffiliationHistory(editedPerson.getAffiliationHistory(), editedPerson, model);
             AffiliationModifier.removeAffiliations(personToEdit.getAffiliations(), editedPerson, model);
             AffiliationModifier.addAffiliations(editedPerson.getAffiliations(), editedPerson, model);

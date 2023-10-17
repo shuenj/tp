@@ -1,6 +1,7 @@
 package seedu.address.model.affiliation;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Set;
 
@@ -23,20 +24,19 @@ public class AuthenticateAffiliation {
      * @param model The current model that is running.
      * @throws CommandException If affiliation list fails the check.
      */
-    public static Boolean check(Person personAddingAffiliation, Model model) throws CommandException {
-        requireNonNull(personAddingAffiliation);
-        requireNonNull(model);
+    public static Boolean check(Set<Affiliation> affiliationSet, Person personAddingAffiliation, Model model)
+            throws CommandException {
+        requireAllNonNull(affiliationSet, personAddingAffiliation, model);
 
-        Set<Affiliation> affiliationList = personAddingAffiliation.getAffiliations();
-
-        if (affiliationList.isEmpty()) {
+        if (affiliationSet.isEmpty()) {
             return true;
         }
 
         ReadOnlyAddressBook addressBook = model.getAddressBook();
 
-        for (Affiliation affiliation: affiliationList) {
+        for (Affiliation affiliation: affiliationSet) {
             Person affiliatedPerson = findAffiliatedPerson(affiliation, addressBook);
+
             if (affiliatedPerson == null) {
                 throw new AffiliationPersonNotFoundException(affiliation.affiliationName);
             }
