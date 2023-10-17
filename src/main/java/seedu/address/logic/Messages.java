@@ -1,10 +1,12 @@
 package seedu.address.logic;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Person;
 
 /**
@@ -44,10 +46,24 @@ public class Messages {
                 .append("; Role: ")
                 .append(person.getRole())
                 .append("; Affiliations: {");
-        person.getAffiliations().forEach(builder::append);
+
+        ArrayList<Affiliation> affiliationsList = new ArrayList<>(person.getAffiliations());
+        for (int i = 0; i < affiliationsList.size(); i++) {
+            builder.append(affiliationsList.get(i));
+            if (i < affiliationsList.size() - 1) {
+                builder.append(", ");
+            }
+        }
         builder.append("}");
         builder.append("; Affiliation History: {");
-        person.getAffiliationHistory().forEach(builder::append);
+
+        ArrayList<Affiliation> affiliationHistoryList = new ArrayList<>(person.getAffiliationHistory());
+        for (int i = 0; i < affiliationHistoryList.size(); i++) {
+            builder.append(affiliationHistoryList.get(i));
+            if (i < affiliationHistoryList.size() - 1) {
+                builder.append(", ");
+            }
+        }
         builder.append("}");
         return builder.toString();
     }

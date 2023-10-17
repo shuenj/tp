@@ -1,37 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane HBox.hgrow="ALWAYS">
-    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-    </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-      <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
-      </padding>
-      <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-      </HBox>
-      <FlowPane fx:id="affiliations" />
-      <FlowPane fx:id="affiliationHistoryPane" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="role" styleClass="cell_small_label" text="\$role" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+<HBox id="cardPane" fx:id="cardPane" alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="id" minWidth="30.0" styleClass="cell_big_label">
+        <HBox.margin>
+            <Insets left="10.0"/>
+        </HBox.margin>
+    </Label>
+    <ImageView fx:id="displayPicture" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true"
+               style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);">
+        <HBox.margin>
+            <Insets bottom="20.0" left="10.0" right="10.0" top="20.0"/>
+        </HBox.margin>
+    </ImageView>
+    <VBox alignment="CENTER_LEFT" spacing="5.0">
+        <children>
+            <Label fx:id="name" maxWidth="160.0" minWidth="160.0" styleClass="cell_big_label" text="\$first"
+                   wrapText="true">
+                <VBox.margin>
+                    <Insets top="10.0"/>
+                </VBox.margin>
+            </Label>
+            <Label fx:id="role" alignment="CENTER" minWidth="70.0"
+                   style="-fx-background-color: #DDDDDD; -fx-background-radius: 8px; -fx-text-fill: #333333; -fx-font-weight: bold;"
+                   styleClass="cell_small_label" text="\$role">
+                <padding>
+                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                </padding>
+                <VBox.margin>
+                    <Insets bottom="15.0"/>
+                </VBox.margin>
+            </Label>
+        </children>
+        <HBox.margin>
+            <Insets left="8.0"/>
+        </HBox.margin>
     </VBox>
-  </GridPane>
+    <Label fx:id="phone" alignment="TOP_LEFT" maxWidth="80.0" minWidth="80.0" text="\$phone" wrapText="true"
+           HBox.hgrow="NEVER">
+        <styleClass>
+            <String fx:value="cell_small_label"/>
+            <String fx:value="phone-number"/>
+        </styleClass>
+        <HBox.margin>
+            <Insets bottom="15.0" left="30.0" top="15.0"/>
+        </HBox.margin>
+    </Label>
 </HBox>

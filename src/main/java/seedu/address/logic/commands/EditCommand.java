@@ -109,7 +109,7 @@ public class EditCommand extends Command {
         }
 
         if (this.editPersonDescriptor.isRoleEdited()) {
-            if (!isNull(personToEdit.getAffiliations()) && personToEdit.getAffiliations().isEmpty()) {
+            if (!isNull(personToEdit.getAffiliations()) && !personToEdit.getAffiliations().isEmpty()) {
                 throw new CommandException(MESSAGE_EDIT_ROLE_CONTAIN_AFFILIATION);
             }
         }
@@ -120,7 +120,7 @@ public class EditCommand extends Command {
         }
         if (this.editPersonDescriptor.isAffiliationEdited()) {
             AuthenticateAffiliation.check(editedPerson, model);
-            AffiliationModifier.addAffiliationHistory(editedPerson.getAffiliationHistory(), editedPerson, model);
+            AffiliationModifier.addAffiliationHistory(editedPerson.getAffiliations(), editedPerson, model);
             AffiliationModifier.removeAffiliations(personToEdit.getAffiliations(), editedPerson, model);
             AffiliationModifier.addAffiliations(editedPerson.getAffiliations(), editedPerson, model);
         }

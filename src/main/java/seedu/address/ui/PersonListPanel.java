@@ -20,19 +20,41 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> personListView;
 
+    private InformationWindow informationWindow;
+
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, InformationWindow informationWindow) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        this.informationWindow = informationWindow;
+    }
+
+    /**
+     * Clears any selection of {@code PersonCard}.
+     */
+    public void unselectPersonCard() {
+        personListView.getSelectionModel().clearSelection();
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
+
+        public PersonListViewCell() {
+            setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1) {
+                    Person selectedPerson = getItem();
+                    if (selectedPerson != null) {
+                        informationWindow.displayInformation(selectedPerson);
+                    }
+                }
+            });
+        }
+
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
@@ -45,5 +67,4 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

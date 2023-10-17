@@ -1,9 +1,15 @@
 ﻿Some code adapted from http://code.makery.ch/library/javafx-8-tutorial/ by Marco Jakob
 
 Copyright by Susumu Yoshida - http://www.mcdodesign.com/
-- address_book_32.png
 - AddressApp.ico
 
 Copyright by Jan Jan Kovařík - http://glyphicons.com/
 - calendar.png
 - edit.png
+
+Free PNG icon - https://www.iconpacks.net/free-icon/healthcare-3610.html
+- medisync_32.png
+
+Image by Freepik - https://www.freepik.com/
+- patient.png
+- doctor.png
