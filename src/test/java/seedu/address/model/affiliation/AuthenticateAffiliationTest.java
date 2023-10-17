@@ -25,7 +25,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AffiliationCheckerTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void check_withAffiliationPersonNotExist_affiliationPersonNotFoundException() {
@@ -35,7 +35,8 @@ public class AffiliationCheckerTest {
                 .withAffiliations(VALID_AFFILIATION_BOB)
                 .withAffiliationHistory(VALID_AFFILIATION_BOB)
                 .build();
-        assertThrows(AffiliationPersonNotFoundException.class, () -> AuthenticateAffiliation.check(person, model));
+        assertThrows(AffiliationPersonNotFoundException.class,
+                () -> AuthenticateAffiliation.check(person.getAffiliations(), person, model));
     }
 
     @Test
@@ -46,7 +47,8 @@ public class AffiliationCheckerTest {
                 .withAffiliations(VALID_NAME_ALICE)
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
-        assertThrows(SamePersonAffiliationException.class, () -> AuthenticateAffiliation.check(person, model));
+        assertThrows(SamePersonAffiliationException.class,
+                () -> AuthenticateAffiliation.check(person.getAffiliations(), person, model));
     }
 
     @Test
@@ -57,7 +59,8 @@ public class AffiliationCheckerTest {
                 .withAffiliations(VALID_NAME_ALICE)
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
-        assertThrows(SameRoleAffiliationException.class, () -> AuthenticateAffiliation.check(person, model));
+        assertThrows(SameRoleAffiliationException.class,
+                () -> AuthenticateAffiliation.check(person.getAffiliations(), person, model));
     }
 
     @Test
@@ -69,7 +72,7 @@ public class AffiliationCheckerTest {
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
         try {
-            assertTrue(AuthenticateAffiliation.check(person, model));
+            assertTrue(AuthenticateAffiliation.check(person.getAffiliations(), person, model));
         } catch (CommandException ce) {
             fail();
         }
