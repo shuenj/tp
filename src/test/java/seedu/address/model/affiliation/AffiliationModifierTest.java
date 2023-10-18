@@ -78,4 +78,23 @@ public class AffiliationModifierTest {
                 patientB.getName(), newName, model);
         assertTrue(doctorA.getAffiliations().contains(new Affiliation(newName.fullName)));
     }
+
+    @Test
+    public void nameChangeAffiliationHistory_validParam_success() {
+        Person doctorAlice = new DoctorBuilder().withName("Alice")
+            .withAffiliationHistory("Bob").build();
+        Person doctorCharlie = new DoctorBuilder().withName("Charlie")
+            .withAffiliationHistory("Bob").build();
+        Person patientBob = new PatientBuilder().withName("Bob")
+            .withAffiliations("Alice", "Charlie")
+            .withAffiliationHistory("Alice", "Charlie").build();
+        model.addPerson(doctorAlice);
+        model.addPerson(doctorCharlie);
+        model.addPerson(patientBob);
+        Name newName = new Name("Ben");
+        AffiliationModifier.nameChangeAffiliationHistory(patientBob.getAffiliationHistory(), patientBob.getName(),
+                newName, model);
+        assertTrue(doctorAlice.getAffiliationHistory().contains(new Affiliation(newName.fullName)));
+        assertTrue(doctorCharlie.getAffiliationHistory().contains(new Affiliation(newName.fullName)));
+    }
 }
