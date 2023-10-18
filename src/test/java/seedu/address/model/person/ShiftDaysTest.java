@@ -1,9 +1,11 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -68,5 +70,10 @@ public class ShiftDaysTest {
         Set<Integer> otherShiftDaysSet = new HashSet<>();
         otherShiftDaysSet.add(5);
         assertFalse(shiftDays.equals(new ShiftDays(otherShiftDaysSet)));
+    }
+
+    @Test
+    public void toString_compareAdjustedShiftDays_success() {
+        assertEquals("[Mon, Tue]", new ShiftDays(new HashSet<>(Arrays.asList(1, 2))).toString());
     }
 }
