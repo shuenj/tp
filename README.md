@@ -10,5 +10,5 @@
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base (around 6 KLoC).
   * It has a **reasonable level of user and developer documentation**.
 * It is named `MediSync` as it allows the syncing of directory information in a medical context.
-* For the detailed documentation of this project, see the **[MediSync Product Website]()**.
+* For the detailed documentation of this project, see the **[MediSync Product Website](https://ay2324s1-cs2103-t16-2.github.io/tp/)**.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
