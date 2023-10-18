@@ -6,14 +6,14 @@
     "email" : "alice@example.com",
     "role" : "Doctor",
     "affiliations" : [ "Benson Meier" ],
-    "affiliationHistory" : [ "Benson Meier" ]
+    "affiliationHistory" : [ "Thomas Mink", "Benson Meier" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "role" : "Patient",
-    "affiliations" : [ "Alice Pauline", "Carl Kurz" ],
-    "affiliationHistory" : [ "Alice Pauline", "Carl Kurz" ]
+    "role" : "Doctor",
+    "affiliations" : [ ],
+    "affiliationHistory" : [ "Alice Menti", "Bonas Kurz" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -25,7 +25,7 @@
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "role" : "Patient",
+    "role" : "Doctor",
     "affiliations" : [ ],
     "affiliationHistory" : [ ]
   }, {
@@ -39,7 +39,7 @@
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "role" : "Patient",
+    "role" : "Doctor",
     "affiliations" : [ ],
     "affiliationHistory" : [ ]
   }, {

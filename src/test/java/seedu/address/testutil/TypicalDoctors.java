@@ -26,11 +26,10 @@ public class TypicalDoctors {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withAffiliations("Benson Meier")
-            .withAffiliationHistory("Benson Meier").build();
+            .withAffiliationHistory("Thomas Mink", "Benson Meier").build();
     public static final Doctor BENSON = new DoctorBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withAffiliations("Alice Pauline", "Carl Kurz")
-            .withAffiliationHistory("Alice Pauline", "Carl Kurz").build();
+            .withAffiliationHistory("Alice Menti", "Bonas Kurz").build();
     public static final Doctor CARL = new DoctorBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").build();
     public static final Doctor DANIEL = new DoctorBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -65,7 +64,7 @@ public class TypicalDoctors {
     /**
      * Returns an {@code AddressBook} with all the typical doctors.
      */
-    public static AddressBook getTypicalAddressBook() {
+    public static AddressBook getTypicalDoctorsAddressBook() {
         AddressBook ab = new AddressBook();
         for (Doctor doctor : getTypicalDoctors()) {
             ab.addPerson(doctor);

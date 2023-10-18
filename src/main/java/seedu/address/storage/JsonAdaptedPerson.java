@@ -115,7 +115,7 @@ class JsonAdaptedPerson {
 
         final Set<Affiliation> modelAffiliations = new HashSet<>(personAffiliations);
         final Set<Affiliation> modelAffiliationHistory = new HashSet<>(personAffiliationHistory);
-        return new Person(modelName, modelPhone, modelEmail, modelRole, modelAffiliations, modelAffiliationHistory);
+        return modelRole.generatePerson(modelName, modelPhone, modelEmail, modelAffiliations, modelAffiliationHistory);
     }
 
 }

@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.affiliation.Affiliation;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Person;
 
 /**
@@ -65,6 +66,11 @@ public class Messages {
             }
         }
         builder.append("}");
+
+        if (person instanceof Doctor) {
+            builder.append("; Shift Days: ");
+            builder.append(((Doctor) person).getShiftDays());
+        }
         return builder.toString();
     }
 

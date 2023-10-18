@@ -24,12 +24,10 @@ public class TypicalPatients {
     public static final Patient ALICE = new PatientBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withAffiliations("Benson Meier")
-            .withAffiliationHistory("Benson Meier").build();
+            .withAffiliationHistory("Thomas Mink").build();
     public static final Patient BENSON = new PatientBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withAffiliations("Alice Pauline", "Carl Kurz")
-            .withAffiliationHistory("Alice Pauline", "Carl Kurz").build();
+            .withAffiliationHistory("Alice Menti", "Bonas Kurz").build();
     public static final Patient CARL = new PatientBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").build();
     public static final Patient DANIEL = new PatientBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -64,7 +62,7 @@ public class TypicalPatients {
     /**
      * Returns an {@code AddressBook} with all the typical patients.
      */
-    public static AddressBook getTypicalAddressBook() {
+    public static AddressBook getTypicalPatientsAddressBook() {
         AddressBook ab = new AddressBook();
         for (Patient patient : getTypicalPatients()) {
             ab.addPerson(patient);
