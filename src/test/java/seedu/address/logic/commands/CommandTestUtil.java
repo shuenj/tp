@@ -11,7 +11,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -36,8 +38,9 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_AMY = "Doctor";
     public static final String VALID_ROLE_BOB = "Patient";
     public static final String VALID_AFFILIATION_AMY = "Amy Bee";
-    public static final String VALID_AFFILIATION_DANIEL = "Daniel Meier";
     public static final String VALID_AFFILIATION_BOB = "Bob Choo";
+    public static final Set<Integer> VALID_SHIFTDAYS_AMY = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5));
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

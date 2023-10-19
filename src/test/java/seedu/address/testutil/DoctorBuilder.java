@@ -8,6 +8,7 @@ import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ShiftDays;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -24,6 +25,7 @@ public class DoctorBuilder {
     private Email email;
     private Set<Affiliation> affiliations;
     private Set<Affiliation> affiliationHistory;
+    private ShiftDays shiftDays;
 
     /**
      * Creates a {@code DoctorBuilder} with the default details.
@@ -34,6 +36,7 @@ public class DoctorBuilder {
         email = new Email(DEFAULT_EMAIL);
         affiliations = new HashSet<>();
         affiliationHistory = new HashSet<>();
+        shiftDays = new ShiftDays();
     }
 
     /**
@@ -45,6 +48,7 @@ public class DoctorBuilder {
         email = doctorToCopy.getEmail();
         affiliations = new HashSet<>(doctorToCopy.getAffiliations());
         affiliationHistory = new HashSet<>(doctorToCopy.getAffiliationHistory());
+        shiftDays = doctorToCopy.getShiftDays();
     }
 
     /**
@@ -89,8 +93,15 @@ public class DoctorBuilder {
         return this;
     }
 
-    public Doctor build() {
-        return new Doctor(name, phone, email, affiliations, affiliationHistory);
+    /**
+     * Sets the {@code ShiftDays} of the {@code Doctor} that we are building.
+     */
+    public DoctorBuilder withShiftDays(Set<Integer> shiftDays) {
+        this.shiftDays = new ShiftDays(shiftDays);
+        return this;
     }
 
+    public Doctor build() {
+        return new Doctor(name, phone, email, affiliations, affiliationHistory).setShiftDays(shiftDays);
+    }
 }

@@ -7,8 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.affiliation.Affiliation;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Role;
 
 /**
  * A UI component that displays information of a {@code Person}.
@@ -16,6 +17,8 @@ import seedu.address.model.person.Role;
 public class InformationWindow extends UiPart<Region> {
 
     private static final String FXML = "InformationWindow.fxml";
+
+    private static final int[] SAMPLE_SHIFT_DAYS = {1, 4, 6};
 
     @FXML
     private VBox fullWindow;
@@ -41,6 +44,7 @@ public class InformationWindow extends UiPart<Region> {
     private Label shiftSat;
     @FXML
     private Label shiftSun;
+    private Label[] shiftDays;
 
     @FXML
     private VBox affnBlock;
@@ -54,6 +58,7 @@ public class InformationWindow extends UiPart<Region> {
      */
     public InformationWindow() {
         super(FXML);
+        shiftDays = new Label[]{shiftMon, shiftTue, shiftWed, shiftThu, shiftFri, shiftSat, shiftSun};
 
         // The initialisation should not render the information window.
         resetWindow();
@@ -70,58 +75,54 @@ public class InformationWindow extends UiPart<Region> {
         name.setText(person.getName().fullName);
         role.setText(person.getRole().value);
 
-        if (person.getRole().toString().toUpperCase().equals(Role.Type.DOCTOR.name())) {
-            displayDoctorInformation(person);
-        } else if (person.getRole().toString().toUpperCase().equals(Role.Type.PATIENT.name())) {
-            displayPatientInformation(person);
+        if (person instanceof Doctor) {
+            displayDoctorInformation((Doctor) person);
+        } else if (person instanceof Patient) {
+            displayPatientInformation((Patient) person);
         }
 
         showWindow();
     }
 
     /**
-     * Displays information of the given {@code Person} that has been identified as a {@code Doctor}.
-     * @param person the intended doctor for display.
+     * Displays information of the given {@code Doctor}.
+     * @param doctor the intended doctor for display.
      */
-    private void displayDoctorInformation(Person person) {
+    private void displayDoctorInformation(Doctor doctor) {
         role.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
-        setShiftDays(person);
-        setAffiliations(person);
+        setShiftDays(doctor);
+        setAffiliations(doctor);
         affnCount.setText("Tending to:");
         affnBlock.setStyle("-fx-border-color: #BBBBBB; -fx-border-width: 2 0 0 0;");
     }
 
     /**
-     * Displays information of the given {@code Person} that has been identified as a {@code Patient}.
-     * @param person the intended patient for display.
+     * Displays information of the given {@code Patient}.
+     * @param patient the intended patient for display.
      */
-    private void displayPatientInformation(Person person) {
+    private void displayPatientInformation(Patient patient) {
         role.setStyle("-fx-background-color: #E97451; -fx-font-weight: bold; -fx-text-fill: #8B4000");
         clearShiftDays();
-        setAffiliations(person);
+        setAffiliations(patient);
         affnCount.setText("Attended by:");
         affnBlock.setStyle("-fx-border-color: #BBBBBB; -fx-border-width: 2 0 0 0;");
     }
 
     /**
-     * Sets the shift days information of the given {@code Person}.
-     * @param person the intended person for display.
+     * Sets the shift days information of the given {@code Doctor}.
+     * @param doctor the intended person for display.
      */
-    private void setShiftDays(Person person) {
+    private void setShiftDays(Doctor doctor) {
 
         shiftBlock.setVisible(true);
         shiftBlock.setManaged(true);
         shiftBlock.setStyle("-fx-border-color: #BBBBBB; -fx-border-width: 2 0 0 0;");
         shiftHeader.setText("Shift days:");
 
-        // Function to be modified in the future. Currently picks only Mon, Thu and Sat.
-        shiftMon.setStyle("-fx-background-color: #AFE1AF; -fx-font-weight: bold; -fx-text-fill: #008000");
-        // shiftTue.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
-        // shiftWed.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
-        shiftThu.setStyle("-fx-background-color: #AFE1AF; -fx-font-weight: bold; -fx-text-fill: #008000");
-        // shiftFri.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
-        shiftSat.setStyle("-fx-background-color: #AFE1AF; -fx-font-weight: bold; -fx-text-fill: #008000");
-        // shiftSun.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
+        for (int shiftDay : SAMPLE_SHIFT_DAYS) {
+            shiftDays[shiftDay - 1]
+                    .setStyle("-fx-background-color: #AFE1AF; -fx-font-weight: bold; -fx-text-fill: #008000");
+        }
     }
 
     /**
@@ -154,6 +155,9 @@ public class InformationWindow extends UiPart<Region> {
      * Removes the shift days information from the information window.
      */
     private void clearShiftDays() {
+        for (Label shiftDay : shiftDays) {
+            shiftDay.setStyle("-fx-background-color: transparent; -fx-font-weight: normal; -fx-text-fill: black");;
+        }
         shiftBlock.setVisible(false);
         shiftBlock.setManaged(false);
     }
