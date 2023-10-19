@@ -101,4 +101,35 @@ public class AffiliationModifier {
             }
         }
     }
+
+    /**
+     * Changes the affiliated person's name to a new name for every
+     * person's affiliation history in the affiliation set provided.
+     * @param affiliationSet The affiliation set that contains all person that needs to change the affiliated
+     *                      person from old name to new name.
+     * @param oldName The old name that identify the person.
+     * @param newName The new name to identify the person.
+     * @param model The current model that is running.
+     */
+    public static void nameChangeAffiliationHistory(Set<Affiliation> affiliationSet,
+                                                     Name oldName, Name newName, Model model) {
+        requireAllNonNull(affiliationSet, oldName, newName, model);
+
+        ReadOnlyAddressBook addressBook = model.getAddressBook();
+
+        for (Affiliation affiliation: affiliationSet) {
+            Person otherAffiliatedPerson = AuthenticateAffiliation.findAffiliatedPerson(affiliation, addressBook);
+            if (otherAffiliatedPerson == null) { // ignore deleted person in history for now
+                continue;
+            }
+            Set<Affiliation> otherAffiliatedSet = otherAffiliatedPerson.getAffiliationHistory();
+            for (Affiliation affiliation1: otherAffiliatedSet) {
+                if (affiliation1.affiliationName.equals(oldName.fullName)) {
+                    otherAffiliatedSet.remove(affiliation1);
+                    otherAffiliatedSet.add(new Affiliation(newName.fullName));
+                    break;
+                }
+            }
+        }
+    }
 }

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.DoctorBuilder;
@@ -77,5 +78,27 @@ public class AffiliationModifierTest {
         AffiliationModifier.nameChangeAffiliations(patientB.getAffiliations(),
                 patientB.getName(), newName, model);
         assertTrue(doctorA.getAffiliations().contains(new Affiliation(newName.fullName)));
+    }
+
+    @Test
+    public void nameChangeAffiliationHistory_validParam_success() {
+        Person doctorAlice = new DoctorBuilder().withName("Alice")
+            .withAffiliationHistory("Bob", "Thomas").build();
+        Person doctorCharlie = new DoctorBuilder().withName("Charlie")
+            .withAffiliationHistory("Bob").build();
+        Doctor doctorDonald = new DoctorBuilder().withName("Donald").build();
+        Person patientBob = new PatientBuilder().withName("Bob")
+            .withAffiliations("Alice", "Charlie")
+            .withAffiliationHistory("Alice",
+                "Charlie", "Donald").build();
+        model.addPerson(doctorAlice);
+        model.addPerson(doctorCharlie);
+        model.addPerson(patientBob);
+        model.addPerson(doctorDonald);
+        Name newName = new Name("Ben");
+        AffiliationModifier.nameChangeAffiliationHistory(patientBob.getAffiliationHistory(), patientBob.getName(),
+                newName, model);
+        assertTrue(doctorAlice.getAffiliationHistory().contains(new Affiliation(newName.fullName)));
+        assertTrue(doctorCharlie.getAffiliationHistory().contains(new Affiliation(newName.fullName)));
     }
 }
