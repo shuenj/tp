@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -122,4 +123,18 @@ public class ParserUtil {
         }
         return affiliationSet;
     }
+
+    /**
+     * Parses a {@code String shiftDayString} into a {@code ShiftDays}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code shiftDayString} is invalid.
+     */
+    public static Set<Integer> parseShiftDays(String shiftDayString) {
+        requireNonNull(shiftDayString);
+        return shiftDayString.trim().chars().map(x -> x - '0') // converts string into CharStream, then into IntStream
+                .boxed().collect(Collectors.toSet());
+    }
+
+
 }
