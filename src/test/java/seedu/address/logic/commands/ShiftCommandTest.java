@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -31,7 +32,7 @@ public class ShiftCommandTest {
     private Model model = new ModelManager(getTypicalDoctorsAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_roleIsDoctor_success() {
+    public void execute_roleIsDoctor_success() throws CommandException {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
@@ -48,6 +49,8 @@ public class ShiftCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, shiftDaysChangedPerson);
         assertCommandSuccess(shiftCommand, model, expectedMessage, expectedModel);
+        ShiftCommand unmodifyShiftCommand = new ShiftCommand(indexLastPerson, new HashSet<>());
+        unmodifyShiftCommand.execute(model);
     }
 
     @Test
