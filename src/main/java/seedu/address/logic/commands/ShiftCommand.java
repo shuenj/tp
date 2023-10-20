@@ -14,6 +14,9 @@ import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ShiftDays;
 
+/**
+ * Updates the shift days of an existing person in the contact list.
+ */
 public class ShiftCommand extends Command {
 
     public static final String COMMAND_WORD = "shift";
