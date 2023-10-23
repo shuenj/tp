@@ -18,8 +18,6 @@ public class InformationWindow extends UiPart<Region> {
 
     private static final String FXML = "InformationWindow.fxml";
 
-    private static final int[] SAMPLE_SHIFT_DAYS = {1, 4, 6};
-
     @FXML
     private VBox fullWindow;
     @FXML
@@ -113,13 +111,14 @@ public class InformationWindow extends UiPart<Region> {
      * @param doctor the intended person for display.
      */
     private void setShiftDays(Doctor doctor) {
+        clearShiftDays();
 
         shiftBlock.setVisible(true);
         shiftBlock.setManaged(true);
         shiftBlock.setStyle("-fx-border-color: #BBBBBB; -fx-border-width: 2 0 0 0;");
         shiftHeader.setText("Shift days:");
 
-        for (int shiftDay : SAMPLE_SHIFT_DAYS) {
+        for (int shiftDay : doctor.getShiftDays()) {
             shiftDays[shiftDay - 1]
                     .setStyle("-fx-background-color: #AFE1AF; -fx-font-weight: bold; -fx-text-fill: #008000");
         }

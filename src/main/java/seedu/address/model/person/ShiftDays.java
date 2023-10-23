@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 /**
  * Represents a set of ShiftDays in the contact list.
  */
-public class ShiftDays {
+public class ShiftDays implements Iterable<Integer> {
 
     public static final int SMALLEST_DAY_REPRESENTATION = 1;
     public static final int NUMBER_OF_DAYS_IN_WEEK = 7;
@@ -99,7 +100,7 @@ public class ShiftDays {
     }
 
     /**
-     * Format state as text for viewing.
+     * Formats state as text for viewing.
      */
     public String toString() {
         ArrayList<Integer> sortedShiftDays = new ArrayList<>(shiftDays);
@@ -111,6 +112,14 @@ public class ShiftDays {
         }
 
         return "[" + String.join(", ", daysOfWeek) + "]";
+    }
+
+    /**
+     * Enables an iterator to loop through shift days.
+     */
+    @Override
+    public Iterator<Integer> iterator() {
+        return shiftDays.iterator();
     }
 
 }
