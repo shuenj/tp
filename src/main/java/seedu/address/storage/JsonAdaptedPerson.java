@@ -186,7 +186,7 @@ class JsonAdaptedPerson {
     /**
      * Generates a {@link Role} object from the stored JSON data.
      *
-     * @param role The person's role (e.g., Staff).
+     * @param role The person's role (e.g., Doctor).
      * @return A {@link Role} object based on the stored JSON data.
      * @throws IllegalValueException If the stored role is null or does not meet the constraints.
      */
@@ -205,10 +205,11 @@ class JsonAdaptedPerson {
      *
      * @param shiftDays The person's shift days.
      * @return A {@link ShiftDays} object based on the stored JSON data.
-     * @throws IllegalValueException If the role is "Staff" and shiftDays are null or do not meet the constraints.
+     * @throws IllegalValueException If the role is "Doctor" or "Nurse
+     *     and shiftDays are null or do not meet the constraints.
      */
     private ShiftDays generateShiftDays(Set<Integer> shiftDays) throws IllegalValueException {
-        if (role.equals("Staff") && shiftDays == null) {
+        if ((role.equals("Doctor") || role.equals("Nurse")) && shiftDays == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ShiftDays.class.getSimpleName()));
         }

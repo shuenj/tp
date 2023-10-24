@@ -30,7 +30,6 @@ public class AuthenticateAffiliationTest {
     private final Model personModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Model doctorModel = new ModelManager(getTypicalDoctorAddressBook(), new UserPrefs());
 
-
     @Test
     public void check_withAffiliationPersonNotExist_affiliationPersonNotFoundException() {
         Person person = new PersonBuilder()
