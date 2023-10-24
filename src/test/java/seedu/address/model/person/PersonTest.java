@@ -87,7 +87,7 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withRole(VALID_ROLE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
+        // different affiliation -> returns false
         editedAlice = new PersonBuilder(ALICE).withAffiliations(VALID_AFFILIATION_AMY)
         .withAffiliationHistory(VALID_AFFILIATION_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
