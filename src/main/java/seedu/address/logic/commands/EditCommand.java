@@ -288,7 +288,7 @@ public class EditCommand extends Command {
         }
         /**
          * Adds {@code affiliations} to this object's {@code affiliations}.
-         * @param affiliations
+         * @param affiliations the affiliations to add to affiliation history.
          */
         public void addAffiliationsToHistory(Set<Affiliation> affiliations) {
             if (this.affiliationHistory == null) {
