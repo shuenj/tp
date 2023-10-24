@@ -251,6 +251,20 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+### Affiliation History feature
+The `affiliationHistory` records the past and current affiliations that a person has with others. It is implemented similar to `affiliations`, but with a few differences:
+* When adding a person, the user specified `affiliations` will be added to `affiliationHistory` of himself/herself and the affiliated person.
+  * The `Person` constructor has been modified to use `affiliations` as the `affiliationHistory` during initialization.
+* When editing a `Person`'s `Name`, the user specified affiliation will also be updated in `affiliationHistory` of others.
+* When editing a `Person`'s `affiliations`, specifically,
+  * adding `affiliations` will be add it to `affiliationHistory` as well
+  * removing an `affiliations`, will **not** be removed from `affiliationHistory`
+* When deleting a `Person`, the `affiliationHistory` of others will be updated accordingly.
+
+Alternative implementations:
+Another way to handle deletion is to not remove the `affiliations` from `affiliationHistory` of others. However, this would require either a flag to indicate that the `affiliations` is no longer valid, or a separate `affiliationHistory` to store the `affiliations` that are no longer valid. This would complicate the implementation of `affiliationHistory` and other functions like list so that deleted a `Person` is not shown. By removing the `affiliations` from `affiliationHistory`, it is also truly deleing the person.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
