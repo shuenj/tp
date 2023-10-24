@@ -53,8 +53,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON =
         "This person already exists in the contact list. Please use a different name.";
+    public static final String MESSAGE_EDIT_ROLE_CONTAIN_AFFILIATION =
+            "This person contains affiliations. Changing of Role is not allowed.";
     public static final String MESSAGE_EDIT_ROLE_NOT_ALLOW = "Edit of role is not allow.";
-
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
