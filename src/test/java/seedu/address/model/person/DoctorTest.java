@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.affiliation.Affiliation;
 import seedu.address.testutil.DoctorBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class DoctorTest {
 
@@ -58,6 +59,7 @@ public class DoctorTest {
         // same values -> returns true
         Doctor aliceCopy = new DoctorBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
+        assertTrue(TypicalPersons.ALICE.hashCode() == aliceCopy.hashCode());
 
         // same object -> returns true
         assertTrue(ALICE.equals(ALICE));
