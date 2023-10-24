@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AFFILIATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -45,7 +44,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_AFFILIATION + "AFFILIATION]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -55,8 +53,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON =
         "This person already exists in the contact list. Please use a different name.";
-    public static final String MESSAGE_EDIT_ROLE_CONTAIN_AFFILIATION =
-            "This person contains affiliations. Changing of Role is not allowed.";
+    public static final String MESSAGE_EDIT_ROLE_NOT_ALLOW = "Edit of role is not allow.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -108,11 +105,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (this.editPersonDescriptor.isRoleEdited()) {
-            if (!isNull(personToEdit.getAffiliations()) && !personToEdit.getAffiliations().isEmpty()) {
-                throw new CommandException(MESSAGE_EDIT_ROLE_CONTAIN_AFFILIATION);
-            }
-        }
+        assert !this.editPersonDescriptor.isRoleEdited();
 
         if (this.editPersonDescriptor.isNameEdited()) {
             AffiliationModifier.nameChangeAffiliations(personToEdit.getAffiliations(), personToEdit.getName(),
