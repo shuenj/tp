@@ -84,6 +84,14 @@ public class Person {
     }
 
     /**
+     * Returns an affiliation history set.
+     * @return affiliationHistory
+     */
+    public void clearAffiliationHistory() {
+        this.affiliationHistory.clear();
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
