@@ -11,6 +11,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Staff;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -38,6 +40,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setRole(person.getRole());
         descriptor.setAffiliations(person.getAffiliations());
         descriptor.setAffiliationHistory(person.getAffiliationHistory());
+        if (person instanceof Staff) {
+            descriptor.setShiftDays(((Staff) person).getShiftDays());
+        }
     }
 
     /**
@@ -93,6 +98,14 @@ public class EditPersonDescriptorBuilder {
         Set<Affiliation> affiliationSet = Stream.of(affiliationHistory)
             .map(Affiliation::new).collect(Collectors.toSet());
         descriptor.setAffiliationHistory(affiliationSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code ShiftDays} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withShiftDays(Set<Integer> shiftDays) {
+        descriptor.setShiftDays(new ShiftDays(shiftDays));
         return this;
     }
 

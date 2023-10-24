@@ -16,6 +16,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Staff;
+import seedu.address.testutil.DoctorBuilder;
 import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.StaffBuilder;
 
