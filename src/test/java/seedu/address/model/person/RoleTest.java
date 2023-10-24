@@ -89,6 +89,13 @@ public class RoleTest {
                             new Phone(VALID_PHONE_AMY),
                             new Email(VALID_EMAIL_AMY),
                             parseAffiliations(new ArrayList<>())).getClass());
+
+            assertEquals(doctor.getClass(),
+                    doctorRole.generatePerson(new Name(VALID_NAME_AMY),
+                            new Phone(VALID_PHONE_AMY),
+                            new Email(VALID_EMAIL_AMY),
+                            parseAffiliations(new ArrayList<>()),
+                            parseAffiliations(new ArrayList<>())).getClass());
         } catch (Exception e) {
             fail(); // the test should not reach this line
         }
@@ -100,6 +107,13 @@ public class RoleTest {
                     nurseRole.generatePerson(new Name(VALID_NAME_CAT),
                             new Phone(VALID_PHONE_CAT),
                             new Email(VALID_EMAIL_CAT),
+                            parseAffiliations(new ArrayList<>())).getClass());
+
+            assertEquals(nurse.getClass(),
+                    nurseRole.generatePerson(new Name(VALID_NAME_CAT),
+                            new Phone(VALID_PHONE_CAT),
+                            new Email(VALID_EMAIL_CAT),
+                            parseAffiliations(new ArrayList<>()),
                             parseAffiliations(new ArrayList<>())).getClass());
         } catch (Exception e) {
             fail(); // the test should not reach this line

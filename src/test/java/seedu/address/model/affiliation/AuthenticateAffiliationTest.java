@@ -21,8 +21,10 @@ import seedu.address.model.affiliation.exceptions.AffiliationPersonNotFoundExcep
 import seedu.address.model.affiliation.exceptions.SamePersonAffiliationException;
 import seedu.address.model.affiliation.exceptions.SameRoleAffiliationException;
 import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Nurse;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.DoctorBuilder;
+import seedu.address.testutil.NurseBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AuthenticateAffiliationTest {
@@ -56,13 +58,21 @@ public class AuthenticateAffiliationTest {
 
     @Test
     public void check_withAffiliationPersonSameRoleAsPersonAdding_sameRoleAffiliationException() {
-        Doctor person = new DoctorBuilder()
+        Doctor doctor = new DoctorBuilder()
                 .withName(VALID_NAME_BOB)
                 .withAffiliations(VALID_NAME_ALICE)
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
         assertThrows(SameRoleAffiliationException.class, () ->
-                AuthenticateAffiliation.check(person.getAffiliations(), person, doctorModel));
+                AuthenticateAffiliation.check(doctor.getAffiliations(), doctor, doctorModel));
+
+        Nurse nurse = new NurseBuilder()
+                .withName(VALID_NAME_BOB)
+                .withAffiliations(VALID_NAME_ALICE)
+                .withAffiliationHistory(VALID_NAME_ALICE)
+                .build();
+        assertThrows(SameRoleAffiliationException.class, () ->
+                AuthenticateAffiliation.check(nurse.getAffiliations(), nurse, doctorModel));
     }
 
     @Test

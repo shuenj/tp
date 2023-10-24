@@ -46,8 +46,7 @@ public class AuthenticateAffiliation {
             if (affiliatedPerson.getName().equals(personAddingAffiliation.getName())) {
                 throw new SamePersonAffiliationException(affiliatedPerson);
             }
-            System.out.println(affiliatedPerson instanceof Staff);
-            System.out.println(personAddingAffiliation instanceof Staff);
+
             if ((affiliatedPerson instanceof Staff && personAddingAffiliation instanceof Staff)
                     || (affiliatedPerson instanceof Patient && personAddingAffiliation instanceof Patient)) {
                 throw new SameRoleAffiliationException(affiliatedPerson);

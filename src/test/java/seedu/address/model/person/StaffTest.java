@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.affiliation.Affiliation;
 import seedu.address.testutil.StaffBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class StaffTest {
 
@@ -91,6 +92,9 @@ public class StaffTest {
         // different shift days -> return false
         editedAlice = new StaffBuilder(ALICE).withShiftDays(VALID_SHIFTDAYS_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        //different class instance -> return false
+        assertFalse(TypicalPersons.ALICE.hashCode() == aliceCopy.hashCode());
     }
 
     @Test

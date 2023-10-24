@@ -15,32 +15,54 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Nurse;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.ShiftDays;
-import seedu.address.model.person.Staff;
+import seedu.address.testutil.TypicalDoctors;
+import seedu.address.testutil.TypicalNurses;
 import seedu.address.testutil.TypicalPatients;
-import seedu.address.testutil.TypicalStaff;
 
 public class CustomJsonAdaptedPersonSerializerTest {
 
     @Test
-    public void serialize_staffPersonWithShiftDays_success() throws IOException {
+    public void serialize_doctorPersonWithShiftDays_success() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper(new JsonFactory());
         CustomJsonAdaptedPersonSerializer serializer = new CustomJsonAdaptedPersonSerializer();
 
-        Staff staff = TypicalStaff.ALICE;
+        Doctor doctor = TypicalDoctors.ALICE;
         ShiftDays shiftDays = new ShiftDays(new HashSet<>(Arrays.asList(1, 2, 3)));
-        staff.setShiftDays(shiftDays);
+        doctor.setShiftDays(shiftDays);
 
         StringWriter writer = new StringWriter();
         JsonGenerator jsonGenerator = objectMapper.getFactory().createGenerator(writer);
         SerializerProvider serializerProvider = objectMapper.getSerializerProvider();
-        serializer.serialize(new JsonAdaptedPerson(staff), jsonGenerator, serializerProvider);
+        serializer.serialize(new JsonAdaptedPerson(doctor), jsonGenerator, serializerProvider);
 
         String jsonOutput = writer.toString();
         assertTrue(jsonOutput.contains("shiftDays"));
         ShiftDays undoShiftDays = new ShiftDays(new HashSet<>());
-        staff.setShiftDays(undoShiftDays);
+        doctor.setShiftDays(undoShiftDays);
+    }
+
+    @Test
+    public void serialize_nursePersonWithShiftDays_success() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper(new JsonFactory());
+        CustomJsonAdaptedPersonSerializer serializer = new CustomJsonAdaptedPersonSerializer();
+
+        Nurse nurse = TypicalNurses.ALICE;
+        ShiftDays shiftDays = new ShiftDays(new HashSet<>(Arrays.asList(1, 2, 3)));
+        nurse.setShiftDays(shiftDays);
+
+        StringWriter writer = new StringWriter();
+        JsonGenerator jsonGenerator = objectMapper.getFactory().createGenerator(writer);
+        SerializerProvider serializerProvider = objectMapper.getSerializerProvider();
+        serializer.serialize(new JsonAdaptedPerson(nurse), jsonGenerator, serializerProvider);
+
+        String jsonOutput = writer.toString();
+        assertTrue(jsonOutput.contains("shiftDays"));
+        ShiftDays undoShiftDays = new ShiftDays(new HashSet<>());
+        nurse.setShiftDays(undoShiftDays);
     }
 
     @Test
