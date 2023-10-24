@@ -62,6 +62,7 @@ public class StaffTest {
 
         // same object -> returns true
         assertTrue(ALICE.equals(ALICE));
+        assertTrue(BOB.equals(BOB));
 
         // null -> returns false
         assertFalse(ALICE.equals(null));

@@ -10,9 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalDoctors.getTypicalDoctorAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalStaff.getTypicalStaffAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +29,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Staff;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StaffBuilder;
 
 /**
@@ -35,7 +37,9 @@ import seedu.address.testutil.StaffBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalStaffAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalDoctorAddressBook(), new UserPrefs());
+    private Model personModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_failure() {
@@ -74,6 +78,22 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_affiliationFieldSpecified_success() {
+        Index indexFirstPerson = Index.fromOneBased(2);
+        Person firstPerson = personModel.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withAffiliations("Alice Pauline").build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withAffiliations("Alice Pauline").build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        assertCommandSuccess(editCommand, personModel, expectedMessage, expectedModel);
     }
 
     @Test
