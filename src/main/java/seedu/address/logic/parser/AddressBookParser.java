@@ -83,7 +83,7 @@ public class AddressBookParser {
 
         case AffiliationCommand.COMMAND_WORD:
             return new AffiliationCommandParser().parse(arguments);
-        
+
         case AffiliationHistoryCommand.COMMAND_WORD:
             return new AffiliationHistoryCommandParser().parse(arguments);
 

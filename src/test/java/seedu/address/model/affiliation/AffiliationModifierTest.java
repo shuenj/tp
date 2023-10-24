@@ -66,6 +66,20 @@ public class AffiliationModifierTest {
     }
 
     @Test
+    public void removeAffiliationHistory_validParam_success() {
+        Person doctorAlice = new DoctorBuilder().withName("Alice")
+            .withAffiliationHistory("Bob", "Thomas").build();
+        Person patientBob = new PatientBuilder().withName("Bob")
+            .withAffiliations("Alice")
+            .withAffiliationHistory("Alice").build();
+        model.addPerson(doctorAlice);
+        model.addPerson(patientBob);
+
+        AffiliationModifier.removeAffiliationHistory(patientBob.getAffiliationHistory(), patientBob, model);
+        assertFalse(doctorAlice.getAffiliationHistory().contains(new Affiliation(patientBob.getName().fullName)));
+    }
+
+    @Test
     public void nameChangeAffiliation_validParam_success() {
         Person doctorA = new DoctorBuilder().withName("Alice").withAffiliations("Bob")
             .withAffiliationHistory("Bob").build();

@@ -75,6 +75,7 @@ public class AffiliationModifier {
     /**
      * Removes the affiliated person from the affiliation history for every
      * person's affiliation history in the affiliation set provided.
+     *
      * @param affiliationSet
      * @param affiliatedPerson
      * @param model
@@ -124,6 +125,7 @@ public class AffiliationModifier {
     /**
      * Changes the affiliated person's name to a new name for every
      * person's affiliation history in the affiliation set provided.
+     *
      * @param affiliationSet The affiliation set that contains all person that needs to change the affiliated
      *                      person from old name to new name.
      * @param oldName The old name that identify the person.
