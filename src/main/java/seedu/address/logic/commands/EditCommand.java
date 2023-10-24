@@ -128,8 +128,11 @@ public class EditCommand extends Command {
             AffiliationModifier.removeAffiliations(personToEdit.getAffiliations(), editedPerson, model);
             AffiliationModifier.addAffiliations(editedPerson.getAffiliations(), editedPerson, model);
         }
+
         if (personToEdit instanceof Staff && editedPerson instanceof Staff) {
-            ((Staff) editedPerson).setShiftDays(((Staff) personToEdit).getShiftDays());
+            ShiftDays shiftDays = ((Staff) personToEdit).getShiftDays();
+            Staff editedStaff = (Staff) editedPerson;
+            editedStaff.setShiftDays(shiftDays);
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -335,7 +338,7 @@ public class EditCommand extends Command {
                     && Objects.equals(role, otherEditPersonDescriptor.role)
                     && Objects.equals(affiliations, otherEditPersonDescriptor.affiliations)
                     && Objects.equals(affiliationHistory, otherEditPersonDescriptor.affiliationHistory)
-                    && Objects.equals(shiftDays,otherEditPersonDescriptor.shiftDays);
+                    && Objects.equals(shiftDays, otherEditPersonDescriptor.shiftDays);
         }
 
         @Override
