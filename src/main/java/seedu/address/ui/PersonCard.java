@@ -7,11 +7,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.MainApp;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Nurse;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Role;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -37,10 +39,12 @@ public class PersonCard extends UiPart<Region> {
     private Label phone;
     @FXML
     private Label role;
+
     @FXML
     private ImageView displayPicture;
 
     private Image doctorImage = new Image(MainApp.class.getResourceAsStream("/images/doctor.png"));
+    private Image nurseImage = new Image(MainApp.class.getResourceAsStream("/images/nurse.png"));
     private Image patientImage = new Image(MainApp.class.getResourceAsStream("/images/patient.png"));
 
     /**
@@ -48,16 +52,22 @@ public class PersonCard extends UiPart<Region> {
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
+
+        assert person instanceof Doctor || person instanceof Nurse || person instanceof Patient;
+
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         role.setText(person.getRole().value);
 
-        if (person.getRole().toString().toUpperCase().equals(Role.Type.DOCTOR.name())) {
+        if (person instanceof Doctor) {
             displayPicture.setImage(doctorImage);
             role.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
-        } else if (person.getRole().toString().toUpperCase().equals(Role.Type.PATIENT.name())) {
+        } else if (person instanceof Nurse) {
+            displayPicture.setImage(nurseImage);
+            role.setStyle("-fx-background-color: #FFC0CB; -fx-font-weight: bold; -fx-text-fill: #E0115F");
+        } else if (person instanceof Patient) {
             displayPicture.setImage(patientImage);
             role.setStyle("-fx-background-color: #E97451; -fx-font-weight: bold; -fx-text-fill: #8B4000");
         }

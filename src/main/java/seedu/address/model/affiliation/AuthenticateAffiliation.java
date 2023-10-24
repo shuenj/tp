@@ -11,7 +11,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.affiliation.exceptions.AffiliationPersonNotFoundException;
 import seedu.address.model.affiliation.exceptions.SamePersonAffiliationException;
 import seedu.address.model.affiliation.exceptions.SameRoleAffiliationException;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Staff;
 
 /**
  * AffiliationChecker checks if affiliation is valid.
@@ -44,8 +46,10 @@ public class AuthenticateAffiliation {
             if (affiliatedPerson.getName().equals(personAddingAffiliation.getName())) {
                 throw new SamePersonAffiliationException(affiliatedPerson);
             }
-
-            if (affiliatedPerson.getRole().equals(personAddingAffiliation.getRole())) {
+            System.out.println(affiliatedPerson instanceof Staff);
+            System.out.println(personAddingAffiliation instanceof Staff);
+            if ((affiliatedPerson instanceof Staff && personAddingAffiliation instanceof Staff)
+                    || (affiliatedPerson instanceof Patient && personAddingAffiliation instanceof Patient)) {
                 throw new SameRoleAffiliationException(affiliatedPerson);
             }
         }

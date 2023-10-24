@@ -13,13 +13,13 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.affiliation.Affiliation;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Staff;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -76,8 +76,8 @@ class JsonAdaptedPerson {
         affiliationHistory.addAll(source.getAffiliationHistory().stream()
                 .map(JsonAdaptedAffiliation::new)
                 .collect(Collectors.toList()));
-        if (source instanceof Doctor) {
-            shiftDays.addAll(((Doctor) source).getShiftDays().shiftDays);
+        if (source instanceof Staff) {
+            shiftDays.addAll(((Staff) source).getShiftDays().shiftDays);
         }
     }
 
@@ -186,7 +186,7 @@ class JsonAdaptedPerson {
     /**
      * Generates a {@link Role} object from the stored JSON data.
      *
-     * @param role The person's role (e.g., Doctor).
+     * @param role The person's role (e.g., Staff).
      * @return A {@link Role} object based on the stored JSON data.
      * @throws IllegalValueException If the stored role is null or does not meet the constraints.
      */
@@ -201,14 +201,14 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Generates a {@link ShiftDays} object from the stored JSON data (only for Doctors).
+     * Generates a {@link ShiftDays} object from the stored JSON data (only for Staffs).
      *
      * @param shiftDays The person's shift days.
      * @return A {@link ShiftDays} object based on the stored JSON data.
-     * @throws IllegalValueException If the role is "Doctor" and shiftDays are null or do not meet the constraints.
+     * @throws IllegalValueException If the role is "Staff" and shiftDays are null or do not meet the constraints.
      */
     private ShiftDays generateShiftDays(Set<Integer> shiftDays) throws IllegalValueException {
-        if (role.equals("Doctor") && shiftDays == null) {
+        if (role.equals("Staff") && shiftDays == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ShiftDays.class.getSimpleName()));
         }
@@ -238,8 +238,8 @@ class JsonAdaptedPerson {
 
         Person generatedPerson = modelRole.generatePerson(modelName,
                 modelPhone, modelEmail, modelAffiliations, modelAffiliationHistory);
-        if (generatedPerson instanceof Doctor) {
-            return ((Doctor) generatedPerson).setShiftDays(modelShiftDays);
+        if (generatedPerson instanceof Staff) {
+            return ((Staff) generatedPerson).setShiftDays(modelShiftDays);
         }
 
         return generatedPerson;

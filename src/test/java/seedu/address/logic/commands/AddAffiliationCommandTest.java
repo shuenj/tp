@@ -50,7 +50,7 @@ public class AddAffiliationCommandTest {
 
     @Test
     public void execute_allFieldsValid_success() {
-        Person doctor = model.getFilteredPersonList().get(Index.fromZeroBased(0).getZeroBased());
+        Person staff = model.getFilteredPersonList().get(Index.fromZeroBased(0).getZeroBased());
         Person patient = model.getFilteredPersonList().get(Index.fromZeroBased(3).getZeroBased());
 
         Set<Affiliation> toAddAffiliation = new HashSet<>();
@@ -61,19 +61,19 @@ public class AddAffiliationCommandTest {
 
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        Person expectedDoctor = new PersonBuilder().withName("Alice Pauline")
+        Person expectedStaff = new PersonBuilder().withName("Alice Pauline")
                 .withRole("Doctor").withEmail("alice@example.com")
                 .withPhone("94351253")
                 .withAffiliations("Benson Meier", patient.getName().fullName)
                 .withAffiliationHistory("Benson Meier", patient.getName().fullName).build();
         Person expectedPatient = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
                 .withEmail("cornelia@example.com").withRole("Patient")
-                .withAffiliations(doctor.getName().fullName)
-                .withAffiliationHistory(doctor.getName().fullName).build();
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedDoctor);
+                .withAffiliations(staff.getName().fullName)
+                .withAffiliationHistory(staff.getName().fullName).build();
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedStaff);
         expectedModel.setPerson(model.getFilteredPersonList().get(3), expectedPatient);
         String expectedMessage = String.format(AddAffiliationCommand.MESSAGE_ADD_AFFILIATION_SUCCESS,
-                Messages.format(expectedDoctor));
+                Messages.format(expectedStaff));
         assertCommandSuccess(addAffiliationCommand, model, expectedMessage, expectedModel);
     }
 

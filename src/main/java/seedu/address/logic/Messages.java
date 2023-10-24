@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.affiliation.Affiliation;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Staff;
 
 /**
  * Container for user visible messages.
@@ -68,9 +68,9 @@ public class Messages {
         }
         builder.append("}");
 
-        if (person instanceof Doctor) {
+        if (person instanceof Staff) {
             builder.append("; Shift Days: ");
-            builder.append(((Doctor) person).getShiftDays());
+            builder.append(((Staff) person).getShiftDays());
         }
         return builder.toString();
     }

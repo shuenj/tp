@@ -45,9 +45,13 @@ public class RoleTest {
         assertFalse(Role.isValidRole(" ")); // spaces only
 
         // valid roles
+        assertTrue(Role.isValidRole("Nurse"));
         assertTrue(Role.isValidRole("Doctor"));
-        assertTrue(Role.isValidRole("Patient")); // one character
-        assertTrue(Role.isValidRole("doCtOr")); // mixed case role
+        assertTrue(Role.isValidRole("Patient"));
+        assertTrue(Role.isValidRole("DoCtOR")); // mixed case role
+        assertTrue(Role.isValidRole("nUrSe")); // mixed case role
+        assertTrue(Role.isValidRole("PaTIEnt")); // mixed case role
+
     }
 
     @Test
@@ -71,14 +75,26 @@ public class RoleTest {
     }
 
     @Test
-    public void generate_doctorRole_correctTypeReturned() {
+    public void generate_staffRole_correctTypeReturned() {
         Doctor doctor = new DoctorBuilder().build();
-        Role role = new Role(VALID_ROLE_AMY);
+        Role doctorRole = new Role(VALID_ROLE_AMY);
         try {
             assertEquals(doctor.getClass(),
-                    role.generatePerson(new Name(VALID_NAME_AMY),
+                    doctorRole.generatePerson(new Name(VALID_NAME_AMY),
                             new Phone(VALID_PHONE_AMY),
                             new Email(VALID_EMAIL_AMY),
+                            parseAffiliations(new ArrayList<>())).getClass());
+        } catch (Exception e) {
+            fail(); // the test should not reach this line
+        }
+
+        Patient patient = new PatientBuilder().build();
+        Role patientRole = new Role(VALID_ROLE_BOB);
+        try {
+            assertEquals(patient.getClass(),
+                    patientRole.generatePerson(new Name(VALID_NAME_BOB),
+                            new Phone(VALID_PHONE_BOB),
+                            new Email(VALID_EMAIL_BOB),
                             parseAffiliations(new ArrayList<>())).getClass());
         } catch (Exception e) {
             fail(); // the test should not reach this line
