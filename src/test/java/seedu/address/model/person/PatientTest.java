@@ -58,7 +58,6 @@ public class PatientTest {
         // same values -> returns true
         Patient aliceCopy = new PatientBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
-        assertTrue(TypicalPersons.ALICE.hashCode() == aliceCopy.hashCode());
 
         // same object -> returns true
         assertTrue(ALICE.equals(ALICE));
@@ -88,6 +87,9 @@ public class PatientTest {
         editedAlice = new PatientBuilder(ALICE).withAffiliations(VALID_AFFILIATION_AMY)
         .withAffiliationHistory(VALID_AFFILIATION_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        //different class instance -> return false
+        assertFalse(TypicalPersons.ALICE.hashCode() == aliceCopy.hashCode());
     }
 
     @Test

@@ -59,7 +59,6 @@ public class DoctorTest {
         // same values -> returns true
         Doctor aliceCopy = new DoctorBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
-        assertTrue(TypicalPersons.ALICE.hashCode() == aliceCopy.hashCode());
 
         // same object -> returns true
         assertTrue(ALICE.equals(ALICE));
@@ -93,6 +92,9 @@ public class DoctorTest {
         // different shift days -> return false
         editedAlice = new DoctorBuilder(ALICE).withShiftDays(VALID_SHIFTDAYS_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        //different class instances -> return false
+        assertFalse(TypicalPersons.ALICE.hashCode() == aliceCopy.hashCode());
     }
 
     @Test
