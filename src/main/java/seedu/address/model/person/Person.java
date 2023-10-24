@@ -85,7 +85,6 @@ public class Person {
 
     /**
      * Returns an affiliation history set.
-     * @return affiliationHistory
      */
     public void clearAffiliationHistory() {
         this.affiliationHistory.clear();
