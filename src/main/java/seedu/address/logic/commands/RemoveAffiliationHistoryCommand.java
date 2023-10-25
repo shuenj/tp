@@ -49,6 +49,7 @@ public class RemoveAffiliationHistoryCommand extends Command {
         AffiliationModifier.removeAffiliationHistory(personToClearAffiliationHistory.getAffiliationHistory(),
                 personToClearAffiliationHistory, model);
         personToClearAffiliationHistory.clearAffiliationHistory();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToClearAffiliationHistory)));
     }
 

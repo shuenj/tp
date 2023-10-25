@@ -84,10 +84,11 @@ public class Person {
     }
 
     /**
-     * Returns an affiliation history set.
+     * Clear current affiliation history and add current affiliations to history.
      */
     public void clearAffiliationHistory() {
         this.affiliationHistory.clear();
+        this.affiliationHistory.addAll(this.affiliations);
     }
 
     /**
