@@ -24,11 +24,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Patient;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Staff;
+import seedu.address.testutil.DoctorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StaffBuilder;
 
@@ -40,14 +40,18 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalDoctorAddressBook(), new UserPrefs());
     private Model personModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_failure() {
-        Patient editedPerson = new PatientBuilder().withAffiliationHistory("Benson Meier").build();
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        Doctor editedPerson = new DoctorBuilder().withAffiliationHistory("Thomas Mink", "Benson Meier").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_EDIT_ROLE_CONTAIN_AFFILIATION);
+        Model expectedModel = new ModelManager(getTypicalDoctorAddressBook(), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -85,7 +89,8 @@ public class EditCommandTest {
         Index indexFirstPerson = Index.fromOneBased(2);
         Person firstPerson = personModel.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withAffiliations("Alice Pauline").build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withAffiliations("Alice Pauline").build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
