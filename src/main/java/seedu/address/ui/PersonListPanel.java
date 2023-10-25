@@ -48,6 +48,7 @@ public class PersonListPanel extends UiPart<Region> {
             setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1) {
                     Person selectedPerson = getItem();
+                    logger.info("Person has been click: " + selectedPerson);
                     if (selectedPerson != null) {
                         informationWindow.displayInformation(selectedPerson);
                     }

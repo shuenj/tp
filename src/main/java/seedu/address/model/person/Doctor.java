@@ -8,38 +8,21 @@ import seedu.address.model.affiliation.Affiliation;
 /**
  * Represents a Doctor in the contact list.
  */
-public class Doctor extends Person {
-
-    private final ShiftDays shiftDays;
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Doctor(Name name, Phone phone, Email email,
-        Set<Affiliation> affiliations, Set<Affiliation> affiliationHistory) {
-        super(name, phone, email, new Role("Doctor"), affiliations, affiliationHistory);
-
-        // Instantiation of Doctor should always begin with empty shift days.
-        shiftDays = new ShiftDays();
-    }
+public class Doctor extends Staff {
 
     /**
      * Every field must be present and not null, except affiliationHistory.
      */
+    public Doctor(Name name, Phone phone, Email email,
+            Set<Affiliation> affiliations, Set<Affiliation> affiliationHistory) {
+        super(name, phone, email, new Role("Doctor"), affiliations, affiliationHistory);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
     public Doctor(Name name, Phone phone, Email email, Set<Affiliation> affiliations) {
         super(name, phone, email, new Role("Doctor"), affiliations);
-
-        // Instantiation of Doctor should always begin with empty shift days.
-        shiftDays = new ShiftDays();
-    }
-
-    public ShiftDays getShiftDays() {
-        return shiftDays;
-    }
-
-    public Doctor setShiftDays(ShiftDays shiftDays) {
-        this.shiftDays.modifyShiftDays(shiftDays.getShiftDays());
-        return this;
     }
 
     /**
@@ -61,23 +44,21 @@ public class Doctor extends Person {
         return getName().equals(otherDoctor.getName())
                 && getPhone().equals(otherDoctor.getPhone())
                 && getEmail().equals(otherDoctor.getEmail())
+                && getRole().equals(otherDoctor.getRole())
                 && getAffiliations().equals(otherDoctor.getAffiliations())
                 && getAffiliationHistory().equals(otherDoctor.getAffiliationHistory())
-                && shiftDays.equals(otherDoctor.getShiftDays());
+                && getShiftDays().equals(otherDoctor.getShiftDays());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(getName(), getPhone(), getEmail(), getRole(), getAffiliations(),
-                getAffiliationHistory(), shiftDays);
+                getAffiliationHistory(), getShiftDays());
     }
 
     @Override
     public String toString() {
-        return getStringBuilderRepresentation()
-                .add("shiftDays", shiftDays)
-                .toString();
+        return getStringBuilderRepresentation().toString();
     }
-
 }

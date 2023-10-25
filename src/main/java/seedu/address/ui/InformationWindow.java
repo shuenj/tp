@@ -8,8 +8,10 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Nurse;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Staff;
 
 /**
  * A UI component that displays information of a {@code Person}.
@@ -24,6 +26,8 @@ public class InformationWindow extends UiPart<Region> {
     private Label name;
     @FXML
     private Label role;
+    @FXML
+    private Label email;
     @FXML
     private VBox shiftBlock;
     @FXML
@@ -72,9 +76,10 @@ public class InformationWindow extends UiPart<Region> {
 
         name.setText(person.getName().fullName);
         role.setText(person.getRole().value);
+        email.setText(person.getEmail().value);
 
-        if (person instanceof Doctor) {
-            displayDoctorInformation((Doctor) person);
+        if (person instanceof Staff) {
+            displayStaffInformation((Staff) person);
         } else if (person instanceof Patient) {
             displayPatientInformation((Patient) person);
         }
@@ -83,13 +88,17 @@ public class InformationWindow extends UiPart<Region> {
     }
 
     /**
-     * Displays information of the given {@code Doctor}.
-     * @param doctor the intended doctor for display.
+     * Displays information of the given {@code Staff}.
+     * @param staff the intended staff for display.
      */
-    private void displayDoctorInformation(Doctor doctor) {
-        role.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
-        setShiftDays(doctor);
-        setAffiliations(doctor);
+    private void displayStaffInformation(Staff staff) {
+        if (staff instanceof Doctor) {
+            role.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
+        } else if (staff instanceof Nurse) {
+            role.setStyle("-fx-background-color: #FFC0CB; -fx-font-weight: bold; -fx-text-fill: #E0115F");
+        }
+        setShiftDays(staff);
+        setAffiliations(staff);
         affnCount.setText("Tending to:");
         affnBlock.setStyle("-fx-border-color: #BBBBBB; -fx-border-width: 2 0 0 0;");
     }
@@ -107,10 +116,10 @@ public class InformationWindow extends UiPart<Region> {
     }
 
     /**
-     * Sets the shift days information of the given {@code Doctor}.
-     * @param doctor the intended person for display.
+     * Sets the shift days information of the given {@code Staff}.
+     * @param staff the intended person for display.
      */
-    private void setShiftDays(Doctor doctor) {
+    private void setShiftDays(Staff staff) {
         clearShiftDays();
 
         shiftBlock.setVisible(true);
@@ -118,7 +127,7 @@ public class InformationWindow extends UiPart<Region> {
         shiftBlock.setStyle("-fx-border-color: #BBBBBB; -fx-border-width: 2 0 0 0;");
         shiftHeader.setText("Shift days:");
 
-        for (int shiftDay : doctor.getShiftDays()) {
+        for (int shiftDay : staff.getShiftDays()) {
             shiftDays[shiftDay - 1]
                     .setStyle("-fx-background-color: #AFE1AF; -fx-font-weight: bold; -fx-text-fill: #008000");
         }

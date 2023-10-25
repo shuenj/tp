@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Zhan Peng
+### Lee Zhan Peng
 
 <img src="images/leezhanpeng.png" width="200px">
 

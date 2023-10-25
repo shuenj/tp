@@ -2,6 +2,7 @@ package seedu.address.model.affiliation.exceptions;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Staff;
 
 
 /**
@@ -16,6 +17,7 @@ public class SameRoleAffiliationException extends CommandException {
      */
     public SameRoleAffiliationException(Person personNotAdded) {
         super(personNotAdded.getName().toString() + " cannot be added as an affiliation as "
-                + "it has the same role of " + personNotAdded.getRole() + ".");
+                + "they are both "
+                + (personNotAdded instanceof Staff ? "staff members" : "patients") + ".");
     }
 }
