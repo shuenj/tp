@@ -61,12 +61,12 @@ public class TypicalNurses {
     private TypicalNurses() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical staff.
+     * Returns an {@code AddressBook} with all the typical Nurses.
      */
     public static AddressBook getTypicalNurseAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Nurse staff : getTypicalNurse()) {
-            ab.addPerson(staff);
+        for (Nurse nurse : getTypicalNurse()) {
+            ab.addPerson(nurse);
         }
         return ab;
     }

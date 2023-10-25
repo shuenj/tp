@@ -70,7 +70,7 @@ public class NurseTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different staff -> returns false
+        // different nurse -> returns false
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false

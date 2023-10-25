@@ -61,12 +61,12 @@ public class TypicalDoctors {
     private TypicalDoctors() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical staff.
+     * Returns an {@code AddressBook} with all the typical Doctors.
      */
     public static AddressBook getTypicalDoctorAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Doctor staff : getTypicalDoctor()) {
-            ab.addPerson(staff);
+        for (Doctor doctor : getTypicalDoctor()) {
+            ab.addPerson(doctor);
         }
         return ab;
     }
