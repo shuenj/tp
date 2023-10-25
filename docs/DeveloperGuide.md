@@ -174,6 +174,7 @@ The `affiliationHistory` records the past and current affiliations that a person
 * When adding a person, the user specified `affiliations` will be added to `affiliationHistory` of himself/herself and the affiliated person.
   * The `Person` constructor has been modified to use `affiliations` as the `affiliationHistory` during initialization.
 * When editing a `Person`'s `Name`, the user specified affiliation will also be updated in `affiliationHistory` of others.
+This is done by iterating through the affiliation list of the `Person` and updating the `affiliationHistory` of others. 
 * When editing a `Person`'s `affiliations`, specifically,
   * adding `affiliations` will be add it to `affiliationHistory` as well
   * removing an `affiliations`, will **not** be removed from `affiliationHistory`
@@ -182,6 +183,8 @@ The `affiliationHistory` records the past and current affiliations that a person
 #### Design considerations
 Alternative implementations:
 Another way to handle deletion is to not remove the `affiliations` from `affiliationHistory` of others. However, this would require either a flag to indicate that the `affiliations` is no longer valid, or a separate `affiliationHistory` to store the `affiliations` that are no longer valid. This would complicate the implementation of `affiliationHistory` and other functions like list so that deleted a `Person` is not shown. By removing the `affiliations` from `affiliationHistory`, it is also truly deleting the person from the contact list from the user's perspective.
+
+An alternative approach in implementing `AffiliationHistory` would be to store the `Person` object in the `affiliationHistory` of others, but this would cause the `affiliationHistory` to be inconsistent with the `affiliations` list. Therefore, `Name` is a unique identifier that can be used to update the `affiliationHistory` of others.
 
 --------------------------------------------------------------------------------------------------------------------
 
