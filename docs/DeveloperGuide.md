@@ -180,11 +180,26 @@ This is done by iterating through the affiliation list of the `Person` and updat
   * removing an `affiliations`, will **not** be removed from `affiliationHistory`
 * When deleting a `Person`, the `affiliationHistory` of others will be updated accordingly.
 
+Utilization of Name as a Unique Identifier:
+The proposed method circumvents these issues by employing the Name field as a unique identifier for affiliations. When an affiliation is deleted, the system uses this identifier to update all relevant entries across the `affiliationHistory`, thereby maintaining consistency.
+
+This strategy streamlines the affiliation management process, as it allows for the complete removal of a Person from the system, including their historical data. From a user's perspective, this process is more intuitive and efficient, as it aligns with the expected outcome of entirely deleting an entry from the system.
+
 #### Design considerations
 Alternative implementations:
-Another way to handle deletion is to not remove the `affiliations` from `affiliationHistory` of others. However, this would require either a flag to indicate that the `affiliations` is no longer valid, or a separate `affiliationHistory` to store the `affiliations` that are no longer valid. This would complicate the implementation of `affiliationHistory` and other functions like list so that deleted a `Person` is not shown. By removing the `affiliations` from `affiliationHistory`, it is also truly deleting the person from the contact list from the user's perspective.
+#### 1. Maintaining Inactive Affiliations within Affiliation History:
+One potential methodology involves keeping the deleted affiliations within the `affiliationHistory` of other entities in the system. Implementing this approach would mean that, upon the deletion of an affiliation, the system does not erase the affiliation's record. Instead, it marks it as inactive or invalid within the historical log. This could be achieved by introducing a specific indicator or flag signifying the affiliation's current status.
 
-An alternative approach in implementing `AffiliationHistory` would be to store the `Person` object in the `affiliationHistory` of others, but this would cause the `affiliationHistory` to be inconsistent with the `affiliations` list. Therefore, `Name` is a unique identifier that can be used to update the `affiliationHistory` of others.
+An extension of this method might require the system to incorporate a separate historical record or repository (`affiliationHistory`), explicitly dedicated to storing those affiliations marked as invalid. This secondary historical log ensures that while the affiliation is no longer active or valid, there is still a trace of its existence and impact on other entities within the system.
+
+However, this strategy inherently increases the complexity of the system's infrastructure. It necessitates additional layers of logic in several functionalities, particularly those that list or display affiliations. These functions must be sophisticated enough to distinguish between active and inactive affiliations, ensuring that any representation of the data (like contact lists) reflects only the current, valid entries. This approach, while comprehensive in its historical tracking, may compromise the user experience by not fully removing deleted entities from various views and lists, potentially leading to confusion or perceived inefficiency.
+
+#### 2. Storing Complete Person Objects:
+Another alternative involves the `affiliationHistory` storing complete `Person` objects instead of just references or unique identifiers. This method is akin to taking a snapshot of the Person object at various points in time, preserving a more detailed historical account.
+
+However, this approach can create discrepancies between the current state of `affiliations` and the historical records. Because each snapshot within the `affiliationHistory` remains static, any updates to a Person object post-creation of these snapshots would not reflect in the historical data. This inconsistency means that the current and historical views of affiliations could diverge significantly over time, potentially causing confusion or data integrity concerns.
+
+Moreover, storing complete objects demands more storage space and could complicate data management tasks due to the volume and detail level of the data retained.
 
 --------------------------------------------------------------------------------------------------------------------
 
