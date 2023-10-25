@@ -16,17 +16,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AffiliationCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -97,6 +88,12 @@ public class AddressBookParserTest {
     public void parseCommand_affiliation() throws Exception {
         assertEquals(parser.parseCommand(AffiliationCommand.COMMAND_WORD + " "
                 + "1"), new AffiliationCommand(Index.fromOneBased(1)));
+    }
+
+    @Test
+    public void parseCommand_removeAffiliationHistory() throws Exception {
+        assertEquals(parser.parseCommand(RemoveAffiliationHistoryCommand.COMMAND_WORD + " "
+                + "1"), new RemoveAffiliationHistoryCommand(Index.fromOneBased(1)));
     }
 
     @Test
