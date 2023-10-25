@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_AFFILIATION_D
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
@@ -42,7 +41,6 @@ import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Role;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -53,6 +51,12 @@ public class EditCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
     private EditCommandParser parser = new EditCommandParser();
+
+    @Test
+    public void parse_changeRole_failure() {
+        // Edit of Role not allowed
+        assertParseFailure(parser, "1 r/Patient", EditCommand.MESSAGE_EDIT_ROLE_NOT_ALLOW);
+    }
 
     @Test
     public void parse_missingParts_failure() {
@@ -86,7 +90,6 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS); // invalid role
         assertParseFailure(parser, "1" + INVALID_AFFILIATION_DESC,
                 Affiliation.MESSAGE_CONSTRAINTS); // invalid affiliation
 
@@ -112,10 +115,10 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + AFFILIATION_DESC_AMY
-                + EMAIL_DESC_AMY + ROLE_DESC_AMY + NAME_DESC_AMY + AFFILIATION_DESC_BOB;
+                + EMAIL_DESC_AMY + NAME_DESC_AMY + AFFILIATION_DESC_BOB;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withRole(VALID_ROLE_AMY)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
                 .withAffiliations(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB)
                 .withAffiliationHistory(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -156,12 +159,6 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // role
-        userInput = targetIndex.getOneBased() + ROLE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withRole(VALID_ROLE_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
         // affiliations
         userInput = targetIndex.getOneBased() + AFFILIATION_DESC_BOB;
         descriptor = new EditPersonDescriptorBuilder().withAffiliations(VALID_AFFILIATION_BOB)
@@ -195,11 +192,11 @@ public class EditCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE));
 
         // multiple invalid values
-        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ROLE_DESC + INVALID_EMAIL_DESC
-                + INVALID_PHONE_DESC + INVALID_ROLE_DESC + INVALID_EMAIL_DESC;
+        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_EMAIL_DESC
+                + INVALID_PHONE_DESC + INVALID_EMAIL_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL));
     }
 
     @Test

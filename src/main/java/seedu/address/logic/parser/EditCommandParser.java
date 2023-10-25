@@ -48,6 +48,10 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
+        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            throw new ParseException(EditCommand.MESSAGE_EDIT_ROLE_NOT_ALLOW);
+        }
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -57,9 +61,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-            editPersonDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get()));
-        }
+
         parseAffiliationsForEdit(argMultimap.getAllValues(PREFIX_AFFILIATION))
                 .ifPresent(editPersonDescriptor::setAffiliations);
         parseAffiliationsForEdit(argMultimap.getAllValues(PREFIX_AFFILIATION))
