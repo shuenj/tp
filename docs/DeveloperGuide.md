@@ -145,9 +145,9 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103-T16-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-![Storage Class Diagram](diagrams/StorageClassDiagram.png)
+![Storage Class Diagram](diagrams/storageClassDiagram.png)
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -158,7 +158,7 @@ Specifically, the `CustomJsonAdaptedPersonSerializer` acts as a blueprint to con
 
 The following activity diagram summarizes the jsonification process of the AddressBook when a user executes the `exit` command or closes MediSync:
 
-![StorageActivityDiagram](diagrams/StorageActivityDiagram.png)
+![StorageActivityDiagram](diagrams/storageActivityDiagram.png)
 
 
 ### Common classes
