@@ -37,7 +37,7 @@ public class RemoveAffiliationHistoryCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         Person expectedPerson = new PersonBuilder(model.getFilteredPersonList().get(0))
-                .withAffiliationHistory().build();
+                .withAffiliationHistory("Benson Meier").build();
         expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedPerson);
 
         String expectedMessage = String.format(RemoveAffiliationHistoryCommand.MESSAGE_SUCCESS,
