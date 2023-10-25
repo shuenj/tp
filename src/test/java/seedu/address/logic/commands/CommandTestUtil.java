@@ -76,7 +76,8 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withRole(VALID_ROLE_AMY)
                 .withAffiliations(VALID_AFFILIATION_BOB)
-                .withAffiliationHistory(VALID_AFFILIATION_BOB).build();
+                .withAffiliationHistory(VALID_AFFILIATION_BOB)
+                .withShiftDays(VALID_SHIFTDAYS_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB)

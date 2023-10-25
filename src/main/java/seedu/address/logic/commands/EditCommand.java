@@ -106,8 +106,6 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        assert !this.editPersonDescriptor.isRoleEdited();
-
         if (this.editPersonDescriptor.isNameEdited()) {
             AffiliationModifier.nameChangeAffiliations(personToEdit.getAffiliations(), personToEdit.getName(),
                     editedPerson.getName(), model);

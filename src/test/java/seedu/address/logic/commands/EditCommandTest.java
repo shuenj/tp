@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AFFILIATION_CAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -15,6 +16,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -24,8 +29,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ShiftDays;
 import seedu.address.model.person.Staff;
 import seedu.address.testutil.DoctorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -183,6 +190,19 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+
+        // different affiliation history -> returns false
+        EditPersonDescriptor differentAffiliationHistoryDescriptor = new EditPersonDescriptor(DESC_AMY);
+        Set<Affiliation> differentAffiliationHistory = new HashSet<>();
+        differentAffiliationHistory.add(new Affiliation(VALID_AFFILIATION_CAT));
+        differentAffiliationHistoryDescriptor.setAffiliationHistory(differentAffiliationHistory);
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, differentAffiliationHistoryDescriptor)));
+
+        // different shiftDay -> returns false
+        EditPersonDescriptor differentShiftDayDescriptor = new EditPersonDescriptor(DESC_AMY);
+        ShiftDays differentShiftDay = new ShiftDays(new HashSet<>(Arrays.asList(2, 3, 4)));
+        differentShiftDayDescriptor.setShiftDays(differentShiftDay);
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, differentAffiliationHistoryDescriptor)));
     }
 
     @Test
