@@ -5,15 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AFFILIATION_CAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalDoctors.getTypicalDoctorsAddressBook;
+import static seedu.address.testutil.TypicalDoctors.getTypicalDoctorAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,35 +29,36 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Staff;
 import seedu.address.testutil.DoctorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StaffBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalDoctorsAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalDoctorAddressBook(), new UserPrefs());
+    private Model personModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_failure() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        Doctor editedPerson = new DoctorBuilder().withAffiliationHistory("Thomas Mink", "Benson Meier").build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        DoctorBuilder personInList = new DoctorBuilder((Doctor) lastPerson);
-        Doctor editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).build();
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+        Model expectedModel = new ModelManager(getTypicalDoctorAddressBook(), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(lastPerson, editedPerson);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -61,8 +67,8 @@ public class EditCommandTest {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
-        DoctorBuilder personInList = new DoctorBuilder((Doctor) lastPerson);
-        Doctor editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
+        StaffBuilder personInList = new StaffBuilder((Staff) lastPerson);
+        Staff editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).build();
@@ -87,18 +93,34 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_affiliationFieldSpecified_success() {
+        Index indexFirstPerson = Index.fromOneBased(2);
+        Person firstPerson = personModel.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withAffiliations("Alice Pauline").build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withAffiliations("Alice Pauline").build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        assertCommandSuccess(editCommand, personModel, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Doctor editedDoctor = new DoctorBuilder((Doctor) personInFilteredList).withName(VALID_NAME_BOB).build();
+        Staff editedStaff = new StaffBuilder((Staff) personInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedDoctor));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedStaff));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedDoctor);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedStaff);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -168,6 +190,19 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+
+        // different affiliation history -> returns false
+        EditPersonDescriptor differentAffiliationHistoryDescriptor = new EditPersonDescriptor(DESC_AMY);
+        Set<Affiliation> differentAffiliationHistory = new HashSet<>();
+        differentAffiliationHistory.add(new Affiliation(VALID_AFFILIATION_CAT));
+        differentAffiliationHistoryDescriptor.setAffiliationHistory(differentAffiliationHistory);
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, differentAffiliationHistoryDescriptor)));
+
+        // different shiftDay -> returns false
+        EditPersonDescriptor differentShiftDayDescriptor = new EditPersonDescriptor(DESC_AMY);
+        ShiftDays differentShiftDay = new ShiftDays(new HashSet<>(Arrays.asList(2, 3, 4)));
+        differentShiftDayDescriptor.setShiftDays(differentShiftDay);
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, differentAffiliationHistoryDescriptor)));
     }
 
     @Test

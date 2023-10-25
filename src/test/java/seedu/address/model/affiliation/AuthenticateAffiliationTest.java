@@ -6,9 +6,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_AFFILIATION_BOB
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalDoctors.getTypicalDoctorAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -20,12 +20,17 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.affiliation.exceptions.AffiliationPersonNotFoundException;
 import seedu.address.model.affiliation.exceptions.SamePersonAffiliationException;
 import seedu.address.model.affiliation.exceptions.SameRoleAffiliationException;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Nurse;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.DoctorBuilder;
+import seedu.address.testutil.NurseBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AuthenticateAffiliationTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model personModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model doctorModel = new ModelManager(getTypicalDoctorAddressBook(), new UserPrefs());
 
     @Test
     public void check_withAffiliationPersonNotExist_affiliationPersonNotFoundException() {
@@ -36,7 +41,7 @@ public class AuthenticateAffiliationTest {
                 .withAffiliationHistory(VALID_AFFILIATION_BOB)
                 .build();
         assertThrows(AffiliationPersonNotFoundException.class, () ->
-                AuthenticateAffiliation.check(person.getAffiliations(), person, model));
+                AuthenticateAffiliation.check(person.getAffiliations(), person, personModel));
     }
 
     @Test
@@ -48,19 +53,26 @@ public class AuthenticateAffiliationTest {
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
         assertThrows(SamePersonAffiliationException.class, () ->
-                AuthenticateAffiliation.check(person.getAffiliations(), person, model));
+                AuthenticateAffiliation.check(person.getAffiliations(), person, personModel));
     }
 
     @Test
     public void check_withAffiliationPersonSameRoleAsPersonAdding_sameRoleAffiliationException() {
-        Person person = new PersonBuilder()
+        Doctor doctor = new DoctorBuilder()
                 .withName(VALID_NAME_BOB)
-                .withRole(VALID_ROLE_AMY)
                 .withAffiliations(VALID_NAME_ALICE)
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
         assertThrows(SameRoleAffiliationException.class, () ->
-                AuthenticateAffiliation.check(person.getAffiliations(), person, model));
+                AuthenticateAffiliation.check(doctor.getAffiliations(), doctor, doctorModel));
+
+        Nurse nurse = new NurseBuilder()
+                .withName(VALID_NAME_BOB)
+                .withAffiliations(VALID_NAME_ALICE)
+                .withAffiliationHistory(VALID_NAME_ALICE)
+                .build();
+        assertThrows(SameRoleAffiliationException.class, () ->
+                AuthenticateAffiliation.check(nurse.getAffiliations(), nurse, doctorModel));
     }
 
     @Test
@@ -72,7 +84,7 @@ public class AuthenticateAffiliationTest {
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
         try {
-            assertTrue(AuthenticateAffiliation.check(person.getAffiliations(), person, model));
+            assertTrue(AuthenticateAffiliation.check(person.getAffiliations(), person, personModel));
         } catch (CommandException ce) {
             fail();
         }

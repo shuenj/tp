@@ -16,9 +16,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Nurse;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.ShiftDays;
 import seedu.address.testutil.TypicalDoctors;
+import seedu.address.testutil.TypicalNurses;
 import seedu.address.testutil.TypicalPatients;
 
 public class CustomJsonAdaptedPersonSerializerTest {
@@ -44,16 +46,36 @@ public class CustomJsonAdaptedPersonSerializerTest {
     }
 
     @Test
-    public void serialize_nonDoctorPersonWithoutShiftDays_success() throws IOException {
+    public void serialize_nursePersonWithShiftDays_success() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper(new JsonFactory());
         CustomJsonAdaptedPersonSerializer serializer = new CustomJsonAdaptedPersonSerializer();
 
-        Patient nonDoctor = TypicalPatients.ALICE;
+        Nurse nurse = TypicalNurses.ALICE;
+        ShiftDays shiftDays = new ShiftDays(new HashSet<>(Arrays.asList(1, 2, 3)));
+        nurse.setShiftDays(shiftDays);
 
         StringWriter writer = new StringWriter();
         JsonGenerator jsonGenerator = objectMapper.getFactory().createGenerator(writer);
         SerializerProvider serializerProvider = objectMapper.getSerializerProvider();
-        serializer.serialize(new JsonAdaptedPerson(nonDoctor), jsonGenerator, serializerProvider);
+        serializer.serialize(new JsonAdaptedPerson(nurse), jsonGenerator, serializerProvider);
+
+        String jsonOutput = writer.toString();
+        assertTrue(jsonOutput.contains("shiftDays"));
+        ShiftDays undoShiftDays = new ShiftDays(new HashSet<>());
+        nurse.setShiftDays(undoShiftDays);
+    }
+
+    @Test
+    public void serialize_nonStaffPersonWithoutShiftDays_success() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper(new JsonFactory());
+        CustomJsonAdaptedPersonSerializer serializer = new CustomJsonAdaptedPersonSerializer();
+
+        Patient nonStaff = TypicalPatients.ALICE;
+
+        StringWriter writer = new StringWriter();
+        JsonGenerator jsonGenerator = objectMapper.getFactory().createGenerator(writer);
+        SerializerProvider serializerProvider = objectMapper.getSerializerProvider();
+        serializer.serialize(new JsonAdaptedPerson(nonStaff), jsonGenerator, serializerProvider);
 
         String jsonOutput = writer.toString();
 

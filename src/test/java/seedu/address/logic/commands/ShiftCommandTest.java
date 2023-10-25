@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalDoctors.getTypicalDoctorsAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalStaff.getTypicalStaffAddressBook;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,18 +21,18 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.DoctorBuilder;
+import seedu.address.model.person.Staff;
 import seedu.address.testutil.PatientBuilder;
+import seedu.address.testutil.StaffBuilder;
 
 public class ShiftCommandTest {
 
-    private Model model = new ModelManager(getTypicalDoctorsAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalStaffAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_roleIsDoctor_success() throws CommandException {
+    public void execute_roleIsStaff_success() throws CommandException {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
@@ -41,8 +41,8 @@ public class ShiftCommandTest {
         typicalShiftDaysString.add(2);
         typicalShiftDaysString.add(7);
 
-        DoctorBuilder personInList = new DoctorBuilder((Doctor) lastPerson);
-        Doctor shiftDaysChangedPerson = personInList.withShiftDays(typicalShiftDaysString).build();
+        StaffBuilder personInList = new StaffBuilder((Staff) lastPerson);
+        Staff shiftDaysChangedPerson = personInList.withShiftDays(typicalShiftDaysString).build();
 
         ShiftCommand shiftCommand = new ShiftCommand(indexLastPerson, typicalShiftDaysString);
         String expectedMessage = ShiftCommand.MESSAGE_SUCCESS;

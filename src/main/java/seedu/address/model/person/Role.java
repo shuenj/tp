@@ -20,6 +20,7 @@ public class Role {
      */
     public enum Type {
         DOCTOR,
+        NURSE,
         PATIENT
     }
 
@@ -29,7 +30,8 @@ public class Role {
     public static final String VALIDATION_REGEX = "(?i)" + Arrays.stream(Type.values()).map(Enum::name)
             .collect(Collectors.joining("|"));
 
-    public static final String MESSAGE_CONSTRAINTS = "Role can only be Doctor or Patient, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Role can only be Doctor, Nurse or Patient, "
+            + "and it should not be blank";
 
     public final String value;
 
@@ -61,8 +63,15 @@ public class Role {
      */
     public Person generatePerson(Name name, Phone phone, Email email,
         Set<Affiliation> affiliationList, Set<Affiliation> affiliationHistory) {
+
+        assert value.toUpperCase().equals(Type.DOCTOR.name())
+                || value.toUpperCase().equals(Type.NURSE.name())
+                || value.toUpperCase().equals(Type.PATIENT.name());
+
         if (value.toUpperCase().equals(Type.DOCTOR.name())) {
             return new Doctor(name, phone, email, affiliationList, affiliationHistory);
+        } else if (value.toUpperCase().equals(Type.NURSE.name())) {
+            return new Nurse(name, phone, email, affiliationList, affiliationHistory);
         } else if (value.toUpperCase().equals(Type.PATIENT.name())) {
             return new Patient(name, phone, email, affiliationList, affiliationHistory);
         } else {
@@ -79,8 +88,15 @@ public class Role {
      * @param affiliationList Affiliations of person.
      */
     public Person generatePerson(Name name, Phone phone, Email email, Set<Affiliation> affiliationList) {
+
+        assert value.toUpperCase().equals(Type.DOCTOR.name())
+                || value.toUpperCase().equals(Type.NURSE.name())
+                || value.toUpperCase().equals(Type.PATIENT.name());
+
         if (value.toUpperCase().equals(Type.DOCTOR.name())) {
             return new Doctor(name, phone, email, affiliationList);
+        } else if (value.toUpperCase().equals(Type.NURSE.name())) {
+            return new Nurse(name, phone, email, affiliationList);
         } else if (value.toUpperCase().equals(Type.PATIENT.name())) {
             return new Patient(name, phone, email, affiliationList);
         } else {

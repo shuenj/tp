@@ -6,12 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_CAT;
 import static seedu.address.logic.parser.ParserUtil.parseAffiliations;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -20,6 +24,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.DoctorBuilder;
+import seedu.address.testutil.NurseBuilder;
 import seedu.address.testutil.PatientBuilder;
 
 public class RoleTest {
@@ -45,9 +50,13 @@ public class RoleTest {
         assertFalse(Role.isValidRole(" ")); // spaces only
 
         // valid roles
+        assertTrue(Role.isValidRole("Nurse"));
         assertTrue(Role.isValidRole("Doctor"));
-        assertTrue(Role.isValidRole("Patient")); // one character
-        assertTrue(Role.isValidRole("doCtOr")); // mixed case role
+        assertTrue(Role.isValidRole("Patient"));
+        assertTrue(Role.isValidRole("DoCtOR")); // mixed case role
+        assertTrue(Role.isValidRole("nUrSe")); // mixed case role
+        assertTrue(Role.isValidRole("PaTIEnt")); // mixed case role
+
     }
 
     @Test
@@ -71,14 +80,40 @@ public class RoleTest {
     }
 
     @Test
-    public void generate_doctorRole_correctTypeReturned() {
+    public void generate_staffRole_correctTypeReturned() {
         Doctor doctor = new DoctorBuilder().build();
-        Role role = new Role(VALID_ROLE_AMY);
+        Role doctorRole = new Role(VALID_ROLE_AMY);
         try {
             assertEquals(doctor.getClass(),
-                    role.generatePerson(new Name(VALID_NAME_AMY),
+                    doctorRole.generatePerson(new Name(VALID_NAME_AMY),
                             new Phone(VALID_PHONE_AMY),
                             new Email(VALID_EMAIL_AMY),
+                            parseAffiliations(new ArrayList<>())).getClass());
+
+            assertEquals(doctor.getClass(),
+                    doctorRole.generatePerson(new Name(VALID_NAME_AMY),
+                            new Phone(VALID_PHONE_AMY),
+                            new Email(VALID_EMAIL_AMY),
+                            parseAffiliations(new ArrayList<>()),
+                            parseAffiliations(new ArrayList<>())).getClass());
+        } catch (Exception e) {
+            fail(); // the test should not reach this line
+        }
+
+        Nurse nurse = new NurseBuilder().build();
+        Role nurseRole = new Role(VALID_ROLE_CAT);
+        try {
+            assertEquals(nurse.getClass(),
+                    nurseRole.generatePerson(new Name(VALID_NAME_CAT),
+                            new Phone(VALID_PHONE_CAT),
+                            new Email(VALID_EMAIL_CAT),
+                            parseAffiliations(new ArrayList<>())).getClass());
+
+            assertEquals(nurse.getClass(),
+                    nurseRole.generatePerson(new Name(VALID_NAME_CAT),
+                            new Phone(VALID_PHONE_CAT),
+                            new Email(VALID_EMAIL_CAT),
+                            parseAffiliations(new ArrayList<>()),
                             parseAffiliations(new ArrayList<>())).getClass());
         } catch (Exception e) {
             fail(); // the test should not reach this line

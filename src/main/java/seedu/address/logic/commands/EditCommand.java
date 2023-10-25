@@ -29,6 +29,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Staff;
 
 /**
  * Edits the details of an existing person in the contact list.
@@ -52,8 +54,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON =
-        "This person already exists in the contact list. Please use a different name.";
-    public static final String MESSAGE_EDIT_ROLE_NOT_ALLOW = "Edit of role is not allow.";
+            "This person already exists in the contact list. Please use a different name.";
+    public static final String MESSAGE_EDIT_ROLE_NOT_ALLOW = "Editing of role is not allowed.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -105,20 +107,26 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        assert !this.editPersonDescriptor.isRoleEdited();
-
         if (this.editPersonDescriptor.isNameEdited()) {
             AffiliationModifier.nameChangeAffiliations(personToEdit.getAffiliations(), personToEdit.getName(),
                     editedPerson.getName(), model);
             AffiliationModifier.nameChangeAffiliationHistory(personToEdit.getAffiliationHistory(),
                 personToEdit.getName(), editedPerson.getName(), model);
         }
+
         if (this.editPersonDescriptor.isAffiliationEdited()) {
             AuthenticateAffiliation.check(editedPerson.getAffiliations(), editedPerson, model);
             AffiliationModifier.addAffiliationHistory(editedPerson.getAffiliations(), editedPerson, model);
             AffiliationModifier.removeAffiliations(personToEdit.getAffiliations(), editedPerson, model);
             AffiliationModifier.addAffiliations(editedPerson.getAffiliations(), editedPerson, model);
         }
+
+        if (personToEdit instanceof Staff && editedPerson instanceof Staff) {
+            ShiftDays shiftDays = ((Staff) personToEdit).getShiftDays();
+            Staff editedStaff = (Staff) editedPerson;
+            editedStaff.setShiftDays(shiftDays);
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -159,6 +167,7 @@ public class EditCommand extends Command {
         private Role role;
         private Set<Affiliation> affiliations;
         private Set<Affiliation> affiliationHistory;
+        private ShiftDays shiftDays;
 
         public EditPersonDescriptor() {
         }
@@ -174,13 +183,14 @@ public class EditCommand extends Command {
             setRole(toCopy.role);
             setAffiliations(toCopy.affiliations);
             setAffiliationHistory(toCopy.affiliationHistory, toCopy.affiliations);
+            setShiftDays(toCopy.shiftDays);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, role, affiliations, affiliationHistory);
+            return CollectionUtil.isAnyNonNull(name, phone, email, role, affiliations, affiliationHistory, shiftDays);
         }
 
         /**
@@ -235,6 +245,13 @@ public class EditCommand extends Command {
         public void setRole(Role role) {
             this.role = role;
         }
+        public Optional<ShiftDays> getShiftDays() {
+            return Optional.ofNullable(shiftDays);
+        }
+
+        public void setShiftDays(ShiftDays shiftDays) {
+            this.shiftDays = shiftDays;
+        }
 
         /**
          * Returns an unmodifiable affiliation set, which throws {@code UnsupportedOperationException}
@@ -287,7 +304,7 @@ public class EditCommand extends Command {
         }
         /**
          * Adds {@code affiliations} to this object's {@code affiliations}.
-         * @param affiliations
+         * @param affiliations the affiliations to add to affiliation history.
          */
         public void addAffiliationsToHistory(Set<Affiliation> affiliations) {
             if (this.affiliationHistory == null) {
@@ -312,7 +329,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(role, otherEditPersonDescriptor.role)
                     && Objects.equals(affiliations, otherEditPersonDescriptor.affiliations)
-                    && Objects.equals(affiliationHistory, otherEditPersonDescriptor.affiliationHistory);
+                    && Objects.equals(affiliationHistory, otherEditPersonDescriptor.affiliationHistory)
+                    && Objects.equals(shiftDays, otherEditPersonDescriptor.shiftDays);
         }
 
         @Override
@@ -324,6 +342,7 @@ public class EditCommand extends Command {
                     .add("role", role)
                     .add("affiliations", affiliations)
                     .add("affiliationHistory", affiliationHistory)
+                    .add("shiftDays", shiftDays)
                     .toString();
         }
     }

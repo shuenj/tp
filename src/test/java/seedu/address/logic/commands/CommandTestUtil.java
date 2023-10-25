@@ -31,14 +31,20 @@ public class CommandTestUtil {
     public static final String VALID_NAME_ALICE = "Alice Pauline";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_CAT = "Cat Meow";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_CAT = "33333333";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_CAT = "cat@example.com";
     public static final String VALID_ROLE_AMY = "Doctor";
     public static final String VALID_ROLE_BOB = "Patient";
+    public static final String VALID_ROLE_CAT = "Nurse";
+
     public static final String VALID_AFFILIATION_AMY = "Amy Bee";
     public static final String VALID_AFFILIATION_BOB = "Bob Choo";
+    public static final String VALID_AFFILIATION_CAT = "Cat Meow";
     public static final Set<Integer> VALID_SHIFTDAYS_AMY = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5));
 
 
@@ -70,7 +76,8 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withRole(VALID_ROLE_AMY)
                 .withAffiliations(VALID_AFFILIATION_BOB)
-                .withAffiliationHistory(VALID_AFFILIATION_BOB).build();
+                .withAffiliationHistory(VALID_AFFILIATION_BOB)
+                .withShiftDays(VALID_SHIFTDAYS_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_AFFILIATION_AMY, VALID_AFFILIATION_BOB)
