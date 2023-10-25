@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AFFILIATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -46,6 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_AFFILIATION + "AFFILIATION]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -55,7 +57,9 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON =
             "This person already exists in the contact list. Please use a different name.";
-    public static final String MESSAGE_EDIT_ROLE_NOT_ALLOW = "Editing of role is not allowed.";
+    public static final String MESSAGE_EDIT_ROLE_CONTAIN_AFFILIATION =
+            "This person contains affiliations. Changing of Role is not allowed.";
+
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -112,6 +116,7 @@ public class EditCommand extends Command {
             AffiliationModifier.nameChangeAffiliationHistory(personToEdit.getAffiliationHistory(),
                 personToEdit.getName(), editedPerson.getName(), model);
         }
+
         if (this.editPersonDescriptor.isAffiliationEdited()) {
             AuthenticateAffiliation.check(editedPerson.getAffiliations(), editedPerson, model);
             AffiliationModifier.addAffiliationHistory(editedPerson.getAffiliations(), editedPerson, model);
@@ -302,7 +307,7 @@ public class EditCommand extends Command {
         }
         /**
          * Adds {@code affiliations} to this object's {@code affiliations}.
-         * @param affiliations the affiliations to add to affiliation history.
+         * @param affiliations
          */
         public void addAffiliationsToHistory(Set<Affiliation> affiliations) {
             if (this.affiliationHistory == null) {

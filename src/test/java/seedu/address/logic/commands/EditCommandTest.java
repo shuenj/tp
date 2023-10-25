@@ -47,6 +47,7 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalDoctorAddressBook(), new UserPrefs());
     private Model personModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Doctor editedPerson = new DoctorBuilder().withAffiliationHistory("Thomas Mink", "Benson Meier").build();
@@ -96,8 +97,7 @@ public class EditCommandTest {
         Index indexFirstPerson = Index.fromOneBased(2);
         Person firstPerson = personModel.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withAffiliations("Alice Pauline").build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withAffiliations("Alice Pauline").build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
