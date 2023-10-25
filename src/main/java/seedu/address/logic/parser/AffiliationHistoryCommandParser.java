@@ -29,7 +29,8 @@ public class AffiliationHistoryCommandParser implements Parser<AffiliationHistor
             Index index = ParserUtil.parseIndex(args);
             return new AffiliationHistoryCommand(index);
         } catch (ParseException pe) {
-            logger.finer("This user input caused a ParseException: " + args);
+            logger.finer("This user input caused a ParseException: "
+                    + AffiliationHistoryCommand.COMMAND_WORD + args);
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AffiliationHistoryCommand.MESSAGE_USAGE), pe);
         }
