@@ -148,6 +148,11 @@
     -fx-background-radius: 5px;
 }
 
+.information-email {
+    -fx-font-size: 16px;
+    -fx-background-radius: 5px;
+}
+
 .information-shift {
     -fx-font-size: 18px;
     -fx-background-radius: 5px;

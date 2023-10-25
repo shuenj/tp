@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.affiliation.Affiliation;
 import seedu.address.testutil.PatientBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class PatientTest {
 
@@ -86,6 +87,9 @@ public class PatientTest {
         editedAlice = new PatientBuilder(ALICE).withAffiliations(VALID_AFFILIATION_AMY)
         .withAffiliationHistory(VALID_AFFILIATION_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        //different class instance -> return false
+        assertFalse(TypicalPersons.ALICE.hashCode() == aliceCopy.hashCode());
     }
 
     @Test

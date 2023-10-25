@@ -112,7 +112,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getEmail().orElse(null) + ", role="
                 + editPersonDescriptor.getRole().orElse(null) + ", affiliations="
                 + editPersonDescriptor.getAffiliations().orElse(null) + ", affiliationHistory="
-                + editPersonDescriptor.getAffiliationHistory().orElse(null) + "}";
+                + editPersonDescriptor.getAffiliationHistory().orElse(null) + ", shiftDays="
+                + editPersonDescriptor.getShiftDays().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

@@ -11,6 +11,7 @@ import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nurse;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -27,15 +28,18 @@ public class SampleDataUtil {
                     .setShiftDays(getShiftDays(1, 3, 6)),
             new Patient(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     getAffiliationSet("Alex Yeoh")),
+            new Nurse(new Name("May Ho"), new Phone("94437233"), new Email("homimay@example.com"),
+                        getAffiliationSet("Irfan Ibrahim"))
+                    .setShiftDays(getShiftDays(3, 4, 5)),
             new Patient(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    getAffiliationSet("Alex Yeoh")),
+                    getAffiliationSet("Alex Yeoh", "Evelyn Ng")),
             new Doctor(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     getAffiliationSet("Irfan Ibrahim"))
                     .setShiftDays(getShiftDays(2, 5, 7)),
             new Patient(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    getAffiliationSet("David Li")),
-            new Doctor(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    getAffiliationSet())
+                    getAffiliationSet("David Li", "May Ho")),
+            new Nurse(new Name("Evelyn Ng"), new Phone("92624417"), new Email("eveng@example.com"),
+                    getAffiliationSet("Charlotte Oliveiro"))
                     .setShiftDays(getShiftDays(1, 2, 4, 6))
         };
     }

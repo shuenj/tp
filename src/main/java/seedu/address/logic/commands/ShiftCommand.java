@@ -10,9 +10,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Staff;
 
 /**
  * Updates the shift days of an existing person in the contact list.
@@ -58,12 +58,12 @@ public class ShiftCommand extends Command {
         }
 
         Person personToSetShiftDatesOf = lastShownList.get(index.getZeroBased());
-        if (!(personToSetShiftDatesOf instanceof Doctor)) {
+        if (!(personToSetShiftDatesOf instanceof Staff)) {
             throw new CommandException(Messages.MESSAGE_INVALID_ROLE);
         }
-        Doctor doctorToSetShiftDatesOf = (Doctor) personToSetShiftDatesOf; // checked cast
+        Staff staffToSetShiftDatesOf = (Staff) personToSetShiftDatesOf; // checked cast
         ShiftDays shiftDays = new ShiftDays(shiftDayNumbers);
-        doctorToSetShiftDatesOf.setShiftDays(shiftDays);
+        staffToSetShiftDatesOf.setShiftDays(shiftDays);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(MESSAGE_SUCCESS);

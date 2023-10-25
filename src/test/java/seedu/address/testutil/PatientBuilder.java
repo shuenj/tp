@@ -39,12 +39,12 @@ public class PatientBuilder {
     /**
      * Initializes the PatientBuilder with the data of {@code personToCopy}.
      */
-    public PatientBuilder(Patient doctorToCopy) {
-        name = doctorToCopy.getName();
-        phone = doctorToCopy.getPhone();
-        email = doctorToCopy.getEmail();
-        affiliations = new HashSet<>(doctorToCopy.getAffiliations());
-        affiliationHistory = new HashSet<>(doctorToCopy.getAffiliationHistory());
+    public PatientBuilder(Patient patientToCopy) {
+        name = patientToCopy.getName();
+        phone = patientToCopy.getPhone();
+        email = patientToCopy.getEmail();
+        affiliations = new HashSet<>(patientToCopy.getAffiliations());
+        affiliationHistory = new HashSet<>(patientToCopy.getAffiliationHistory());
     }
 
     /**

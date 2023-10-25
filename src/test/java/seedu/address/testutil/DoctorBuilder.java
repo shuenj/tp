@@ -23,6 +23,7 @@ public class DoctorBuilder {
     private Name name;
     private Phone phone;
     private Email email;
+
     private Set<Affiliation> affiliations;
     private Set<Affiliation> affiliationHistory;
     private ShiftDays shiftDays;
@@ -102,6 +103,6 @@ public class DoctorBuilder {
     }
 
     public Doctor build() {
-        return new Doctor(name, phone, email, affiliations, affiliationHistory).setShiftDays(shiftDays);
+        return (Doctor) new Doctor(name, phone, email, affiliations, affiliationHistory).setShiftDays(shiftDays);
     }
 }

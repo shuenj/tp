@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  *
  * <p>The serialization process includes converting fields such as name, phone, email, role, affiliations,
  * and affiliation history to JSON fields. Additionally, it conditionally includes the shiftDays
- * field in the JSON output based on the person's role. If the role is "Doctor", the shiftDays field is
+ * field in the JSON output based on the person's role. If the role is "Doctor" or "Nurse", the shiftDays field is
  * included; otherwise, it is excluded.
  */
 public class CustomJsonAdaptedPersonSerializer extends JsonSerializer<JsonAdaptedPerson> {
@@ -35,7 +35,7 @@ public class CustomJsonAdaptedPersonSerializer extends JsonSerializer<JsonAdapte
         gen.writeStringField("email", person.getEmail());
         gen.writeStringField("role", person.getRole());
 
-        if ("Doctor".equals(person.getRole())) {
+        if ("Doctor".equals(person.getRole()) || "Nurse".equals(person.getRole())) {
             gen.writeArrayFieldStart("shiftDays");
             for (Integer shiftDay : person.getShiftDays()) {
                 gen.writeNumber(shiftDay);
