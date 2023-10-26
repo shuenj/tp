@@ -134,11 +134,13 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
+![Class diagram for Model](diagrams/ModelDiagramsPerson.png)
 
-![Class diagram for Model](diagrams/modelPersonDiagram.png)
-</box>
+The `Person` component has several attributes: `Name`, `Phone`, `Email`, `Role`, `Affiliations` and `AffiliationHistory`. Each instance of `Person` class has exactly one of each of these attributes. In particular, `Affiliations` and `AffiliationHistory` can have multiple `Affiliation`. 
 
+`Patient` and `Staff` are the 2 main subclasses of `Person`. `Patient` has an additional attribute `NextOfKin`. `Staff` has an additional attribute `ShiftDays`. `Staff` is a superclass of `Doctor` and `Nurse`, where the former has an additional attribute `Specialisation`.
+
+The hierarchical structure of the classes allows for easy extensibility. If there is a need to introduce more specialized roles or attributes in the future, they can be added as subclasses under Staff or even under Doctor and Nurse. The distinction between various classes also suggests that there can be different levels of permissions associated with each role, which can be useful when implementing data privacy and security features.
 
 ### Storage component
 
@@ -184,6 +186,9 @@ Utilization of Name as a Unique Identifier:
 The proposed method circumvents these issues by employing the Name field as a unique identifier for affiliations. When an affiliation is deleted, the system uses this identifier to update all relevant entries across the `affiliationHistory`, thereby maintaining consistency.
 
 This strategy streamlines the affiliation management process, as it allows for the complete removal of a Person from the system, including their historical data. From a user's perspective, this process is more intuitive and efficient, as it aligns with the expected outcome of entirely deleting an entry from the system.
+
+The following activity diagram showcases the process of handling affiliation when adding a person:
+![Add Person with affiliation diagram](diagrams/AddPersonAffnActivity.png)
 
 #### Design considerations
 Alternative implementations:
