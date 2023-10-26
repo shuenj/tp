@@ -84,6 +84,14 @@ public class Person {
     }
 
     /**
+     * Clear current affiliation history and add current affiliations to history.
+     */
+    public void clearAffiliationHistory() {
+        this.affiliationHistory.clear();
+        this.affiliationHistory.addAll(this.affiliations);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */

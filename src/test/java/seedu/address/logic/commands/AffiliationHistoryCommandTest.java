@@ -27,9 +27,9 @@ public class AffiliationHistoryCommandTest {
 
     @Test
     public void execute() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         NameMatchesAffiliationPredicate predicate = new NameMatchesAffiliationPredicate(
-                Set.of(new Affiliation("Benson Meier")));
+                Set.of(new Affiliation("Benson Meier"), new Affiliation("Daniel Meier")));
         AffiliationHistoryCommand command = new AffiliationHistoryCommand(Index.fromOneBased(1));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

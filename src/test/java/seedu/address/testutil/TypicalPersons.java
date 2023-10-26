@@ -27,7 +27,7 @@ public class TypicalPersons {
             .withRole("Doctor").withEmail("alice@example.com")
             .withPhone("94351253")
             .withAffiliations("Benson Meier")
-            .withAffiliationHistory("Benson Meier").build();
+            .withAffiliationHistory("Benson Meier", "Daniel Meier").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withRole("Patient")
             .withEmail("johnd@example.com").withPhone("98765432")
@@ -79,7 +79,7 @@ public class TypicalPersons {
                 .withRole("Doctor").withEmail("alice@example.com")
                 .withPhone("94351253")
                 .withAffiliations("Benson Meier")
-                .withAffiliationHistory("Benson Meier").build();
+                .withAffiliationHistory("Benson Meier", "Daniel Meier").build();
         Person benson = new PersonBuilder().withName("Benson Meier")
                 .withRole("Patient")
                 .withEmail("johnd@example.com").withPhone("98765432")
