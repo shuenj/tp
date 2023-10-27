@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+box Logic LOGIC_COLOR_T1
+participant ":ShiftCommand" as ShiftCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "s:Staff" as Staff MODEL_COLOR
+participant "sd:ShiftDays" as ShiftDays MODEL_COLOR
+end box
+activate ShiftCommand
+ShiftCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> ShiftCommand : lastShownList
+deactivate Model
+create Staff
+ShiftCommand -> Staff : lastShownList.get()
+activate Staff
+Staff --> ShiftCommand : s
+deactivate Staff
+create ShiftDays
+ShiftCommand -> ShiftDays
+activate ShiftDays
+ShiftDays --> ShiftCommand
+deactivate ShiftDays
+ShiftCommand -> Staff : setShiftDays(sd)
+activate Staff
+Staff -> ShiftDays : getShiftDays()
+ShiftDays --> Staff : set
+activate Staff
+Staff -> Staff : modifyShiftDays(set)
+deactivate Staff
+Staff --> ShiftCommand
+deactivate Staff
+
+@enduml

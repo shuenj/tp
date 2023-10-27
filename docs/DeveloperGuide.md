@@ -216,6 +216,41 @@ However, this approach can create discrepancies between the current state of `af
 
 Moreover, storing complete objects demands more storage space and could complicate data management tasks due to the volume and detail level of the data retained.
 
+### ShiftDays feature
+#### Implementation
+The `ShiftDays` records the days of the week that a `Staff` is on shift duty. It is implemented using a bespoke `ShiftDays` class, which contains: 
+- a `Set<Integer>` that stores the shift days as the respective integers.
+- a `HashMap<Integer, String>` that maps the integers 1 to 7 each to a day of the week, from Monday to Sunday.
+- a `getShiftDays()` method that returns the set of integers
+- a `modifyShiftDays()` method that takes in a set of integers, and replaces the currently contained set of integers with the new set. This does not return a new ShiftDays object.
+
+Likewise, the `Staff` includes several new methods to deal with ShiftDays, including:
+- `getShiftDays()`, which returns the`ShiftDays` object of the staff member
+- `setShiftDays()`, which calls the `modifyShiftDays()` method of the staff member's `ShiftDays` object in order to change the set of integers within their `ShiftDays`.
+
+Finally, the `ShiftCommand` class was added to allow the addition and modification of `ShiftDays` for a staff member.
+
+Below is a partial sequence diagram that illustrates the execution of the `shift` command, using `execute("shift 1 127")` as the API call.
+
+<puml src="diagrams/ShiftCommandExecutionSequenceDiagram.puml" alt="Interactions Between Logic and Model for the `shift` Command" />
+
+#### Design considerations
+Alternative implementations:
+#### Maintaining an immutable ShiftDays object
+One potential alternative to this implementation is to maintain an immutable ShiftDays object. That is to say, instead of modifying the set of integers stored
+within ShiftDays when `modifyShiftDays()` is called, to instead return a new instance of the ShiftDays object. This could be beneficial as it follows the precendence
+set by the other attributes such as Name, Email, and Phone, which all have `final` immutable text, and the objects themselves are replaced when the field is edited.
+
+Potential benefits:
+- Easier to test. As the current `ShiftDays` implementation allows mutability of the set of integers, when the shifts stored in a model address book used for testing are changed,
+the model address book may remain modified, causing future test cases to fail certain checks. While this can be mediated by simply returning the address book to its original condition after
+a test, future extensions may wish to consider this as a more long-term solution to such issues.
+
+Potential costs:
+- Implementing `ShiftDays` in an immutable way may be complex and can lead to its own set of challenges, as the `shiftDays` attribute of a `Staff` will also need to be implemented in an immutable
+manner, requiring commands to return a new `Staff` each time the shift timings are changed.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
