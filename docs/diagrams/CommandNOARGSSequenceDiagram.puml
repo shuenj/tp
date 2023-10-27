@@ -1,0 +1,49 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "c:XYZCommand" as XYZCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("COMMAND_WORD")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("COMMAND_WORD")
+activate AddressBookParser
+
+create XYZCommand
+AddressBookParser -> XYZCommand
+activate XYZCommand
+
+XYZCommand --> AddressBookParser : c
+deactivate XYZCommand
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> XYZCommand : execute()
+activate XYZCommand
+
+ref over XYZCommand, Model : command execution
+
+create CommandResult
+XYZCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> XYZCommand
+deactivate CommandResult
+
+XYZCommand --> LogicManager : result
+deactivate XYZCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
