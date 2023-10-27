@@ -5,6 +5,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -32,9 +34,8 @@ public class ShiftCommand extends Command {
             + "1346";
 
     public static final String MESSAGE_SUCCESS = "Shift days added!";
-
+    private static Logger logger = Logger.getLogger("Shift Command Logger");
     private final Index index;
-
     private final Set<Integer> shiftDayNumbers;
 
     /**
@@ -59,6 +60,7 @@ public class ShiftCommand extends Command {
 
         Person personToSetShiftDatesOf = lastShownList.get(index.getZeroBased());
         if (!(personToSetShiftDatesOf instanceof Staff)) {
+            logger.log(Level.WARNING, "Error: wrong role");
             throw new CommandException(Messages.MESSAGE_INVALID_ROLE);
         }
         Staff staffToSetShiftDatesOf = (Staff) personToSetShiftDatesOf; // checked cast
