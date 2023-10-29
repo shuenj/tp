@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Specialisation {
     
     public static final String MESSAGE_CONSTRAINTS =
-            "Specialisations should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Specialisations should only contain alphanumeric characters and spaces.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String specialisationName;

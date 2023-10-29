@@ -129,7 +129,7 @@ public class EditCommand extends Command {
             editedStaff.setShiftDays(shiftDays);
         }
 
-        if (personToEdit instanceof Doctor) {
+        if (personToEdit instanceof Doctor && editedPerson instanceof Doctor) {
             Set<Specialisation> specialisations = ((Doctor) personToEdit).getSpecialisations();
             Doctor editedDoctor = (Doctor) editedPerson;
             editedDoctor.setSpecialisations(specialisations);

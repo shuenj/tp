@@ -55,6 +55,14 @@ public class CustomJsonAdaptedPersonSerializer extends JsonSerializer<JsonAdapte
         }
         gen.writeEndArray();
 
+        if ("Doctor".equals(person.getRole())) {
+            gen.writeArrayFieldStart("specialisations");
+            for (String specialisation : person.getSpecialisations()) {
+                gen.writeString(specialisation);
+            }
+            gen.writeEndArray();
+        }
+
         gen.writeEndObject();
     }
 }

@@ -33,10 +33,9 @@ public class Doctor extends Staff {
         return specialisations;
     }
 
-    public Set<Specialisation> setSpecialisations(Set<Specialisation> specialisations) {
+    public void setSpecialisations(Set<Specialisation> specialisations) {
         this.specialisations.clear();
         this.specialisations.addAll(specialisations);
-        return this.specialisations;
     }
 
     /**
@@ -75,5 +74,17 @@ public class Doctor extends Staff {
     @Override
     public String toString() {
         return getStringBuilderRepresentation().toString();
+    }
+
+    /**
+     * 
+     */
+    public boolean isValidSpecialisations(Set<Specialisation> specialisations) {
+        for (Specialisation specialisation : specialisations) {
+            if (!Specialisation.isValidSpecialisationName(specialisation.toString())) {
+                return false;
+            }
+        }
+        return true;
     }
 }
