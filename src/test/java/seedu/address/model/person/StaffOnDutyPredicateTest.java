@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPatients.FIONA;
 import static seedu.address.testutil.TypicalStaff.CARL;
 import static seedu.address.testutil.TypicalStaff.ELLE;
 
@@ -44,6 +45,12 @@ public class StaffOnDutyPredicateTest {
     public void test_staffShiftDaysDoesNotContainIndicatedDay_returnsFalse() {
         StaffOnDutyPredicate predicate = new StaffOnDutyPredicate(2);
         assertFalse(predicate.test(ELLE));
+    }
+
+    @Test
+    public void test_personNotStaff_returnsFalse() {
+        StaffOnDutyPredicate predicate = new StaffOnDutyPredicate(2);
+        assertFalse(predicate.test(FIONA));
     }
 
     @Test
