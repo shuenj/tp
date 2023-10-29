@@ -50,16 +50,14 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public void displayPotentialInformation(Optional<Integer> showInfoIndex) {
         if (showInfoIndex.isPresent()) {
-            Integer indexValue = showInfoIndex.get();
+            // Selects the indicated Person
+            personListView.getSelectionModel().select(showInfoIndex.get());
 
-            // Select the indicated Person
-            personListView.getSelectionModel().select(indexValue);
-
-            Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
-            informationWindow.displayInformation(selectedPerson);
+            // Displays the information
+            informationWindow.displayInformation(personListView.getSelectionModel().getSelectedItem());
 
             // Scrolls the Person list to the selected Person
-            personListView.scrollTo(indexValue);
+            personListView.scrollTo(showInfoIndex.get());
         }
     }
 
@@ -82,8 +80,7 @@ public class PersonListPanel extends UiPart<Region> {
 
             // Handles up and down arrow key selection of PersonCard
             personListView.setOnKeyPressed(event -> {
-                Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
-                informationWindow.displayInformation(selectedPerson);
+                informationWindow.displayInformation(personListView.getSelectionModel().getSelectedItem());
             });
         }
 
