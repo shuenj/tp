@@ -43,6 +43,15 @@ public class Staff extends Person {
         return this;
     }
 
+    /**
+     * Checks if the staff is on duty on a particular day of the week.
+     *
+     * @param day The day of the week in integer.
+     */
+    public boolean isWorkingOn(int day) {
+        return shiftDays.contains(day);
+    }
+
     @Override
     public ToStringBuilder getStringBuilderRepresentation() {
         return super.getStringBuilderRepresentation().add("shiftDays", shiftDays);
