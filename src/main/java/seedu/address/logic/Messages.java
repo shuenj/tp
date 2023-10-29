@@ -7,7 +7,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.affiliation.Affiliation;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Specialisation;
 import seedu.address.model.person.Staff;
 
 /**
@@ -71,6 +73,18 @@ public class Messages {
         if (person instanceof Staff) {
             builder.append("; Shift Days: ");
             builder.append(((Staff) person).getShiftDays());
+        }
+
+        if (person instanceof Doctor) {
+            builder.append("; Specialisations: {");
+            ArrayList<Specialisation> specialisationsList = new ArrayList<>(((Doctor) person).getSpecialisations());
+            for (int i = 0; i < specialisationsList.size(); i++) {
+                builder.append(specialisationsList.get(i));
+                if (i < specialisationsList.size() - 1) {
+                    builder.append(", ");
+                }
+            }
+            builder.append("}");
         }
         return builder.toString();
     }

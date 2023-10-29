@@ -135,6 +135,28 @@ public class ParserUtil {
         return shiftDayString.trim().chars().map(x -> x - '0') // converts string into CharStream, then into IntStream
                 .boxed().collect(Collectors.toSet());
     }
+    
+    /**
+     * Parses {@code String specialisations} into a {@code Set<Specialisation>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code specialisations} is invalid.
+     */
+    public static Set<seedu.address.model.person.Specialisation> parseSpecialisations(String specialisations)
+            throws ParseException {
+        requireNonNull(specialisations);
+        String trimmedSpecialisations = specialisations.trim();
+        if (trimmedSpecialisations.isEmpty()) {
+            return new HashSet<>();
+        }
+        String[] specialisationNames = trimmedSpecialisations.split(",");
+        Set<seedu.address.model.person.Specialisation> specialisationSet = new HashSet<>();
+        for (String specialisationName : specialisationNames) {
+            String specialisationNameTrimmed = specialisationName.trim();
+            specialisationSet.add(new seedu.address.model.person.Specialisation(specialisationNameTrimmed));
+        }
+        return specialisationSet;
+    }
 
 
 }

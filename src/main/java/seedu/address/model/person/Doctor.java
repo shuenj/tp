@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,12 +11,14 @@ import seedu.address.model.affiliation.Affiliation;
  */
 public class Doctor extends Staff {
 
+    private final Set<Specialisation> specialisations;
     /**
      * Every field must be present and not null, except affiliationHistory.
      */
     public Doctor(Name name, Phone phone, Email email,
             Set<Affiliation> affiliations, Set<Affiliation> affiliationHistory) {
         super(name, phone, email, new Role("Doctor"), affiliations, affiliationHistory);
+        specialisations = new HashSet<>();
     }
 
     /**
@@ -23,6 +26,17 @@ public class Doctor extends Staff {
      */
     public Doctor(Name name, Phone phone, Email email, Set<Affiliation> affiliations) {
         super(name, phone, email, new Role("Doctor"), affiliations);
+        specialisations = new HashSet<>();
+    }
+
+    public Set<Specialisation> getSpecialisations() {
+        return specialisations;
+    }
+
+    public Set<Specialisation> setSpecialisations(Set<Specialisation> specialisations) {
+        this.specialisations.clear();
+        this.specialisations.addAll(specialisations);
+        return this.specialisations;
     }
 
     /**
@@ -47,7 +61,8 @@ public class Doctor extends Staff {
                 && getRole().equals(otherDoctor.getRole())
                 && getAffiliations().equals(otherDoctor.getAffiliations())
                 && getAffiliationHistory().equals(otherDoctor.getAffiliationHistory())
-                && getShiftDays().equals(otherDoctor.getShiftDays());
+                && getShiftDays().equals(otherDoctor.getShiftDays())
+                && getSpecialisations().equals(otherDoctor.getSpecialisations());
     }
 
     @Override
