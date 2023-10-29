@@ -12,6 +12,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Specialisation;
 import seedu.address.model.person.Staff;
 
 /**
@@ -105,6 +106,15 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withShiftDays(Set<Integer> shiftDays) {
         descriptor.setShiftDays(new ShiftDays(shiftDays));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Specialisation} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSpecialisations(String... specialisations) {
+        descriptor.setSpecialisations(Stream.of(specialisations)
+            .map(Specialisation::new).collect(Collectors.toSet()));
         return this;
     }
 

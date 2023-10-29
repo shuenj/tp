@@ -283,9 +283,7 @@ class JsonAdaptedPerson {
         if (generatedPerson instanceof Doctor) {
             Doctor doctor = (Doctor) generatedPerson;
             doctor.setSpecialisations(modelSpecialisations);
-            if (modelShiftDays != null) {
-                doctor = (Doctor) doctor.setShiftDays(modelShiftDays);
-            }
+            doctor = (Doctor) doctor.setShiftDays(modelShiftDays);
             return doctor;
         }
         if (generatedPerson instanceof Staff) {

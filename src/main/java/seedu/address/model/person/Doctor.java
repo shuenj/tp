@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.affiliation.Affiliation;
 
 /**
@@ -11,7 +12,7 @@ import seedu.address.model.affiliation.Affiliation;
  */
 public class Doctor extends Staff {
 
-    private final Set<Specialisation> specialisations;
+    private final HashSet<Specialisation> specialisations;
     /**
      * Every field must be present and not null, except affiliationHistory.
      */
@@ -29,7 +30,7 @@ public class Doctor extends Staff {
         specialisations = new HashSet<>();
     }
 
-    public Set<Specialisation> getSpecialisations() {
+    public HashSet<Specialisation> getSpecialisations() {
         return specialisations;
     }
 
@@ -76,15 +77,8 @@ public class Doctor extends Staff {
         return getStringBuilderRepresentation().toString();
     }
 
-    /**
-     * 
-     */
-    public boolean isValidSpecialisations(Set<Specialisation> specialisations) {
-        for (Specialisation specialisation : specialisations) {
-            if (!Specialisation.isValidSpecialisationName(specialisation.toString())) {
-                return false;
-            }
-        }
-        return true;
+    @Override
+    public ToStringBuilder getStringBuilderRepresentation() {
+        return super.getStringBuilderRepresentation().add("specialisations", specialisations);
     }
 }

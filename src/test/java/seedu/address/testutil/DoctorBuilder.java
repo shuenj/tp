@@ -9,12 +9,13 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Specialisation;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Doctor objects.
  */
-public class DoctorBuilder {
+public class DoctorBuilder extends StaffBuilder {
 
     public static final String DEFAULT_NAME = "Jennifer Chue";
     public static final String DEFAULT_PHONE = "85552222";
@@ -27,6 +28,7 @@ public class DoctorBuilder {
     private Set<Affiliation> affiliations;
     private Set<Affiliation> affiliationHistory;
     private ShiftDays shiftDays;
+    private HashSet<Specialisation> specialisations;
 
     /**
      * Creates a {@code DoctorBuilder} with the default details.
@@ -38,6 +40,7 @@ public class DoctorBuilder {
         affiliations = new HashSet<>();
         affiliationHistory = new HashSet<>();
         shiftDays = new ShiftDays();
+        specialisations = new HashSet<>();
     }
 
     /**
@@ -50,6 +53,7 @@ public class DoctorBuilder {
         affiliations = new HashSet<>(doctorToCopy.getAffiliations());
         affiliationHistory = new HashSet<>(doctorToCopy.getAffiliationHistory());
         shiftDays = doctorToCopy.getShiftDays();
+        specialisations = new HashSet<>(doctorToCopy.getSpecialisations());
     }
 
     /**
@@ -102,7 +106,19 @@ public class DoctorBuilder {
         return this;
     }
 
+    /**
+     * Set the {@code Specialisation} of the {@code Doctor} that we are building.
+     */
+    public DoctorBuilder withSpecialisations(String ... specialisations) {
+        this.specialisations = SampleDataUtil.getSpecialisationSet(specialisations);
+        return this;
+    }
+
+    @Override
     public Doctor build() {
-        return (Doctor) new Doctor(name, phone, email, affiliations, affiliationHistory).setShiftDays(shiftDays);
+        Doctor doctor = new Doctor(name, phone, email, affiliations, affiliationHistory);
+        doctor.setShiftDays(shiftDays);
+        doctor.setSpecialisations(specialisations);
+        return doctor;
     }
 }

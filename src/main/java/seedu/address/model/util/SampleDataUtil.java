@@ -16,6 +16,7 @@ import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Specialisation;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -68,4 +69,12 @@ public class SampleDataUtil {
         return new ShiftDays(new HashSet<>(Arrays.asList(days)));
     }
 
+    /**
+     * Returns a @code{Specialisation} containing the list of specialisations given as strings.
+     */
+    public static HashSet<Specialisation> getSpecialisationSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Specialisation::new)
+                .collect(Collectors.toCollection(HashSet::new));
+    }
 }

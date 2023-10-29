@@ -263,6 +263,10 @@ public class EditCommand extends Command {
             this.shiftDays = shiftDays;
         }
 
+        public Optional<Set<Specialisation>> getSpecialisation() {
+            return Optional.ofNullable(specialisations);
+        }
+
         public void setSpecialisations(Set<Specialisation> specialisations) {
             this.specialisations = specialisations;
         }

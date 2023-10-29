@@ -4,11 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.affiliation.Affiliation;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Specialisation;
 import seedu.address.model.person.Staff;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -31,6 +33,7 @@ public class StaffBuilder {
     private Set<Affiliation> affiliations;
     private Set<Affiliation> affiliationHistory;
     private ShiftDays shiftDays;
+    private HashSet<Specialisation> specialisations;
 
     /**
      * Creates a {@code StaffBuilder} with the default details.
@@ -113,6 +116,14 @@ public class StaffBuilder {
      */
     public StaffBuilder withShiftDays(Set<Integer> shiftDays) {
         this.shiftDays = new ShiftDays(shiftDays);
+        return this;
+    }
+
+    /**
+     * Set the {@code Specialisation} of the {@code Staff} that we are building.
+     */
+    public StaffBuilder withSpecialisations(String ... specialisations) {
+        this.affiliations = SampleDataUtil.getAffiliationSet(specialisations);
         return this;
     }
 

@@ -43,6 +43,14 @@ public class CustomJsonAdaptedPersonSerializer extends JsonSerializer<JsonAdapte
             gen.writeEndArray();
         }
 
+        if ("Doctor".equals(person.getRole())) {
+            gen.writeArrayFieldStart("specialisations");
+            for (String specialisation : person.getSpecialisations()) {
+                gen.writeString(specialisation);
+            }
+            gen.writeEndArray();
+        }
+
         gen.writeArrayFieldStart("affiliations");
         for (JsonAdaptedAffiliation affiliation : person.getAffiliations()) {
             gen.writeObject(affiliation);
@@ -54,14 +62,6 @@ public class CustomJsonAdaptedPersonSerializer extends JsonSerializer<JsonAdapte
             gen.writeObject(affiliation);
         }
         gen.writeEndArray();
-
-        if ("Doctor".equals(person.getRole())) {
-            gen.writeArrayFieldStart("specialisations");
-            for (String specialisation : person.getSpecialisations()) {
-                gen.writeString(specialisation);
-            }
-            gen.writeEndArray();
-        }
 
         gen.writeEndObject();
     }
