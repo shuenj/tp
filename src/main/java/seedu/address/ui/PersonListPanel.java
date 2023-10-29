@@ -80,7 +80,8 @@ public class PersonListPanel extends UiPart<Region> {
 
             // Handles up and down arrow key selection of PersonCard
             personListView.setOnKeyPressed(event -> {
-                informationWindow.displayInformation(personListView.getSelectionModel().getSelectedItem());
+                Person focusedPerson = personListView.getSelectionModel().getSelectedItem();
+                informationWindow.displayInformation(focusedPerson);
             });
         }
 

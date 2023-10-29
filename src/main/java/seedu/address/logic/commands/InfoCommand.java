@@ -69,5 +69,4 @@ public class InfoCommand extends Command {
                 .add("targetIndex", targetIndex)
                 .toString();
     }
-
 }
