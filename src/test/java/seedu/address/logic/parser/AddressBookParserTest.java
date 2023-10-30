@@ -25,6 +25,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.InfoCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemoveAffiliationHistoryCommand;
 import seedu.address.logic.commands.ShiftCommand;
@@ -114,6 +115,13 @@ public class AddressBookParserTest {
         shiftDaysSet.add(7);
         assertEquals(parser.parseCommand(ShiftCommand.COMMAND_WORD + " "
                 + "1" + " " + "127"), new ShiftCommand(Index.fromOneBased(1), shiftDaysSet));
+    }
+
+    @Test
+    public void parseCommand_info() throws Exception {
+        InfoCommand command = (InfoCommand) parser.parseCommand(
+                InfoCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new InfoCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
