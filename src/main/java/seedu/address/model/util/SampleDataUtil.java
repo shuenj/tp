@@ -72,8 +72,8 @@ public class SampleDataUtil {
     /**
      * Returns a @code{Specialisation} containing the list of specialisations given as strings.
      */
-    public static HashSet<Specialisation> getSpecialisationSet(String... strings) {
-        return Arrays.stream(strings)
+    public static HashSet<Specialisation> getSpecialisationSet(Set<String> strings) {
+        return strings.stream()
                 .map(Specialisation::new)
                 .collect(Collectors.toCollection(HashSet::new));
     }

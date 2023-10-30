@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Specialisation;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -135,7 +136,7 @@ public class ParserUtil {
         return shiftDayString.trim().chars().map(x -> x - '0') // converts string into CharStream, then into IntStream
                 .boxed().collect(Collectors.toSet());
     }
-    
+
     /**
      * Parses {@code String specialisations} into a {@code Set<Specialisation>}.
      * Leading and trailing whitespaces will be trimmed.
@@ -153,6 +154,9 @@ public class ParserUtil {
         Set<seedu.address.model.person.Specialisation> specialisationSet = new HashSet<>();
         for (String specialisationName : specialisationNames) {
             String specialisationNameTrimmed = specialisationName.trim();
+            if (!Specialisation.isValidSpecialisationName(specialisationNameTrimmed)) {
+                throw new ParseException(Specialisation.MESSAGE_CONSTRAINTS);
+            }
             specialisationSet.add(new seedu.address.model.person.Specialisation(specialisationNameTrimmed));
         }
         return specialisationSet;

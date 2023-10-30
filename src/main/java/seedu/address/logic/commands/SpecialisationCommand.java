@@ -5,7 +5,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
@@ -16,25 +15,27 @@ import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Specialisation;
 
+/**
+ * Modifies the specialisations of an existing doctor in the contact list.
+ */
 public class SpecialisationCommand extends Command {
-    
-    public static final String COMMAND_WORD = "spec";
 
-    public static final String MESSAGE_USAGE  = COMMAND_WORD + ": Modify the specialisation to the person identified "
-            + "by the index number used in the displayed person list.\n"
-            + "Clear the specialisation by not providing any specialisation.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "SPEC (must be a valid specialisation)\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + "ENT, Orthopaedic";
-    
+    public static final String COMMAND_WORD = "spec";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Modify the specialisation to the person identified"
+        + " by the index number used in the displayed person list.\n"
+        + "Clear the specialisation by not providing any specialisation.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "SPEC (must be a valid specialisation)\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + "ENT, Orthopaedic";
+
     public static final String MESSAGE_SUCCESS = "Specialisation added!";
     private static Logger logger = Logger.getLogger("Specialisation Command Logger");
     private final Index index;
     private final Set<Specialisation> specialisations;
 
     /**
-     * Creates an SpecialisationCommand to modify the specified {@code Specialisation}
+     * Creates a SpecialisationCommand to modify the specified {@code Specialisation}
      * @param index of the person in the filtered person list to modify
      * @param specialisations of the person to be modified to
      */

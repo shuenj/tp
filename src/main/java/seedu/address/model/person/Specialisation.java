@@ -3,8 +3,11 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Doctor's specialisation in the address book.
+ */
 public class Specialisation {
-    
+
     public static final String MESSAGE_CONSTRAINTS =
             "Specialisations should only contain alphanumeric characters and spaces.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";

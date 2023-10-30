@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -238,12 +236,12 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Generates a {@link Set<Specialisation>} object from the stored JSON data (only for Doctors).
-     * 
+     * Generates a set of {@link Specialisation} object from the stored JSON data (only for Doctors).
+     *
      * @param specialisations The person's specialisations.
-     * @return A {@link Set<Specialisation>} object based on the stored JSON data.
+     * @return A set of {@link Specialisation} object based on the stored JSON data.
      * @throws IllegalValueException If the role is not "Doctor" or specialisations are null or do not meet the
-     *    constraints.
+     *      constraints.
      */
     private Set<Specialisation> generateSpecialisations(Set<String> specialisations) throws IllegalValueException {
         if (!role.equals("Doctor") && specialisations == null) {

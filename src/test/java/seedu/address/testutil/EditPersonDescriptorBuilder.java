@@ -6,14 +6,15 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.affiliation.Affiliation;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.ShiftDays;
-import seedu.address.model.person.Specialisation;
 import seedu.address.model.person.Staff;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -42,6 +43,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAffiliationHistory(person.getAffiliationHistory());
         if (person instanceof Staff) {
             descriptor.setShiftDays(((Staff) person).getShiftDays());
+        }
+        if (person instanceof Doctor) {
+            descriptor.setSpecialisations(((Doctor) person).getSpecialisations());
         }
     }
 
@@ -112,9 +116,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Specialisation} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withSpecialisations(String... specialisations) {
-        descriptor.setSpecialisations(Stream.of(specialisations)
-            .map(Specialisation::new).collect(Collectors.toSet()));
+    public EditPersonDescriptorBuilder withSpecialisations(Set<String> specialisations) {
+        descriptor.setSpecialisations(SampleDataUtil.getSpecialisationSet(specialisations));
         return this;
     }
 

@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTDAYS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALISATION_AMY;
 import static seedu.address.testutil.TypicalDoctors.ALICE;
 import static seedu.address.testutil.TypicalDoctors.BOB;
 
@@ -95,7 +96,7 @@ public class DoctorTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different specialisations -> return false
-        editedAlice = new DoctorBuilder(ALICE).withSpecialisations(VALID_AFFILIATION_AMY).build();
+        editedAlice = new DoctorBuilder(ALICE).withSpecialisations(VALID_SPECIALISATION_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
 
         //different class instances -> return false

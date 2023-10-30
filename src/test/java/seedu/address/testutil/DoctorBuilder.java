@@ -109,7 +109,7 @@ public class DoctorBuilder extends StaffBuilder {
     /**
      * Set the {@code Specialisation} of the {@code Doctor} that we are building.
      */
-    public DoctorBuilder withSpecialisations(String ... specialisations) {
+    public DoctorBuilder withSpecialisations(Set<String> specialisations) {
         this.specialisations = SampleDataUtil.getSpecialisationSet(specialisations);
         return this;
     }
