@@ -127,6 +127,7 @@ public class AddressBookParserTest {
         assertEquals(parser.parseCommand(SpecialisationCommand.COMMAND_WORD + " "
                 + "1" + " " + "ENT,cardiology"), new SpecialisationCommand(Index.fromOneBased(1),
                 specialisationsSet));
+    }
 
     @Test
     public void parseCommand_info() throws Exception {
