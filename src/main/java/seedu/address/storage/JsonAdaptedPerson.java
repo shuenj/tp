@@ -244,7 +244,7 @@ class JsonAdaptedPerson {
      *      constraints.
      */
     private Set<Specialisation> generateSpecialisations(Set<String> specialisations) throws IllegalValueException {
-        if (!role.equals("Doctor") && specialisations == null) {
+        if (role.equals("Doctor") && specialisations == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     "Specialisations"));
         }
@@ -281,8 +281,7 @@ class JsonAdaptedPerson {
         if (generatedPerson instanceof Doctor) {
             Doctor doctor = (Doctor) generatedPerson;
             doctor.setSpecialisations(modelSpecialisations);
-            doctor = (Doctor) doctor.setShiftDays(modelShiftDays);
-            return doctor;
+            return doctor.setShiftDays(modelShiftDays);
         }
         if (generatedPerson instanceof Staff) {
             return ((Staff) generatedPerson).setShiftDays(modelShiftDays);

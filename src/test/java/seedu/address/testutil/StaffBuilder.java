@@ -118,14 +118,6 @@ public class StaffBuilder {
         return this;
     }
 
-    /**
-     * Set the {@code Specialisation} of the {@code Staff} that we are building.
-     */
-    public StaffBuilder withSpecialisations(String ... specialisations) {
-        this.affiliations = SampleDataUtil.getAffiliationSet(specialisations);
-        return this;
-    }
-
     public Staff build() {
         return new Staff(name, phone, email, role, affiliations, affiliationHistory).setShiftDays(shiftDays);
     }

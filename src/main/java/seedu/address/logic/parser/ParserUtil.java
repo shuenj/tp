@@ -143,7 +143,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code specialisations} is invalid.
      */
-    public static Set<seedu.address.model.person.Specialisation> parseSpecialisations(String specialisations)
+    public static Set<Specialisation> parseSpecialisations(String specialisations)
             throws ParseException {
         requireNonNull(specialisations);
         String trimmedSpecialisations = specialisations.trim();
@@ -151,13 +151,13 @@ public class ParserUtil {
             return new HashSet<>();
         }
         String[] specialisationNames = trimmedSpecialisations.split(",");
-        Set<seedu.address.model.person.Specialisation> specialisationSet = new HashSet<>();
+        Set<Specialisation> specialisationSet = new HashSet<>();
         for (String specialisationName : specialisationNames) {
             String specialisationNameTrimmed = specialisationName.trim();
             if (!Specialisation.isValidSpecialisationName(specialisationNameTrimmed)) {
                 throw new ParseException(Specialisation.MESSAGE_CONSTRAINTS);
             }
-            specialisationSet.add(new seedu.address.model.person.Specialisation(specialisationNameTrimmed));
+            specialisationSet.add(new Specialisation(specialisationNameTrimmed));
         }
         return specialisationSet;
     }
