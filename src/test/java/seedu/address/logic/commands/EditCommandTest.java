@@ -33,6 +33,7 @@ import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Specialisation;
 import seedu.address.model.person.Staff;
 import seedu.address.testutil.DoctorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -67,7 +68,7 @@ public class EditCommandTest {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
-        StaffBuilder personInList = new StaffBuilder((Staff) lastPerson);
+        StaffBuilder personInList = new DoctorBuilder((Doctor) lastPerson);
         Staff editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -113,7 +114,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Staff editedStaff = new StaffBuilder((Staff) personInFilteredList).withName(VALID_NAME_BOB).build();
+        Staff editedStaff = new DoctorBuilder((Doctor) personInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
@@ -203,6 +204,13 @@ public class EditCommandTest {
         ShiftDays differentShiftDay = new ShiftDays(new HashSet<>(Arrays.asList(2, 3, 4)));
         differentShiftDayDescriptor.setShiftDays(differentShiftDay);
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, differentAffiliationHistoryDescriptor)));
+
+        //different specialisation -> returns false
+        EditPersonDescriptor differentSpecialisationDescriptor = new EditPersonDescriptor(DESC_AMY);
+        Set<Specialisation> differentSpecialisation = new HashSet<>();
+        differentSpecialisation.add(new Specialisation("Cardiology"));
+        differentSpecialisationDescriptor.setSpecialisations(differentSpecialisation);
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, differentSpecialisationDescriptor)));
     }
 
     @Test

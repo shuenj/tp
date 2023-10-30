@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTDAYS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALISATION_AMY;
 import static seedu.address.testutil.TypicalDoctors.ALICE;
 import static seedu.address.testutil.TypicalDoctors.BOB;
 
@@ -94,6 +95,10 @@ public class DoctorTest {
         editedAlice = new DoctorBuilder(ALICE).withShiftDays(VALID_SHIFTDAYS_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different specialisations -> return false
+        editedAlice = new DoctorBuilder(ALICE).withSpecialisations(VALID_SPECIALISATION_AMY).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         //different class instances -> return false
         assertFalse(TypicalPersons.ALICE.hashCode() == aliceCopy.hashCode());
     }
@@ -104,7 +109,8 @@ public class DoctorTest {
         String expected = Doctor.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", role=" + ALICE.getRole() + ", affiliations="
                 + ALICE.getAffiliations() + ", affiliationHistory=" + ALICE.getAffiliationHistory()
-                + ", shiftDays=" + ALICE.getShiftDays() + "}";
+                + ", shiftDays=" + ALICE.getShiftDays()
+                + ", specialisations=" + ALICE.getSpecialisations() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

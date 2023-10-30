@@ -46,7 +46,9 @@ public class CommandTestUtil {
     public static final String VALID_AFFILIATION_BOB = "Bob Choo";
     public static final String VALID_AFFILIATION_CAT = "Cat Meow";
     public static final Set<Integer> VALID_SHIFTDAYS_AMY = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5));
-
+    public static final Set<String> VALID_SPECIALISATION_AMY = new HashSet<>(Arrays.asList("Heart", "Lungs"));
+    public static final Set<String> VALID_SPECIALISATION_BOB = new HashSet<>(Arrays.asList("Kidney", "Lungs"));
+    public static final Set<String> VALID_SPECIALISATION_EMPTY = new HashSet<>(Arrays.asList());
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
