@@ -192,6 +192,12 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            // Every command successfully executed will reset the information window
+            informationWindow.resetWindow();
+
+            // Clear selection of any PersonCard
+            personListPanel.unselectPersonCard();
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -200,11 +206,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            // Every command successfully executed will reset the information window.
-            informationWindow.resetWindow();
-
-            // Clear selection of any PersonCard.
-            personListPanel.unselectPersonCard();
+            // Displays information of Person if show command is potentially called
+            personListPanel.displayPotentialInformation(commandResult.getShowInfoIndex());
 
             return commandResult;
         } catch (CommandException | ParseException e) {

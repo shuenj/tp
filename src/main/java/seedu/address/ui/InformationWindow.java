@@ -2,10 +2,13 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Nurse;
@@ -19,6 +22,8 @@ import seedu.address.model.person.Staff;
 public class InformationWindow extends UiPart<Region> {
 
     private static final String FXML = "InformationWindow.fxml";
+    private final Logger logger = LogsCenter.getLogger(InformationWindow.class);
+
 
     @FXML
     private VBox fullWindow;
@@ -62,17 +67,27 @@ public class InformationWindow extends UiPart<Region> {
         super(FXML);
         shiftDays = new Label[]{shiftMon, shiftTue, shiftWed, shiftThu, shiftFri, shiftSat, shiftSun};
 
-        // The initialisation should not render the information window.
+        // The initialisation should not render the information window
         resetWindow();
     }
 
     /**
      * Displays information of the given {@code Person}.
-     * @param person the intended person for display.
+     *
+     * @param person The intended person for display. It is expected that {@code Person} passed is its subclass only.
      */
     @FXML
     public void displayInformation(Person person) {
         requireNonNull(person);
+
+        assert (person instanceof Staff || person instanceof Patient);
+
+        // Display window will not be updated if it is for the same person being displayed
+        if (name.getText().equals(person.getName().fullName)) {
+            return;
+        }
+
+        logger.info("Displaying person: " + person);
 
         name.setText(person.getName().fullName);
         role.setText(person.getRole().value);
@@ -89,9 +104,12 @@ public class InformationWindow extends UiPart<Region> {
 
     /**
      * Displays information of the given {@code Staff}.
-     * @param staff the intended staff for display.
+     *
+     * @param staff The intended staff for display. It is expected that the {@code Staff} passed is its subclass only.
      */
     private void displayStaffInformation(Staff staff) {
+        assert (staff instanceof Doctor || staff instanceof Nurse);
+
         if (staff instanceof Doctor) {
             role.setStyle("-fx-background-color: #89CFF0; -fx-font-weight: bold; -fx-text-fill: #0047AB");
         } else if (staff instanceof Nurse) {
@@ -105,7 +123,8 @@ public class InformationWindow extends UiPart<Region> {
 
     /**
      * Displays information of the given {@code Patient}.
-     * @param patient the intended patient for display.
+     *
+     * @param patient The intended patient for display.
      */
     private void displayPatientInformation(Patient patient) {
         role.setStyle("-fx-background-color: #E97451; -fx-font-weight: bold; -fx-text-fill: #8B4000");
@@ -117,7 +136,8 @@ public class InformationWindow extends UiPart<Region> {
 
     /**
      * Sets the shift days information of the given {@code Staff}.
-     * @param staff the intended person for display.
+     *
+     * @param staff The intended person for display.
      */
     private void setShiftDays(Staff staff) {
         clearShiftDays();
@@ -135,6 +155,8 @@ public class InformationWindow extends UiPart<Region> {
 
     /**
      * Sets the list of affiliation names into the information window.
+     *
+     * @param person The intended Person to display the affiliations of.
      */
     private void setAffiliations(Person person) {
         clearAffiliations();
