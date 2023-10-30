@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -40,19 +41,47 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
+     * Displays the information of {@code Person} with the given index referred from the displayed contact list
+     * potentially.
+     *
+     * @param showInfoIndex An optional index indicating the position of the {@code Person} to display information for.
+     *                      If present, the {@code Person} at the specified index will be displayed in the information
+     *                      window.
+     */
+    public void displayPotentialInformation(Optional<Integer> showInfoIndex) {
+        if (showInfoIndex.isPresent()) {
+            // Selects the indicated Person
+            personListView.getSelectionModel().select(showInfoIndex.get());
+
+            // Displays the information
+            informationWindow.displayInformation(personListView.getSelectionModel().getSelectedItem());
+
+            // Scrolls the Person list to the selected Person
+            personListView.scrollTo(showInfoIndex.get());
+        }
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
 
         public PersonListViewCell() {
+
+            // Handles an on-click of a PersonCard
             setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1) {
                     Person selectedPerson = getItem();
-                    logger.info("Person has been click: " + selectedPerson);
                     if (selectedPerson != null) {
                         informationWindow.displayInformation(selectedPerson);
                     }
                 }
+            });
+
+            // Handles up and down arrow key selection of PersonCard
+            personListView.setOnKeyPressed(event -> {
+                Person focusedPerson = personListView.getSelectionModel().getSelectedItem();
+                informationWindow.displayInformation(focusedPerson);
             });
         }
 
