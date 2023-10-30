@@ -9,6 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Specialisation;
 import seedu.address.model.person.Staff;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -31,6 +32,7 @@ public class StaffBuilder {
     private Set<Affiliation> affiliations;
     private Set<Affiliation> affiliationHistory;
     private ShiftDays shiftDays;
+    private HashSet<Specialisation> specialisations;
 
     /**
      * Creates a {@code StaffBuilder} with the default details.

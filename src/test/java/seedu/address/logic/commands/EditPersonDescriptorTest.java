@@ -113,7 +113,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getRole().orElse(null) + ", affiliations="
                 + editPersonDescriptor.getAffiliations().orElse(null) + ", affiliationHistory="
                 + editPersonDescriptor.getAffiliationHistory().orElse(null) + ", shiftDays="
-                + editPersonDescriptor.getShiftDays().orElse(null) + "}";
+                + editPersonDescriptor.getShiftDays().orElse(null) + ", specialisations="
+                + editPersonDescriptor.getSpecialisation().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

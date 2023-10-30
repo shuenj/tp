@@ -30,9 +30,11 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.OnDutyCommand;
 import seedu.address.logic.commands.RemoveAffiliationHistoryCommand;
 import seedu.address.logic.commands.ShiftCommand;
+import seedu.address.logic.commands.SpecialisationCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Specialisation;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -122,6 +124,16 @@ public class AddressBookParserTest {
     public void parseCommand_onDuty() throws Exception {
         OnDutyCommand command = (OnDutyCommand) parser.parseCommand(OnDutyCommand.COMMAND_WORD);
         assertEquals(command, new OnDutyCommand());
+    }
+
+    @Test
+    public void parseCommand_specialisation() throws Exception {
+        Set<Specialisation> specialisationsSet = new HashSet<>();
+        specialisationsSet.add(new Specialisation("ENT"));
+        specialisationsSet.add(new Specialisation("cardiology"));
+        assertEquals(parser.parseCommand(SpecialisationCommand.COMMAND_WORD + " "
+                + "1" + " " + "ENT,cardiology"), new SpecialisationCommand(Index.fromOneBased(1),
+                specialisationsSet));
     }
 
     @Test

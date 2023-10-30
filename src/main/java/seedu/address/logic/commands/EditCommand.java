@@ -24,12 +24,14 @@ import seedu.address.model.Model;
 import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.affiliation.AffiliationModifier;
 import seedu.address.model.affiliation.AuthenticateAffiliation;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Specialisation;
 import seedu.address.model.person.Staff;
 
 /**
@@ -127,6 +129,12 @@ public class EditCommand extends Command {
             editedStaff.setShiftDays(shiftDays);
         }
 
+        if (personToEdit instanceof Doctor && editedPerson instanceof Doctor) {
+            Set<Specialisation> specialisations = ((Doctor) personToEdit).getSpecialisations();
+            Doctor editedDoctor = (Doctor) editedPerson;
+            editedDoctor.setSpecialisations(specialisations);
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -168,6 +176,7 @@ public class EditCommand extends Command {
         private Set<Affiliation> affiliations;
         private Set<Affiliation> affiliationHistory;
         private ShiftDays shiftDays;
+        private Set<Specialisation> specialisations;
 
         public EditPersonDescriptor() {
         }
@@ -184,6 +193,7 @@ public class EditCommand extends Command {
             setAffiliations(toCopy.affiliations);
             setAffiliationHistory(toCopy.affiliationHistory, toCopy.affiliations);
             setShiftDays(toCopy.shiftDays);
+            setSpecialisations(toCopy.specialisations);
         }
 
         /**
@@ -251,6 +261,14 @@ public class EditCommand extends Command {
 
         public void setShiftDays(ShiftDays shiftDays) {
             this.shiftDays = shiftDays;
+        }
+
+        public Optional<Set<Specialisation>> getSpecialisation() {
+            return Optional.ofNullable(specialisations);
+        }
+
+        public void setSpecialisations(Set<Specialisation> specialisations) {
+            this.specialisations = specialisations;
         }
 
         /**
@@ -330,7 +348,8 @@ public class EditCommand extends Command {
                     && Objects.equals(role, otherEditPersonDescriptor.role)
                     && Objects.equals(affiliations, otherEditPersonDescriptor.affiliations)
                     && Objects.equals(affiliationHistory, otherEditPersonDescriptor.affiliationHistory)
-                    && Objects.equals(shiftDays, otherEditPersonDescriptor.shiftDays);
+                    && Objects.equals(shiftDays, otherEditPersonDescriptor.shiftDays)
+                    && Objects.equals(specialisations, otherEditPersonDescriptor.specialisations);
         }
 
         @Override
@@ -343,6 +362,7 @@ public class EditCommand extends Command {
                     .add("affiliations", affiliations)
                     .add("affiliationHistory", affiliationHistory)
                     .add("shiftDays", shiftDays)
+                    .add("specialisations", specialisations)
                     .toString();
         }
     }

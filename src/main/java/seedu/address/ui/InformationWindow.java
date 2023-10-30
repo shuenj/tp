@@ -205,6 +205,7 @@ public class InformationWindow extends UiPart<Region> {
      * Clears the whole window.
      */
     public void resetWindow() {
+        name.setText("");
         fullWindow.setVisible(false);
         fullWindow.setManaged(false);
         fullWindow.setMinSize(0, 0);
