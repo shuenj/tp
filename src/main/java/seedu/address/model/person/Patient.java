@@ -11,8 +11,6 @@ import seedu.address.model.affiliation.Affiliation;
  */
 public class Patient extends Person {
 
-    public static final String MESSAGE_NEXT_OF_KIN_NOT_EXIST = "This person does not have a Next-of-Kin";
-
     private NextOfKin nextOfKin;
 
     /**
@@ -55,9 +53,6 @@ public class Patient extends Person {
 
     @Override
     public ToStringBuilder getStringBuilderRepresentation() {
-        if (!nextOfKin.isPresent()) {
-            return super.getStringBuilderRepresentation().add("nextOfKin", MESSAGE_NEXT_OF_KIN_NOT_EXIST);
-        }
         return super.getStringBuilderRepresentation().add("nextOfKin", getNextOfKin());
     }
 

@@ -27,6 +27,8 @@ import seedu.address.model.affiliation.AuthenticateAffiliation;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextOfKin;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -133,6 +135,12 @@ public class EditCommand extends Command {
             Set<Specialisation> specialisations = ((Doctor) personToEdit).getSpecialisations();
             Doctor editedDoctor = (Doctor) editedPerson;
             editedDoctor.setSpecialisations(specialisations);
+        }
+
+        if (personToEdit instanceof Patient && editedPerson instanceof Patient) {
+            NextOfKin nextOfKin = ((Patient) personToEdit).getNextOfKin();
+            Patient editedPatient = (Patient) editedPerson;
+            editedPatient.setNextOfKin(nextOfKin);
         }
 
         model.setPerson(personToEdit, editedPerson);

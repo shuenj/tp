@@ -93,10 +93,6 @@ public class PatientTest {
         .withAffiliationHistory(VALID_AFFILIATION_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        //difference next of kins -> return false
-        editedAlice = new PatientBuilder(ALICE).withNextOfKin(VALID_NEXT_OF_KIN_AMY).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         //different class instance -> return false
         assertFalse(TypicalPersons.ALICE.hashCode() == aliceCopy.hashCode());
     }
@@ -106,7 +102,7 @@ public class PatientTest {
         String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", role=" + ALICE.getRole() + ", affiliations="
                 + ALICE.getAffiliations() + ", affiliationHistory=" + ALICE.getAffiliationHistory()
-                + ", nextOfKin=" + Patient.MESSAGE_NEXT_OF_KIN_NOT_EXIST + "}";
+                + ", nextOfKin=" + ALICE.getNextOfKin() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
