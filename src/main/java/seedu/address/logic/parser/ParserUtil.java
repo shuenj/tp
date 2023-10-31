@@ -131,8 +131,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code shiftDayString} is invalid.
      */
-    public static Set<Integer> parseShiftDays(String shiftDayString) {
+    public static Set<Integer> parseShiftDays(String shiftDayString) throws ParseException {
         requireNonNull(shiftDayString);
+        // check if valid
+        if (!shiftDayString.trim().chars().allMatch(x -> x >= '1' && x <= '7')) {
+            throw new ParseException("Indication of shift days should be integers "
+                    + "between 1 to 7 inclusive.");
+        }
         return shiftDayString.trim().chars().map(x -> x - '0') // converts string into CharStream, then into IntStream
                 .boxed().collect(Collectors.toSet());
     }
