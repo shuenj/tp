@@ -3,6 +3,8 @@ package seedu.address.ui;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -83,7 +85,19 @@ public class PersonListPanel extends UiPart<Region> {
             // Handles up and down arrow key selection of PersonCard
             personListView.setOnKeyPressed(event -> {
                 Person focusedPerson = personListView.getSelectionModel().getSelectedItem();
-                informationWindow.displayInformation(focusedPerson);
+                if (focusedPerson != null) {
+                    informationWindow.displayInformation(focusedPerson);
+                }
+            });
+
+            // Handles the unfocus of list view when it loses focus due to user clicking elsewhere
+            personListView.focusedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if (!newValue) {
+                        personListView.getSelectionModel().clearSelection();
+                    }
+                }
             });
         }
 
