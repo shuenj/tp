@@ -32,7 +32,7 @@ public class ShiftCommand extends Command {
             + "2" + " "
             + "1346";
 
-    public static final String MESSAGE_SUCCESS = "Shift days added!";
+    public static final String MESSAGE_SUCCESS = "Shift days modified!";
     private static Logger logger = Logger.getLogger("Shift Command Logger");
     private final Index index;
     private final Set<Integer> shiftDayNumbers;

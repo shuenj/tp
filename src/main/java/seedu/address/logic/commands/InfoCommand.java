@@ -28,7 +28,7 @@ public class InfoCommand extends Command {
     private final Index targetIndex;
 
     /**
-     * Creates an InfoCommand to display the information of the person with the specified {@code Index}
+     * Creates an InfoCommand to display the information of the person with the specified {@code Index}.
      */
     public InfoCommand(Index targetIndex) {
         requireNonNull(targetIndex);

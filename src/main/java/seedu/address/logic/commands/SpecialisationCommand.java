@@ -29,7 +29,7 @@ public class SpecialisationCommand extends Command {
         + "Example: " + COMMAND_WORD + " 1 "
         + "ENT, Orthopaedic";
 
-    public static final String MESSAGE_SUCCESS = "Specialisation added!";
+    public static final String MESSAGE_SUCCESS = "Specialisation modified!";
     private static Logger logger = Logger.getLogger("Specialisation Command Logger");
     private final Index index;
     private final Set<Specialisation> specialisations;

@@ -24,9 +24,10 @@ public class ShiftCommandParser implements Parser<ShiftCommand> {
 
         requireNonNull(args);
         try {
-            String[] splitArgs = args.trim().split(" ");
+            String[] splitArgs = args.trim().split(" ", 2);
             Index index = ParserUtil.parseIndex(splitArgs[0]);
             Set<Integer> shiftDayNumbers;
+
             // check if there are any arguments after the index
             if (splitArgs.length > 1 && !splitArgs[1].isEmpty()) {
                 shiftDayNumbers = ParserUtil.parseShiftDays(splitArgs[1]);
