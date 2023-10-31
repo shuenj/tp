@@ -11,6 +11,7 @@ import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextOfKin;
 import seedu.address.model.person.Nurse;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
@@ -76,5 +77,12 @@ public class SampleDataUtil {
         return strings.stream()
                 .map(Specialisation::new)
                 .collect(Collectors.toCollection(HashSet::new));
+    }
+
+    /**
+     * Returns a @code{NextOfKin} containing the list of next of kins given as strings.
+     */
+    public static HashSet<NextOfKin> getNextOfKinSet(NextOfKin ... nextOfKins) {
+        return new HashSet<>(Arrays.asList(nextOfKins));
     }
 }

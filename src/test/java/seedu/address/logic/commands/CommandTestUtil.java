@@ -19,8 +19,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NextOfKin;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relationship;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -49,6 +53,19 @@ public class CommandTestUtil {
     public static final Set<String> VALID_SPECIALISATION_AMY = new HashSet<>(Arrays.asList("Heart", "Lungs"));
     public static final Set<String> VALID_SPECIALISATION_BOB = new HashSet<>(Arrays.asList("Kidney", "Lungs"));
     public static final Set<String> VALID_SPECIALISATION_EMPTY = new HashSet<>(Arrays.asList());
+
+    public static final Relationship VALID_RELATIONSHIP_AMY = new Relationship("Parents");
+    public static final Relationship VALID_RELATIONSHIP_BOB = new Relationship("Spouse");
+
+    public static final NextOfKin VALID_NEXT_OF_KIN_AMY = new NextOfKin(new Name("Tom"),
+            new Phone("11111111"), new Relationship("Parents"));
+    public static final NextOfKin VALID_NEXT_OF_KIN_BOB = new NextOfKin(new Name("Jerry"),
+            new Phone("33333333"), new Relationship("Spouse"));
+
+    public static final Set<NextOfKin> VALID_NEXT_OF_KIN_SET_AMY =
+            new HashSet<>(Arrays.asList(VALID_NEXT_OF_KIN_AMY));
+    public static final Set<NextOfKin> VALID_NEXT_OF_KIN_SET_BOB =
+            new HashSet<>(Arrays.asList(VALID_NEXT_OF_KIN_BOB));
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

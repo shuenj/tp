@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextOfKin;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Phone;
 import seedu.address.model.util.SampleDataUtil;
@@ -25,6 +26,8 @@ public class PatientBuilder {
     private Set<Affiliation> affiliations;
     private Set<Affiliation> affiliationHistory;
 
+    private Set<NextOfKin> nextOfKins;
+
     /**
      * Creates a {@code PatientBuilder} with the default details.
      */
@@ -34,6 +37,7 @@ public class PatientBuilder {
         email = new Email(DEFAULT_EMAIL);
         affiliations = new HashSet<>();
         affiliationHistory = new HashSet<>();
+        nextOfKins = new HashSet<>();
     }
 
     /**
@@ -45,6 +49,7 @@ public class PatientBuilder {
         email = patientToCopy.getEmail();
         affiliations = new HashSet<>(patientToCopy.getAffiliations());
         affiliationHistory = new HashSet<>(patientToCopy.getAffiliationHistory());
+        nextOfKins = new HashSet<>(patientToCopy.getNextOfKins());
     }
 
     /**
@@ -74,6 +79,15 @@ public class PatientBuilder {
     }
 
     /**
+     * Parses the {@code nextOfKin} into a {@code Set<NextOfKin>} and set it to the {@code Patient} that
+     * we are building.
+     */
+    public PatientBuilder withNextOfKins(NextOfKin ... nextOfKins) {
+        this.nextOfKins = SampleDataUtil.getNextOfKinSet(nextOfKins);
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Patient} that we are building.
      */
     public PatientBuilder withPhone(String phone) {
@@ -89,8 +103,13 @@ public class PatientBuilder {
         return this;
     }
 
+    /**
+     * Rebuilds a Patient Object with the specified parameters.
+     */
     public Patient build() {
-        return new Patient(name, phone, email, affiliations, affiliationHistory);
+        Patient patient = new Patient(name, phone, email, affiliations, affiliationHistory);
+        patient.setNextOfKins(nextOfKins);
+        return patient;
     }
 
 }
