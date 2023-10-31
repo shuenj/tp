@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalMixed.getTypicalMixedAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,6 +21,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.DoctorBuilder;
+import seedu.address.testutil.NurseBuilder;
+import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -85,6 +89,28 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void checkValidity_mixedPersonList_returnsTrue() {
+        addressBook.addPerson(new DoctorBuilder().withName("Sam")
+                .withAffiliations().withAffiliationHistory().build());
+        addressBook.addPerson(new NurseBuilder().withName("Tom")
+                .withAffiliations().withAffiliationHistory().build());
+        addressBook.addPerson(new PatientBuilder().withName("May")
+                .withAffiliations().withAffiliationHistory().build());
+        assertTrue(addressBook.hasValidAffiliationConfiguration());
+    }
+
+    @Test
+    public void checkValidity_mixedPersonList_returnsFalse() {
+        addressBook.addPerson(new DoctorBuilder().withName("Sam")
+                .withAffiliations().withAffiliationHistory().build());
+        addressBook.addPerson(new NurseBuilder().withName("Tom")
+                .withAffiliations().withAffiliationHistory().build());
+        addressBook.addPerson(new PatientBuilder().withName("May")
+                .withAffiliations("Sam").withAffiliationHistory().build());
+        assertFalse(addressBook.hasValidAffiliationConfiguration());
     }
 
     @Test

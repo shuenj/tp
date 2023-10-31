@@ -49,13 +49,11 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Returns the role of the Person with the given name.
-     * The person with the given name must exist in the list.
      *
      * @param name The name of person to check for.
      */
     public Role getPersonRoleByName(String name) {
         requireNonNull(name);
-        assert containsName(name);
 
         for (Person person : internalList) {
             if (person.getName().fullName.equals(name)) {
