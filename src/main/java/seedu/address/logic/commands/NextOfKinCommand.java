@@ -27,6 +27,7 @@ public class NextOfKinCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Modify the Next-of-Kin of the person identified"
             + " by the index number used in the displayed person list.\n"
             + "Clear the Next-of-Kin by not providing any parameters.\n"
+            + "Either all of the 3 unique parameter are specified or none of the parameter is specified.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME " + "]"
             + "[" + PREFIX_PHONE + "PHONE " + "]"
