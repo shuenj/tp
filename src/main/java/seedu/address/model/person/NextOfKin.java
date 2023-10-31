@@ -72,13 +72,6 @@ public class NextOfKin {
         }
     }
 
-    public ToStringBuilder getStringBuilderRepresentation() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("relationship", relationship);
-    }
-
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -88,7 +81,7 @@ public class NextOfKin {
     @Override
     public String toString() {
         if (this.isPresent()) {
-            return this.getStringBuilderRepresentation().toString();
+            return "{name=" + name + ", phone=" + phone + ", relationship=" + relationship + "}";
         } else {
             return MESSAGE_NEXT_OF_KIN_NOT_EXIST;
         }

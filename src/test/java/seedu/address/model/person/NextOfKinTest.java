@@ -55,8 +55,7 @@ public class NextOfKinTest {
     @Test
     public void toStringMethod() {
         NextOfKin nextOfKin = VALID_NEXT_OF_KIN_AMY;
-        String expected = NextOfKin.class.getCanonicalName() + "{"
-                + "name=Tom, phone=11111111, relationship=Parents" + "}";
+        String expected = "{" + "name=Tom, phone=11111111, relationship=Parents" + "}";
         assertEquals(expected, nextOfKin.toString());
     }
 }
