@@ -34,9 +34,10 @@ public class Doctor extends Staff {
         return specialisations;
     }
 
-    public void setSpecialisations(Set<Specialisation> specialisations) {
+    public Doctor setSpecialisations(Set<Specialisation> specialisations) {
         this.specialisations.clear();
         this.specialisations.addAll(specialisations);
+        return this;
     }
 
     /**
