@@ -206,7 +206,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            // Displays information of Person if show command is potentially called
+            // Displays information of Person if info command is potentially called
             personListPanel.displayPotentialInformation(commandResult.getShowInfoIndex());
 
             return commandResult;
