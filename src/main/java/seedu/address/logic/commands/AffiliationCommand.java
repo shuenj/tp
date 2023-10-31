@@ -23,7 +23,6 @@ public class AffiliationCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds and returns the list of people who are "
         + "affiliated with the person identified by the index number shown in the displayed person list. "
         + "(i.e. returns the staff of a patient, or the patients of a staff)\n"
-        + "The index must be a positive integer 1, 2, 3, …\n"
         + "Parameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 2";
 
