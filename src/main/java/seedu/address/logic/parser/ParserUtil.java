@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.ShiftDays;
 import seedu.address.model.person.Specialisation;
 
 /**
@@ -133,13 +134,14 @@ public class ParserUtil {
      */
     public static Set<Integer> parseShiftDays(String shiftDayString) throws ParseException {
         requireNonNull(shiftDayString);
-        // check if valid
-        if (!shiftDayString.trim().chars().allMatch(x -> x >= '1' && x <= '7')) {
-            throw new ParseException("Indication of shift days should be integers "
-                    + "between 1 to 7 inclusive.");
-        }
-        return shiftDayString.trim().chars().map(x -> x - '0') // converts string into CharStream, then into IntStream
+
+        // converts string into CharStream, then into IntStream
+        Set<Integer> shiftDaysSet = shiftDayString.trim().chars().map(x -> x - '0')
                 .boxed().collect(Collectors.toSet());
+        if (!ShiftDays.isValidShiftDays(shiftDaysSet)) {
+            throw new ParseException(ShiftDays.MESSAGE_CONSTRAINTS);
+        }
+        return shiftDaysSet;
     }
 
     /**
