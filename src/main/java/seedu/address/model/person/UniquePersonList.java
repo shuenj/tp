@@ -38,6 +38,8 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Returns true if the list contains an equivalent person's name as the given argument.
+     *
+     * @param name The name of person to check for.
      */
     public boolean containsName(String name) {
         requireNonNull(name);
@@ -48,6 +50,8 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Returns the role of the Person with the given name.
      * The person with the given name must exist in the list.
+     *
+     * @param name The name of person to check for.
      */
     public Role getPersonRoleByName(String name) {
         requireNonNull(name);
