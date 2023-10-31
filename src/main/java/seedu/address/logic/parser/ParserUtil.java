@@ -14,6 +14,7 @@ import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relationship;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.ShiftDays;
 import seedu.address.model.person.Specialisation;
@@ -170,4 +171,18 @@ public class ParserUtil {
     }
 
 
+    /**
+     * Parses a {@code String relationship} into a {@code Relationship}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code relationship} is invalid.
+     */
+    public static Relationship parseRelationship(String relationship) throws ParseException {
+        requireNonNull(relationship);
+        String trimmedRelationship = relationship.trim();
+        if (!Name.isValidName(trimmedRelationship)) {
+            throw new ParseException(Relationship.MESSAGE_CONSTRAINTS);
+        }
+        return new Relationship(trimmedRelationship);
+    }
 }

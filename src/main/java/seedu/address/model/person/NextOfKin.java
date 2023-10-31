@@ -11,6 +11,8 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class NextOfKin {
 
+    public static final String MESSAGE_NEXT_OF_KIN_NOT_EXIST = "This person does not have a Next-of-Kin";
+
     public final Name name;
     public final Phone phone;
     public final Relationship relationship;
@@ -85,6 +87,10 @@ public class NextOfKin {
 
     @Override
     public String toString() {
-        return getStringBuilderRepresentation().toString();
+        if (this.isPresent()) {
+            return this.getStringBuilderRepresentation().toString();
+        } else {
+            return MESSAGE_NEXT_OF_KIN_NOT_EXIST;
+        }
     }
 }
