@@ -50,6 +50,8 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public void displayPotentialInformation(Optional<Integer> showInfoIndex) {
         if (showInfoIndex.isPresent()) {
+            personListView.requestFocus();
+
             // Selects the indicated Person
             personListView.getSelectionModel().select(showInfoIndex.get());
 
