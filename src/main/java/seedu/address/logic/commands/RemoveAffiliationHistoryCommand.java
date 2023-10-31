@@ -21,8 +21,8 @@ public class RemoveAffiliationHistoryCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Affiliation history has been cleared!\n%1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clear the affiliation history of the person "
-            + "identified by the index number used in the displayed person list. "
-            + "Parameters: INDEX (must be a positive integer) "
+            + "identified by the index number used in the displayed person list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 2";
 
     private final Index index;

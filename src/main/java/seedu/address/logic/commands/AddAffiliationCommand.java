@@ -29,7 +29,7 @@ public class AddAffiliationCommand extends Command {
             + "Input affiliation will be added on existing affiliation.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_AFFILIATION + "AFFILIATION "
-            + "[" + PREFIX_AFFILIATION + "AFFILIATION]..."
+            + "[" + PREFIX_AFFILIATION + "AFFILIATION]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_AFFILIATION + "John Doe "
             + PREFIX_AFFILIATION + "Amy";

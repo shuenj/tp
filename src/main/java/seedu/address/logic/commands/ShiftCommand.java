@@ -25,10 +25,9 @@ public class ShiftCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the shift days of the "
             + "person identified with the given index number.\n"
-            + "The index must be a positive integer 1, 2, 3, …\n"
             + "Parameters: "
-            + "INDEX (must be a positive integer)\n"
-            + "SHIFT_DAYS (from 1, Monday to 7, Sunday, typed with no spaces)"
+            + "INDEX (must be a positive integer) "
+            + "SHIFT_DAYS (from 1, Monday to 7, Sunday, typed with no spaces)\n"
             + "Example: " + COMMAND_WORD + " "
             + "2" + " "
             + "1346";

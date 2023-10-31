@@ -22,7 +22,7 @@ public class SpecialisationCommand extends Command {
 
     public static final String COMMAND_WORD = "spec";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Modify the specialisation to the person identified"
-        + " by the index number used in the displayed person list.\n"
+        + " by the index number used in the displayed person list. "
         + "Clear the specialisation by not providing any specialisation.\n"
         + "Parameters: INDEX (must be a positive integer) "
         + "SPEC (must be a valid specialisation)\n"
