@@ -62,7 +62,7 @@ public class TypicalMixed {
     private TypicalMixed() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical Doctors.
+     * Returns an {@code AddressBook} with all the Persons with mixed roles.
      */
     public static AddressBook getTypicalMixedAddressBook() {
         AddressBook ab = new AddressBook();
