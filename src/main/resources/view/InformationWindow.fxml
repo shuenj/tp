@@ -90,6 +90,33 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                     </padding>
                 </VBox>
+                <VBox fx:id="nokBlock">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                    <children>
+                        <Label fx:id="nokHeader" styleClass="information-nok"/>
+                        <Label fx:id="nokNotPresent" styleClass="information-nok-missing"/>
+                        <Label fx:id="nokName" styleClass="information-nok-name"/>
+                        <Label fx:id="nokPhone" styleClass="information-nok-phone"/>
+                        <Label fx:id="nokRelationship" styleClass="information-nok-relationship"/>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="15.0"/>
+                    </VBox.margin>
+                </VBox>
+                <VBox fx:id="specBlock">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                    <children>
+                        <Label fx:id="specListHeader" styleClass="information-spec"/>
+                        <VBox fx:id="specListBlock"/>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="15.0"/>
+                    </VBox.margin>
+                </VBox>
                 <VBox fx:id="affnBlock">
                     <VBox.margin>
                         <Insets left="20.0" right="20.0" top="15.0"/>

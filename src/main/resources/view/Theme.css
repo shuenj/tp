@@ -158,11 +158,40 @@
     -fx-background-radius: 5px;
 }
 
+.information-nok {
+    -fx-font-size: 20px;
+}
+
+.information-nok-missing {
+    -fx-font-size: 16px;
+    -fx-text-fill: red;
+}
+
+.information-nok-name {
+    -fx-font-size: 16px;
+}
+
+.information-nok-phone {
+    -fx-font-size: 16px;
+}
+
+.information-nok-relationship {
+    -fx-font-size: 16px;
+}
+
 .information-affn {
     -fx-font-size: 20px;
 }
 
 .information-affn-list {
+    -fx-font-size: 16px;
+}
+
+.information-spec {
+    -fx-font-size: 20px;
+}
+
+.information-spec-list {
     -fx-font-size: 16px;
 }
 
