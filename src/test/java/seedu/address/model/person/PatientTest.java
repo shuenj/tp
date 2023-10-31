@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AFFILIATION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NEXT_OF_KIN_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.TypicalPatients.ALICE;
 import static seedu.address.testutil.TypicalPatients.BOB;
@@ -23,6 +24,9 @@ public class PatientTest {
         Patient patient = new PatientBuilder().build();
         patient.getAffiliations().add(new Affiliation(VALID_AFFILIATION_AMY));
         assertTrue(patient.getAffiliations().contains(new Affiliation(VALID_AFFILIATION_AMY)));
+
+        patient.setNextOfKin(VALID_NEXT_OF_KIN_AMY);
+        assertEquals(patient.getNextOfKin(), VALID_NEXT_OF_KIN_AMY);
     }
 
     @Test
@@ -36,7 +40,8 @@ public class PatientTest {
         // same name, all other attributes different -> returns true
         Patient editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAffiliations(VALID_AFFILIATION_AMY)
-                .withAffiliationHistory(VALID_AFFILIATION_AMY).build();
+                .withAffiliationHistory(VALID_AFFILIATION_AMY)
+                .withNextOfKin(VALID_NEXT_OF_KIN_AMY).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -88,6 +93,10 @@ public class PatientTest {
         .withAffiliationHistory(VALID_AFFILIATION_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        //difference next of kins -> return false
+        editedAlice = new PatientBuilder(ALICE).withNextOfKin(VALID_NEXT_OF_KIN_AMY).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         //different class instance -> return false
         assertFalse(TypicalPersons.ALICE.hashCode() == aliceCopy.hashCode());
     }
@@ -96,7 +105,8 @@ public class PatientTest {
     public void toStringMethod() {
         String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", role=" + ALICE.getRole() + ", affiliations="
-                + ALICE.getAffiliations() + ", affiliationHistory=" + ALICE.getAffiliationHistory() + "}";
+                + ALICE.getAffiliations() + ", affiliationHistory=" + ALICE.getAffiliationHistory()
+                + ", nextOfKin=" + Patient.MESSAGE_NEXT_OF_KIN_NOT_EXIST + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
