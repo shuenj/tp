@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,7 +11,9 @@ import seedu.address.model.affiliation.Affiliation;
  */
 public class Patient extends Person {
 
-    private final Set<NextOfKin> nextOfKins;
+    public static String MESSAGE_NEXT_NOT_KIN_NOT_EXIST = "This person does not have a Next-of-Kin";
+
+    public NextOfKin nextOfKin;
 
     /**
      * Every field must be present and not null.
@@ -20,7 +21,7 @@ public class Patient extends Person {
     public Patient(Name name, Phone phone, Email email,
         Set<Affiliation> affiliations, Set<Affiliation> affiliationHistory) {
         super(name, phone, email, new Role("Patient"), affiliations, affiliationHistory);
-        this.nextOfKins = new HashSet<>();
+        this.nextOfKin = NextOfKin.initialNextOfKin;
     }
 
     /**
@@ -28,7 +29,7 @@ public class Patient extends Person {
      */
     public Patient(Name name, Phone phone, Email email, Set<Affiliation> affiliations) {
         super(name, phone, email, new Role("Patient"), affiliations);
-        this.nextOfKins = new HashSet<>();
+        this.nextOfKin = NextOfKin.initialNextOfKin;
     }
 
     @Override
@@ -49,36 +50,34 @@ public class Patient extends Person {
                 && getRole().equals(otherPatient.getRole())
                 && getAffiliations().equals(otherPatient.getAffiliations())
                 && getAffiliationHistory().equals(otherPatient.getAffiliationHistory())
-                && getNextOfKins().equals(otherPatient.getNextOfKins());
+                && getNextOfKin().equals(otherPatient.getNextOfKin());
     }
 
     @Override
     public ToStringBuilder getStringBuilderRepresentation() {
-        return super.getStringBuilderRepresentation().add("nextOfKins", getNextOfKins());
+        if (!nextOfKin.isPresent()) {
+            return super.getStringBuilderRepresentation().add("nextOfKin", MESSAGE_NEXT_NOT_KIN_NOT_EXIST);
+        }
+        return super.getStringBuilderRepresentation().add("nextOfKin", getNextOfKin());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(getName(), getPhone(), getEmail(), getRole(), getAffiliations(),
-                getAffiliationHistory(), getNextOfKins());
+                getAffiliationHistory(), getNextOfKin());
     }
 
-    public Set<NextOfKin> getNextOfKins() {
-        return this.nextOfKins;
+    public NextOfKin getNextOfKin() {
+        return this.nextOfKin;
     }
 
-    public void addNextOfKin(NextOfKin newNextOfKin) {
-        this.nextOfKins.add(newNextOfKin);
-    }
-
-    public void setNextOfKins(Set<NextOfKin> newNextOfKins) {
-        this.nextOfKins.clear();
-        this.nextOfKins.addAll(newNextOfKins);
+    public void setNextOfKin(NextOfKin newNextOfKin) {
+        this.nextOfKin = newNextOfKin;
     }
 
     public void clearNextOfKins() {
-        this.nextOfKins.clear();
+        this.nextOfKin = NextOfKin.initialNextOfKin;
     }
 
     @Override

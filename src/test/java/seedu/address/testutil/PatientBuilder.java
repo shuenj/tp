@@ -26,7 +26,7 @@ public class PatientBuilder {
     private Set<Affiliation> affiliations;
     private Set<Affiliation> affiliationHistory;
 
-    private Set<NextOfKin> nextOfKins;
+    private NextOfKin nextOfKin;
 
     /**
      * Creates a {@code PatientBuilder} with the default details.
@@ -37,7 +37,7 @@ public class PatientBuilder {
         email = new Email(DEFAULT_EMAIL);
         affiliations = new HashSet<>();
         affiliationHistory = new HashSet<>();
-        nextOfKins = new HashSet<>();
+        nextOfKin = new NextOfKin();
     }
 
     /**
@@ -49,7 +49,7 @@ public class PatientBuilder {
         email = patientToCopy.getEmail();
         affiliations = new HashSet<>(patientToCopy.getAffiliations());
         affiliationHistory = new HashSet<>(patientToCopy.getAffiliationHistory());
-        nextOfKins = new HashSet<>(patientToCopy.getNextOfKins());
+        nextOfKin = patientToCopy.getNextOfKin();
     }
 
     /**
@@ -82,8 +82,8 @@ public class PatientBuilder {
      * Parses the {@code nextOfKin} into a {@code Set<NextOfKin>} and set it to the {@code Patient} that
      * we are building.
      */
-    public PatientBuilder withNextOfKins(NextOfKin ... nextOfKins) {
-        this.nextOfKins = SampleDataUtil.getNextOfKinSet(nextOfKins);
+    public PatientBuilder withNextOfKin(NextOfKin nextOfKin) {
+        this.nextOfKin = nextOfKin;
         return this;
     }
 
@@ -108,7 +108,7 @@ public class PatientBuilder {
      */
     public Patient build() {
         Patient patient = new Patient(name, phone, email, affiliations, affiliationHistory);
-        patient.setNextOfKins(nextOfKins);
+        patient.setNextOfKin(nextOfKin);
         return patient;
     }
 

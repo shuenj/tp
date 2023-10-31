@@ -25,8 +25,8 @@ public class PatientTest {
         patient.getAffiliations().add(new Affiliation(VALID_AFFILIATION_AMY));
         assertTrue(patient.getAffiliations().contains(new Affiliation(VALID_AFFILIATION_AMY)));
 
-        patient.getNextOfKins().add(VALID_NEXT_OF_KIN_AMY);
-        assertTrue(patient.getNextOfKins().contains(VALID_NEXT_OF_KIN_AMY));
+        patient.setNextOfKin(VALID_NEXT_OF_KIN_AMY);
+        assertEquals(patient.getNextOfKin(), VALID_NEXT_OF_KIN_AMY);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class PatientTest {
         Patient editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAffiliations(VALID_AFFILIATION_AMY)
                 .withAffiliationHistory(VALID_AFFILIATION_AMY)
-                .withNextOfKins(VALID_NEXT_OF_KIN_AMY).build();
+                .withNextOfKin(VALID_NEXT_OF_KIN_AMY).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -94,9 +94,7 @@ public class PatientTest {
         assertFalse(ALICE.equals(editedAlice));
 
         //difference next of kins -> return false
-        NextOfKin sampleNextOfKin = new NextOfKin(new Name(VALID_NAME_BOB),
-                new Phone(VALID_PHONE_BOB), new Relationship("Brother"));
-        editedAlice = new PatientBuilder(ALICE).withNextOfKins(sampleNextOfKin).build();
+        editedAlice = new PatientBuilder(ALICE).withNextOfKin(VALID_NEXT_OF_KIN_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
 
         //different class instance -> return false
@@ -108,7 +106,7 @@ public class PatientTest {
         String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", role=" + ALICE.getRole() + ", affiliations="
                 + ALICE.getAffiliations() + ", affiliationHistory=" + ALICE.getAffiliationHistory()
-                + ", nextOfKins=" + ALICE.getNextOfKins() + "}";
+                + ", nextOfKin=" + Patient.MESSAGE_NEXT_NOT_KIN_NOT_EXIST + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

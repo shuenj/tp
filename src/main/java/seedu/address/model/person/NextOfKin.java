@@ -10,9 +10,11 @@ import seedu.address.commons.util.ToStringBuilder;
  * Represents a Patient's Next of Kin in the contact list.
  */
 public class NextOfKin {
-    private final Name name;
-    private final Phone phone;
-    private final Relationship relationship;
+
+    public static final NextOfKin initialNextOfKin = new NextOfKin();
+    public final Name name;
+    public final Phone phone;
+    public final Relationship relationship;
 
     /**
      * Every field must be present and not null.
@@ -22,6 +24,12 @@ public class NextOfKin {
         this.name = name;
         this.phone = phone;
         this.relationship = relationship;
+    }
+
+    public NextOfKin() {
+        this.name = null;
+        this.phone = null;
+        this.relationship = null;
     }
 
     public Name getName() {
@@ -35,6 +43,10 @@ public class NextOfKin {
     public Relationship getRelationship() {
         return this.relationship;
     }
+
+    public boolean isPresent() {
+        return this.name != null;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -47,9 +59,13 @@ public class NextOfKin {
         }
 
         NextOfKin otherNextOfKin = (NextOfKin) other;
-        return getName().equals(otherNextOfKin.getName())
-                && getPhone().equals(otherNextOfKin.getPhone())
-                && getRelationship().equals(otherNextOfKin.getRelationship());
+        if (this.isPresent()) {
+            return getName().equals(otherNextOfKin.getName())
+                    && getPhone().equals(otherNextOfKin.getPhone())
+                    && getRelationship().equals(otherNextOfKin.getRelationship());
+        } else {
+            return !otherNextOfKin.isPresent();
+        }
     }
 
     public ToStringBuilder getStringBuilderRepresentation() {
