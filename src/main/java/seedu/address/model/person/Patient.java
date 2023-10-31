@@ -11,9 +11,9 @@ import seedu.address.model.affiliation.Affiliation;
  */
 public class Patient extends Person {
 
-    public static String MESSAGE_NEXT_NOT_KIN_NOT_EXIST = "This person does not have a Next-of-Kin";
+    public static final String MESSAGE_NEXT_OF_KIN_NOT_EXIST = "This person does not have a Next-of-Kin";
 
-    public NextOfKin nextOfKin;
+    private NextOfKin nextOfKin;
 
     /**
      * Every field must be present and not null.
@@ -21,7 +21,7 @@ public class Patient extends Person {
     public Patient(Name name, Phone phone, Email email,
         Set<Affiliation> affiliations, Set<Affiliation> affiliationHistory) {
         super(name, phone, email, new Role("Patient"), affiliations, affiliationHistory);
-        this.nextOfKin = NextOfKin.initialNextOfKin;
+        this.nextOfKin = new NextOfKin();
     }
 
     /**
@@ -29,7 +29,7 @@ public class Patient extends Person {
      */
     public Patient(Name name, Phone phone, Email email, Set<Affiliation> affiliations) {
         super(name, phone, email, new Role("Patient"), affiliations);
-        this.nextOfKin = NextOfKin.initialNextOfKin;
+        this.nextOfKin = new NextOfKin();
     }
 
     @Override
@@ -56,7 +56,7 @@ public class Patient extends Person {
     @Override
     public ToStringBuilder getStringBuilderRepresentation() {
         if (!nextOfKin.isPresent()) {
-            return super.getStringBuilderRepresentation().add("nextOfKin", MESSAGE_NEXT_NOT_KIN_NOT_EXIST);
+            return super.getStringBuilderRepresentation().add("nextOfKin", MESSAGE_NEXT_OF_KIN_NOT_EXIST);
         }
         return super.getStringBuilderRepresentation().add("nextOfKin", getNextOfKin());
     }
@@ -77,7 +77,7 @@ public class Patient extends Person {
     }
 
     public void clearNextOfKins() {
-        this.nextOfKin = NextOfKin.initialNextOfKin;
+        this.nextOfKin = new NextOfKin();
     }
 
     @Override

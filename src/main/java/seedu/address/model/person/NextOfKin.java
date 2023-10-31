@@ -11,7 +11,6 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class NextOfKin {
 
-    public static final NextOfKin initialNextOfKin = new NextOfKin();
     public final Name name;
     public final Phone phone;
     public final Relationship relationship;
@@ -26,6 +25,9 @@ public class NextOfKin {
         this.relationship = relationship;
     }
 
+    /**
+     * Constructs a NextOfKin with no parameters.
+     */
     public NextOfKin() {
         this.name = null;
         this.phone = null;

@@ -106,7 +106,7 @@ public class PatientTest {
         String expected = Patient.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", role=" + ALICE.getRole() + ", affiliations="
                 + ALICE.getAffiliations() + ", affiliationHistory=" + ALICE.getAffiliationHistory()
-                + ", nextOfKin=" + Patient.MESSAGE_NEXT_NOT_KIN_NOT_EXIST + "}";
+                + ", nextOfKin=" + Patient.MESSAGE_NEXT_OF_KIN_NOT_EXIST + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
