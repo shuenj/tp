@@ -277,7 +277,7 @@ class JsonAdaptedPerson {
      * Generates {@link NextOfKin} object from the stored JSON data (only for Patients).
      *
      * @return {@link NextOfKin} object based on the stored JSON data.
-     * @throws IllegalValueException If the role is not "Doctor" or specialisations are null or do not meet the
+     * @throws IllegalValueException If the role is not "Patient" or nextOfKin are null or do not meet the
      *      constraints.
      */
     private NextOfKin generateNextOfKin(JsonAdaptedNextOfKin nextOfKin) throws IllegalValueException {
