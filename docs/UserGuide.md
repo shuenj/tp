@@ -335,7 +335,7 @@ _Details coming soon ..._
 | **Add**                        | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/NAME]…​` <br> e.g., `add n/May Ho p/98765432 e/johnd@example.com r/nurse a/John Doe` |
 | **Clear**                      | `clear`                                                                                                                           |
 | **Delete**                     | `delete INDEX`<br> e.g., `delete 3`                                                                                               |
-| **Edit**                       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/NAME]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                  |
+| **Edit**                       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/NAME]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                           |
 | **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                        |
 | **List**                       | `list`                                                                                                                            |
 | **List Affiliations**          | `affn INDEX`<br> e.g., `affn 1`                                                                                                   |
@@ -343,6 +343,7 @@ _Details coming soon ..._
 | **Add Affiliations**           | `addaffn INDEX a/NAME [a/NAME]`<br> e.g., `addaffn 4 a/Mike Chang a/Tom Cruise`                                                   |
 | **Modify Shift Days**          | `shift INDEX SHIFT_DAYS`<br> e.g., `shift 2 1457`                                                                                 |
 | **Clears Affiliation History** | `removeah INDEX`<br> e.g., `removeah 1`                                                                                           |
+| **Add Next of Kin**            | `nok INDEX` <br> e.g., `nok 2` or `nok INDEX n/NAME p/PHONE rs/RELATIONSHIP` <br> e.g., `nok 3 n/John p/11111 rs/Brother`         |
 | **List Staff On Duty**         | `onduty`                                                                                                                          |
 | **Modify Specialisation**      | `spec INDEX SPECIALISATIONS`<br> e.g., `spec 4 Cardiology, Osteology`                                                             |
 | **Display Person Information** | `info INDEX`<br> e.g., `info 2`                                                                                                   |
