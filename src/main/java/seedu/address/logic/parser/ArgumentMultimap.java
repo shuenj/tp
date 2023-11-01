@@ -44,6 +44,14 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns the number of unique keys.
+     */
+    public int getPrefixNum() {
+        // Subtracts 1 to take into account the empty "" prefix.
+        return argMultimap.size() - 1;
+    }
+
+    /**
      * Returns all values of {@code prefix}.
      * If the prefix does not exist or has no values, this will return an empty list.
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
