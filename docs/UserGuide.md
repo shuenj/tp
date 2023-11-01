@@ -105,7 +105,7 @@ Format: `list`
 
 Edits an existing contact in the contact list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/AFFN]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -113,6 +113,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/AFFN]…​`
 * When editing affiliations, the existing affiliations of the person will be removed i.e adding of affiliations is not cumulative.
 * You can remove all the person’s affiliations by typing `a/` without
     specifying any affiliations after it.
+* Removing all affiliation automatically deletes the person from others' affiliation.
 
 Examples:
 *  `edit 3 p/81234567 a/` Edits the phone number of the 3rd person to `81234567` and removes the person’s affiliation
@@ -136,6 +137,26 @@ Examples:
 * `find sally` returns `Sally Wing`<br>
   ![result for 'find alex david'](images/findSallyResult.png)
 
+### Add affiliations of a staff/patient: `addaffn`
+
+Format: `addaffn INDEX a/AFFN [a/AFFN]…`
+
+Add affiliations to staff/patients indicated by the given `INDEX` without deleting existing affiliation.
+
+* Add affiliations for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* If person at index is staff, affiliations specified must be a patient.
+* If person at index is patient, affiliations specified must be a staff.
+* Adding patient A to affiliation of staff B, will result in adding staff B to affiliation of Patient A.
+* Multiple affiliations can be added.
+* At least one affiliation field must be provided.
+* `AFFN` is specified as full name of a person in the contact list.
+
+Examples:
+* `addaffn 1 a/John` add `John` to affiliation of 1st person in the contact list.
+* `addaffn 3 a/John a/Mary` add `John` and `Mary` to affiliation of 3rd person in the contact list.
+
 ### Returning affiliations of a staff/patient: `affn`
 
 Finds staff/patients who are affiliated with the patient/staff indicated
@@ -157,10 +178,23 @@ Finds the staff/patients that used to be affiliated or are currently affiliated 
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Adding/Editing a person's affiliation automatically updates the affiliation history for the person.
-* Deleting a person automatically deletes the person from others' affilation history.
 
 Examples:
 * `affnh 2` lists the people who used to be affiliated or are currently affiliated to the 2nd person in the contact list.
+
+### Remove affiliation history of a person: `removeah`
+
+Format: `removeah INDEX`
+
+Remove all affiliation history of patient/staff indicated by the given `INDEX`, except for affiliations that are currently affiliated.
+
+* Remove all affiliation history for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Current affiliation in affiliation history will not be removed.
+
+Examples:
+* `removeah 2` remove affiliation history of the 2nd person in the contact list.
 
 ### Modifying specialisations of a doctor: `spec`
 
@@ -185,10 +219,28 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Deleting a person automatically deletes the person from others' affiliation and affiliation history.
 
 Examples:
 * `list` followed by `delete 3` deletes the 3rd person in the contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Add next of kin to a patient: `nok`
+
+Format: `nok INDEX`
+Format: `nok INDEX n/NAME p/PHONE rs/RELATIONSHIP`
+
+Update next of kin of a patient identified at `INDEX` in the contact list.
+
+* Update next of kin for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* If no fields are provided, next of kin of the person identified at index will be removed.
+* `RELATIONSHIP` can be specified in any alphanumeric characters and spaces.
+
+Examples:
+* `nok 2` remove next of kin of the 2nd person in the contact list.
+* `nok 3 n/John p/11111 rs/Brother` add next of kin with the name `John`, phone `11111` and relationship `Brother` to the 3rd person in the contact list.
 
 ### Returning staff that are on duty: `onduty`
 
