@@ -71,7 +71,7 @@ MediSync is a **desktop app specifically used for head nurses to manage staff an
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessageT16.png)
+![help message](images/helpMessage.png)
 
 Format: `help`
 
@@ -80,17 +80,20 @@ Format: `help`
 
 Adds a contact to the contact list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/NAME]…​`
+
+* Role can only be listed as `Nurse`, `Doctor`, or `Patient` (case-insensitive).
+* Affiliations that are successfully added will update the opposing list of affiliations for the affiliated.
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of affiliations (including 0)
+**Tip:** A person can have any number of affiliations (including 0). However, to add an affiliation, it must already exist in the contact list. In addition, the role of the affiliation must be constrasting to the person being added (i.e. affiliations can only be between Nurse and Patient OR Doctor and Patient).
 
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/patient`
-* `add n/John Doe p/98765432 e/johnd@example.com r/patient a/Dr Mike`
+* `add n/May Ho p/97746234 e/may@example.com r/nurse a/John Doe`
 
 ### Listing all persons : `list`
 
@@ -133,9 +136,9 @@ Examples:
 * `find sally` returns `Sally Wing`<br>
   ![result for 'find alex david'](images/findSallyResult.png)
 
-### Returning affiliations of a doctor/patient: `affn`
+### Returning affiliations of a staff/patient: `affn`
 
-Finds doctors/patients who are affiliated with the patient/doctor indicated
+Finds staff/patients who are affiliated with the patient/staff indicated
 by the given index.
 
 * Finds affiliations for the person at the specified `INDEX`.
@@ -146,10 +149,36 @@ Examples:
 * `list` followed by `affn 2` lists the people affiliated to the 2nd person in the contact list.
 * Subsequently, `affn 1` will list the people affiliated with the 1st person displayed after the previous `affn` command.
 
+### Listing affiliation history of a person: `affnh`
+
+Finds the staff/patients that used to be affiliated or are currently affiliated with the patient/staff indicated by the given index.
+
+* Finds affiliation history for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Adding/Editing a person's affiliation automatically updates the affiliation history for the person.
+* Deleting a person automatically deletes the person from others' affilation history.
+
+Examples:
+* `affnh 2` lists the people who used to be affiliated or are currently affiliated to the 2nd person in the contact list.
+
+### Modifying specialisations of a doctor: `spec`
+
+Finds the doctor indicated by the given index and modifies the specialisations of the doctor.
+
+* Finds the doctor at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list and it must refer to a doctor.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Specialisations must be separated by a comma.
+* To remove all specialisations, type `spec INDEX` without specifying any specialisations after it.
+
+Examples:
+* `spec 2 heart, brain` modifies the specialisations of the 2nd doctor in the contact list to `heart` and `brain`.
+
 ### Deleting a person : `delete`
 
 Deletes the contact in the contact list.
-If the other contacts have affiliations with this contact, the affiliations will be deleted automatically.
+If the other contacts have affiliations/affiliation history with this contact, the affiliations will be deleted automatically.
 
 Format: `delete INDEX`
 
@@ -160,6 +189,42 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 3` deletes the 3rd person in the contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Returning staff that are on duty: `onduty`
+
+Finds staff members(doctors/nurses) who are on duty today.
+
+Format: `onduty`
+
+Examples:
+* If today is Monday, and `onduty` is called, then staff members that have duty on Monday will be listed.
+
+### Displaying the information of a person : `info`
+
+Displays the information of the person in the contact list.
+
+Format: `info INDEX`
+
+* Displays the information of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `info 3` displays the information of the 3rd person in the contact list.
+* `find Betsy` followed by `info 1` displays the information of the 1st person in the results of the `find` command.
+
+### Displaying the information of a person using mouse
+
+Displays the information of the person in the contact list by clicking on the person in the list.
+
+* If clicking is unavailable, you can consider the use of `info` command.
+
+### Traversing the information of persons in the list
+
+Navigate through the information of different people in the displayed list using `UP` and `DOWN` arrow keys.
+
+* The use of `UP` and `DOWN` arrow keys is only applicable when any of the person in the list is highlighted, indicating that the list is on focus.
+* Simply clicking on any of the person in the list OR run the `info` command to set the list on focus.
 
 ### Clearing all entries : `clear`
 
@@ -181,10 +246,13 @@ MediSync data are saved in the hard disk automatically after any command that ch
 
 MediSync data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless></box>
+<box type="warning" seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, MediSync will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+
+Be very careful, especially when you modify attributes such as Role, as any mismatch in Affiliations will render the data as invalid e.g. Changing the Role of a Patient to Doctor resulting in this new Doctor having affiliations with another Doctor. Scenarios like these are not exhaustive.
+
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -210,14 +278,21 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action          | Format, Examples                                                                                                                     |
-|-----------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com r/patient a/Dr Mike` |
-| **Clear**       | `clear`                                                                                                                              |
-| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                  |
-| **Edit**        | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/AFFN]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                     |
-| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                           |
-| **Affiliation** | `affn INDEX`                                                                                                                         |
-| **List**        | `list`                                                                                                                               |
-| **Help**        | `help`                                                                                                                               |
-| **Exit**        | `exit`                                                                                                                               |
+| Action                         | Format, Examples                                                                                                                  |
+|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                        | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/NAME]…​` <br> e.g., `add n/May Ho p/98765432 e/johnd@example.com r/nurse a/John Doe` |
+| **Clear**                      | `clear`                                                                                                                           |
+| **Delete**                     | `delete INDEX`<br> e.g., `delete 3`                                                                                               |
+| **Edit**                       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/NAME]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                  |
+| **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                        |
+| **List**                       | `list`                                                                                                                            |
+| **List Affiliations**          | `affn INDEX`<br> e.g., `affn 1`                                                                                                   |
+| **List Affiliation History**   | `affnh INDEX`<br> e.g., `affnh 2`                                                                                                 |
+| **Add Affiliations**           | `addaffn INDEX a/NAME [a/NAME]`<br> e.g., `addaffn 4 a/Mike Chang a/Tom Cruise`                                                   |
+| **Modify Shift Days**          | `shift INDEX SHIFT_DAYS`<br> e.g., `shift 2 1457`                                                                                 |
+| **Clears Affiliation History** | `removeah INDEX`<br> e.g., `removeah 1`                                                                                           |
+| **List Staff On Duty**         | `onduty`                                                                                                                          |
+| **Modify Specialisation**      | `spec INDEX SPECIALISATIONS`<br> e.g., `spec 4 Cardiology, Osteology`                                                             |
+| **Display Person Information** | `info INDEX`<br> e.g., `info 2`                                                                                                   |
+| **Help**                       | `help`                                                                                                                            |
+| **Exit**                       | `exit`                                                                                                                            |

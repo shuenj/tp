@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.MixedAddressBook.getTypicalMixedAddressBook;
 import static seedu.address.testutil.TypicalDoctors.getTypicalDoctorAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -31,12 +32,14 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Specialisation;
 import seedu.address.model.person.Staff;
 import seedu.address.testutil.DoctorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.StaffBuilder;
 
 /**
@@ -46,6 +49,8 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalDoctorAddressBook(), new UserPrefs());
     private Model personModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    private Model mixedModel = new ModelManager(getTypicalMixedAddressBook(), new UserPrefs());
 
 
     @Test
@@ -67,7 +72,7 @@ public class EditCommandTest {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
-        StaffBuilder personInList = new StaffBuilder((Staff) lastPerson);
+        StaffBuilder personInList = new DoctorBuilder((Doctor) lastPerson);
         Staff editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -95,17 +100,18 @@ public class EditCommandTest {
     @Test
     public void execute_affiliationFieldSpecified_success() {
         Index indexFirstPerson = Index.fromOneBased(2);
-        Person firstPerson = personModel.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withAffiliations("Alice Pauline").build();
+        Patient firstPerson = (Patient) mixedModel.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
+        Patient editedPerson = new PatientBuilder(firstPerson).withAffiliations("Alice Pauline")
+                .withAffiliationHistory("Alice Menti", "Bonas Kurz", "Alice Pauline").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withAffiliations("Alice Pauline").build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalMixedAddressBook(), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        assertCommandSuccess(editCommand, personModel, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, mixedModel, expectedMessage, expectedModel);
     }
 
     @Test
@@ -113,7 +119,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Staff editedStaff = new StaffBuilder((Staff) personInFilteredList).withName(VALID_NAME_BOB).build();
+        Staff editedStaff = new DoctorBuilder((Doctor) personInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
@@ -203,6 +209,13 @@ public class EditCommandTest {
         ShiftDays differentShiftDay = new ShiftDays(new HashSet<>(Arrays.asList(2, 3, 4)));
         differentShiftDayDescriptor.setShiftDays(differentShiftDay);
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, differentAffiliationHistoryDescriptor)));
+
+        //different specialisation -> returns false
+        EditPersonDescriptor differentSpecialisationDescriptor = new EditPersonDescriptor(DESC_AMY);
+        Set<Specialisation> differentSpecialisation = new HashSet<>();
+        differentSpecialisation.add(new Specialisation("Cardiology"));
+        differentSpecialisationDescriptor.setSpecialisations(differentSpecialisation);
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, differentSpecialisationDescriptor)));
     }
 
     @Test

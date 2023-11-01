@@ -2,11 +2,17 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.affiliation.Affiliation;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.Staff;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -92,6 +98,67 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Checks if {@code AddressBook} is valid in terms of affiliation configuration.
+     */
+    public boolean hasValidAffiliationConfiguration() {
+        Set<String> checkPairAffn = new HashSet<>();
+        for (Person person : persons) {
+            Set<Affiliation> affiliations = person.getAffiliations();
+            if (!checkAffiliation(person, affiliations, checkPairAffn)) {
+                return false;
+            }
+
+            Set<Affiliation> affiliationHistory = person.getAffiliationHistory();
+            if (!affiliationHistory.containsAll(affiliations)) {
+                return false;
+            }
+
+            for (Affiliation affiliation : affiliationHistory) {
+                if (!persons.containsName(affiliation.toString())) {
+                    return false;
+                }
+                Role role = persons.getPersonRoleByName(affiliation.toString());
+                if (person instanceof Staff && (role.toString().equals("Doctor") || role.toString().equals("Nurse"))) {
+                    return false;
+                }
+                if (person instanceof Patient && role.toString().equals("Patient")) {
+                    return false;
+                }
+
+            }
+        }
+        return checkPairAffn.isEmpty();
+    }
+
+    /**
+     * Checks if the combination of the person and its affiliations is valid.
+     */
+    private boolean checkAffiliation(Person person, Set<Affiliation> affiliations, Set<String> checkPairAffn) {
+        for (Affiliation affiliation : affiliations) {
+            if (!persons.containsName(affiliation.toString())) {
+                return false;
+            }
+
+            Role role = persons.getPersonRoleByName(affiliation.toString());
+            if (person instanceof Staff && (role.toString().equals("Doctor") || role.toString().equals("Nurse"))) {
+                return false;
+            }
+            if (person instanceof Patient && role.toString().equals("Patient")) {
+                return false;
+            }
+
+            String affnPair = person.getName().fullName + affiliation;
+            String affnPairFlipped = affiliation + person.getName().fullName;
+            if (checkPairAffn.contains(affnPairFlipped)) {
+                checkPairAffn.remove(affnPairFlipped);
+            } else {
+                checkPairAffn.add(affnPair);
+            }
+        }
+        return true;
     }
 
     //// util methods

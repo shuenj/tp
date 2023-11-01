@@ -12,7 +12,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Staff;
@@ -31,13 +33,13 @@ public class TypicalStaff {
             .withEmail("johnd@example.com").withPhone("98765432")
             .withAffiliationHistory("Alice Menti", "Bonas Kurz").build();
     public static final Staff CARL = new StaffBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").build();
+            .withEmail("heinz@example.com").withShiftDays(new HashSet<>(Set.of(3))).build();
     public static final Staff DANIEL = new StaffBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").build();
     public static final Staff ELLE = new StaffBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").build();
+            .withEmail("werner@example.com").withShiftDays(new HashSet<>(Set.of(3))).build();
     public static final Staff FIONA = new StaffBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").build();
+            .withEmail("lydia@example.com").withShiftDays(new HashSet<>(Set.of(3))).build();
     public static final Staff GEORGE = new StaffBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").build();
 

@@ -76,4 +76,15 @@ public class ShiftDaysTest {
     public void toString_compareAdjustedShiftDays_success() {
         assertEquals("[Mon, Tue]", new ShiftDays(new HashSet<>(Arrays.asList(1, 2))).toString());
     }
+
+    @Test
+    public void contains_checkshiftDayInSet_returnsCorrectBoolean() {
+        // day in shiftdays
+        assertTrue(new ShiftDays(new HashSet<>(Arrays.asList(1, 2))).contains(2));
+
+        // day not in shiftdays
+        assertFalse(new ShiftDays(new HashSet<>(Arrays.asList(1, 2))).contains(7));
+        assertFalse(new ShiftDays(new HashSet<>(Arrays.asList(1, 2))).contains(49));
+        assertFalse(new ShiftDays(new HashSet<>(Arrays.asList(1, 2))).contains(-12));
+    }
 }

@@ -21,11 +21,19 @@ public class ShiftCommandParser implements Parser<ShiftCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ShiftCommand parse(String args) throws ParseException {
+
         requireNonNull(args);
         try {
-            String[] splitArgs = args.trim().split(" ");
+            String[] splitArgs = args.trim().split(" ", 2);
             Index index = ParserUtil.parseIndex(splitArgs[0]);
-            Set<Integer> shiftDayNumbers = ParserUtil.parseShiftDays(splitArgs[1]);
+            Set<Integer> shiftDayNumbers;
+
+            // check if there are any arguments after the index
+            if (splitArgs.length > 1 && !splitArgs[1].isEmpty()) {
+                shiftDayNumbers = ParserUtil.parseShiftDays(splitArgs[1]);
+            } else {
+                shiftDayNumbers = ParserUtil.parseShiftDays("");
+            }
             return new ShiftCommand(index, shiftDayNumbers);
         } catch (ParseException pe) {
             throw new ParseException(

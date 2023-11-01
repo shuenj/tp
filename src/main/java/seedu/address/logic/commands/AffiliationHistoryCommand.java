@@ -24,7 +24,6 @@ public class AffiliationHistoryCommand extends Command {
         + "are affiliated or once affiliated with the person identified by the index number shown in the  "
         + "displayed person list. "
         + "(i.e. returns the doctors of a patient, or the patients of a doctor)\n"
-        + "The index must be a positive integer 1, 2, 3, …\n"
         + "Parameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 2";
 

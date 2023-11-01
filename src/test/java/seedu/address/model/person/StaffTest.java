@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTDAYS_AMY;
 import static seedu.address.testutil.TypicalStaff.ALICE;
 import static seedu.address.testutil.TypicalStaff.BOB;
+import static seedu.address.testutil.TypicalStaff.CARL;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,6 +53,17 @@ public class StaffTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new StaffBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void isWorkingOn_checkDayInShiftDays_returnsCorrectBoolean() {
+        // day in shiftdays
+        assertTrue(CARL.isWorkingOn(3));
+
+        // day not in shiftdays
+        assertFalse(CARL.isWorkingOn(6));
+        assertFalse(CARL.isWorkingOn(42));
+        assertFalse(CARL.isWorkingOn(-12));
     }
 
     @Test

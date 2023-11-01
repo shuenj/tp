@@ -1,8 +1,10 @@
 package seedu.address.model.person;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.affiliation.Affiliation;
 
 /**
@@ -10,12 +12,14 @@ import seedu.address.model.affiliation.Affiliation;
  */
 public class Doctor extends Staff {
 
+    private final HashSet<Specialisation> specialisations;
     /**
      * Every field must be present and not null, except affiliationHistory.
      */
     public Doctor(Name name, Phone phone, Email email,
             Set<Affiliation> affiliations, Set<Affiliation> affiliationHistory) {
         super(name, phone, email, new Role("Doctor"), affiliations, affiliationHistory);
+        specialisations = new HashSet<>();
     }
 
     /**
@@ -23,6 +27,17 @@ public class Doctor extends Staff {
      */
     public Doctor(Name name, Phone phone, Email email, Set<Affiliation> affiliations) {
         super(name, phone, email, new Role("Doctor"), affiliations);
+        specialisations = new HashSet<>();
+    }
+
+    public HashSet<Specialisation> getSpecialisations() {
+        return specialisations;
+    }
+
+    public Doctor setSpecialisations(Set<Specialisation> specialisations) {
+        this.specialisations.clear();
+        this.specialisations.addAll(specialisations);
+        return this;
     }
 
     /**
@@ -47,7 +62,8 @@ public class Doctor extends Staff {
                 && getRole().equals(otherDoctor.getRole())
                 && getAffiliations().equals(otherDoctor.getAffiliations())
                 && getAffiliationHistory().equals(otherDoctor.getAffiliationHistory())
-                && getShiftDays().equals(otherDoctor.getShiftDays());
+                && getShiftDays().equals(otherDoctor.getShiftDays())
+                && getSpecialisations().equals(otherDoctor.getSpecialisations());
     }
 
     @Override
@@ -60,5 +76,10 @@ public class Doctor extends Staff {
     @Override
     public String toString() {
         return getStringBuilderRepresentation().toString();
+    }
+
+    @Override
+    public ToStringBuilder getStringBuilderRepresentation() {
+        return super.getStringBuilderRepresentation().add("specialisations", specialisations);
     }
 }

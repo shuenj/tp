@@ -14,7 +14,10 @@ import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relationship;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Specialisation;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -130,11 +133,56 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code shiftDayString} is invalid.
      */
-    public static Set<Integer> parseShiftDays(String shiftDayString) {
+    public static Set<Integer> parseShiftDays(String shiftDayString) throws ParseException {
         requireNonNull(shiftDayString);
-        return shiftDayString.trim().chars().map(x -> x - '0') // converts string into CharStream, then into IntStream
+
+        // converts string into CharStream, then into IntStream
+        Set<Integer> shiftDaysSet = shiftDayString.trim().chars().map(x -> x - '0')
                 .boxed().collect(Collectors.toSet());
+        if (!ShiftDays.isValidShiftDays(shiftDaysSet)) {
+            throw new ParseException(ShiftDays.MESSAGE_CONSTRAINTS);
+        }
+        return shiftDaysSet;
+    }
+
+    /**
+     * Parses {@code String specialisations} into a {@code Set<Specialisation>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code specialisations} is invalid.
+     */
+    public static Set<Specialisation> parseSpecialisations(String specialisations)
+            throws ParseException {
+        requireNonNull(specialisations);
+        String trimmedSpecialisations = specialisations.trim();
+        if (trimmedSpecialisations.isEmpty()) {
+            return new HashSet<>();
+        }
+        String[] specialisationNames = trimmedSpecialisations.split(",");
+        Set<Specialisation> specialisationSet = new HashSet<>();
+        for (String specialisationName : specialisationNames) {
+            String specialisationNameTrimmed = specialisationName.trim();
+            if (!Specialisation.isValidSpecialisationName(specialisationNameTrimmed)) {
+                throw new ParseException(Specialisation.MESSAGE_CONSTRAINTS);
+            }
+            specialisationSet.add(new Specialisation(specialisationNameTrimmed));
+        }
+        return specialisationSet;
     }
 
 
+    /**
+     * Parses a {@code String relationship} into a {@code Relationship}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code relationship} is invalid.
+     */
+    public static Relationship parseRelationship(String relationship) throws ParseException {
+        requireNonNull(relationship);
+        String trimmedRelationship = relationship.trim();
+        if (!Name.isValidName(trimmedRelationship)) {
+            throw new ParseException(Relationship.MESSAGE_CONSTRAINTS);
+        }
+        return new Relationship(trimmedRelationship);
+    }
 }

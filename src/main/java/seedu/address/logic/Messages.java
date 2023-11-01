@@ -7,7 +7,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.affiliation.Affiliation;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Specialisation;
 import seedu.address.model.person.Staff;
 
 /**
@@ -68,9 +71,36 @@ public class Messages {
         }
         builder.append("}");
 
+        if (person instanceof Patient) {
+            builder.append("; Next-of-Kin: {");
+            if (((Patient) person).getNextOfKin().isPresent()) {
+                builder.append("Name: ");
+                builder.append(((Patient) person).getNextOfKin().getName());
+                builder.append("; Phone: ");
+                builder.append(((Patient) person).getNextOfKin().getPhone());
+                builder.append("; Relationship: ");
+                builder.append(((Patient) person).getNextOfKin().getRelationship());
+            } else {
+                builder.append(((Patient) person).getNextOfKin());
+            }
+            builder.append("}");
+        }
+
         if (person instanceof Staff) {
             builder.append("; Shift Days: ");
             builder.append(((Staff) person).getShiftDays());
+        }
+
+        if (person instanceof Doctor) {
+            builder.append("; Specialisations: {");
+            ArrayList<Specialisation> specialisationsList = new ArrayList<>(((Doctor) person).getSpecialisations());
+            for (int i = 0; i < specialisationsList.size(); i++) {
+                builder.append(specialisationsList.get(i));
+                if (i < specialisationsList.size() - 1) {
+                    builder.append(", ");
+                }
+            }
+            builder.append("}");
         }
         return builder.toString();
     }

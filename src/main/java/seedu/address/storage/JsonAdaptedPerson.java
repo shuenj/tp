@@ -13,12 +13,14 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.affiliation.Affiliation;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Specialisation;
 import seedu.address.model.person.Staff;
 
 /**
@@ -37,6 +39,8 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedAffiliation> affiliationHistory = new ArrayList<>();
     @JsonIgnore
     private final Set<Integer> shiftDays = new HashSet<>();
+    @JsonIgnore
+    private final Set<String> specialisations = new HashSet<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -46,7 +50,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("role") String role,
                              @JsonProperty("affiliations") List<JsonAdaptedAffiliation> affiliations,
                              @JsonProperty("affiliationHistory") List<JsonAdaptedAffiliation> affiliationHistory,
-                             @JsonProperty("shiftDays") List<Integer> shiftDays) {
+                             @JsonProperty("shiftDays") List<Integer> shiftDays,
+                             @JsonProperty("specialisations") List<String> specialisations) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -59,6 +64,9 @@ class JsonAdaptedPerson {
         }
         if (shiftDays != null) {
             this.shiftDays.addAll(shiftDays);
+        }
+        if (specialisations != null) {
+            this.specialisations.addAll(specialisations);
         }
     }
 
@@ -78,6 +86,11 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         if (source instanceof Staff) {
             shiftDays.addAll(((Staff) source).getShiftDays().shiftDays);
+        }
+        if (source instanceof Doctor) {
+            specialisations.addAll(((Doctor) source).getSpecialisations().stream()
+                    .map(specialisation -> specialisation.toString())
+                    .collect(Collectors.toList()));
         }
     }
 
@@ -101,6 +114,9 @@ class JsonAdaptedPerson {
     }
     public Set<Integer> getShiftDays() {
         return shiftDays;
+    }
+    public Set<String> getSpecialisations() {
+        return specialisations;
     }
 
     /**
@@ -219,6 +235,28 @@ class JsonAdaptedPerson {
         return new ShiftDays(shiftDays);
     }
 
+    /**
+     * Generates a set of {@link Specialisation} object from the stored JSON data (only for Doctors).
+     *
+     * @param specialisations The person's specialisations.
+     * @return A set of {@link Specialisation} object based on the stored JSON data.
+     * @throws IllegalValueException If the role is not "Doctor" or specialisations are null or do not meet the
+     *      constraints.
+     */
+    private Set<Specialisation> generateSpecialisations(Set<String> specialisations) throws IllegalValueException {
+        if (role.equals("Doctor") && specialisations == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "Specialisations"));
+        }
+        Set<Specialisation> specialisationSet = new HashSet<>();
+        for (String specialisation : specialisations) {
+            if (!Specialisation.isValidSpecialisationName(specialisation)) {
+                throw new IllegalValueException(Specialisation.MESSAGE_CONSTRAINTS);
+            }
+            specialisationSet.add(new Specialisation(specialisation));
+        }
+        return specialisationSet;
+    }
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
@@ -231,6 +269,7 @@ class JsonAdaptedPerson {
         final Email modelEmail = generateEmail(email);
         final Role modelRole = generateRole(role);
         final ShiftDays modelShiftDays = generateShiftDays(shiftDays);
+        final Set<Specialisation> modelSpecialisations = generateSpecialisations(specialisations);
 
         final List<Affiliation> personAffiliations = generateAffiliationList();
         final List<Affiliation> personAffiliationHistory = generateAffiliationHistoryList();
@@ -239,6 +278,11 @@ class JsonAdaptedPerson {
 
         Person generatedPerson = modelRole.generatePerson(modelName,
                 modelPhone, modelEmail, modelAffiliations, modelAffiliationHistory);
+        if (generatedPerson instanceof Doctor) {
+            Doctor doctor = (Doctor) generatedPerson;
+            doctor.setSpecialisations(modelSpecialisations);
+            return doctor.setShiftDays(modelShiftDays);
+        }
         if (generatedPerson instanceof Staff) {
             return ((Staff) generatedPerson).setShiftDays(modelShiftDays);
         }

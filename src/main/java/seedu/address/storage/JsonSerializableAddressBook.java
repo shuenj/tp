@@ -20,6 +20,16 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_INVALID_AFFILIATION_CONFIG = "There exist an incompatible affiliation "
+            + "configuration. Possible problems:\n"
+            + "Affiliations are not mutual e.g. A is affiliated to B but B is not affiliated to A.\n"
+            + "Person is in Affiliations but not in Affiliation History.\n"
+            + "A Staff has an affiliation with another Staff or a Patient has an affiliation with another Patient.\n"
+            + "A Staff contains an affiliation history of another Staff or"
+            + " a Patient contains an affiliation history of another Patient.\n"
+            + "Person in Affiliations or Affiliation History does not exist in contact list.";
+
+
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -54,6 +64,10 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+        if (!addressBook.hasValidAffiliationConfiguration()) {
+            throw new IllegalValueException(MESSAGE_INVALID_AFFILIATION_CONFIG);
+        }
+
         return addressBook;
     }
 

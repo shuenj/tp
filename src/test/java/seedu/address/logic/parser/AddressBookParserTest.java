@@ -25,12 +25,16 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.InfoCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.OnDutyCommand;
 import seedu.address.logic.commands.RemoveAffiliationHistoryCommand;
 import seedu.address.logic.commands.ShiftCommand;
+import seedu.address.logic.commands.SpecialisationCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Specialisation;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -114,6 +118,29 @@ public class AddressBookParserTest {
         shiftDaysSet.add(7);
         assertEquals(parser.parseCommand(ShiftCommand.COMMAND_WORD + " "
                 + "1" + " " + "127"), new ShiftCommand(Index.fromOneBased(1), shiftDaysSet));
+    }
+
+    @Test
+    public void parseCommand_onDuty() throws Exception {
+        OnDutyCommand command = (OnDutyCommand) parser.parseCommand(OnDutyCommand.COMMAND_WORD);
+        assertEquals(command, new OnDutyCommand());
+    }
+
+    @Test
+    public void parseCommand_specialisation() throws Exception {
+        Set<Specialisation> specialisationsSet = new HashSet<>();
+        specialisationsSet.add(new Specialisation("ENT"));
+        specialisationsSet.add(new Specialisation("cardiology"));
+        assertEquals(parser.parseCommand(SpecialisationCommand.COMMAND_WORD + " "
+                + "1" + " " + "ENT,cardiology"), new SpecialisationCommand(Index.fromOneBased(1),
+                specialisationsSet));
+    }
+
+    @Test
+    public void parseCommand_info() throws Exception {
+        InfoCommand command = (InfoCommand) parser.parseCommand(
+                InfoCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new InfoCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test

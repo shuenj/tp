@@ -79,6 +79,15 @@ public class ShiftDays implements Iterable<Integer> {
         return this;
     }
 
+    /**
+     * Checks whether the set of shiftdays contains a particular day of the week represented in integer.
+     *
+     * @param day The day of the week in integer.
+     */
+    public boolean contains(int day) {
+        return shiftDays.contains(day);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
