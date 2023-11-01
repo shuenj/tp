@@ -133,9 +133,9 @@ Examples:
 * `find sally` returns `Sally Wing`<br>
   ![result for 'find alex david'](images/findSallyResult.png)
 
-### Returning affiliations of a doctor/patient: `affn`
+### Returning affiliations of a staff/patient: `affn`
 
-Finds doctors/patients who are affiliated with the patient/doctor indicated
+Finds staff/patients who are affiliated with the patient/staff indicated
 by the given index.
 
 * Finds affiliations for the person at the specified `INDEX`.
@@ -146,10 +146,36 @@ Examples:
 * `list` followed by `affn 2` lists the people affiliated to the 2nd person in the contact list.
 * Subsequently, `affn 1` will list the people affiliated with the 1st person displayed after the previous `affn` command.
 
+### Listing affiliation history of a person: `affnh`
+
+Finds the staff/patients that used to be affiliated or are currently affiliated with the patient/staff indicated by the given index.
+
+* Finds affiliation history for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Adding/Editing a person's affiliation automatically updates the affiliation history for the person.
+* Deleting a person automatically deletes the person from others' affilation history.
+
+Examples:
+* `affnh 2` lists the people who used to be affiliated or are currently affiliated to the 2nd person in the contact list.
+
+### Modifying specialisations of a doctor: `spec`
+
+Finds the doctor indicated by the given index and modifies the specialisations of the doctor.
+
+* Finds the doctor at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list and it must refer to a doctor.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Specialisations must be separated by a comma.
+* To remove all specialisations, type `spec INDEX` without specifying any specialisations after it.
+
+Examples:
+* `spec 2 heart, brain` modifies the specialisations of the 2nd doctor in the contact list to `heart` and `brain`.
+
 ### Deleting a person : `delete`
 
 Deletes the contact in the contact list.
-If the other contacts have affiliations with this contact, the affiliations will be deleted automatically.
+If the other contacts have affiliations/affiliation history with this contact, the affiliations will be deleted automatically.
 
 Format: `delete INDEX`
 
