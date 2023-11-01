@@ -35,6 +35,10 @@ public class CustomJsonAdaptedPersonSerializer extends JsonSerializer<JsonAdapte
         gen.writeStringField("email", person.getEmail());
         gen.writeStringField("role", person.getRole());
 
+        if ("Patient".equals(person.getRole())) {
+            gen.writeObjectField("nextOfKin", person.getNextOfKin());
+        }
+
         if ("Doctor".equals(person.getRole()) || "Nurse".equals(person.getRole())) {
             gen.writeArrayFieldStart("shiftDays");
             for (Integer shiftDay : person.getShiftDays()) {

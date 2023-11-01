@@ -16,6 +16,8 @@ import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextOfKin;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -42,6 +44,8 @@ class JsonAdaptedPerson {
     @JsonIgnore
     private final Set<String> specialisations = new HashSet<>();
 
+    private final JsonAdaptedNextOfKin nextOfKin;
+
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
@@ -51,7 +55,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("affiliations") List<JsonAdaptedAffiliation> affiliations,
                              @JsonProperty("affiliationHistory") List<JsonAdaptedAffiliation> affiliationHistory,
                              @JsonProperty("shiftDays") List<Integer> shiftDays,
-                             @JsonProperty("specialisations") List<String> specialisations) {
+                             @JsonProperty("specialisations") List<String> specialisations,
+                             @JsonProperty("nextOfKin") JsonAdaptedNextOfKin nextOfKin) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -68,6 +73,7 @@ class JsonAdaptedPerson {
         if (specialisations != null) {
             this.specialisations.addAll(specialisations);
         }
+        this.nextOfKin = nextOfKin;
     }
 
     /**
@@ -91,6 +97,11 @@ class JsonAdaptedPerson {
             specialisations.addAll(((Doctor) source).getSpecialisations().stream()
                     .map(specialisation -> specialisation.toString())
                     .collect(Collectors.toList()));
+        }
+        if (source instanceof Patient) {
+            nextOfKin = new JsonAdaptedNextOfKin(((Patient) source).getNextOfKin());
+        } else {
+            nextOfKin = null;
         }
     }
 
@@ -117,6 +128,10 @@ class JsonAdaptedPerson {
     }
     public Set<String> getSpecialisations() {
         return specialisations;
+    }
+
+    public JsonAdaptedNextOfKin getNextOfKin() {
+        return nextOfKin;
     }
 
     /**
@@ -259,6 +274,21 @@ class JsonAdaptedPerson {
     }
 
     /**
+     * Generates {@link NextOfKin} object from the stored JSON data (only for Patients).
+     *
+     * @return {@link NextOfKin} object based on the stored JSON data.
+     * @throws IllegalValueException If the role is not "Doctor" or specialisations are null or do not meet the
+     *      constraints.
+     */
+    private NextOfKin generateNextOfKin(JsonAdaptedNextOfKin nextOfKin) throws IllegalValueException {
+        if (role.equals("Patient") && nextOfKin == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "nextOfKin"));
+        }
+        return nextOfKin.toModelType();
+    }
+
+    /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
@@ -271,6 +301,7 @@ class JsonAdaptedPerson {
         final ShiftDays modelShiftDays = generateShiftDays(shiftDays);
         final Set<Specialisation> modelSpecialisations = generateSpecialisations(specialisations);
 
+
         final List<Affiliation> personAffiliations = generateAffiliationList();
         final List<Affiliation> personAffiliationHistory = generateAffiliationHistoryList();
         final Set<Affiliation> modelAffiliations = new HashSet<>(personAffiliations);
@@ -278,11 +309,20 @@ class JsonAdaptedPerson {
 
         Person generatedPerson = modelRole.generatePerson(modelName,
                 modelPhone, modelEmail, modelAffiliations, modelAffiliationHistory);
+
+        if (generatedPerson instanceof Patient) {
+            final NextOfKin modelNextOfKin = generateNextOfKin(nextOfKin);
+            Patient patient = ((Patient) generatedPerson);
+            patient.setNextOfKin(modelNextOfKin);
+            return patient;
+        }
+
         if (generatedPerson instanceof Doctor) {
             Doctor doctor = (Doctor) generatedPerson;
             doctor.setSpecialisations(modelSpecialisations);
             return doctor.setShiftDays(modelShiftDays);
         }
+
         if (generatedPerson instanceof Staff) {
             return ((Staff) generatedPerson).setShiftDays(modelShiftDays);
         }
