@@ -34,6 +34,28 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void containsName_personInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        assertTrue(uniquePersonList.containsName(ALICE.getName().fullName));
+    }
+
+    @Test
+    public void containsName_personNotInList_returnsFalse() {
+        assertFalse(uniquePersonList.containsName("May Flower"));
+    }
+
+    @Test
+    public void getPersonRoleByName_personInList_success() {
+        uniquePersonList.add(ALICE);
+        assertEquals(uniquePersonList.getPersonRoleByName(ALICE.getName().fullName), new Role("Doctor"));
+    }
+
+    @Test
+    public void getPersonRoleByName_personNotInList_throwsPersonNotFoundException() throws PersonNotFoundException {
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.getPersonRoleByName(BOB.getName().fullName));
+    }
+
+    @Test
     public void contains_personInList_returnsTrue() {
         uniquePersonList.add(ALICE);
         assertTrue(uniquePersonList.contains(ALICE));

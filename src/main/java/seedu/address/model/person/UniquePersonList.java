@@ -37,6 +37,33 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains an equivalent person's name as the given argument.
+     *
+     * @param name The name of person to check for.
+     */
+    public boolean containsName(String name) {
+        requireNonNull(name);
+        return internalList.stream().map(person -> person.getName().fullName)
+                .anyMatch(name::equals);
+    }
+
+    /**
+     * Returns the role of the Person with the given name.
+     *
+     * @param name The name of person to check for.
+     */
+    public Role getPersonRoleByName(String name) {
+        requireNonNull(name);
+
+        for (Person person : internalList) {
+            if (person.getName().fullName.equals(name)) {
+                return person.getRole();
+            }
+        }
+        throw new PersonNotFoundException();
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

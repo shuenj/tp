@@ -1,0 +1,58 @@
+{
+  "persons" : [ {
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "role" : "Doctor",
+    "shiftDays" : [ 1, 3, 6 ],
+    "specialisations" : [ "Radiologist", "ENT" ],
+    "affiliations" : [ "Bernice Yu", "Charlotte Oliveiro" ],
+    "affiliationHistory" : [ "Bernice Yu", "Charlotte Oliveiro" ]
+  }, {
+    "name" : "Bernice Yu",
+    "phone" : "99272758",
+    "email" : "berniceyu@example.com",
+    "role" : "Patient",
+    "affiliations" : [ "Charlotte Oliveiro" ],
+    "affiliationHistory" : [ "Charlotte Oliveiro" ]
+  }, {
+    "name" : "May Ho",
+    "phone" : "94437233",
+    "email" : "homimay@example.com",
+    "role" : "Nurse",
+    "shiftDays" : [ 3, 4, 5 ],
+    "affiliations" : [ "Irfan Ibrahim" ],
+    "affiliationHistory" : [ "Irfan Ibrahim" ]
+  }, {
+    "name" : "Charlotte Oliveiro",
+    "phone" : "93210283",
+    "email" : "charlotte@example.com",
+    "role" : "Patient",
+    "affiliations" : [ "Alex Yeoh", "Evelyn Ng", "Bernice Yu" ],
+    "affiliationHistory" : [ "Alex Yeoh", "Evelyn Ng", "Bernice Yu" ]
+  }, {
+    "name" : "David Li",
+    "phone" : "91031282",
+    "email" : "lidavid@example.com",
+    "role" : "Doctor",
+    "shiftDays" : [ 2, 5, 7 ],
+    "specialisations" : [ "Cardiologist" ],
+    "affiliations" : [ ],
+    "affiliationHistory" : [ "Irfan Ibrahim" ]
+  }, {
+    "name" : "Irfan Ibrahim",
+    "phone" : "92492021",
+    "email" : "irfan@example.com",
+    "role" : "Doctor",
+    "affiliations" : [ "May Ho" ],
+    "affiliationHistory" : [ "May Ho" ]
+  }, {
+    "name" : "Evelyn Ng",
+    "phone" : "92624417",
+    "email" : "eveng@example.com",
+    "role" : "Nurse",
+    "shiftDays" : [ 1, 2, 4, 6 ],
+    "affiliations" : [ "Pancake Man" ],
+    "affiliationHistory" : [ "Charlotte Oliveiro" ]
+  } ]
+}

@@ -26,6 +26,7 @@ public class SampleDataUtil {
         return new Person[]{
             new Doctor(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     getAffiliationSet("Bernice Yu", "Charlotte Oliveiro"))
+                    .setSpecialisations(getSpecialisationSet("ENT", "Radiologist"))
                     .setShiftDays(getShiftDays(1, 3, 6)),
             new Patient(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     getAffiliationSet("Alex Yeoh")),
@@ -36,6 +37,7 @@ public class SampleDataUtil {
                     getAffiliationSet("Alex Yeoh", "Evelyn Ng")),
             new Doctor(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     getAffiliationSet("Irfan Ibrahim"))
+                    .setSpecialisations(getSpecialisationSet("Cardiologist"))
                     .setShiftDays(getShiftDays(2, 5, 7)),
             new Patient(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     getAffiliationSet("David Li", "May Ho")),
@@ -70,12 +72,21 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a @code{Specialisation} containing the list of specialisations given as strings.
+     * Returns a @code{Specialisation} containing the list of specialisations given as strings in a set.
      */
     public static HashSet<Specialisation> getSpecialisationSet(Set<String> strings) {
         return strings.stream()
                 .map(Specialisation::new)
                 .collect(Collectors.toCollection(HashSet::new));
+    }
+
+    /**
+     * Returns a @code{Specialisation} containing the list of specialisations given as strings.
+     */
+    public static Set<Specialisation> getSpecialisationSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Specialisation::new)
+                .collect(Collectors.toSet());
     }
 
 }
