@@ -43,9 +43,6 @@ public class ArgumentTokenizerTest {
         // Verify the number of values returned is as expected
         assertEquals(expectedValues.length, argMultimap.getAllValues(prefix).size());
 
-        // Verify the getPrefixNum() method works as expected
-        assertEquals(expectedValues.length, argMultimap.getPrefixNum() + 1);
-
         // Verify all values returned are as expected and in order
         for (int i = 0; i < expectedValues.length; i++) {
             assertEquals(expectedValues[i], argMultimap.getAllValues(prefix).get(i));
@@ -79,6 +76,9 @@ public class ArgumentTokenizerTest {
         argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
         assertPreambleEmpty(argMultimap);
         assertArgumentPresent(argMultimap, pSlash, "Argument value");
+
+        // Check if one prefix is identified
+        assertEquals(argMultimap.getPrefixNum(), 1);
 
     }
 
