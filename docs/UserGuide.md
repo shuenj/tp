@@ -52,10 +52,10 @@ MediSync is a **desktop app specifically used for head nurses to manage staff an
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [a/AFFN]` can be used as `n/John Doe a/friend` or as `n/John Doe`.
+  e.g `n/NAME [a/AFFN_NAME]` can be used as `n/John Doe a/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[a/AFFN]…​` can be used as ` ` (i.e. 0 times), `a/friend`, `a/friend a/family` etc.
+  e.g. `[a/AFFN_NAME]…​` can be used as ` ` (i.e. 0 times), `a/friend`, `a/friend a/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -80,7 +80,7 @@ Format: `help`
 
 Adds a contact to the contact list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/NAME]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN_NAME]…​`
 
 * Role can only be listed as `Nurse`, `Doctor`, or `Patient` (case-insensitive).
 * Affiliations that are successfully added will update the opposing list of affiliations for the affiliated.
@@ -105,7 +105,7 @@ Format: `list`
 
 Edits an existing contact in the contact list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/AFFN]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN_NAME_NAME]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -113,6 +113,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/AFFN]…​`
 * When editing affiliations, the existing affiliations of the person will be removed i.e adding of affiliations is not cumulative.
 * You can remove all the person’s affiliations by typing `a/` without
     specifying any affiliations after it.
+* Removing all affiliation automatically deletes the person from others' affiliation.
 
 Examples:
 *  `edit 3 p/81234567 a/` Edits the phone number of the 3rd person to `81234567` and removes the person’s affiliation
@@ -136,6 +137,26 @@ Examples:
 * `find sally` returns `Sally Wing`<br>
   ![result for 'find alex david'](images/findSallyResult.png)
 
+### Add affiliations of a staff/patient: `addaffn`
+
+Format: `addaffn INDEX a/AFFN_NAME [a/AFFN_NAME_NAME]…`
+
+Add affiliations to staff/patients indicated by the given `INDEX` without deleting existing affiliation.
+
+* Add affiliations for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* If person at index is staff, affiliations specified must be a patient.
+* If person at index is patient, affiliations specified must be a staff.
+* Adding patient A to affiliation of staff B, will result in adding staff B to affiliation of Patient A.
+* Multiple affiliations can be added.
+* At least one affiliation field must be provided.
+* `AFFN` is specified as full name of a person in the contact list.
+
+Examples:
+* `addaffn 1 a/John` add `John` to affiliation of 1st person in the contact list.
+* `addaffn 3 a/John a/Mary` add `John` and `Mary` to affiliation of 3rd person in the contact list.
+
 ### Returning affiliations of a staff/patient: `affn`
 
 Finds staff/patients who are affiliated with the patient/staff indicated
@@ -157,10 +178,23 @@ Finds the staff/patients that used to be affiliated or are currently affiliated 
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Adding/Editing a person's affiliation automatically updates the affiliation history for the person.
-* Deleting a person automatically deletes the person from others' affilation history.
 
 Examples:
 * `affnh 2` lists the people who used to be affiliated or are currently affiliated to the 2nd person in the contact list.
+
+### Remove affiliation history of a person: `removeah`
+
+Format: `removeah INDEX`
+
+Remove all affiliation history of patient/staff indicated by the given `INDEX`, except for affiliations that are currently affiliated.
+
+* Remove all affiliation history for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Does not remove the person they are currently affiliated to from affiliation history.
+
+Examples:
+* `removeah 2` remove affiliation history of the 2nd person in the contact list.
 
 ### Modifying specialisations of a doctor: `spec`
 
@@ -185,10 +219,27 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Deleting a person automatically deletes the person from others' affiliation and affiliation history.
 
 Examples:
 * `list` followed by `delete 3` deletes the 3rd person in the contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Add next of kin to a patient: `nok`
+
+Format: `nok INDEX [n/NAME p/PHONE rs/RELATIONSHIP]`
+
+Update next of kin of a patient identified at `INDEX` in the contact list.
+
+* Update next of kin for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* If no optional field provided, next of kin of the person identified at index will be removed.
+* `RELATIONSHIP` can be specified in any alphanumeric characters and spaces.
+
+Examples:
+* `nok 2` remove next of kin of the 2nd person in the contact list.
+* `nok 3 n/John p/11111 rs/Brother` add next of kin with the name `John`, phone `11111` and relationship `Brother` to the 3rd person in the contact list.
 
 ### Returning staff that are on duty: `onduty`
 
@@ -278,21 +329,22 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                         | Format, Examples                                                                                                                  |
-|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                        | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/NAME]…​` <br> e.g., `add n/May Ho p/98765432 e/johnd@example.com r/nurse a/John Doe` |
-| **Clear**                      | `clear`                                                                                                                           |
-| **Delete**                     | `delete INDEX`<br> e.g., `delete 3`                                                                                               |
-| **Edit**                       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/NAME]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                  |
-| **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                        |
-| **List**                       | `list`                                                                                                                            |
-| **List Affiliations**          | `affn INDEX`<br> e.g., `affn 1`                                                                                                   |
-| **List Affiliation History**   | `affnh INDEX`<br> e.g., `affnh 2`                                                                                                 |
-| **Add Affiliations**           | `addaffn INDEX a/NAME [a/NAME]`<br> e.g., `addaffn 4 a/Mike Chang a/Tom Cruise`                                                   |
-| **Modify Shift Days**          | `shift INDEX SHIFT_DAYS`<br> e.g., `shift 2 1457`                                                                                 |
-| **Clears Affiliation History** | `removeah INDEX`<br> e.g., `removeah 1`                                                                                           |
-| **List Staff On Duty**         | `onduty`                                                                                                                          |
-| **Modify Specialisation**      | `spec INDEX SPECIALISATIONS`<br> e.g., `spec 4 Cardiology, Osteology`                                                             |
-| **Display Person Information** | `info INDEX`<br> e.g., `info 2`                                                                                                   |
-| **Help**                       | `help`                                                                                                                            |
-| **Exit**                       | `exit`                                                                                                                            |
+| Action                         | Format, Examples                                                                                                                       |
+|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                        | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN_NAME]…​` <br> e.g., `add n/May Ho p/98765432 e/johnd@example.com r/nurse a/John Doe` |
+| **Clear**                      | `clear`                                                                                                                                |
+| **Delete**                     | `delete INDEX`<br> e.g., `delete 3`                                                                                                    |
+| **Edit**                       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN_NAME]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                           |
+| **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                             |
+| **List**                       | `list`                                                                                                                                 |
+| **List Affiliations**          | `affn INDEX`<br> e.g., `affn 1`                                                                                                        |
+| **List Affiliation History**   | `affnh INDEX`<br> e.g., `affnh 2`                                                                                                      |
+| **Add Affiliations**           | `addaffn INDEX a/AFFN_NAME [a/AFFN_NAME]`<br> e.g., `addaffn 4 a/Mike Chang a/Tom Cruise`                                              |
+| **Modify Shift Days**          | `shift INDEX SHIFT_DAYS`<br> e.g., `shift 2 1457`                                                                                      |
+| **Clears Affiliation History** | `removeah INDEX`<br> e.g., `removeah 1`                                                                                                |
+| **Edit Next of Kin**           | `nok INDEX [n/NAME p/PHONE rs/RELATIONSHIP]` <br> e.g., `nok 3 n/John p/11111 rs/Brother`                                              |
+| **List Staff On Duty**         | `onduty`                                                                                                                               |
+| **Modify Specialisation**      | `spec INDEX SPECIALISATIONS`<br> e.g., `spec 4 Cardiology, Osteology`                                                                  |
+| **Display Person Information** | `info INDEX`<br> e.g., `info 2`                                                                                                        |
+| **Help**                       | `help`                                                                                                                                 |
+| **Exit**                       | `exit`                                                                                                                                 |
