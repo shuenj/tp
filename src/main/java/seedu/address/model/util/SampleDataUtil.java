@@ -11,10 +11,12 @@ import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextOfKin;
 import seedu.address.model.person.Nurse;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relationship;
 import seedu.address.model.person.ShiftDays;
 import seedu.address.model.person.Specialisation;
 
@@ -29,12 +31,14 @@ public class SampleDataUtil {
                     .setSpecialisations(getSpecialisationSet("ENT", "Radiologist"))
                     .setShiftDays(getShiftDays(1, 3, 6)),
             new Patient(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                    getAffiliationSet("Alex Yeoh")),
+                    getAffiliationSet("Alex Yeoh"))
+                    .setNextOfKin(getNextOfKin("Holland Tan", "91334428", "Father")),
             new Nurse(new Name("May Ho"), new Phone("94437233"), new Email("homimay@example.com"),
                         getAffiliationSet("Irfan Ibrahim"))
                     .setShiftDays(getShiftDays(3, 4, 5)),
             new Patient(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    getAffiliationSet("Alex Yeoh", "Evelyn Ng")),
+                    getAffiliationSet("Alex Yeoh", "Evelyn Ng"))
+                    .setNextOfKin(getNextOfKin("Ancob Maximus", "87769988", "Husband")),
             new Doctor(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     getAffiliationSet("Irfan Ibrahim"))
                     .setSpecialisations(getSpecialisationSet("Cardiologist"))
@@ -87,6 +91,13 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Specialisation::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a @code{NextOfKin} containing the list of attributes given as strings.
+     */
+    public static NextOfKin getNextOfKin(String name, String phone, String relationship) {
+        return new NextOfKin(new Name(name), new Phone(phone), new Relationship(relationship));
     }
 
 }

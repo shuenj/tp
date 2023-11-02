@@ -67,12 +67,20 @@ public class Patient extends Person {
         return this.nextOfKin;
     }
 
-    public void setNextOfKin(NextOfKin newNextOfKin) {
+    /**
+     * Sets the next of kin data.
+     */
+    public Patient setNextOfKin(NextOfKin newNextOfKin) {
         this.nextOfKin = newNextOfKin;
+        return this;
     }
 
-    public void clearNextOfKins() {
+    /**
+     * Clears the next of kin data.
+     */
+    public Patient clearNextOfKins() {
         this.nextOfKin = new NextOfKin();
+        return this;
     }
 
     @Override
