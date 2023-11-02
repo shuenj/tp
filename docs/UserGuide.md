@@ -56,7 +56,6 @@ Here are some definitions that are noteworthy when using MediSync.
 | Next of Kin         | The **Next of Kin** attribute is meant for `Patient`s. Having a method of contact with the `Patient`s next of kin is vital in medical care.                                                                                                                                                                                                                                  |
 | Specialisation      | Exclusively for `Doctor`s, the **specialisation** attribute offers added information about each doctor, enabling the appropriate doctor to be matched with patients having diverse requirements.                                                                                                                                                                             |
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
