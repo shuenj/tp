@@ -14,6 +14,11 @@
     "phone" : "99272758",
     "email" : "berniceyu@example.com",
     "role" : "Patient",
+    "nextOfKin" : {
+      "nextOfKinName" : null,
+      "nextOfKinPhone" : null,
+      "nextOfKinRelationship" : null
+    },
     "affiliations" : [ "Alex Yeoh" ],
     "affiliationHistory" : [ "Alex Yeoh" ]
   }, {
@@ -29,6 +34,11 @@
     "phone" : "93210283",
     "email" : "charlotte@example.com",
     "role" : "Patient",
+    "nextOfKin" : {
+      "nextOfKinName" : null,
+      "nextOfKinPhone" : null,
+      "nextOfKinRelationship" : null
+    },
     "affiliations" : [ "Alex Yeoh", "Evelyn Ng" ],
     "affiliationHistory" : [ "Alex Yeoh", "Evelyn Ng" ]
   }, {
@@ -45,6 +55,11 @@
     "phone" : "92492021",
     "email" : "irfan@example.com",
     "role" : "Patient",
+    "nextOfKin" : {
+      "nextOfKinName" : null,
+      "nextOfKinPhone" : null,
+      "nextOfKinRelationship" : null
+    },
     "affiliations" : [ "May Ho" ],
     "affiliationHistory" : [ "May Ho" ]
   }, {
