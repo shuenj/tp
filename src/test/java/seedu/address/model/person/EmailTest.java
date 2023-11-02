@@ -22,7 +22,7 @@ public class EmailTest {
     @Test
     public void isValidEmail() {
         // null email
-        assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
+        assertThrows(NullPointerException.class, () -> Email.isValidEmail((String) null));
 
         // blank email
         assertFalse(Email.isValidEmail("")); // empty string

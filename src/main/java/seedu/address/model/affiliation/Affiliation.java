@@ -3,6 +3,8 @@ package seedu.address.model.affiliation;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+
 /**
  * Represents an Affiliation in the contact list.
  * Guarantees: immutable; name is valid as declared in {@link #isValidAffiliationName(String)}
@@ -31,6 +33,13 @@ public class Affiliation {
      */
     public static boolean isValidAffiliationName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given array of strings contains all valid affiliation names.
+     */
+    public static boolean isValidAffiliationName(String[] test) {
+        return Arrays.stream(test).allMatch(s -> s.matches(VALIDATION_REGEX));
     }
 
     @Override

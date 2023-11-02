@@ -20,7 +20,7 @@ public class AffiliationTest {
     @Test
     public void isValidAffiliationName() {
         // null affiliation name
-        assertThrows(NullPointerException.class, () -> Affiliation.isValidAffiliationName(null));
+        assertThrows(NullPointerException.class, () -> Affiliation.isValidAffiliationName((String) null));
     }
 
 }

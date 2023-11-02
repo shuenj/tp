@@ -27,7 +27,7 @@ public class SpecialisationTest {
 
     @Test
     public void isValidSpecialisationName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> Specialisation.isValidSpecialisationName(null));
+        assertThrows(NullPointerException.class, () -> Specialisation.isValidSpecialisationName((String) null));
     }
 
     @Test

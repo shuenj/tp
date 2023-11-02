@@ -77,6 +77,9 @@ public class ArgumentTokenizerTest {
         assertPreambleEmpty(argMultimap);
         assertArgumentPresent(argMultimap, pSlash, "Argument value");
 
+        // Check if one prefix is identified
+        assertEquals(argMultimap.getPrefixNum(), 1);
+
     }
 
     @Test
