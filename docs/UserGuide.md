@@ -52,10 +52,10 @@ MediSync is a **desktop app specifically used for head nurses to manage staff an
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [a/AFFN]` can be used as `n/John Doe a/friend` or as `n/John Doe`.
+  e.g `n/NAME [a/AFFN_NAME]` can be used as `n/John Doe a/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[a/AFFN]…​` can be used as ` ` (i.e. 0 times), `a/friend`, `a/friend a/family` etc.
+  e.g. `[a/AFFN_NAME]…​` can be used as ` ` (i.e. 0 times), `a/friend`, `a/friend a/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -80,7 +80,7 @@ Format: `help`
 
 Adds a contact to the contact list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/NAME]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN_NAME]…​`
 
 * Role can only be listed as `Nurse`, `Doctor`, or `Patient` (case-insensitive).
 * Affiliations that are successfully added will update the opposing list of affiliations for the affiliated.
@@ -105,7 +105,7 @@ Format: `list`
 
 Edits an existing contact in the contact list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN_NAME_NAME]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -139,7 +139,7 @@ Examples:
 
 ### Add affiliations of a staff/patient: `addaffn`
 
-Format: `addaffn INDEX a/AFFN [a/AFFN]…`
+Format: `addaffn INDEX a/AFFN_NAME [a/AFFN_NAME_NAME]…`
 
 Add affiliations to staff/patients indicated by the given `INDEX` without deleting existing affiliation.
 
@@ -227,15 +227,14 @@ Examples:
 
 ### Add next of kin to a patient: `nok`
 
-Format: `nok INDEX`
-Format: `nok INDEX n/NAME p/PHONE rs/RELATIONSHIP`
+Format: `nok INDEX [n/NAME p/PHONE rs/RELATIONSHIP]`
 
 Update next of kin of a patient identified at `INDEX` in the contact list.
 
 * Update next of kin for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If no fields are provided, next of kin of the person identified at index will be removed.
+* If no optional field provided, next of kin of the person identified at index will be removed.
 * `RELATIONSHIP` can be specified in any alphanumeric characters and spaces.
 
 Examples:
@@ -330,22 +329,22 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                         | Format, Examples                                                                                                                  |
-|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                        | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/NAME]…​` <br> e.g., `add n/May Ho p/98765432 e/johnd@example.com r/nurse a/John Doe` |
-| **Clear**                      | `clear`                                                                                                                           |
-| **Delete**                     | `delete INDEX`<br> e.g., `delete 3`                                                                                               |
-| **Edit**                       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/NAME]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                           |
-| **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                        |
-| **List**                       | `list`                                                                                                                            |
-| **List Affiliations**          | `affn INDEX`<br> e.g., `affn 1`                                                                                                   |
-| **List Affiliation History**   | `affnh INDEX`<br> e.g., `affnh 2`                                                                                                 |
-| **Add Affiliations**           | `addaffn INDEX a/NAME [a/NAME]`<br> e.g., `addaffn 4 a/Mike Chang a/Tom Cruise`                                                   |
-| **Modify Shift Days**          | `shift INDEX SHIFT_DAYS`<br> e.g., `shift 2 1457`                                                                                 |
-| **Clears Affiliation History** | `removeah INDEX`<br> e.g., `removeah 1`                                                                                           |
-| **Add Next of Kin**            | `nok INDEX` <br> e.g., `nok 2` or `nok INDEX n/NAME p/PHONE rs/RELATIONSHIP` <br> e.g., `nok 3 n/John p/11111 rs/Brother`         |
-| **List Staff On Duty**         | `onduty`                                                                                                                          |
-| **Modify Specialisation**      | `spec INDEX SPECIALISATIONS`<br> e.g., `spec 4 Cardiology, Osteology`                                                             |
-| **Display Person Information** | `info INDEX`<br> e.g., `info 2`                                                                                                   |
-| **Help**                       | `help`                                                                                                                            |
-| **Exit**                       | `exit`                                                                                                                            |
+| Action                         | Format, Examples                                                                                                                       |
+|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                        | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN_NAME]…​` <br> e.g., `add n/May Ho p/98765432 e/johnd@example.com r/nurse a/John Doe` |
+| **Clear**                      | `clear`                                                                                                                                |
+| **Delete**                     | `delete INDEX`<br> e.g., `delete 3`                                                                                                    |
+| **Edit**                       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN_NAME]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                           |
+| **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                             |
+| **List**                       | `list`                                                                                                                                 |
+| **List Affiliations**          | `affn INDEX`<br> e.g., `affn 1`                                                                                                        |
+| **List Affiliation History**   | `affnh INDEX`<br> e.g., `affnh 2`                                                                                                      |
+| **Add Affiliations**           | `addaffn INDEX a/AFFN_NAME [a/AFFN_NAME]`<br> e.g., `addaffn 4 a/Mike Chang a/Tom Cruise`                                              |
+| **Modify Shift Days**          | `shift INDEX SHIFT_DAYS`<br> e.g., `shift 2 1457`                                                                                      |
+| **Clears Affiliation History** | `removeah INDEX`<br> e.g., `removeah 1`                                                                                                |
+| **Edit Next of Kin**           | `nok INDEX [n/NAME p/PHONE rs/RELATIONSHIP]` <br> e.g., `nok 3 n/John p/11111 rs/Brother`                                              |
+| **List Staff On Duty**         | `onduty`                                                                                                                               |
+| **Modify Specialisation**      | `spec INDEX SPECIALISATIONS`<br> e.g., `spec 4 Cardiology, Osteology`                                                                  |
+| **Display Person Information** | `info INDEX`<br> e.g., `info 2`                                                                                                        |
+| **Help**                       | `help`                                                                                                                                 |
+| **Exit**                       | `exit`                                                                                                                                 |
