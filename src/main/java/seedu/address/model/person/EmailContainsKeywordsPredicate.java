@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Email} matches any of the keywords given. Keywords can be a partial match.
+ * Tests that a {@code Person}'s {@code Email} matches any of the keywords given. Emails must start with the keywords.
  */
 public class EmailContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
@@ -18,7 +18,7 @@ public class EmailContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getEmail().value.contains(keyword));
+                .anyMatch(keyword -> person.getEmail().value.startsWith(keyword));
     }
 
     @Override

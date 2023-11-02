@@ -20,7 +20,7 @@ public class AffiliationContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword -> person.getAffiliations().stream().anyMatch(
-                        affiliation -> StringUtil.containsWordIgnoreCase(keyword, affiliation.affiliationName)));
+                        affiliation -> StringUtil.containsWordIgnoreCase(affiliation.affiliationName, keyword)));
     }
 
     @Override
