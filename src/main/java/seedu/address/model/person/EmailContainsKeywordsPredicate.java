@@ -6,19 +6,19 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Phone} matches any of the keywords given. Keywords can be a partial match.
+ * Tests that a {@code Person}'s {@code Email} matches any of the keywords given. Keywords can be a partial match.
  */
-public class PhoneContainsKeywordsPredicate implements Predicate<Person> {
+public class EmailContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public PhoneContainsKeywordsPredicate(List<String> keywords) {
+    public EmailContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getPhone().value.contains(keyword));
+                .anyMatch(keyword -> person.getEmail().value.contains(keyword));
     }
 
     @Override
@@ -28,12 +28,12 @@ public class PhoneContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PhoneContainsKeywordsPredicate)) {
+        if (!(other instanceof EmailContainsKeywordsPredicate)) {
             return false;
         }
 
-        PhoneContainsKeywordsPredicate otherPhoneContainsKeywordsPredicate = (PhoneContainsKeywordsPredicate) other;
-        return keywords.equals(otherPhoneContainsKeywordsPredicate.keywords);
+        EmailContainsKeywordsPredicate otherEmailContainsKeywordsPredicate = (EmailContainsKeywordsPredicate) other;
+        return keywords.equals(otherEmailContainsKeywordsPredicate.keywords);
     }
 
     @Override

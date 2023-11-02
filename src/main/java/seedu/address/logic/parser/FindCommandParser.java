@@ -12,9 +12,12 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AffiliationContainsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.RoleContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -56,13 +59,22 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        Predicate<Person> predicate = null;
+        Predicate<Person> predicate;
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String[] keywords = getKeywords(argMultimap, PREFIX_NAME);
             predicate = new NameContainsKeywordsPredicate(Arrays.asList(keywords));
         } else if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             String[] keywords = getKeywords(argMultimap, PREFIX_PHONE);
             predicate = new PhoneContainsKeywordsPredicate(Arrays.asList(keywords));
+        } else if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            String[] keywords = getKeywords(argMultimap, PREFIX_EMAIL);
+            predicate = new EmailContainsKeywordsPredicate(Arrays.asList(keywords));
+        } else if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            String[] keywords = getKeywords(argMultimap, PREFIX_ROLE);
+            predicate = new RoleContainsKeywordsPredicate(Arrays.asList(keywords));
+        } else if (argMultimap.getValue(PREFIX_AFFILIATION).isPresent()) {
+            String[] keywords = getKeywords(argMultimap, PREFIX_AFFILIATION);
+            predicate = new AffiliationContainsKeywordsPredicate(Arrays.asList(keywords));
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }

@@ -3,22 +3,23 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Phone} matches any of the keywords given. Keywords can be a partial match.
+ * Tests that a {@code Person}'s {@code Role} matches any of the keywords given.
  */
-public class PhoneContainsKeywordsPredicate implements Predicate<Person> {
+public class RoleContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public PhoneContainsKeywordsPredicate(List<String> keywords) {
+    public RoleContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getPhone().value.contains(keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getRole().value, keyword));
     }
 
     @Override
@@ -28,12 +29,12 @@ public class PhoneContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PhoneContainsKeywordsPredicate)) {
+        if (!(other instanceof RoleContainsKeywordsPredicate)) {
             return false;
         }
 
-        PhoneContainsKeywordsPredicate otherPhoneContainsKeywordsPredicate = (PhoneContainsKeywordsPredicate) other;
-        return keywords.equals(otherPhoneContainsKeywordsPredicate.keywords);
+        RoleContainsKeywordsPredicate otherRoleContainsKeywordsPredicate = (RoleContainsKeywordsPredicate) other;
+        return keywords.equals(otherRoleContainsKeywordsPredicate.keywords);
     }
 
     @Override
