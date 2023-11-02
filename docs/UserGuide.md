@@ -41,6 +41,23 @@ MediSync is a **desktop app specifically used for head nurses to manage staff an
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Glossary
+
+MediSync strives to streamline the storage and identification of contacts, focusing on essential information that are critical in medical contexts.
+
+Here are some definitions that are noteworthy when using MediSync.
+
+| Term                | Explanation                                                                                                                                                                                                                                                                                                                                                                  |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Role                | The **role** of a person in the contact list is either `Doctor`, `Nurse`, or `Patient`. When we use the word staff, we are implying both `Doctor`s and `Nurse`s.                                                                                                                                                                                                             |
+| Affiliation         | With staff members providing care to specific `Patient`s, there is a need to establish an association between staff members and `Patient`s. We use **affiliations** to denote such relationships. Such relationships can never be one-sided in MediSync, and it will not exist between staff members or between `Patient`s.                                                  |
+| Affiliation History | Having some level of history-taking is vital in tracking medical care. The use of **affiliation history** is to track past staff members that had affiliations with a particular `Patient`, and vice-versa. MediSync allows for the deletion of these history, but existing affiliations can never be deleted from the affiliation history until the affiliation is severed. |
+| Shift Days          | **Shift days** is an attribute unique to staff members. For simplicity, the current version of MediSync monitors the workdays of each staff member in blocks of days.                                                                                                                                                                                                        |
+| Next of Kin         | The **Next of Kin** attribute is meant for `Patient`s. Having a method of contact with the `Patient`s next of kin is vital in medical care.                                                                                                                                                                                                                                  |
+| Specialisation      | Exclusively for `Doctor`s, the **specialisation** attribute offers added information about each doctor, enabling the appropriate doctor to be matched with patients having diverse requirements.                                                                                                                                                                             |
+
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -105,7 +122,7 @@ Format: `list`
 
 Edits an existing contact in the contact list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN_NAME_NAME]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN_NAME]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -139,7 +156,7 @@ Examples:
 
 ### Add affiliations of a staff/patient: `addaffn`
 
-Format: `addaffn INDEX a/AFFN_NAME [a/AFFN_NAME_NAME]…`
+Format: `addaffn INDEX a/AFFN_NAME [a/AFFN_NAME]…`
 
 Add affiliations to staff/patients indicated by the given `INDEX` without deleting existing affiliation.
 
@@ -151,7 +168,7 @@ Add affiliations to staff/patients indicated by the given `INDEX` without deleti
 * Adding patient A to affiliation of staff B, will result in adding staff B to affiliation of Patient A.
 * Multiple affiliations can be added.
 * At least one affiliation field must be provided.
-* `AFFN` is specified as full name of a person in the contact list.
+* `AFFN_NAME` is specified as full name of a person in the contact list.
 
 Examples:
 * `addaffn 1 a/John` add `John` to affiliation of 1st person in the contact list.
