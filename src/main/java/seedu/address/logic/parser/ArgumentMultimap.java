@@ -47,7 +47,7 @@ public class ArgumentMultimap {
      * Returns the number of unique keys.
      */
     public int getPrefixNum() {
-        // Subtracts 1 to take into account the empty "" prefix.
+        // Subtracts 1 to take into account the preamble.
         return argMultimap.size() - 1;
     }
 

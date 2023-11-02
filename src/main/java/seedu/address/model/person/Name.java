@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+
 /**
  * Represents a Person's name in the contact list.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -36,6 +38,13 @@ public class Name {
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given array of strings contains all valid names.
+     */
+    public static boolean isValidName(String[] test) {
+        return Arrays.stream(test).allMatch(s -> s.matches(VALIDATION_REGEX));
     }
 
 

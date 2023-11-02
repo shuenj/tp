@@ -16,23 +16,12 @@ import seedu.address.model.affiliation.Affiliation;
 public class Role {
 
     /**
-     * Represents different types of role in MediSync.
-     */
-    public enum Type {
-        DOCTOR,
-        NURSE,
-        PATIENT
-    }
-
-    /**
      * Role must be exactly one of the types. It is case-insensitive.
      */
     public static final String VALIDATION_REGEX = "(?i)" + Arrays.stream(Type.values()).map(Enum::name)
             .collect(Collectors.joining("|"));
-
     public static final String MESSAGE_CONSTRAINTS = "Role can only be Doctor, Nurse or Patient, "
             + "and it should not be blank";
-
     public final String value;
 
     /**
@@ -51,6 +40,13 @@ public class Role {
      */
     public static boolean isValidRole(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given array of strings contains all valid roles.
+     */
+    public static boolean isValidRole(String[] test) {
+        return Arrays.stream(test).allMatch(s -> s.matches(VALIDATION_REGEX));
     }
 
     /**
@@ -127,6 +123,15 @@ public class Role {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    /**
+     * Represents different types of role in MediSync.
+     */
+    public enum Type {
+        DOCTOR,
+        NURSE,
+        PATIENT
     }
 
 }

@@ -43,7 +43,7 @@ public class RoleTest {
     @Test
     public void isValidRole() {
         // null role
-        assertThrows(NullPointerException.class, () -> Role.isValidRole(null));
+        assertThrows(NullPointerException.class, () -> Role.isValidRole((String) null));
 
         // invalid roles
         assertFalse(Role.isValidRole("")); // empty string

@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+
 /**
  * Represents a Doctor's specialisation in the address book.
  */
@@ -30,6 +32,13 @@ public class Specialisation {
      */
     public static boolean isValidSpecialisationName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given array of strings contains all valid specialisation names.
+     */
+    public static boolean isValidSpecialisationName(String[] test) {
+        return Arrays.stream(test).allMatch(s -> s.matches(VALIDATION_REGEX));
     }
 
     @Override

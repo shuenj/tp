@@ -22,7 +22,7 @@ public class RelationshipTest {
     @Test
     public void isValidRelationship() {
         // null relationship
-        assertThrows(NullPointerException.class, () -> Relationship.isValidRelationship(null));
+        assertThrows(NullPointerException.class, () -> Relationship.isValidRelationship((String) null));
 
         // invalid relationship
         assertFalse(Relationship.isValidRelationship("")); // empty string
