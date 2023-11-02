@@ -37,7 +37,8 @@ public class SampleDataUtil {
                         getAffiliationSet("Irfan Ibrahim"))
                     .setShiftDays(getShiftDays(3, 4, 5)),
             new Patient(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    getAffiliationSet("Alex Yeoh", "Evelyn Ng")),
+                    getAffiliationSet("Alex Yeoh", "Evelyn Ng"))
+                    .setNextOfKin(getNextOfKin("Ancob Maximus", "87769988", "Husband")),
             new Doctor(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     getAffiliationSet("Irfan Ibrahim"))
                     .setSpecialisations(getSpecialisationSet("Cardiologist"))
