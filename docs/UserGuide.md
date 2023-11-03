@@ -135,29 +135,30 @@ Examples:
 *  `edit 3 p/81234567 a/` Edits the phone number of the 3rd person to `81234567` and removes the person’s affiliation
 *  `edit 1 n/Sally Wing e/sallyw@kmail.com` Edits the name and the email of the 1st person to `Sally Wing` and `sallyw@kmail.com` respectively.
 
-### Locating persons by name: `find`
+### Locating persons by attribute: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose specified attribute contains any of the given keywords. Requires a prefix to choose which attribute
+to search for.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/] | [p/] | [e/] | [r/] | [a/]  [KEYWORD] [MORE KEYWORDS]`
 
+* Supports prefixes `n/` for `NAME`, `p/` for `PHONE`, `e/` for `EMAIL`, `r/` for `ROLE`, and `a/` for `AFFILIATION`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Keywords only require a partial match, e.g. `chard` will return `Richard Gramson`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find sally` returns `Sally Wing`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/sally` returns `Sally Wing`<br>
   ![result for 'find alex david'](images/findSallyResult.png)
 
 ### Add affiliations of a staff/patient: `addaffn`
 
-Format: `addaffn INDEX a/AFFN_NAME [a/AFFN_NAME]…`
-
 Add affiliations to staff/patients indicated by the given `INDEX` without deleting existing affiliation.
+
+Format: `addaffn INDEX a/AFFN_NAME [a/AFFN_NAME]…`
 
 * Add affiliations for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -178,6 +179,8 @@ Examples:
 Finds staff/patients who are affiliated with the patient/staff indicated
 by the given index.
 
+Format: `affn INDEX`
+
 * Finds affiliations for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -190,6 +193,8 @@ Examples:
 
 Finds the staff/patients that used to be affiliated or are currently affiliated with the patient/staff indicated by the given index.
 
+Format: `affnh INDEX`
+
 * Finds affiliation history for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -200,9 +205,9 @@ Examples:
 
 ### Remove affiliation history of a person: `removeah`
 
-Format: `removeah INDEX`
-
 Remove all affiliation history of patient/staff indicated by the given `INDEX`, except for affiliations that are currently affiliated.
+
+Format: `removeah INDEX`
 
 * Remove all affiliation history for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -215,6 +220,8 @@ Examples:
 ### Modifying specialisations of a doctor: `spec`
 
 Finds the doctor indicated by the given index and modifies the specialisations of the doctor.
+
+Format: `spec INDEX`
 
 * Finds the doctor at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list and it must refer to a doctor.
@@ -243,9 +250,9 @@ Examples:
 
 ### Add next of kin to a patient: `nok`
 
-Format: `nok INDEX [n/NAME p/PHONE rs/RELATIONSHIP]`
-
 Update next of kin of a patient identified at `INDEX` in the contact list.
+
+Format: `nok INDEX [n/NAME p/PHONE rs/RELATIONSHIP]`
 
 * Update next of kin for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -256,6 +263,19 @@ Update next of kin of a patient identified at `INDEX` in the contact list.
 Examples:
 * `nok 2` remove next of kin of the 2nd person in the contact list.
 * `nok 3 n/John p/11111 rs/Brother` add next of kin with the name `John`, phone `11111` and relationship `Brother` to the 3rd person in the contact list.
+
+### Add shift dates for a staff: `shift`
+
+Updates the shift days of the person identified with the given index number.
+
+Format: `shift INDEX SHIFT_DAYS`
+
+* `SHIFT_DAYS` is in the form of a unbroken string of numbers, from 1 (Monday) to 7 (Sunday), typed with no spaces, e.g. `147` (Monday, Thursday, Sunday).
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `shift 1 126` will set the 1st person in the contact list's shift days to be Monday, Tuesday, and Saturday.
 
 ### Returning staff that are on duty: `onduty`
 
