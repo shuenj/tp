@@ -135,22 +135,23 @@ Examples:
 *  `edit 3 p/81234567 a/` Edits the phone number of the 3rd person to `81234567` and removes the person’s affiliation
 *  `edit 1 n/Sally Wing e/sallyw@kmail.com` Edits the name and the email of the 1st person to `Sally Wing` and `sallyw@kmail.com` respectively.
 
-### Locating persons by name: `find`
+### Locating persons by attribute: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose specified attribute contains any of the given keywords. Requires a prefix to choose which attribute
+to search for.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/] | [p/] | [e/] | [r/] | [a/]  [KEYWORD] [MORE KEYWORDS]`
 
+* Supports prefixes `n/` for `NAME`, `p/` for `PHONE`, `e/` for `EMAIL`, `r/` for `ROLE`, and `a/` for `AFFILIATION`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Keywords only require a partial match, e.g. `chard` will return `Richard Gramson`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find sally` returns `Sally Wing`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/sally` returns `Sally Wing`<br>
   ![result for 'find alex david'](images/findSallyResult.png)
 
 ### Add affiliations of a staff/patient: `addaffn`
