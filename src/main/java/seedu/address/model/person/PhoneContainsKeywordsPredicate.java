@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Phone} matches any of the keywords given. Results must start with the keywords.
+ * Tests that a {@code Person}'s {@code Phone} matches any of the keywords given. Results must contain the keywords.
  */
 public class PhoneContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
@@ -18,7 +18,7 @@ public class PhoneContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getPhone().value.startsWith(keyword));
+                .anyMatch(keyword -> person.getPhone().value.contains(keyword));
     }
 
     @Override
