@@ -7,6 +7,7 @@ import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code Person}'s {@code Role} matches any of the keywords given.
+ * Results must contain the keywords. Ignores case.
  */
 public class RoleContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
