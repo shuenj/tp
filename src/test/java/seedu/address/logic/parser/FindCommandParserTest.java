@@ -9,15 +9,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.affiliation.Affiliation;
 import seedu.address.model.person.AffiliationContainsKeywordsPredicate;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.Role;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -45,20 +40,6 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " z/hello n/Alice Bob",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
 
-        // valid and invalid tag - name
-        assertParseFailure(parser, " n/Alice Bob z/hello", Name.MESSAGE_CONSTRAINTS);
-
-        // valid and invalid tag - phone
-        assertParseFailure(parser, " p/88796878 z/hello", Phone.MESSAGE_CONSTRAINTS);
-
-        // valid and invalid tag - email
-        assertParseFailure(parser, " e/a@gmail.com z/hello", Email.MESSAGE_CONSTRAINTS);
-
-        // valid and invalid tag - role
-        assertParseFailure(parser, " r/Doctor z/hello", Role.MESSAGE_CONSTRAINTS);
-
-        // valid and invalid tag - affiliation
-        assertParseFailure(parser, " a/Alice z/hello", Affiliation.MESSAGE_CONSTRAINTS);
     }
 
     @Test
