@@ -84,11 +84,13 @@ public class AffiliationModifier {
         requireAllNonNull(affiliationSet, affiliatedPerson, model);
 
         ReadOnlyAddressBook addressBook = model.getAddressBook();
-
+        Affiliation affiliationOfAffiliatedPerson = new Affiliation(affiliatedPerson.getName().fullName);
         for (Affiliation affiliation: affiliationSet) {
             Person otherAffiliatedPerson = AuthenticateAffiliation.findAffiliatedPerson(affiliation, addressBook);
             assert otherAffiliatedPerson != null;
-            otherAffiliatedPerson.getAffiliationHistory().remove(new Affiliation(affiliatedPerson.getName().fullName));
+            if (!otherAffiliatedPerson.getAffiliations().contains(affiliationOfAffiliatedPerson)) {
+                otherAffiliatedPerson.getAffiliationHistory().remove(affiliationOfAffiliatedPerson);
+            }
         }
     }
 
