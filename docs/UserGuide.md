@@ -132,8 +132,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN_NAME]…​`
 * Removing all affiliation automatically deletes the person from others' affiliation.
 
 Examples:
-*  `edit 3 p/81234567 a/` Edits the phone number of the 3rd person to `81234567` and removes the person’s affiliation
-*  `edit 1 n/Sally Wing e/sallyw@kmail.com` Edits the name and the email of the 1st person to `Sally Wing` and `sallyw@kmail.com` respectively.
+*  `edit 3 p/81234567 a/` edits the phone number of the 3rd person to `81234567` and removes the person’s affiliation
+*  `edit 1 n/Sally Wing e/sallyw@kmail.com` edits the name and the email of the 1st person to `Sally Wing` and `sallyw@kmail.com` respectively.
 
 ### Locating persons by attribute: `find`
 
@@ -171,8 +171,8 @@ Format: `addaffn INDEX a/AFFN_NAME [a/AFFN_NAME]…`
 * `AFFN_NAME` is specified as full name of a person in the contact list.
 
 Examples:
-* `addaffn 1 a/John` add `John` to affiliation of 1st person in the contact list.
-* `addaffn 3 a/John a/Mary` add `John` and `Mary` to affiliation of 3rd person in the contact list.
+* `addaffn 1 a/John` adds `John` to affiliation of 1st person in the contact list.
+* `addaffn 3 a/John a/Mary` adds `John` and `Mary` to affiliation of 3rd person in the contact list.
 
 ### Returning affiliations of a staff/patient: `affn`
 
@@ -215,18 +215,18 @@ Format: `removeah INDEX`
 * Does not remove the person they are currently affiliated to from affiliation history.
 
 Examples:
-* `removeah 2` remove affiliation history of the 2nd person in the contact list.
+* `removeah 2` removes affiliation history of the 2nd person in the contact list.
 
 ### Modifying specialisations of a doctor: `spec`
 
 Finds the doctor indicated by the given index and modifies the specialisations of the doctor.
 
-Format: `spec INDEX`
+Format: `spec INDEX [SPECIALIZATION1, SPECIALIZATION2, ...]`
 
 * Finds the doctor at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list and it must refer to a doctor.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Specialisations must be separated by a comma.
+* A specialisation must only contain alphanumeric charaters and specialisations must be separated by a comma.
 * To remove all specialisations, type `spec INDEX` without specifying any specialisations after it.
 
 Examples:
@@ -268,14 +268,17 @@ Examples:
 
 Updates the shift days of the person identified with the given index number.
 
-Format: `shift INDEX SHIFT_DAYS`
+Format: `shift INDEX [SHIFT_DAYS]`
 
-* `SHIFT_DAYS` is in the form of a unbroken string of numbers, from 1 (Monday) to 7 (Sunday), typed with no spaces, e.g. `147` (Monday, Thursday, Sunday).
+* `SHIFT_DAYS` is in the form of a unbroken string of numbers, from 1 (Monday) to 7 (Sunday), typed with no spaces, e.g. `147` (Monday, Thursday, Sunday). Duplicates are allowed in the `SHIFT_DAYS` string, but each day will only be counted once in the actual shift schedule.
+* If `SHIFT_DAYS` is not provided, the shift days for the staff member at the given index will be cleared.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `shift 1 126` will set the 1st person in the contact list's shift days to be Monday, Tuesday, and Saturday.
+* `shift 3 1127` would also be valid input and would assign Monday, Tuesday, and Sunday as shift days for the 3rd person, ignoring the duplicate entry of Monday.
+* `shift 2` with no SHIFT_DAYS specified will clear all shift days for the 2nd person in the contact list.
 
 ### Returning staff that are on duty: `onduty`
 
@@ -376,11 +379,11 @@ _Details coming soon ..._
 | **List Affiliations**          | `affn INDEX`<br> e.g., `affn 1`                                                                                                        |
 | **List Affiliation History**   | `affnh INDEX`<br> e.g., `affnh 2`                                                                                                      |
 | **Add Affiliations**           | `addaffn INDEX a/AFFN_NAME [a/AFFN_NAME]`<br> e.g., `addaffn 4 a/Mike Chang a/Tom Cruise`                                              |
-| **Modify Shift Days**          | `shift INDEX SHIFT_DAYS`<br> e.g., `shift 2 1457`                                                                                      |
+| **Modify Shift Days**          | `shift INDEX [SHIFT_DAYS]`<br> e.g., `shift 2 1457`                                                                                      |
 | **Clears Affiliation History** | `removeah INDEX`<br> e.g., `removeah 1`                                                                                                |
 | **Edit Next of Kin**           | `nok INDEX [n/NAME p/PHONE rs/RELATIONSHIP]` <br> e.g., `nok 3 n/John p/11111 rs/Brother`                                              |
 | **List Staff On Duty**         | `onduty`                                                                                                                               |
-| **Modify Specialisation**      | `spec INDEX SPECIALISATIONS`<br> e.g., `spec 4 Cardiology, Osteology`                                                                  |
+| **Modify Specialisation**      | `spec INDEX [SPECIALIZATION1, SPECIALIZATION2, ...]`<br> e.g., `spec 4 Cardiology, Osteology`                                                                  |
 | **Display Person Information** | `info INDEX`<br> e.g., `info 2`                                                                                                        |
 | **Help**                       | `help`                                                                                                                                 |
 | **Exit**                       | `exit`                                                                                                                                 |
