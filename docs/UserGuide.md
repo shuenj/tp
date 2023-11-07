@@ -1,7 +1,6 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
 ---
 
 # MediSync User Guide
@@ -109,7 +108,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [a/AFFN_NAME]…​`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/patient`
-* `add n/May Ho p/97746234 e/may@example.com r/nurse a/John Doe`
+* `add n/Mint Ho p/97746234 e/mint@example.com r/nurse a/Bernice Yu`<br>
+  ![result for add command](images/addMintResult.png)
 
 ### Listing all persons : `list`
 
@@ -140,19 +140,20 @@ Examples:
 Finds persons whose specified attribute contains any of the given keywords. Requires a prefix to choose which attribute
 to search for.
 
-Format: `find [n/] | [p/] | [e/] | [r/] | [a/]  [KEYWORD] [MORE KEYWORDS]`
+Format: `find (n|p|e|r|a)/[KEYWORD]`
 
 * Supports prefixes `n/` for `NAME`, `p/` for `PHONE`, `e/` for `EMAIL`, `r/` for `ROLE`, and `a/` for `AFFILIATION`
+* Exactly 1 prefix is supported, indicated by the `|` (OR) indicator in the format. Using two or more prefixes in one search will lead to an invalid command.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Keywords only require a partial match, e.g. `chard` will return `Richard Gramson`
+* Keywords only require a partial match, e.g. `find n/chard` will return `Richard Gramson`, or `find e/max` will return persons with email such as `himax@test.com`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
-* `find n/sally` returns `Sally Wing`<br>
-  ![result for 'find alex david'](images/findSallyResult.png)
+* `find p/976` returns any person in the contact list that has `976` in its phone number.
+* `find n/eve irfan` returns `Irfan Ibrahim`, `Evelyn Ng`<br>
+  ![result for 'find alex david'](images/findEveIrfanResult.png)
 
 ### Add affiliations of a staff/patient: `addaffn`
 
@@ -187,7 +188,8 @@ Format: `affn INDEX`
 
 Examples:
 * `list` followed by `affn 2` lists the people affiliated to the 2nd person in the contact list.
-* Subsequently, `affn 1` will list the people affiliated with the 1st person displayed after the previous `affn` command.
+* Subsequently, `affn 1` will list the people affiliated with the 1st person displayed after the previous `affn` command.<br>
+  ![result for 'info 1'](images/affnResult.png)
 
 ### Listing affiliation history of a person: `affnh`
 
@@ -230,8 +232,8 @@ Format: `spec INDEX [SPECIALIZATION1, SPECIALIZATION2, ...]`
 * To remove all specialisations, type `spec INDEX` without specifying any specialisations after it.
 
 Examples:
-* `spec 2 heart, brain` modifies the specialisations of the 2nd doctor in the contact list to `heart` and `brain`.
-
+* `spec 5 heart, brain` modifies the specialisations of the 5th person(a `Doctor`) in the contact list to `heart` and `brain`.
+ 
 ### Deleting a person : `delete`
 
 Deletes the contact in the contact list.
@@ -246,7 +248,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 3` deletes the 3rd person in the contact list.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Add next of kin to a patient: `nok`
 
@@ -262,7 +264,8 @@ Format: `nok INDEX [n/NAME p/PHONE rs/RELATIONSHIP]`
 
 Examples:
 * `nok 2` remove next of kin of the 2nd person in the contact list.
-* `nok 3 n/John p/11111 rs/Brother` add next of kin with the name `John`, phone `11111` and relationship `Brother` to the 3rd person in the contact list.
+* `nok 2 n/John p/11111 rs/Brother` add next of kin with the name `John`, phone `11111` and relationship `Brother` to the 3rd person in the contact list.<br>
+  ![result for 'info 1'](images/nokResult.png)
 
 ### Add shift dates for a staff: `shift`
 
@@ -301,7 +304,8 @@ Format: `info INDEX`
 
 Examples:
 * `list` followed by `info 3` displays the information of the 3rd person in the contact list.
-* `find Betsy` followed by `info 1` displays the information of the 1st person in the results of the `find` command.
+* `find n/Charlotte` followed by `info 1` displays the information of the 1st person in the results of the `find` command.<br>
+  ![result for 'info 1'](images/infoResult.png)
 
 ### Displaying the information of a person using mouse
 
@@ -345,10 +349,6 @@ Be very careful, especially when you modify attributes such as Role, as any mism
 
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -374,16 +374,16 @@ _Details coming soon ..._
 | **Clear**                      | `clear`                                                                                                                                |
 | **Delete**                     | `delete INDEX`<br> e.g., `delete 3`                                                                                                    |
 | **Edit**                       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN_NAME]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                           |
-| **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                             |
+| **Find**                       | `find (n\|p\|e\|r\|a)/[KEYWORD]`<br> e.g., `find n/james`                                                                              |
 | **List**                       | `list`                                                                                                                                 |
 | **List Affiliations**          | `affn INDEX`<br> e.g., `affn 1`                                                                                                        |
 | **List Affiliation History**   | `affnh INDEX`<br> e.g., `affnh 2`                                                                                                      |
 | **Add Affiliations**           | `addaffn INDEX a/AFFN_NAME [a/AFFN_NAME]`<br> e.g., `addaffn 4 a/Mike Chang a/Tom Cruise`                                              |
-| **Modify Shift Days**          | `shift INDEX [SHIFT_DAYS]`<br> e.g., `shift 2 1457`                                                                                      |
+| **Modify Shift Days**          | `shift INDEX [SHIFT_DAYS]`<br> e.g., `shift 2 1457`                                                                                    |
 | **Clears Affiliation History** | `removeah INDEX`<br> e.g., `removeah 1`                                                                                                |
 | **Edit Next of Kin**           | `nok INDEX [n/NAME p/PHONE rs/RELATIONSHIP]` <br> e.g., `nok 3 n/John p/11111 rs/Brother`                                              |
 | **List Staff On Duty**         | `onduty`                                                                                                                               |
-| **Modify Specialisation**      | `spec INDEX [SPECIALIZATION1, SPECIALIZATION2, ...]`<br> e.g., `spec 4 Cardiology, Osteology`                                                                  |
+| **Modify Specialisation**      | `spec INDEX [SPECIALIZATION1, SPECIALIZATION2, ...]`<br> e.g., `spec 4 Cardiology, Osteology`                                          |
 | **Display Person Information** | `info INDEX`<br> e.g., `info 2`                                                                                                        |
 | **Help**                       | `help`                                                                                                                                 |
 | **Exit**                       | `exit`                                                                                                                                 |
