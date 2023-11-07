@@ -24,7 +24,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_INVALID_ROLE = "Next-of-Kin are not available for Doctors and Nurses!";
+    public static final String MESSAGE_INVALID_ROLE = "Invalid Role!";
+    public static final String MESSAGE_INVALID_NOK_ROLE = "Next-of-Kin are not available for Doctors and Nurses!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

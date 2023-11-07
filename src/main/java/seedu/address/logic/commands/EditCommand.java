@@ -111,6 +111,10 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        if (this.editPersonDescriptor.isAffiliationEdited()) {
+            AuthenticateAffiliation.check(editedPerson.getAffiliations(), personToEdit, editedPerson, model);
+        }
+
         if (this.editPersonDescriptor.isNameEdited()) {
             AffiliationModifier.nameChangeAffiliations(personToEdit.getAffiliations(), personToEdit.getName(),
                     editedPerson.getName(), model);
@@ -119,7 +123,6 @@ public class EditCommand extends Command {
         }
 
         if (this.editPersonDescriptor.isAffiliationEdited()) {
-            AuthenticateAffiliation.check(editedPerson.getAffiliations(), editedPerson, model);
             AffiliationModifier.addAffiliationHistory(editedPerson.getAffiliations(), editedPerson, model);
             AffiliationModifier.removeAffiliations(personToEdit.getAffiliations(), editedPerson, model);
             AffiliationModifier.addAffiliations(editedPerson.getAffiliations(), editedPerson, model);

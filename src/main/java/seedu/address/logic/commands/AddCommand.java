@@ -59,7 +59,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        AuthenticateAffiliation.check(toAdd.getAffiliations(), toAdd, model);
+        AuthenticateAffiliation.check(toAdd.getAffiliations(), toAdd, toAdd, model);
         AffiliationModifier.addAffiliations(toAdd.getAffiliations(), toAdd, model);
         AffiliationModifier.addAffiliationHistory(toAdd.getAffiliations(), toAdd, model);
 

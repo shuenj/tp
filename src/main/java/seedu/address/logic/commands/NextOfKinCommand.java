@@ -64,7 +64,7 @@ public class NextOfKinCommand extends Command {
         }
         Person personToModify = lastShownList.get(index.getZeroBased());
         if (!(personToModify instanceof Patient)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ROLE);
+            throw new CommandException(Messages.MESSAGE_INVALID_NOK_ROLE);
         }
         Patient modifiedPerson = (Patient) personToModify;
         if (nextOfKin == null) {
