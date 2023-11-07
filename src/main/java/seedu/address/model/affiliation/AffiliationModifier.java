@@ -107,7 +107,6 @@ public class AffiliationModifier {
     public static void nameChangeAffiliations(Set<Affiliation> affiliationSet,
                                               Name oldName, Name newName, Model model) {
         requireAllNonNull(affiliationSet, oldName, newName, model);
-        System.out.println(111);
         ReadOnlyAddressBook addressBook = model.getAddressBook();
         for (Affiliation affiliation: affiliationSet) {
             Person otherAffiliatedPerson = AuthenticateAffiliation.findAffiliatedPerson(affiliation, addressBook);
@@ -115,7 +114,7 @@ public class AffiliationModifier {
             Set<Affiliation> otherAffiliatedSet = otherAffiliatedPerson.getAffiliations();
             for (Affiliation affiliation1: otherAffiliatedSet) {
                 if (affiliation1.affiliationName.equals(oldName.fullName)) {
-                    System.out.println(otherAffiliatedSet.remove(affiliation1));
+                    otherAffiliatedSet.remove(affiliation1);
                     otherAffiliatedSet.add(new Affiliation(newName.fullName));
                     break;
                 }
