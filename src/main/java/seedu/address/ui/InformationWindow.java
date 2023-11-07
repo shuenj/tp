@@ -186,8 +186,10 @@ public class InformationWindow extends UiPart<Region> {
         clearAffiliations();
         for (Affiliation affiliation : person.getAffiliations()) {
             String name = affiliation.toString();
-            Label label = new Label("- " + name);
+            Label label = new Label("-\u00A0" + name);
             label.getStyleClass().add("information-affn-list");
+            label.setMinHeight(Region.USE_PREF_SIZE);
+            label.setWrapText(true);
             affnListBlock.getChildren().add(label);
         }
 
@@ -223,6 +225,7 @@ public class InformationWindow extends UiPart<Region> {
      */
     private void setNok(Patient patient) {
         clearNok();
+
         nokBlock.setVisible(true);
         nokBlock.setManaged(true);
         nokBlock.setStyle("-fx-border-color: #BBBBBB; -fx-border-width: 2 0 0 0;");
@@ -231,9 +234,9 @@ public class InformationWindow extends UiPart<Region> {
         NextOfKin nok = patient.getNextOfKin();
         if (nok.isPresent()) {
             adjustNokPresence(true);
-            nokName.setText("Name: " + nok.getName().fullName);
-            nokPhone.setText("Phone no.: " + nok.getPhone().value);
-            nokRelationship.setText("Relationship: " + nok.getRelationship().relationship);
+            nokName.setText("Name:\u00A0" + nok.getName().fullName);
+            nokPhone.setText("Phone\u00A0no.:\u00A0" + nok.getPhone().value);
+            nokRelationship.setText("Relationship:\u00A0" + nok.getRelationship().relationship);
         } else {
             adjustNokPresence(false);
             nokNotPresent.setText("MISSING. Please add an NOK for this patient.");
@@ -282,8 +285,10 @@ public class InformationWindow extends UiPart<Region> {
         specListHeader.setText("Specialisations:");
         for (Specialisation specialisation : doctor.getSpecialisations()) {
             String spec = specialisation.toString();
-            Label label = new Label("- " + spec);
+            Label label = new Label("-\u00A0" + spec);
             label.getStyleClass().add("information-spec-list");
+            label.setWrapText(true);
+            label.setMinHeight(Region.USE_PREF_SIZE);
             specListBlock.getChildren().add(label);
         }
 
