@@ -1,7 +1,6 @@
 ---
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+layout: default.md
+title: "Developer Guide"
 ---
 
 # MediSync Developer Guide
@@ -526,3 +525,10 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. The current implementation of `name` is case-sensitive. This means that adding or editing a `Person` with name that only differs by letter casing with someone else in the contact list is considered a different `Person`. If similar name is flagged, we plan to add a success message with a warning: `WARNING: Although the person is added/edited, do note that there exist a person in the contact list with a very similar name that only differs in letter casing. Please make sure this addition/editing is intended`.
+2. The current implementation of `find` command allow for empty keyword. This means that, for example, if we run the command `find n/`, we will list everyone in the contact list. Since an empty keyword is a subset of anyone's name, the listing of everybody thus happens, which is already possible with the `list` command. Same goes for other tags. We plan to prevent users from inputting an empty keyword in the future.
