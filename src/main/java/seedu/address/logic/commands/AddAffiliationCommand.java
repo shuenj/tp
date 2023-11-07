@@ -62,7 +62,7 @@ public class AddAffiliationCommand extends Command {
         }
 
         Person personToAddAffiliation = lastShownList.get(index.getZeroBased());
-        AuthenticateAffiliation.check(this.affiliationListToAdd, personToAddAffiliation, personToAddAffiliation, model);
+        AuthenticateAffiliation.check(this.affiliationListToAdd, personToAddAffiliation, model);
 
         // Add new affiliations
         personToAddAffiliation.getAffiliations().addAll(this.affiliationListToAdd);
