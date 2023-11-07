@@ -140,7 +140,7 @@ Examples:
 Finds persons whose specified attribute contains any of the given keywords. Requires a prefix to choose which attribute
 to search for.
 
-Format: `find (n|p|e|r|a)/[KEYWORD]`
+Format: `find (n|p|e|r|a)/[KEYWORD] [MORE_KEYWORDS]...`
 
 * Supports prefixes `n/` for `NAME`, `p/` for `PHONE`, `e/` for `EMAIL`, `r/` for `ROLE`, and `a/` for `AFFILIATION`
 * Exactly 1 prefix is supported, indicated by the `|` (OR) indicator in the format. Using two or more prefixes in one search will lead to an invalid command.
@@ -374,7 +374,7 @@ Be very careful, especially when you modify attributes such as Role, as any mism
 | **Clear**                      | `clear`                                                                                                                                |
 | **Delete**                     | `delete INDEX`<br> e.g., `delete 3`                                                                                                    |
 | **Edit**                       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN_NAME]…​`<br> e.g.,`edit 1 p/91234567 e/johndoe@example.com`                           |
-| **Find**                       | `find (n\|p\|e\|r\|a)/[KEYWORD]`<br> e.g., `find n/james`                                                                              |
+| **Find**                       | `find (n\|p\|e\|r\|a)/[KEYWORD] [MORE_KEYWORDS]...`<br> e.g., `find n/james`                                                           |
 | **List**                       | `list`                                                                                                                                 |
 | **List Affiliations**          | `affn INDEX`<br> e.g., `affn 1`                                                                                                        |
 | **List Affiliation History**   | `affnh INDEX`<br> e.g., `affnh 2`                                                                                                      |
