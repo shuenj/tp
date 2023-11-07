@@ -8,7 +8,7 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER"
             style="-fx-background-color: transparent; -fx-border-width: 0; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);"
-            styleClass="scroll-pane" xmlns="17" xmlns:fx="http://javafx.com/fxml/1">
+            styleClass="scroll-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <content>
         <VBox fx:id="fullWindow" minHeight="0.0">
             <children>
