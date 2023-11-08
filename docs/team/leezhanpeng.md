@@ -16,6 +16,7 @@ Given below are my contributions to the project.
   * It enables user to view the information of a particular person without having to click on its `PersonCard`.
   * This thereby retains MediSync's spirit of a CLI-optimised application.
   * The difficulty of this implementation lies in the inner workings of the UI. Having to set the correct elements on focus, and allowing the use of arrow keys for information traversal took a lot of understanding of the interaction between each component, specifically the UI and the Model.
+  
 
 * **New Feature**: Implemented the `onduty` command (PR: [#145](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/146))
   * It enables user to list the `Doctor` or `Nurse` that are on duty for the day.
@@ -26,9 +27,11 @@ Given below are my contributions to the project.
   * The use of polymorphism is necessary as we intend to have varying attributes and commands for the different role types. The `Staff` class is also created for `Doctor` and `Nurse` to morph from.
   * It was arduous in setting this up. Having the varying classes be suitable for use for ALL commands took a burst of effort. It is a needed addition for the whole application to stay intact.
 
+
 * **Technical Additions**: Introduced the `Role` class/attribute to suit the presence of the three `Person` types (PR: [#88](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/88))
   * To complement the above addition, the `Role` attribute is introduced for `Person` class.
   * It streamlines a lot of the processes for the commands that are available. It does so by allowing itself to generate `Person` of the different types without the need to check their instances.
+
 
 * **Technical Additions**: Introduced the `Shiftdays` class/attribute for the `Doctor` class (PR: [#109](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/109))
   * This addition was to kickstart the development of the `shiftday` command to modify shift days of staff members.
@@ -54,6 +57,7 @@ Given below are my contributions to the project.
     * Written the `Editing the data file` section (PR: [#156](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/156)).
     * Adjusted the `Command Summary` table.
 
+
   * Developer Guide:
     * Updated UI component (PR: [#129](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/129)).
       * Adjusted the overview Class diagram of the UI component.
@@ -63,10 +67,12 @@ Given below are my contributions to the project.
       * Added the activity diagram for the jsonification process of the saving of data in MediSync.
     * Updated the Non-Functional Requirements.
 
+
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [#68](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/68), [#96](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/96), [#98](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/98), [#147](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/147).
   * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2324S1/forum/issues/28#issuecomment-1694649929), [2](https://github.com/nus-cs2103-AY2324S1/forum/issues/29#issuecomment-1694648517)).
   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/AY2324S1-CS2103T-T12-4/tp/issues/118), [2](https://github.com/AY2324S1-CS2103T-T12-4/tp/issues/138), [3](https://github.com/AY2324S1-CS2103T-T12-4/tp/issues/124), [4](https://github.com/AY2324S1-CS2103T-T12-4/tp/issues/140)).
+
 
 * **Tools**:
   * Set up the team's project repo.

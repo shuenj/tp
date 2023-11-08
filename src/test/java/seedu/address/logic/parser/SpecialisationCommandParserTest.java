@@ -58,11 +58,11 @@ public class SpecialisationCommandParserTest {
     @Test
     public void parse_invalidSpecialisation_failure() {
         assertParseFailure(parser, "1 " + INVALID_SPECIALISATION,
-            MESSAGE_INVALID_FORMAT); // invalid specialisation
+            Specialisation.MESSAGE_CONSTRAINTS); // invalid specialisation
 
         // invalid specialisation followed by valid specialisation
         assertParseFailure(parser, "1 " + INVALID_SPECIALISATION + VALID_SPECIALISATION,
-            MESSAGE_INVALID_FORMAT);
+            Specialisation.MESSAGE_CONSTRAINTS);
     }
 
     @Test

@@ -25,25 +25,22 @@ public class SpecialisationCommandParser implements Parser<SpecialisationCommand
      */
     public SpecialisationCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        // Limit set to -1 to include empty strings in the array
+        String[] splitArgs = args.trim().split("\\s+", -1);
+        Index index;
         try {
-            // Limit set to -1 to include empty strings in the array
-            String[] splitArgs = args.trim().split("\\s+", -1);
-
-            // Parse the index from the first part of the arguments.
-            Index index = ParserUtil.parseIndex(splitArgs[0]);
-            Set<Specialisation> specialisations = new HashSet<>();
-
-            // Check if there are any arguments after the index.
-            if (splitArgs.length > 1 && !splitArgs[1].isEmpty()) {
-                String specialisationString = String.join(" ", Arrays.copyOfRange(splitArgs, 1, splitArgs.length));
-                specialisations = ParserUtil.parseSpecialisations(specialisationString);
-            }
-            return new SpecialisationCommand(index, specialisations);
-
+            index = ParserUtil.parseIndex(splitArgs[0]);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SpecialisationCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SpecialisationCommand.MESSAGE_USAGE), pe);
         }
-    }
+        Set<Specialisation> specialisations = new HashSet<>();
 
+        // Check if there are any arguments after the index.
+        if (splitArgs.length > 1 && !splitArgs[1].isEmpty()) {
+            String specialisationString = String.join(" ", Arrays.copyOfRange(splitArgs, 1, splitArgs.length));
+            specialisations = ParserUtil.parseSpecialisations(specialisationString);
+        }
+        return new SpecialisationCommand(index, specialisations);
+    }
 }

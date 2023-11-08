@@ -12,7 +12,8 @@
     <content>
         <VBox fx:id="fullWindow" minHeight="0.0">
             <children>
-                <Label fx:id="name" minWidth="350.0" prefWidth="350.0" styleClass="information-name">
+                <Label fx:id="name" minHeight="-Infinity" minWidth="350.0" styleClass="information-name"
+                       wrapText="true">
                     <VBox.margin>
                         <Insets left="20.0" top="15.0"/>
                     </VBox.margin>
@@ -25,7 +26,7 @@
                         <Insets left="10.0" right="10.0"/>
                     </padding>
                 </Label>
-                <Label fx:id="email" styleClass="information-email">
+                <Label fx:id="email" minHeight="-Infinity" styleClass="information-email" wrapText="true">
                     <padding>
                         <Insets left="10.0" right="10.0"/>
                     </padding>
@@ -97,9 +98,11 @@
                     <children>
                         <Label fx:id="nokHeader" styleClass="information-nok"/>
                         <Label fx:id="nokNotPresent" styleClass="information-nok-missing"/>
-                        <Label fx:id="nokName" styleClass="information-nok-name"/>
-                        <Label fx:id="nokPhone" styleClass="information-nok-phone"/>
-                        <Label fx:id="nokRelationship" styleClass="information-nok-relationship"/>
+                        <Label fx:id="nokName" minHeight="-Infinity" styleClass="information-nok-name" wrapText="true"/>
+                        <Label fx:id="nokPhone" minHeight="-Infinity" styleClass="information-nok-phone"
+                               wrapText="true"/>
+                        <Label fx:id="nokRelationship" minHeight="-Infinity" styleClass="information-nok-relationship"
+                               wrapText="true"/>
                     </children>
                     <VBox.margin>
                         <Insets left="20.0" right="20.0" top="15.0"/>

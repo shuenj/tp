@@ -85,6 +85,7 @@ public class AffiliationModifier {
 
         ReadOnlyAddressBook addressBook = model.getAddressBook();
         Affiliation affiliationOfAffiliatedPerson = new Affiliation(affiliatedPerson.getName().fullName);
+
         for (Affiliation affiliation: affiliationSet) {
             Person otherAffiliatedPerson = AuthenticateAffiliation.findAffiliatedPerson(affiliation, addressBook);
             assert otherAffiliatedPerson != null;
@@ -107,7 +108,9 @@ public class AffiliationModifier {
     public static void nameChangeAffiliations(Set<Affiliation> affiliationSet,
                                               Name oldName, Name newName, Model model) {
         requireAllNonNull(affiliationSet, oldName, newName, model);
+
         ReadOnlyAddressBook addressBook = model.getAddressBook();
+
         for (Affiliation affiliation: affiliationSet) {
             Person otherAffiliatedPerson = AuthenticateAffiliation.findAffiliatedPerson(affiliation, addressBook);
             assert otherAffiliatedPerson != null;

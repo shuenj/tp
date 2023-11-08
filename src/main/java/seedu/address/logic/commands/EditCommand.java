@@ -92,7 +92,7 @@ public class EditCommand extends Command {
         Set<Affiliation> mergedAffiliationHistory = new HashSet<>(personToEdit.getAffiliationHistory());
         mergedAffiliationHistory.addAll(updatedAffiliations);
         return updatedRole.generatePerson(updatedName, updatedPhone, updatedEmail,
-            updatedAffiliations, mergedAffiliationHistory);
+                updatedAffiliations, mergedAffiliationHistory);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class EditCommand extends Command {
             AffiliationModifier.nameChangeAffiliations(personToEdit.getAffiliations(), personToEdit.getName(),
                     editedPerson.getName(), model);
             AffiliationModifier.nameChangeAffiliationHistory(personToEdit.getAffiliationHistory(),
-                personToEdit.getName(), editedPerson.getName(), model);
+                    personToEdit.getName(), editedPerson.getName(), model);
         }
 
         if (this.editPersonDescriptor.isAffiliationEdited()) {
@@ -297,7 +297,7 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Affiliation>> getAffiliationHistory() {
             return (affiliationHistory != null) ? Optional.of(Collections.unmodifiableSet(affiliationHistory))
-                : Optional.empty();
+                    : Optional.empty();
         }
         /**
          * Sets {@code affiliations} to this object's {@code affiliations}.
@@ -329,7 +329,7 @@ public class EditCommand extends Command {
          */
         public void setAffiliationHistory(Set<Affiliation> affiliationHistory) {
             this.affiliationHistory = (affiliationHistory != null)
-                ? new HashSet<>(affiliationHistory) : null;
+                    ? new HashSet<>(affiliationHistory) : null;
         }
         /**
          * Adds {@code affiliations} to this object's {@code affiliations}.

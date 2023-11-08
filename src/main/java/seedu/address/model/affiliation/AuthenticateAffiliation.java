@@ -28,7 +28,7 @@ public class AuthenticateAffiliation {
      */
     public static Boolean check(Set<Affiliation> affiliationSet, Person personToEdit, Person editedPerson, Model model)
             throws CommandException {
-        requireAllNonNull(affiliationSet, editedPerson, model);
+        requireAllNonNull(affiliationSet, personToEdit, editedPerson, model);
 
         if (affiliationSet.isEmpty()) {
             return true;
