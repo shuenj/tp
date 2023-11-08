@@ -21,9 +21,9 @@ public class FindCommand extends Command {
             + "adding a tag, and keywords after it to search for. Finds all persons whose attribute contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers. Can only"
             + "take in one tag at a time (i.e. can only search by one attribute at a time).\n"
-            + "Parameters: [TAG] KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " n/alice bob charlie"
-            + "Example: " + COMMAND_WORD + " r/doctor";
+            + "Parameters: (n|p|e|r|a)/[KEYWORD] [MORE_KEYWORDS]...\n"
+            + "Example 1: " + COMMAND_WORD + " n/alice bob charlie\n"
+            + "Example 2: " + COMMAND_WORD + " r/doctor";
 
     private final Predicate<Person> predicate;
 
