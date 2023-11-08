@@ -26,9 +26,9 @@ public class AuthenticateAffiliation {
      * @param model The current model that is running.
      * @throws CommandException If affiliation list fails the check.
      */
-    public static Boolean check(Set<Affiliation> affiliationSet, Person personAddingAffiliation, Model model)
+    public static Boolean check(Set<Affiliation> affiliationSet, Person personToEdit, Person editedPerson, Model model)
             throws CommandException {
-        requireAllNonNull(affiliationSet, personAddingAffiliation, model);
+        requireAllNonNull(affiliationSet, personToEdit, editedPerson, model);
 
         if (affiliationSet.isEmpty()) {
             return true;
@@ -43,12 +43,13 @@ public class AuthenticateAffiliation {
                 throw new AffiliationPersonNotFoundException(affiliation.affiliationName);
             }
 
-            if (affiliatedPerson.getName().equals(personAddingAffiliation.getName())) {
+            if (affiliatedPerson.getName().equals(personToEdit.getName())
+                    || affiliatedPerson.getName().equals(editedPerson.getName())) {
                 throw new SamePersonAffiliationException(affiliatedPerson);
             }
 
-            if ((affiliatedPerson instanceof Staff && personAddingAffiliation instanceof Staff)
-                    || (affiliatedPerson instanceof Patient && personAddingAffiliation instanceof Patient)) {
+            if ((affiliatedPerson instanceof Staff && editedPerson instanceof Staff)
+                    || (affiliatedPerson instanceof Patient && editedPerson instanceof Patient)) {
                 throw new SameRoleAffiliationException(affiliatedPerson);
             }
         }
