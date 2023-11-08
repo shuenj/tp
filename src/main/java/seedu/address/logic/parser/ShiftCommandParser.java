@@ -23,22 +23,23 @@ public class ShiftCommandParser implements Parser<ShiftCommand> {
     public ShiftCommand parse(String args) throws ParseException {
 
         requireNonNull(args);
+        String[] splitArgs = args.trim().split(" ", 2);
+        Index index;
         try {
-            String[] splitArgs = args.trim().split(" ", 2);
-            Index index = ParserUtil.parseIndex(splitArgs[0]);
-            Set<Integer> shiftDayNumbers;
-
-            // check if there are any arguments after the index
-            if (splitArgs.length > 1 && !splitArgs[1].isEmpty()) {
-                shiftDayNumbers = ParserUtil.parseShiftDays(splitArgs[1]);
-            } else {
-                shiftDayNumbers = ParserUtil.parseShiftDays("");
-            }
-            return new ShiftCommand(index, shiftDayNumbers);
+            index = ParserUtil.parseIndex(splitArgs[0]);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShiftCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ShiftCommand.MESSAGE_USAGE), pe);
         }
+        Set<Integer> shiftDayNumbers;
+
+        // check if there are any arguments after the index
+        if (splitArgs.length > 1 && !splitArgs[1].isEmpty()) {
+            shiftDayNumbers = ParserUtil.parseShiftDays(splitArgs[1]);
+        } else {
+            shiftDayNumbers = ParserUtil.parseShiftDays("");
+        }
+        return new ShiftCommand(index, shiftDayNumbers);
     }
 
 }
