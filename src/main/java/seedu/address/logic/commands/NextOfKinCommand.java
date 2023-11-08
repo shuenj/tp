@@ -38,7 +38,7 @@ public class NextOfKinCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_RELATIONSHIP + "Spouse";
 
-    public static final String MESSAGE_SUCCESS = "Next of Kin updated!\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Next of Kin added!\n%1$s";
     private static Logger logger = Logger.getLogger("NextOfKin Command Logger");
     private final Index index;
     private final NextOfKin nextOfKin;
@@ -64,7 +64,7 @@ public class NextOfKinCommand extends Command {
         }
         Person personToModify = lastShownList.get(index.getZeroBased());
         if (!(personToModify instanceof Patient)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_NOK_ROLE);
+            throw new CommandException(Messages.MESSAGE_INVALID_ROLE);
         }
         Patient modifiedPerson = (Patient) personToModify;
         if (nextOfKin == null) {

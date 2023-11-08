@@ -35,18 +35,13 @@ public class AuthenticateAffiliationTest {
     @Test
     public void check_withAffiliationPersonNotExist_affiliationPersonNotFoundException() {
         Person person = new PersonBuilder()
-                .withName(VALID_NAME_ALICE)
-                .withRole(VALID_ROLE_BOB)
-                .build();
-
-        Person editedPerson = new PersonBuilder()
                 .withName(VALID_NAME_AMY)
                 .withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_AFFILIATION_BOB)
                 .withAffiliationHistory(VALID_AFFILIATION_BOB)
                 .build();
         assertThrows(AffiliationPersonNotFoundException.class, () ->
-                AuthenticateAffiliation.check(editedPerson.getAffiliations(), person, editedPerson, personModel));
+                AuthenticateAffiliation.check(person.getAffiliations(), person, personModel));
     }
 
     @Test
@@ -54,59 +49,42 @@ public class AuthenticateAffiliationTest {
         Person person = new PersonBuilder()
                 .withName(VALID_NAME_ALICE)
                 .withRole(VALID_ROLE_BOB)
-                .build();
-
-        Person editedPerson = new PersonBuilder()
-                .withName(VALID_NAME_ALICE)
-                .withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_NAME_ALICE)
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
-
         assertThrows(SamePersonAffiliationException.class, () ->
-                AuthenticateAffiliation.check(editedPerson.getAffiliations(), person, editedPerson, personModel));
+                AuthenticateAffiliation.check(person.getAffiliations(), person, personModel));
     }
 
     @Test
     public void check_withAffiliationPersonSameRoleAsPersonAdding_sameRoleAffiliationException() {
         Doctor doctor = new DoctorBuilder()
-                .withName(VALID_NAME_BOB).build();
-
-        Doctor editedDoctor = new DoctorBuilder()
                 .withName(VALID_NAME_BOB)
                 .withAffiliations(VALID_NAME_ALICE)
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
         assertThrows(SameRoleAffiliationException.class, () ->
-                AuthenticateAffiliation.check(editedDoctor.getAffiliations(), doctor, editedDoctor, doctorModel));
+                AuthenticateAffiliation.check(doctor.getAffiliations(), doctor, doctorModel));
 
         Nurse nurse = new NurseBuilder()
-                .withName(VALID_NAME_BOB).build();
-
-        Nurse editedNurse = new NurseBuilder()
                 .withName(VALID_NAME_BOB)
                 .withAffiliations(VALID_NAME_ALICE)
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
         assertThrows(SameRoleAffiliationException.class, () ->
-                AuthenticateAffiliation.check(editedNurse.getAffiliations(), nurse, editedNurse, doctorModel));
+                AuthenticateAffiliation.check(nurse.getAffiliations(), nurse, doctorModel));
     }
 
     @Test
     public void check_validAffiliation_returnsTrue() {
         Person person = new PersonBuilder()
                 .withName(VALID_NAME_BOB)
-                .withRole(VALID_ROLE_BOB).build();
-
-        Person editedPerson = new PersonBuilder()
-                .withName(VALID_NAME_BOB)
                 .withRole(VALID_ROLE_BOB)
                 .withAffiliations(VALID_NAME_ALICE)
                 .withAffiliationHistory(VALID_NAME_ALICE)
                 .build();
         try {
-            assertTrue(AuthenticateAffiliation.check(editedPerson.getAffiliations(),
-                    person, editedPerson, personModel));
+            assertTrue(AuthenticateAffiliation.check(person.getAffiliations(), person, personModel));
         } catch (CommandException ce) {
             fail();
         }
