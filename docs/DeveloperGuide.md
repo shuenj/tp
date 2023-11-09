@@ -12,7 +12,7 @@ title: "Developer Guide"
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on and built up upon the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -283,8 +283,7 @@ manner, requiring commands to return a new `Staff` each time the shift timings a
 
 **Value proposition**:
 
-Provide categories for different healthcare roles, healthcare-specific information within each contact, capacity to track duty days and shifts for staff members, an emergency contacts section that updates based on who is on duty, robust search and filter capabilities to quickly find staff members based on criteria such as department, specialisation
-
+Provide categories for different healthcare roles, healthcare-specific information within each contact, capacity to track duty days and shifts for staff members, the ability to track working staff that updates based on who is on duty, robust search and filter capabilities to quickly find staff members based on criteria such as specialisation.
 
 ### User stories
 
@@ -480,7 +479,25 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exiting the application
+
+    1. Run the command `exit`.
+       Expected: The application will close.
+
+### Editing a person
+
+1. Editing a person while all persons are being shown.
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `edit 1 n/Mike Chang`<br>
+       Expected: First person in the list has its name changed to `Mike Chang`. Details of the edited person shown in the output message.
+
+    1. Test case: `edit 0 n/Valid Name`<br>
+       Expected: No person is deleted. Error details shown in the status message.
+
+    1. Other incorrect edit commands to try: `edit`, `edit x p/123`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 ### Deleting a person
 
@@ -489,23 +506,32 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a person after using the `find` command to list only one person.
+
+    1. Prerequisites: Using sample data generated from a new initialisation of the application, run the command `find n/may` to list only a person named `May Ho`.
+
+    1. Test case: `delete 1`<br>
+       Expected: `May Ho` is deleted from the list. Details of the deleted contact shown in the status message. List is now empty.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted data file
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Delete `medisync.json` in the data folder to simulate missing data file. Then, launch the application and run any valid command, e.g. `list`.<br>
+      Expected: A new `medisync.json` file will be created with sample data.
 
-1. _{ more test cases …​ }_
+1. Dealing with invalid data in data file
+
+    1. Open `medisync.json` in the data folder. Then, modify any field that will render the data as invalid, e.g. change any `phone` field to the value `invalid`. Then, launch the application.<br>
+       Expected: Application will start up with no data.
 
 --------------------------------------------------------------------------------------------------------------------
 

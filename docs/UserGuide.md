@@ -29,7 +29,7 @@ MediSync is a **desktop app specifically used for head nurses to manage staff an
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com r/patient af/Dr Mike` : Adds a contact named `John Doe` to MediSync.
+   * `add n/John Doe p/98765432 e/johnd@example.com r/patient a/Alex Yeoh` : Adds a contact named `John Doe` to MediSync.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -40,6 +40,7 @@ MediSync is a **desktop app specifically used for head nurses to manage staff an
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Glossary
 
 MediSync strives to streamline the storage and identification of contacts, focusing on essential information that are critical in medical contexts.
@@ -67,10 +68,10 @@ Here are some definitions that are noteworthy when using MediSync.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [a/AFFN_NAME]` can be used as `n/John Doe a/friend` or as `n/John Doe`.
+  e.g `n/NAME [a/AFFN_NAME]` can be used as `n/John Doe a/Sam Young` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[a/AFFN_NAME]…​` can be used as ` ` (i.e. 0 times), `a/friend`, `a/friend a/family` etc.
+  e.g. `[a/AFFN_NAME]…​` can be used as ` ` (i.e. 0 times), `a/Sam Young`, `a/Sam Young a/Ben Chua` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -113,11 +114,13 @@ Examples:
 * `add n/Mint Ho p/97746234 e/mint@example.com r/nurse a/Bernice Yu`<br>
   ![result for add command](images/addMintResult.png)
 
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the contact list.
 
 Format: `list`
+
 
 ### Editing a person : `edit`
 
@@ -136,6 +139,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN_NAME]…​`
 Examples:
 *  `edit 3 p/81234567 a/` edits the phone number of the 3rd person to `81234567` and removes the person’s affiliation
 *  `edit 1 n/Sally Wing e/sallyw@kmail.com` edits the name and the email of the 1st person to `Sally Wing` and `sallyw@kmail.com` respectively.
+
 
 ### Locating persons by attribute: `find`
 
@@ -157,6 +161,7 @@ Examples:
 * `find n/eve irfan` returns `Irfan Ibrahim`, `Evelyn Ng`<br>
   ![result for 'find alex david'](images/findEveIrfanResult.png)
 
+
 ### Add affiliations of a staff/patient: `addaffn`
 
 Add affiliations to staff/patients indicated by the given `INDEX` without deleting existing affiliation.
@@ -177,6 +182,7 @@ Examples:
 * `addaffn 1 a/John` adds `John` to affiliation of 1st person in the contact list.
 * `addaffn 3 a/John a/Mary` adds `John` and `Mary` to affiliation of 3rd person in the contact list.
 
+
 ### Returning affiliations of a staff/patient: `affn`
 
 Finds staff/patients who are affiliated with the patient/staff indicated
@@ -193,6 +199,7 @@ Examples:
 * Subsequently, `affn 1` will list the people affiliated with the 1st person displayed after the previous `affn` command.<br>
   ![result for 'info 1'](images/affnResult.png)
 
+
 ### Listing affiliation history of a person: `affnh`
 
 Finds the staff/patients that used to be affiliated or are currently affiliated with the patient/staff indicated by the given index.
@@ -207,6 +214,7 @@ Format: `affnh INDEX`
 Examples:
 * `affnh 2` lists the people who used to be affiliated or are currently affiliated to the 2nd person in the contact list.
 
+
 ### Remove affiliation history of a person: `removeah`
 
 Remove all affiliation history of patient/staff indicated by the given `INDEX`, except for affiliations that are currently affiliated.
@@ -220,6 +228,7 @@ Format: `removeah INDEX`
 
 Examples:
 * `removeah 2` removes affiliation history of the 2nd person in the contact list.
+
 
 ### Modifying specialisations of a doctor: `spec`
 
@@ -236,6 +245,7 @@ Format: `spec INDEX [SPECIALIZATION1, SPECIALIZATION2, ...]`
 Examples:
 * `spec 5 heart, brain` modifies the specialisations of the 5th person(a `Doctor`) in the contact list to `heart` and `brain`.
  
+
 ### Deleting a person : `delete`
 
 Deletes the contact in the contact list.
@@ -251,6 +261,14 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 3` deletes the 3rd person in the contact list.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+<box type="warning" seamless>
+
+**WARNING:**
+Deleting a person is irreversible. Any associations will be erased. Please make sure it is intended before proceeding.
+
+</box>
+
 
 ### Add next of kin to a patient: `nok`
 
@@ -269,6 +287,7 @@ Examples:
 * `nok 2 n/John p/11111 rs/Brother` add next of kin with the name `John`, phone `11111` and relationship `Brother` to the 3rd person in the contact list.<br>
   ![result for 'info 1'](images/nokResult.png)
 
+
 ### Add shift dates for a staff: `shift`
 
 Updates the shift days of the person identified with the given index number.
@@ -285,6 +304,7 @@ Examples:
 * `shift 3 1127` would also be valid input and would assign Monday, Tuesday, and Sunday as shift days for the 3rd person, ignoring the duplicate entry of Monday.
 * `shift 2` with no SHIFT_DAYS specified will clear all shift days for the 2nd person in the contact list.
 
+
 ### Returning staff that are on duty: `onduty`
 
 Finds staff members(doctors/nurses) who are on duty today.
@@ -293,6 +313,7 @@ Format: `onduty`
 
 Examples:
 * If today is Monday, and `onduty` is called, then staff members that have duty on Monday will be listed.
+
 
 ### Displaying the information of a person : `info`
 
@@ -309,11 +330,13 @@ Examples:
 * `find n/Charlotte` followed by `info 1` displays the information of the 1st person in the results of the `find` command.<br>
   ![result for 'info 1'](images/infoResult.png)
 
+
 ### Displaying the information of a person using mouse
 
 Displays the information of the person in the contact list by clicking on the person in the list.
 
 * If clicking is unavailable, you can consider the use of `info` command.
+
 
 ### Traversing the information of persons in the list
 
@@ -322,11 +345,20 @@ Navigate through the information of different people in the displayed list using
 * The use of `UP` and `DOWN` arrow keys is only applicable when any of the person in the list is highlighted, indicating that the list is on focus.
 * Simply clicking on any of the person in the list OR run the `info` command to set the list on focus.
 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the contact list.
 
 Format: `clear`
+
+<box type="warning" seamless>
+
+**WARNING:**
+Information cleared are irretrievable. As MediSync do not have confirmation prompts, do not, in any way, input this command if there are no intentions of using it.
+
+</box>
+
 
 ### Exiting the program : `exit`
 
@@ -334,9 +366,11 @@ Exits the program.
 
 Format: `exit`
 
+
 ### Saving the data
 
 MediSync data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 ### Editing the data file
 
