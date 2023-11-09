@@ -29,7 +29,7 @@ MediSync is a **desktop app specifically used for head nurses to manage staff an
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com r/patient af/Dr Mike` : Adds a contact named `John Doe` to MediSync.
+   * `add n/John Doe p/98765432 e/johnd@example.com r/patient a/Alex Yeoh` : Adds a contact named `John Doe` to MediSync.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -67,10 +67,10 @@ Here are some definitions that are noteworthy when using MediSync.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [a/AFFN_NAME]` can be used as `n/John Doe a/friend` or as `n/John Doe`.
+  e.g `n/NAME [a/AFFN_NAME]` can be used as `n/John Doe a/Sam Young` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[a/AFFN_NAME]…​` can be used as ` ` (i.e. 0 times), `a/friend`, `a/friend a/family` etc.
+  e.g. `[a/AFFN_NAME]…​` can be used as ` ` (i.e. 0 times), `a/Sam Young`, `a/Sam Young a/Ben Chua` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -252,6 +252,13 @@ Examples:
 * `list` followed by `delete 3` deletes the 3rd person in the contact list.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+<box type="warning" seamless>
+
+**WARNING:**
+Deleting a person is irreversible. Any associations will be erased. Please make sure it is intended before proceeding.
+
+</box>
+
 ### Add next of kin to a patient: `nok`
 
 Update next of kin of a patient identified at `INDEX` in the contact list.
@@ -327,6 +334,13 @@ Navigate through the information of different people in the displayed list using
 Clears all entries from the contact list.
 
 Format: `clear`
+
+<box type="warning" seamless>
+
+**WARNING:**
+Information cleared are irretrievable. As MediSync do not have confirmation prompts, do not, in any way, input this command if there are no intentions of using it.
+
+</box>
 
 ### Exiting the program : `exit`
 
