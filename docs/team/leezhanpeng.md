@@ -5,15 +5,11 @@ title: "Zhan Peng's Project Portfolio Page"
 
 ### Project: MediSync
 
-MediSync is a desktop app specifically used for head nurses to manage staff and patients, optimised for use via a
-Command Line Interface (CLI). Instead of tracking data of staff and patients using existing applications such as
-Microsoft Excel, using a CLI-centric application like MediSync will help head nurses track and handle contact management
-more quickly.
+MediSync is a desktop app specifically used for head nurses to manage staff and patients, optimised for use via a Command Line Interface (CLI). Instead of tracking data of staff and patients using existing applications such as Microsoft Excel, using a CLI-centric application like MediSync will help head nurses track and handle contact management more quickly.
 
 Given below are my contributions to the project.
 
-* **Code contributed
-  **: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-2&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=leezhanpeng&tabRepo=AY2324S1-CS2103-T16-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-2&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=leezhanpeng&tabRepo=AY2324S1-CS2103-T16-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 
 * **New Feature**: Implemented the `info` command (PR: [#145](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/145))
