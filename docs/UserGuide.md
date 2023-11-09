@@ -68,7 +68,7 @@ Here are some definitions that are noteworthy when using MediSync.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [a/AFFN_NAME]` can be used as `n/John Doe a/Sam Young` or as `n/John Doe`.
+  e.g. `n/NAME [a/AFFN_NAME]` can be used as `n/John Doe a/Sam Young` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[a/AFFN_NAME]…​` can be used as ` ` (i.e. 0 times), `a/Sam Young`, `a/Sam Young a/Ben Chua` etc.
@@ -131,7 +131,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/AFFN_NAME]…​`
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing affiliations, the existing affiliations of the person will be removed i.e adding of affiliations is not cumulative.
+* When editing affiliations, the existing affiliations of the person will be removed i.e. adding of affiliations is not cumulative.
 * You can remove all the person’s affiliations by typing `a/` without
     specifying any affiliations after it.
 * Removing all affiliation automatically deletes the person from others' affiliation.
@@ -237,9 +237,9 @@ Finds the doctor indicated by the given index and modifies the specialisations o
 Format: `spec INDEX [SPECIALIZATION1, SPECIALIZATION2, ...]`
 
 * Finds the doctor at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list and it must refer to a doctor.
+* The index refers to the index number shown in the displayed person list, and it must refer to a doctor.
 * The index **must be a positive integer** 1, 2, 3, …​
-* A specialisation must only contain alphanumeric charaters and specialisations must be separated by a comma.
+* A specialisation must only contain alphanumeric characters and specialisations must be separated by a comma.
 * To remove all specialisations, type `spec INDEX` without specifying any specialisations after it.
 
 Examples:
@@ -294,7 +294,7 @@ Updates the shift days of the person identified with the given index number.
 
 Format: `shift INDEX [SHIFT_DAYS]`
 
-* `SHIFT_DAYS` is in the form of a unbroken string of numbers, from 1 (Monday) to 7 (Sunday), typed with no spaces, e.g. `147` (Monday, Thursday, Sunday). Duplicates are allowed in the `SHIFT_DAYS` string, but each day will only be counted once in the actual shift schedule.
+* `SHIFT_DAYS` is in the form of an unbroken string of numbers, from 1 (Monday) to 7 (Sunday), typed with no spaces, e.g. `147` (Monday, Thursday, Sunday). Duplicates are allowed in the `SHIFT_DAYS` string, but each day will only be counted once in the actual shift schedule.
 * If `SHIFT_DAYS` is not provided, the shift days for the staff member at the given index will be cleared.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
