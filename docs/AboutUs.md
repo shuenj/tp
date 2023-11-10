@@ -7,7 +7,7 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `shuenjin@u.nus.edu`
 
 ## Project team
 
@@ -37,8 +37,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/shuenj)] [[portfolio](team/shuenj.md)]
 
-* Role: Drummer
-* Responsibilities: Drums
+* Role: Developer
+* Responsibilities: Features
 
 ### Zheng Chenglong
 
