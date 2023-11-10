@@ -145,6 +145,26 @@ public class ParserUtil {
         return shiftDaysSet;
     }
 
+
+    /**
+     * Adds specialisations to the set from a comma-separated string of names.
+     *
+     * @param specialisationsString the comma-separated string of specialisation names.
+     * @param specialisationSet the set to which parsed specialisations will be added.
+     * @throws ParseException if any of the specialisation names are invalid.
+     */
+    private static void addSpecialisationsFromString(String specialisationsString,
+        Set<Specialisation> specialisationSet) throws ParseException {
+        String[] specialisationNames = specialisationsString.split(",");
+        for (String specialisationName : specialisationNames) {
+            String specialisationNameTrimmed = specialisationName.trim();
+            if (!Specialisation.isValidSpecialisationName(specialisationNameTrimmed)) {
+                throw new ParseException(Specialisation.MESSAGE_CONSTRAINTS);
+            }
+            specialisationSet.add(new Specialisation(specialisationNameTrimmed));
+        }
+    }
+
     /**
      * Parses {@code String specialisations} into a {@code Set<Specialisation>}.
      * Leading and trailing whitespaces will be trimmed.
@@ -158,15 +178,9 @@ public class ParserUtil {
         if (trimmedSpecialisations.isEmpty()) {
             return new HashSet<>();
         }
-        String[] specialisationNames = trimmedSpecialisations.split(",");
+
         Set<Specialisation> specialisationSet = new HashSet<>();
-        for (String specialisationName : specialisationNames) {
-            String specialisationNameTrimmed = specialisationName.trim();
-            if (!Specialisation.isValidSpecialisationName(specialisationNameTrimmed)) {
-                throw new ParseException(Specialisation.MESSAGE_CONSTRAINTS);
-            }
-            specialisationSet.add(new Specialisation(specialisationNameTrimmed));
-        }
+        addSpecialisationsFromString(trimmedSpecialisations, specialisationSet);
         return specialisationSet;
     }
 

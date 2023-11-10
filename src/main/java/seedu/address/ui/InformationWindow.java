@@ -246,17 +246,17 @@ public class InformationWindow extends UiPart<Region> {
     /**
      * Adjusts the NOK information from the information window depending on whether NOK is present.
      *
-     * @param toAdd Boolean on whether NOK is present.
+     * @param isNokPresent Boolean on whether NOK is present.
      */
-    private void adjustNokPresence(boolean toAdd) {
-        nokNotPresent.setVisible(!toAdd);
-        nokNotPresent.setManaged(!toAdd);
-        nokName.setVisible(toAdd);
-        nokName.setManaged(toAdd);
-        nokPhone.setVisible(toAdd);
-        nokPhone.setManaged(toAdd);
-        nokRelationship.setVisible(toAdd);
-        nokRelationship.setManaged(toAdd);
+    private void adjustNokPresence(boolean isNokPresent) {
+        nokNotPresent.setVisible(!isNokPresent);
+        nokNotPresent.setManaged(!isNokPresent);
+        nokName.setVisible(isNokPresent);
+        nokName.setManaged(isNokPresent);
+        nokPhone.setVisible(isNokPresent);
+        nokPhone.setManaged(isNokPresent);
+        nokRelationship.setVisible(isNokPresent);
+        nokRelationship.setManaged(isNokPresent);
     }
 
 

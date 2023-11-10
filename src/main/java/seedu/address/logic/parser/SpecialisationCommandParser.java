@@ -39,6 +39,8 @@ public class SpecialisationCommandParser implements Parser<SpecialisationCommand
         // Check if there are any arguments after the index.
         if (splitArgs.length > 1 && !splitArgs[1].isEmpty()) {
             String specialisationString = String.join(" ", Arrays.copyOfRange(splitArgs, 1, splitArgs.length));
+            assert !specialisationString.isEmpty() : "Specialisation string should not be empty";
+
             specialisations = ParserUtil.parseSpecialisations(specialisationString);
         }
         return new SpecialisationCommand(index, specialisations);
