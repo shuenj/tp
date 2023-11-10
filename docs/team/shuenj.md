@@ -23,10 +23,11 @@ Given below are my contributions to the project.
     * Careful consideration of the parser was also necessary to ensure `spec` is able to handle multiple specialisations that are separated by commas.
   * **Existing feaure:** Updated `shift` feature 
     * Allow clearing of shift days (PR: [#150](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/150))
-    * Proper handling of invalid shift days (PR: [#151](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/151), [#152](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/152))
+    * Proper handling of invalid shift days (PR: [#151](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/151), [#152](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/152), [#209](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/209))
+    * Wrote tests for `ShiftCommandParser` (PR: [#209](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/209))
 
 * **Contributions to the UG**:
-  * Added documentation for features `affnh`, `spec`, `shift`, `delete` 
+  * Documentation for features `affnh`, `spec`, `shift`, `delete` (PR: [#159](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/159/files), [#203](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/203))
   * Update of command summary table (PR: [#81](https://github.com/AY2324S1-CS2103-T16-2/tp/pull/81))
 
 * **Contributions to the DG**:

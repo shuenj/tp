@@ -54,7 +54,7 @@ Here are some definitions that are noteworthy when using MediSync.
 | Affiliation History | Having some level of history-taking is vital in tracking medical care. The use of **affiliation history** is to track past staff members that had affiliations with a particular `Patient`, and vice-versa. MediSync allows for the deletion of these history, but existing affiliations can never be deleted from the affiliation history until the affiliation is severed. |
 | Shift Days          | **Shift days** is an attribute unique to staff members. For simplicity, the current version of MediSync monitors the workdays of each staff member in blocks of days.                                                                                                                                                                                                        |
 | Next of Kin         | The **Next of Kin** attribute is meant for `Patient`s. Having a method of contact with the `Patient`s next of kin is vital in medical care.                                                                                                                                                                                                                                  |
-| Specialisation      | Exclusively for `Doctor`s, the **specialisation** attribute offers added information about each doctor, enabling the appropriate doctor to be matched with patients having diverse requirements.                                                                                                                                                                             |
+| Specialisations      | Exclusively for `Doctor`s, the **specialisations** attribute offers added information about each doctor, enabling the appropriate doctor to be matched with patients having diverse requirements.                                                                                                                                                                             |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -217,14 +217,15 @@ Examples:
 
 ### Remove affiliation history of a person: `removeah`
 
-Remove all affiliation history of patient/staff indicated by the given `INDEX`, except for affiliations that are currently affiliated.
+Removes all affiliation history of patient/staff indicated by the given `INDEX`, except for affiliations that are currently affiliated.
 
 Format: `removeah INDEX`
 
-* Remove all affiliation history for the person at the specified `INDEX`.
+* Removes all affiliation history for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Does not remove the person they are currently affiliated to from affiliation history.
+* Also removes patient/staff indicated by the given `INDEX` from the affiliation history of others.
 
 Examples:
 * `removeah 2` removes affiliation history of the 2nd person in the contact list.
@@ -239,11 +240,12 @@ Format: `spec INDEX [SPECIALIZATION1, SPECIALIZATION2, ...]`
 * Finds the doctor at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list and it must refer to a doctor.
 * The index **must be a positive integer** 1, 2, 3, …​
-* A specialisation must only contain alphanumeric charaters and specialisations must be separated by a comma.
+* A specialisation must only contain alphanumeric charaters and specialisations must be separated by a comma. Duplicate specialisations will be ignored.
 * To remove all specialisations, type `spec INDEX` without specifying any specialisations after it.
 
 Examples:
-* `spec 5 heart, brain` modifies the specialisations of the 5th person(a `Doctor`) in the contact list to `heart` and `brain`.
+* `spec 5 heart, brain, brain` modifies the specialisations of the 5th person(a `Doctor`) in the contact list to `heart` and `brain`.
+* `spec 5` removes all specialisations of the 5th person(a `Doctor`) in the contact list.
  
 
 ### Deleting a person : `delete`
@@ -276,15 +278,15 @@ Update next of kin of a patient identified at `INDEX` in the contact list.
 
 Format: `nok INDEX [n/NAME p/PHONE rs/RELATIONSHIP]`
 
-* Update next of kin for the person at the specified `INDEX`.
+* Updates next of kin for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * If no optional field provided, next of kin of the person identified at index will be removed.
 * `RELATIONSHIP` can be specified in any alphanumeric characters and spaces.
 
 Examples:
-* `nok 2` remove next of kin of the 2nd person in the contact list.
-* `nok 2 n/John p/11111 rs/Brother` add next of kin with the name `John`, phone `11111` and relationship `Brother` to the 3rd person in the contact list.<br>
+* `nok 2` removes next of kin of the 2nd person in the contact list.
+* `nok 2 n/John p/11111 rs/Brother` adds next of kin with the name `John`, phone `11111` and relationship `Brother` to the 3rd person in the contact list.<br>
   ![result for 'info 1'](images/nokResult.png)
 
 
@@ -302,7 +304,7 @@ Format: `shift INDEX [SHIFT_DAYS]`
 Examples:
 * `shift 1 126` will set the 1st person in the contact list's shift days to be Monday, Tuesday, and Saturday.
 * `shift 3 1127` would also be valid input and would assign Monday, Tuesday, and Sunday as shift days for the 3rd person, ignoring the duplicate entry of Monday.
-* `shift 2` with no SHIFT_DAYS specified will clear all shift days for the 2nd person in the contact list.
+* `shift 2` with no `SHIFT_DAYS` specified will clear all shift days for the 2nd person in the contact list.
 
 
 ### Returning staff that are on duty: `onduty`
